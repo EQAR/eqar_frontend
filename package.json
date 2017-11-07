@@ -5,6 +5,11 @@
   "repository": "https://github.com/EQAR/eqar_frontend.git",
   "author": "gygabor <gyorgyg@gmail.com>",
   "license": "GNU",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "yarn run build",
+    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 1234 --history-api-fallback"
+  },
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -14,6 +19,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   }
 }
