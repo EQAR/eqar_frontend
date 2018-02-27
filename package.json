@@ -54,6 +54,7 @@
     "react-toastify": "3.0.0",
     "react-transition-group": "2.2.1",
     "reactstrap": "5.0.0-alpha.4",
+    "redux": "^3.7.2",
     "simple-line-icons": "^2.4.1",
     "spinkit": "1.2.5"
   },
