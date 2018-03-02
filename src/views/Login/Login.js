@@ -1,8 +1,26 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import loginUser from './actions/loginAjax';
+import store from '../../main_store';
+import setStates from '../../state';
 
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+
+  }
+
+  handleLogin(event) {
+    console.log(event, this);
+    if (event.key === 'Enter') {
+      return;
+    } else {
+      loginUser(this.name.value, this.password.value);
+    }
+  }
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -16,7 +34,7 @@ class Login extends Component {
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
                       <InputGroupAddon><i className="icon-user"></i></InputGroupAddon>
-                      <Input type="text" placeholder="Username"/>
+                      <Input onKeyUp={this.handleLogin} type="text" placeholder="Username"/>
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
@@ -24,7 +42,7 @@ class Login extends Component {
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" className="px-4">Login</Button>
+                        <Button onClick={this.handleLogin} color="primary" className="px-4">Login</Button>
                       </Col>
                       <Col xs="6" className="text-right">
                         <Button color="link" className="px-0">Forgot password?</Button>

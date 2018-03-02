@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
+import loginReducer from './views/Login/Reducer/login_reducer';
 
 
 const reducers = combineReducers({

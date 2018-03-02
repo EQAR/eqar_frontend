@@ -10,16 +10,18 @@ import 'simple-line-icons/css/simple-line-icons.css';
 import '../scss/style.scss';
 import '../scss/core/_dropdown-menu-right.scss';
 
-ReactDOM.render((
-  <Provider store={store}>
-    <HashRouter>
-      <Switch>
-        <Route exact path="/login" name="Login Page" component={Login}/>
-        <Route path="/" name="Home" component={Full}/>
-      </Switch>
-    </HashRouter>
-  </Provider>
-), document.getElementById('root'));
+const render = () => {
+  ReactDOM.render((
+    <Provider store={store}>
+      <HashRouter>
+        <Switch>
+          <Route exact path="/login" name="Login Page" component={Login}/>
+          <Route path="/" name="Home" component={Full}/>
+        </Switch>
+      </HashRouter>
+    </Provider>
+  ), document.getElementById('root'));
+}
 
 store.subscribe(render);
 render();
