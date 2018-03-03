@@ -1,5 +1,5 @@
 const setStates = state => ({
-  login: state.login,
+  login: state.login
 });
 
 export default setStates;

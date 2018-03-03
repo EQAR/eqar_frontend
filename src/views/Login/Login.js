@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import { connect } from 'react-redux';
 import loginUser from './actions/loginAjax';
 import store from '../../main_store';
 import setStates from '../../state';
@@ -9,15 +10,31 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.setUsername = this.setUsername.bind(this);
+    this.setPassword = this.setPassword.bind(this);
+    this.username;
+    this.password;
+  }
 
+  setUsername(event) {
+    this.username = event.target.value;
+  }
+
+  setPassword(event) {
+    this.password = event.target.value;
+    console.log(this.password);
   }
 
   handleLogin(event) {
-    console.log(event, this);
-    if (event.key === 'Enter') {
+    if (event.key !== 'Enter') {
       return;
     } else {
-      loginUser(this.name.value, this.password.value);
+      store.dispatch({
+      type: 'LOGIN_BUTTON',
+      username: this.username,
+      password: this.password
+      });
+      // loginUser(this.state.username, this.password.value);
     }
   }
 
@@ -34,11 +51,11 @@ class Login extends Component {
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
                       <InputGroupAddon><i className="icon-user"></i></InputGroupAddon>
-                      <Input onKeyUp={this.handleLogin} type="text" placeholder="Username"/>
+                      <Input type="text" placeholder="Username" onKeyUp={this.handleLogin} onChange={this.setUsername} />
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
-                      <Input type="password" placeholder="Password"/>
+                      <Input type="password" placeholder="Password" onKeyUp={this.handleLogin} onChange={this.setPassword} />
                     </InputGroup>
                     <Row>
                       <Col xs="6">
@@ -69,4 +86,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(setStates)(Login);
