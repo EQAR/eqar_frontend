@@ -1,10 +1,10 @@
 function loginReducer(state = {
   username: '',
-  password: ''
+  token: ''
 }, action) {
   switch (action.type) {
     case 'LOGIN_BUTTON': {
-      return { ...state, username: action.username, password: action.password };
+      return { ...state, username: action.username, token: action.payload };
     }
     case 'FETCHING_USERS': {
       return { ...state, data: action.payload };

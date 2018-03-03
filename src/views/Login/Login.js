@@ -22,19 +22,13 @@ class Login extends Component {
 
   setPassword(event) {
     this.password = event.target.value;
-    console.log(this.password);
   }
 
   handleLogin(event) {
-    if (event.key !== 'Enter') {
+    if (event.key !== 'Enter' && event.key !== undefined) {
       return;
     } else {
-      store.dispatch({
-      type: 'LOGIN_BUTTON',
-      username: this.username,
-      password: this.password
-      });
-      // loginUser(this.state.username, this.password.value);
+      loginUser(this.username, this.password);
     }
   }
 

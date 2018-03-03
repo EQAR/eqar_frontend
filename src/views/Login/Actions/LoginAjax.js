@@ -5,19 +5,20 @@ import store from '../../../main_store';
 
 function loginUser(username, password) {
   store.dispatch((dispatch) => {
-    axios().post('https://backend.deqar.eu/accounts/get_token/', {
-      username: name,
-      password,
+    axios.post('https://backend.deqar.eu/accounts/get_token/', {
+      username: username,
+      password: password,
     }).then((response) => {
-      dispatch({ type: 'FETCHING_USERS', payload: response.data });
-      if (response.data.state) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('username', username);
-        dispatch({ type: 'TOKEN_PROVIDED', payload: localStorage.getItem('token'), username: username });
-        dispatch(push('/dashboard'));
-      } else {
-        dispatch({ type: 'ERROR', payload: response.data.error });
-      }
+      console.log(response.data);
+      dispatch({ type: 'LOGIN_BUTTON', payload: response.data });
+      // if (response.data.state) {
+      //   localStorage.setItem('token', response.data.token);
+      //   localStorage.setItem('username', username);
+      //   dispatch({ type: 'TOKEN_PROVIDED', payload: localStorage.getItem('token'), username: username });
+        dispatch(push('/'));
+      // } else {
+      //   dispatch({ type: 'ERROR', payload: response.data.error });
+      // }
     });
   });
 }
