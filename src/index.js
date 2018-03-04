@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
+import createHistory from 'history/createBrowserHistory'
 import Full from './containers/Full/';
 import Login from './views/Login/';
 import store from './main_store';

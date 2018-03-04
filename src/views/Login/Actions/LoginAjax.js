@@ -9,11 +9,11 @@ function loginUser(username, password) {
       username: username,
       password: password,
     }).then((response) => {
-      console.log(response.data);
-      dispatch({ type: 'LOGIN_BUTTON', payload: response.data });
+      console.log(history);
+      dispatch({ type: 'TOKEN_PROVIDED', payload: response.data, username: username });
       // if (response.data.state) {
-      //   localStorage.setItem('token', response.data.token);
-      //   localStorage.setItem('username', username);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', username);
       //   dispatch({ type: 'TOKEN_PROVIDED', payload: localStorage.getItem('token'), username: username });
         dispatch(push('/'));
       // } else {
