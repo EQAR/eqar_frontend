@@ -15,8 +15,6 @@ const middleWare = applyMiddleware(thunk, logger);
 
 const store = createStore(reducers, middleWare);
 
-syncHistoryWithStore(
-  createHistory(),
-  store,
-);
+// export const history = syncHistoryWithStore(createHistory(), store);
+
 export default store;
