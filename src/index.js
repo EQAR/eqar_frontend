@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Router, BrowserRouter, Route, Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import Full from './containers/Full/';
 import Login from './views/Login/';
 import store from './main_store';
@@ -13,12 +15,12 @@ import '../scss/core/_dropdown-menu-right.scss';
 const render = () => {
   ReactDOM.render((
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={createHistory()}>
         <Switch>
           <Route exact path="/login" name="Login Page" component={Login}/>
           <Route path="/" name="Home" component={Full}/>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </Provider>
   ), document.getElementById('root'));
 }
