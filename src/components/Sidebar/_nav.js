@@ -5,10 +5,9 @@ export default {
       url: '/dashboard',
       icon: 'icon-speedometer',
       badge: {
-        variant: 'info',
-        text: 'NEW'
+        variant: 'info'
       }
-    }
+    },
     {
       title: true,
       name: 'Menu',
@@ -33,7 +32,8 @@ export default {
           url: '/components/csv-upload',
           icon: 'icon-cloud-upload'
         }
-      },
+      ]
+    },
     {
       name: 'Reference Data',
       url: '/reference-data',
@@ -48,23 +48,23 @@ export default {
           name: 'Institutions',
           url: '/reference-data/institutions',
           icon: 'icon-graduation'
-        }
+        },
         {
           name: 'Countries',
           url: '/reference-data/countries',
           icon: 'icon-globe-alt'
         }
-      },
+      ]
+    },
       {
         name: 'Alerts and flags',
         url: '/alerts-and-flags',
         icon: 'icon-flag'
-      },
+    },
       {
         name: 'Statistics',
         url: '/statistics',
         icon: 'icon-chart'
-      }
     }
   ]
 };
