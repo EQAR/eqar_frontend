@@ -15,12 +15,12 @@ import '../scss/core/_dropdown-menu-right.scss';
 const render = () => {
   ReactDOM.render((
     <Provider store={store}>
-      <Router history={createHistory()}>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/login" name="Login Page" component={Login}/>
           <Route path="/" name="Home" component={Full}/>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </Provider>
   ), document.getElementById('root'));
 }

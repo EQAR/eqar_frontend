@@ -6,8 +6,10 @@ import Sidebar from '../../components/Sidebar/';
 import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
-
 import Dashboard from '../../views/Dashboard/';
+import { connect } from 'react-redux';
+import store from '../../main_store';
+import setStates from '../../state';
 
 class Full extends Component {
   render() {
@@ -33,4 +35,4 @@ class Full extends Component {
   }
 }
 
-export default Full;
+export default connect(setStates)(Full);

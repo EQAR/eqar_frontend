@@ -1,5 +1,6 @@
 const setStates = state => ({
-  login: state.login
+  login: state.login,
+  dashboard: state.dashboard
 });
 
 export default setStates;
