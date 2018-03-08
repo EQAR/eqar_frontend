@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
 import { connect } from 'react-redux';
-import loginUser from './actions/loginAjax';
+// import loginUser from './actions/loginAjax';
 import store from '../../main_store';
 import setStates from '../../state';
 
@@ -28,7 +28,8 @@ class Login extends Component {
     if (event.key !== 'Enter' && event.key !== undefined) {
       return;
     } else {
-      loginUser(this.username, this.password);
+      return;
+      // loginUser(this.username, this.password);
     }
   }
 
