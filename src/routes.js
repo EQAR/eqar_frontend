@@ -1,9 +1,9 @@
 const routes = {
   '/': 'Home',
   '/dashboard': 'Dashboard',
-  '/report-data': 'Report data',
-  '/upload-report':'Upload Report',
-  '/edit-report': 'Edit Report'
+  '/create-report': 'Create report',
+  '/upload-report':'Upload report',
+  '/edit-report': 'Edit report'
 };
 
 export default routes;
