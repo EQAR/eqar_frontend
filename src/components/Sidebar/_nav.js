@@ -18,21 +18,19 @@ export default {
       class: ''
     },
     {
-      name: 'Report data',
-      url: '/report-data',
-      icon: 'icon-doc',
-      children: [
-        {
-          name: 'Add/Modify/Delete',
-          url: '/report-data/add-modify-delete',
-          icon: 'icon-refresh'
-        },
-        {
-          name: 'CSV Upload',
-          url: '/components/csv-upload',
-          icon: 'icon-cloud-upload'
-        }
-      ]
+      name: 'Create Report',
+      url: '/create-report',
+      icon: 'icon-doc'
+    },
+    {
+      name: 'Upload Report',
+      url: '/upload-report',
+      icon: 'icon-cloud-upload'
+    },
+    {
+      name: 'Edit Report',
+      url: '/edit-report',
+      icon: 'icon-cloud-upload'
     },
     {
       name: 'Reference Data',
