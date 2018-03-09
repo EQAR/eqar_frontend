@@ -16,8 +16,7 @@ function loginUser(username, password) {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', username);
       //   dispatch({ type: 'TOKEN_PROVIDED', payload: localStorage.getItem('token'), username: username });
-      console.log(localStorage.getItem('token'));
-      // history.pushState('/');
+      history.pushState('/');
       dispatch(push('/'));
       // } else {
       //   dispatch({ type: 'ERROR', payload: response.data.error });
