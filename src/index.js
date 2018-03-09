@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import Full from './containers/Full/';
+import Login from './views/Login/';
+import store from './main_store';
+import 'font-awesome/css/font-awesome.min.css';
+import 'simple-line-icons/css/simple-line-icons.css';
+import '../scss/style.scss';
+import '../scss/core/_dropdown-menu-right.scss';
 
-class HelloWorld extends React.Component {
-    render() {
-        return <h1>Hello, world!</h1>;
-    }
+const render = () => {
+  ReactDOM.render((
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" name="Login Page" component={Login}/>
+          <Route path="/" name="Home" component={Full}/>
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  ), document.getElementById('root'));
 }
 
-const element = document.getElementById('hello-world');
-
-ReactDOM.render(<HelloWorld />, element);
+store.subscribe(render);
+render();

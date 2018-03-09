@@ -1,1 +1,1 @@
-# eqar_frontend
+# Equar Frontend
