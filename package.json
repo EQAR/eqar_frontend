@@ -1,11 +1,11 @@
 {
-  "name": "@coreuipro/react",
-  "version": "1.0.7",
-  "description": "Bootstrap 4 Admin Template",
-  "author": "Łukasz Holeczek",
-  "homepage": "http://coreui.io/pro/",
-  "copyright": "Copyright 2017 creativeLabs Łukasz Holeczek",
-  "license": "http://coreui.io/pro/license/",
+  "name": "equar frontend",
+  "version": "0.1",
+  "description": "equar frontend",
+  "author": "Gabor Gyorgy",
+  "homepage": "",
+  "copyright": "",
+  "license": "",
   "private": true,
   "devDependencies": {
     "babel-core": "6.26.0",
