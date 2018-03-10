@@ -4,8 +4,7 @@ import {
   Input,
   Label,
   Row,
-  Col,
-  Form} from 'reactstrap';
+  Col } from 'reactstrap';
 
 class ReportBaseData extends Component {
   render() {
