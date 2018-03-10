@@ -13,9 +13,9 @@ import store from '../../main_store';
 import setStates from '../../state';
 
 class Dashboard extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
