@@ -10,7 +10,9 @@ import {
   NavLink,
   Card,
   CardBody,
-  CardHeader} from 'reactstrap';
+  CardHeader,
+  CardFooter,
+  Button } from 'reactstrap';
 import classnames from 'classnames';
 import ReportBaseData from './components/ReportBaseData';
 import Institutions from './components/Institutions'
@@ -37,7 +39,6 @@ class CreateReport extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <Col>
           <Card>
             <CardHeader>
               <Row>
@@ -84,20 +85,24 @@ class CreateReport extends Component {
               </Row>
             </CardHeader>
             <CardBody>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <ReportBaseData />
-                </TabPane>
-                <TabPane tabId="2">
-                  <Institutions />
-                </TabPane>
-                <TabPane tabId="3">
-                  <Programmes />
-                </TabPane>
-              </TabContent>
+              <Col>
+                <TabContent activeTab={this.state.activeTab}>
+                  <TabPane tabId="1">
+                    <ReportBaseData />
+                  </TabPane>
+                  <TabPane tabId="2">
+                    <Institutions />
+                  </TabPane>
+                  <TabPane tabId="3">
+                    <Programmes />
+                  </TabPane>
+                </TabContent>
+              </Col>
+              <CardFooter>
+                <Button color="info">Save</Button>
+              </CardFooter>
             </CardBody>
           </Card>
-        </Col>
       </div>
     );
   }

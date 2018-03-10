@@ -5,6 +5,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CardFooter,
   FormGroup,
   Input,
   Label,
@@ -67,9 +68,9 @@ class Programmes extends Component {
                     multi
                   />
                 </FormGroup>
-                <FormGroup>
+                <CardFooter>
                   <Button color="info">Add programme ></Button>
-                </FormGroup>
+                </CardFooter>
               </CardBody>
             </Card>
           </Col>
