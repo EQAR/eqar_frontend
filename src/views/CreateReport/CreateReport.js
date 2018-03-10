@@ -15,8 +15,9 @@ import {
   Button } from 'reactstrap';
 import classnames from 'classnames';
 import ReportBaseData from './components/ReportBaseData';
-import Institutions from './components/Institutions'
-import Programmes from './components/Programmes'
+import Institutions from './components/Institutions';
+import Programmes from './components/Programmes';
+import ReportFiles from './components/ReportFiles'
 
 
 class CreateReport extends Component {
@@ -95,6 +96,9 @@ class CreateReport extends Component {
                   </TabPane>
                   <TabPane tabId="3">
                     <Programmes />
+                  </TabPane>
+                  <TabPane tabId="4">
+                    <ReportFiles />
                   </TabPane>
                 </TabContent>
               </Col>
