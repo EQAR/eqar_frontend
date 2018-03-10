@@ -1,7 +1,7 @@
 {
   "name": "eqar_frontend",
   "version": "1.0.0",
-  "description": "equar frontend",
+  "description": "eqar frontend",
   "author": "",
   "main": "webpack.config.js",
   "scripts": {
