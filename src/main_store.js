@@ -1,20 +1,20 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { routerReducer, syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
 import loginReducer from './views/Login/Reducer/login_reducer';
-import logger from 'redux-logger';
 
+export const history = createBrowserHistory();
 
 const reducers = combineReducers({
   login: loginReducer,
-  routing: routerReducer
+  router: routerReducer
 });
 
-const middleWare = applyMiddleware(thunk, logger);
+const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
 
 const store = createStore(reducers, middleWare);
 
-// export const history = routerMiddleware(createHistory(), store);
+startListener(history, store);
 
 export default store;

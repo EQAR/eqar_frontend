@@ -10,10 +10,14 @@ import {
   NavLink,
   Card,
   CardBody,
-  CardHeader} from 'reactstrap';
+  CardHeader,
+  CardFooter,
+  Button } from 'reactstrap';
 import classnames from 'classnames';
 import ReportBaseData from './components/ReportBaseData';
-import Institutions from './components/Institutions'
+import Institutions from './components/Institutions';
+import Programmes from './components/Programmes';
+import ReportFiles from './components/ReportFiles'
 
 
 class CreateReport extends Component {
@@ -36,7 +40,6 @@ class CreateReport extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <Col>
           <Card>
             <CardHeader>
               <Row>
@@ -83,24 +86,27 @@ class CreateReport extends Component {
               </Row>
             </CardHeader>
             <CardBody>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <ReportBaseData />
-                </TabPane>
-                <TabPane tabId="2">
-                  <Institutions />
-                </TabPane>
-                <TabPane tabId="3">
-                  2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.
-                </TabPane>
-              </TabContent>
+              <Col>
+                <TabContent activeTab={this.state.activeTab}>
+                  <TabPane tabId="1">
+                    <ReportBaseData />
+                  </TabPane>
+                  <TabPane tabId="2">
+                    <Institutions />
+                  </TabPane>
+                  <TabPane tabId="3">
+                    <Programmes />
+                  </TabPane>
+                  <TabPane tabId="4">
+                    <ReportFiles />
+                  </TabPane>
+                </TabContent>
+              </Col>
+              <CardFooter>
+                <Button color="info">Save</Button>
+              </CardFooter>
             </CardBody>
           </Card>
-        </Col>
       </div>
     );
   }
