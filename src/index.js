@@ -11,18 +11,29 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'simple-line-icons/css/simple-line-icons.css';
 import '../scss/style.scss';
 import '../scss/core/_dropdown-menu-right.scss';
+import testUserToken from './TestUserToken';
 
-const render = () => {
-  ReactDOM.render((
-    <Provider store={store}>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    testUserToken();
+  }
+  render() {
+    return (
+      <Provider store={store}>
       <Router history={history}>
         <Switch>
           <Route exact path="/login" name="Login Page" component={Login}/>
           <Route path="/" name="Home" component={Full}/>
         </Switch>
       </Router>
-    </Provider>
-  ), document.getElementById('root'));
+      </Provider>
+    )
+  }
+}
+
+const render = () => {
+  ReactDOM.render(<App />, document.getElementById('root'));
 }
 
 store.subscribe(render);
