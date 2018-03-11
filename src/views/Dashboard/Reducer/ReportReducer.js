@@ -5,12 +5,14 @@ function reportReducer(state = {
   previous: ''
 }, action) {
   switch (action.type) {
-    // case 'TOKEN_PROVIDED': {
-    //   return { ...state,
-    //            username: action.username,
-    //            token: action.payload.token
-    //          };
-    // }
+    case 'GET_REPORTS': {
+      return { ...state,
+               count: action.payload.count,
+               reports: action.payload.results,
+               next: action.payload.next,
+               previous: action.payload.previous
+             };
+    }
     default: return { ...state };
   }
 }
