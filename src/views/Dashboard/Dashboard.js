@@ -12,10 +12,15 @@ import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
 import ReportTable from './components/ReportTable';
+import getReports from './Actions/ReportAjax';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.dispatch(getReports());
   }
 
   render() {
@@ -27,7 +32,7 @@ class Dashboard extends Component {
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
                 </ButtonGroup>
-                <h4 className="mb-0">120</h4>
+                <h4 className="mb-0">{}</h4>
                 <p>Reports submitted</p>
               </CardBody>
             </Card>

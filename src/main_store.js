@@ -9,7 +9,7 @@ export const history = createBrowserHistory();
 
 const reducers = combineReducers({
   login: loginReducer,
-  report: reportReducer,
+  reports: reportReducer,
   router: routerReducer
 });
 

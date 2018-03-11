@@ -11,12 +11,11 @@ import { Row,
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import getReport from '../Actions/ReportAjax';
+import getReports from '../Actions/ReportAjax';
 
 class ReportTable extends Component {
   constructor(props) {
     super(props);
-    getReport();
   }
 
   render() {

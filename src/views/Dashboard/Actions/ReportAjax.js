@@ -7,7 +7,6 @@ function getReport(username, password) {
 
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/adminapi/v1/reports_by_agency').then((response) => {
-      console.log(response);
       dispatch({ type: 'GET_REPORTS', payload: response.data});
     });
   });
