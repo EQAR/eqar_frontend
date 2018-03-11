@@ -8,6 +8,7 @@ import {
   Dropdown,
   Progress,
 } from 'reactstrap';
+import logoutUser from './Actions/Logout';
 
 class HeaderDropdown extends Component {
 
@@ -15,6 +16,7 @@ class HeaderDropdown extends Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.logout = this.logout.bind(this);
     this.state = {
       dropdownOpen: false,
     };
@@ -24,6 +26,10 @@ class HeaderDropdown extends Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  logout(){
+    logoutUser();
   }
 
   render() {
@@ -37,7 +43,7 @@ class HeaderDropdown extends Component {
           <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
           <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
           <DropdownItem divider/>
-          <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+          <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );
