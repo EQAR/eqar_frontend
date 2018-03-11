@@ -8,7 +8,7 @@ function testUserToken() {
   if (!token) {
     store.dispatch(push('/login'));
   } else {
-    axios.defaults.headers.common['x-auth-token'] = token;
+    axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
   }
   return token;
 }

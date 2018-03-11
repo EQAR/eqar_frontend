@@ -1,11 +1,9 @@
-const state = {
+function reportReducer(state = {
   count: 0,
   reports: [],
   next: '',
   previous: ''
-}
-
-function reportReducer(state, action) {
+}, action) {
   switch (action.type) {
     // case 'TOKEN_PROVIDED': {
     //   return { ...state,
