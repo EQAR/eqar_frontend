@@ -20,7 +20,7 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(getReports());
+    getReports();
   }
 
   render() {
@@ -32,7 +32,7 @@ class Dashboard extends Component {
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
                 </ButtonGroup>
-                <h4 className="mb-0">{}</h4>
+                <h4 className="mb-0">{this.props.reports.count}</h4>
                 <p>Reports submitted</p>
               </CardBody>
             </Card>
