@@ -1,5 +1,6 @@
 function reportReducer(state = {
   count: 0,
+  agency: '',
   reports: [],
   next: '',
   previous: ''
@@ -11,6 +12,11 @@ function reportReducer(state = {
                reports: action.payload.results,
                next: action.payload.next,
                previous: action.payload.previous
+             };
+    }
+    case 'GET_AGENCY_NAME': {
+      return { ...state,
+               agency: action.payload
              };
     }
     default: return { ...state };
