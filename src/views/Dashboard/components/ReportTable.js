@@ -18,8 +18,51 @@ class ReportTable extends Component {
     super(props);
   }
 
+  renderInstitutions(institutions) {
+    institutions = institutions.map((institute, index) => {
+      return (
+        <li key={index}>{institute}</li>
+      );
+    });
+    return institutions;
+  }
+
+  renderProgrammes(programmes) {
+    programmes = programmes.map((programme, index) => {
+      return (
+        <li key={index}>{programme}</li>
+      );
+    });
+    return programmes;
+  }
+
   render() {
-    // let reportRows =
+    let reports = this.props.reports.reports;
+    let reportRows = reports.map((report, index) => {
+      return (
+        <tr key={report.id}>
+          <td>{ report.id }</td>
+          <td>ACQUIN</td>
+          <td>{report.name}</td>
+          <td>
+            <ul>
+              {this.renderInstitutions(report.institutions)}
+            </ul>
+          </td>
+          <td>
+            <ul>
+              {this.renderProgrammes(report.programmes)}
+            </ul>
+          </td>
+          <td>
+            {report.flag}
+            <Badge color="warning" pill>Low level</Badge>
+          </td>
+          <td>{report.date}</td>
+        </tr>
+      );
+    });
+
     return (
       <div className="animated fadeIn">
         <Row>
@@ -43,28 +86,7 @@ class ReportTable extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>177</td>
-                      <td>ACQUIN</td>
-                      <td>Programme accreditation in Germany (ACQUIN)</td>
-                      <td>Fulda University of Applied Sciences</td>
-                      <td>MA in Polotology</td>
-                      <td>
-                        <Badge color="warning" pill>Low level</Badge>
-                      </td>
-                      <td>2018-04-31</td>
-                    </tr>
-                    <tr>
-                      <td>178</td>
-                      <td>ACQUIN</td>
-                      <td>Programme accreditation in Austria (ACQUIN)</td>
-                      <td>University of Vienna</td>
-                      <td>MA in Economics</td>
-                      <td>
-                        <Badge color="success" pill>None</Badge>
-                      </td>
-                      <td>2018-04-31</td>
-                    </tr>
+                    {reportRows}
                   </tbody>
                 </Table>
               </CardBody>
