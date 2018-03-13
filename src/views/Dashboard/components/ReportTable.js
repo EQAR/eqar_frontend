@@ -10,7 +10,10 @@ import {
   Badge,
   Label,
   Input,
-  FormGroup
+  FormGroup,
+  Pagination,
+  PaginationLink,
+  PaginationItem
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
@@ -128,6 +131,26 @@ class ReportTable extends Component {
                       {reportRows}
                     </tbody>
                   </Table>
+                  <Pagination>
+                  <PaginationItem>
+                    <PaginationLink previous href="#"></PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active>
+                    <PaginationLink href="#">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">2</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">3</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">4</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink next href="#"></PaginationLink>
+                  </PaginationItem>
+                </Pagination>
                 </Row>
               </CardBody>
             </Card>
