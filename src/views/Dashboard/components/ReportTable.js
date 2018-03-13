@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { Row,
-         Col,
-         Card,
-         CardBody,
-         CardHeader,
-         ButtonGroup,
-         Table,
-         Badge
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardHeader,
+  ButtonGroup,
+  Table,
+  Badge,
+  Label,
+  Input,
+  FormGroup
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
@@ -54,7 +58,7 @@ class ReportTable extends Component {
       return (
         <tr key={report.id}>
           <td>{ report.id }</td>
-          <td>ACQUIN</td>
+          <td>{this.props.reports.agency}</td>
           <td>{report.name}</td>
           <td>
             <ul>
@@ -84,22 +88,47 @@ class ReportTable extends Component {
                 Latest Reports
               </CardHeader>
               <CardBody className="pb-0">
-                <Table bordered>
-                  <thead>
-                    <tr>
-                      <th>Report ID</th>
-                      <th>Agency</th>
-                      <th>Report Name</th>
-                      <th>Institutions</th>
-                      <th>Programmes</th>
-                      <th>Flag</th>
-                      <th>Date Submitted</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reportRows}
-                  </tbody>
-                </Table>
+                <Row>
+                  <Col>
+                    <FormGroup row>
+                      <Label for="reportAmount" sm={3}>Show reports: </Label>
+                      <Col sm={2}>
+                        <Input type="select" name="select" id="reportAmount">
+                          <option>10</option>
+                          <option>20</option>
+                          <option>40</option>
+                          <option>All</option>
+                        </Input>
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col>
+                    <FormGroup row>
+                      <Label for="searchReport" sm={2}>Search</Label>
+                      <Col sm={10}>
+                        <Input type="text" name="text" id="searchReport"/>
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Table bordered striped responsive size="sm">
+                    <thead>
+                      <tr>
+                        <th>Report ID</th>
+                        <th>Agency</th>
+                        <th>Report Name</th>
+                        <th>Institutions</th>
+                        <th>Programmes</th>
+                        <th>Flag</th>
+                        <th>Date Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reportRows}
+                    </tbody>
+                  </Table>
+                </Row>
               </CardBody>
             </Card>
           </Col>
