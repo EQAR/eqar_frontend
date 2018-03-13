@@ -36,6 +36,18 @@ class ReportTable extends Component {
     return programmes;
   }
 
+  renderFlag(flag) {
+    let badgeColor = "success";
+    if ( flag === "low level" ) {
+      badgeColor = "warning";
+    } else if ( flag === "high level" ){
+      badgeColor = "danger";
+    }
+    return (
+      <Badge color={badgeColor} pill>{flag}</Badge>
+    );
+  }
+
   render() {
     let reports = this.props.reports.reports;
     let reportRows = reports.map((report, index) => {
@@ -55,8 +67,7 @@ class ReportTable extends Component {
             </ul>
           </td>
           <td>
-            {report.flag}
-            <Badge color="warning" pill>Low level</Badge>
+            {this.renderFlag(report.flag)}
           </td>
           <td>{report.date}</td>
         </tr>
