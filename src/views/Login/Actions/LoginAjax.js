@@ -11,15 +11,9 @@ function loginUser(username, password) {
       password: password,
     }).then((response) => {
       dispatch({ type: 'TOKEN_PROVIDED', payload: response.data, username: username });
-      // if (response.data.state) {
+      dispatch({ type: 'GET_AGENCY_NAME', payload: response.data.account });
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('username', username);
-      //   dispatch({ type: 'TOKEN_PROVIDED', payload: localStorage.getItem('token'), username: username });
-      // history.push('/');
       dispatch(push('/'));
-      // } else {
-      //   dispatch({ type: 'ERROR', payload: response.data.error });
-      // }
     });
   });
 }
