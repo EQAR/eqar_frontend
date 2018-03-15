@@ -4,12 +4,14 @@ import { createBrowserHistory, routerReducer, routerMiddleware, startListener } 
 import thunk from 'redux-thunk';
 import loginReducer from './views/Login/Reducer/login_reducer';
 import reportReducer from './views/Dashboard/Reducer/ReportReducer.js';
+import reportFormReducer from './views/CreateReport/Reducers/reportFormReducer.js';
 
 export const history = createBrowserHistory();
 
 const reducers = combineReducers({
   login: loginReducer,
   reports: reportReducer,
+  reportForm: reportFormReducer,
   router: routerReducer
 });
 
