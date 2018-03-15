@@ -115,42 +115,44 @@ class ReportTable extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Table bordered striped responsive size="sm">
-                    <thead>
-                      <tr>
-                        <th>Report ID</th>
-                        <th>Agency</th>
-                        <th>Report Name</th>
-                        <th>Institutions</th>
-                        <th>Programmes</th>
-                        <th>Flag</th>
-                        <th>Date Submitted</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {reportRows}
-                    </tbody>
-                  </Table>
-                  <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous href="#"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next href="#"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+                  <Col>
+                    <Table bordered striped responsive size="sm">
+                      <thead>
+                        <tr>
+                          <th>Report ID</th>
+                          <th>Agency</th>
+                          <th>Report Name</th>
+                          <th>Institutions</th>
+                          <th>Programmes</th>
+                          <th>Flag</th>
+                          <th>Date Submitted</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {reportRows}
+                      </tbody>
+                    </Table>
+                    <Pagination>
+                    <PaginationItem>
+                      <PaginationLink previous href="#"></PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem active>
+                      <PaginationLink href="#">1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">4</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink next href="#"></PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </Col>
                 </Row>
               </CardBody>
             </Card>
