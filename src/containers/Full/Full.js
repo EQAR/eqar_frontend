@@ -7,6 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import CreateReport from '../../views/CreateReport';
 import Dashboard from '../../views/Dashboard/';
+import Intitutions from '../../views/Institutions';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
@@ -24,6 +25,7 @@ class Full extends Component {
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/create-report" name="Create Report" component={CreateReport}/>
+                <Route path="/reference-data/institutionss" name="Intitutions" component={Institutions}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
