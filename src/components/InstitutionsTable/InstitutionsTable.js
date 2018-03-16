@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import { connect } from 'react-redux';
-import store from '../../../main_store';
-import setStates from '../../../state';
-import {selectInstitution} from '../Actions/selectInstitution'
+import store from '../../main_store';
+import setStates from '../../state';
+import {selectInstitution} from './Actions/selectInstitution'
 
-class SelectTable extends Component {
+class InstitutionsTable extends Component {
   constructor(props) {
     super(props);
     this.options = {
@@ -60,4 +60,4 @@ class SelectTable extends Component {
   }
 }
 
-export default connect(setStates)(SelectTable);
+export default connect(setStates)(InstitutionsTable);
