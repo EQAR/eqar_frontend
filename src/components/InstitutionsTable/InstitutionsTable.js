@@ -3,7 +3,8 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
-import {selectInstitution} from './Actions/selectInstitution'
+import selectInstitution from './Actions/SelectInstitution';
+import getInstitutions from './Actions/InstitutionsAjax';
 
 class InstitutionsTable extends Component {
   constructor(props) {
@@ -25,26 +26,40 @@ class InstitutionsTable extends Component {
     };
   }
 
+  componentDidMount(){
+    getInstitutions();
+  }
+
   onRowSelect(row, isSelected){
     selectInstitution(row, this.reportFormInt);
   }
 
   getCountries(countries) {
     countries = countries.map(country => country.country);
-    const countriesString = countries.reduce((countryString, country) => countryString + ', ' + country);
-    return countriesString;
+    return countries;
+  }
+
+  selectInstitutionsState() {
+    return {
+      allInstitutions: this.props.institutions.institutions,
+      reportInstitutions: this.props.reportForm.institutions
+    }[this.props.tableType];
   }
 
   getInstitutionsRows() {
-    let institutions = this.props.institutions.institutions;
-    institutions = institutions.map(institution => {
-      return {
-        'id': institution.id,
-        'eter_id': institution.eter_id,
-        'name': institution.name_primary,
-        'countries': this.getCountries(institution.countries)
-      }
-    });
+    let institutions = this.selectInstitutionsState();
+    if (institutions) {
+      institutions = institutions.map(institution => {
+        return {
+          'id': institution.id,
+          'eter_id': institution.eter_id,
+          'name_primary': institution.name_primary,
+          'countries': this.getCountries(institution.countries)
+        }
+      });
+    } else {
+      institutions = [];
+    }
     return institutions;
   }
 
@@ -53,7 +68,7 @@ class InstitutionsTable extends Component {
       <BootstrapTable data={this.getInstitutionsRows()} version="4" striped hover pagination search options={this.options} selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort>Id</TableHeaderColumn>
         <TableHeaderColumn isKey dataField="eter_id">ETER Id</TableHeaderColumn>
-        <TableHeaderColumn dataField="name" dataSort>Institution</TableHeaderColumn>
+        <TableHeaderColumn dataField="name_primary" dataSort>Institution</TableHeaderColumn>
         <TableHeaderColumn dataField="countries" dataSort>Countries</TableHeaderColumn>
       </BootstrapTable>
     )
