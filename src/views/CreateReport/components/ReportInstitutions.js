@@ -19,9 +19,11 @@ import getInstitutions from '../Actions/InstitutionsAjax.js';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import SelectTable from './SelectTable'
+import SelectTable from './SelectTable';
+import InstitutionsTable from '../../../components/InstitutionsTable';
 
-class Institutions extends Component {
+
+class ReportInstitutions extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,7 +83,7 @@ class Institutions extends Component {
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
             <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
             <ModalBody>
-              <SelectTable />
+              <InstitutionsTable />
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
@@ -94,4 +96,4 @@ class Institutions extends Component {
   }
 }
 
-export default connect(setStates)(Institutions);
+export default connect(setStates)(ReportInstitutions);
