@@ -12,15 +12,11 @@ import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
 import ReportTable from './components/ReportTable';
-import getReports from './Actions/ReportAjax';
+import ReportDataTable from './components/ReportDataTable'
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    getReports();
   }
 
   render() {
@@ -65,7 +61,7 @@ class Dashboard extends Component {
             </Card>
           </Col>
         </Row>
-        <ReportTable />
+        <ReportDataTable />
       </div>
     )
   }
