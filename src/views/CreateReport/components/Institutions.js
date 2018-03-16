@@ -29,6 +29,11 @@ class Institutions extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
+    this.clearInstitutions = this.clearInstitutions.bind(this);
+  }
+
+  componentWillMount() {
+    getInstitutions();
   }
 
   toggle() {
@@ -37,21 +42,23 @@ class Institutions extends Component {
     });
   }
 
-  componentWillMount() {
-    getInstitutions();
+  clearInstitutions() {
+    this.props.reportForm.institutions = [];
+    this.toggle();
   }
 
   render() {
     let institutions = this.props.reportForm.institutions;
-    let institutionRows = institutions.map(institution => {
-      <tr key={institution.id}>
-        <td>{institution.id}</td>
-        <td>{institution.eter_id}</td>
-        <td>{institution.name_primary}</td>
-        <td>{institution.countries.country}</td>
-      </tr>
+    institutions = institutions.map(institution => {
+      return (
+        <tr key={institution.id}>
+          <td>{institution.id}</td>
+          <td>{institution.eter_id}</td>
+          <td>{institution.name}</td>
+          <td>{institution.countries}</td>
+        </tr>
+      )
     });
-
     return (
       <div>
         <Row>
@@ -65,7 +72,7 @@ class Institutions extends Component {
                 </tr>
               </thead>
               <tbody>
-                {institutionRows}
+                {institutions}
               </tbody>
             </Table>
         </Row>
@@ -78,7 +85,7 @@ class Institutions extends Component {
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
-              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+              <Button color="secondary" onClick={this.clearInstitutions}>Cancel</Button>
             </ModalFooter>
           </Modal>
         </Row>

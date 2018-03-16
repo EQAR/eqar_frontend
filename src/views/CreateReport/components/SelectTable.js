@@ -26,13 +26,7 @@ class SelectTable extends Component {
   }
 
   onRowSelect(row, isSelected){
-    console.log(this)
     selectInstitution(row, this.reportFormInt);
-    // var rowStr = "";
-    // for(var prop in row){
-    //   rowStr+=prop+": '"+row[prop]+"' ";
-    // }
-    // alert("is selected: " + isSelected + ", " + rowStr);
   }
 
   getCountries(countries) {
