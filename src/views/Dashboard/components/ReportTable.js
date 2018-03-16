@@ -60,8 +60,8 @@ class ReportTable extends Component {
     let reportRows = reports.map((report, index) => {
       return (
         <tr key={report.id}>
-          <td>{ report.id }</td>
-          <td>{this.props.reports.agency}</td>
+          <td>{report.id}</td>
+          <td>{report.agency}</td>
           <td>{report.name}</td>
           <td>
             <ul>
