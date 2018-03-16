@@ -44,7 +44,7 @@ export default {
         },
         {
           name: 'Institutions',
-          url: '/reference-data/institutions',
+          url: '/institutions',
           icon: 'icon-graduation'
         },
         {

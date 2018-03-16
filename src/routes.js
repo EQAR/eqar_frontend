@@ -3,7 +3,8 @@ const routes = {
   '/dashboard': 'Dashboard',
   '/create-report': 'Create report',
   '/upload-report':'Upload report',
-  '/edit-report': 'Edit report'
+  '/edit-report': 'Edit report',
+  '/institutions': 'Institutions'
 };
 
 export default routes;
