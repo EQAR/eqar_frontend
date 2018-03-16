@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
 import selectInstitution from './Actions/SelectInstitution';
-import getInstitutions from './Actions/InstitutionsAjax';
+import { getInstitutionsByOffset, getInstitutionsByName } from './Actions/InstitutionsAjax';
 
 class InstitutionsTable extends Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class InstitutionsTable extends Component {
       clearSearch: true,
       alwaysShowAllBtns: false,
       withFirstAndLast: false,
-      onPageChange: this.onPageChange
+      onPageChange: this.onPageChange,
+      onFilterChange: this.afterColumnFilter
     }
     this.selectRowProp = {
       mode: 'checkbox',
@@ -29,11 +30,15 @@ class InstitutionsTable extends Component {
 
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
-    getInstitutions(sizePerPage, currentIndex);
+    getInstitutionsByOffset(sizePerPage, currentIndex);
+  }
+
+  afterColumnFilter(filterConds) {
+    getInstitutionsByName(filterConds);
   }
 
   componentDidMount(){
-    getInstitutions();
+    getInstitutionsByOffset();
   }
 
   onRowSelect(row, isSelected){
@@ -80,9 +85,9 @@ class InstitutionsTable extends Component {
 
     return (
       <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
-        <TableHeaderColumn dataField="id" dataSort>Id</TableHeaderColumn>
-        <TableHeaderColumn isKey dataField="eter_id">ETER Id</TableHeaderColumn>
-        <TableHeaderColumn dataField="name_primary" dataSort>Institution</TableHeaderColumn>
+        <TableHeaderColumn dataField="id" dataSort isKey>Id</TableHeaderColumn>
+        <TableHeaderColumn dataField="eter_id" dataSort>ETER Id</TableHeaderColumn>
+        <TableHeaderColumn dataField="name_primary" filter={ { type: 'TextFilter' } } dataSort>Institution</TableHeaderColumn>
         <TableHeaderColumn dataField="countries" dataSort>Countries</TableHeaderColumn>
       </BootstrapTable>
     )
