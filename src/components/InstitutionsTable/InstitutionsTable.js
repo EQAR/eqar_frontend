@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
-import selectInstitution from './Actions/SelectInstitution';
+import selectInstitution from './Actions/selectInstitution';
 import { getInstitutionsByOffset, getInstitutionsByName } from './Actions/InstitutionsAjax';
 
 class InstitutionsTable extends Component {
