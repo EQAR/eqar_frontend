@@ -3,7 +3,8 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import {selectInstitution} from '../Actions/selectInstitution'
+import {selectInstitution} from '../Actions/selectInstitution';
+// import InstitutionsTable from '../../components/InstitutionsTable';
 
 class SelectTable extends Component {
   constructor(props) {

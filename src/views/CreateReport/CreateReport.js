@@ -15,7 +15,7 @@ import {
   Button } from 'reactstrap';
 import classnames from 'classnames';
 import ReportBaseData from './components/ReportBaseData';
-import Institutions from './components/Institutions';
+import ReportInstitutions from './components/ReportInstitutions';
 import Programmes from './components/Programmes';
 import ReportFiles from './components/ReportFiles'
 
