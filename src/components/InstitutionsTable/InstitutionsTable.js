@@ -16,7 +16,8 @@ class InstitutionsTable extends Component {
       hidePageListOnlyOnePage: true,
       clearSearch: true,
       alwaysShowAllBtns: false,
-      withFirstAndLast: false
+      withFirstAndLast: false,
+      onPageChange: this.onPageChange
     }
     this.selectRowProp = {
       mode: 'checkbox',
@@ -24,6 +25,11 @@ class InstitutionsTable extends Component {
       onSelect: this.onRowSelect,
       reportFormInt: this.props.reportForm.institutions
     };
+  }
+
+  onPageChange(page, sizePerPage) {
+    const currentIndex = (page - 1) * sizePerPage;
+    getInstitutions(sizePerPage, currentIndex);
   }
 
   componentDidMount(){
@@ -63,9 +69,17 @@ class InstitutionsTable extends Component {
     return institutions;
   }
 
+  getfetchInfo() {
+    return(this.props.tableType === 'allInstitutions' ? this.props.institutions.count : this.props.reportForm.institutions.length)
+  }
+
   render() {
+    const fetchInfo = {
+      dataTotalSize: this.getfetchInfo()
+    };
+
     return (
-      <BootstrapTable data={this.getInstitutionsRows()} version="4" striped hover pagination search options={this.options} selectRow={ this.selectRowProp }>
+      <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination search options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort>Id</TableHeaderColumn>
         <TableHeaderColumn isKey dataField="eter_id">ETER Id</TableHeaderColumn>
         <TableHeaderColumn dataField="name_primary" dataSort>Institution</TableHeaderColumn>
