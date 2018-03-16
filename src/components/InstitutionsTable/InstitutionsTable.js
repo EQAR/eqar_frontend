@@ -79,7 +79,7 @@ class InstitutionsTable extends Component {
     };
 
     return (
-      <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination search options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
+      <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort>Id</TableHeaderColumn>
         <TableHeaderColumn isKey dataField="eter_id">ETER Id</TableHeaderColumn>
         <TableHeaderColumn dataField="name_primary" dataSort>Institution</TableHeaderColumn>
