@@ -103,7 +103,7 @@ class CreateReport extends Component {
                 </TabContent>
               </Col>
               <CardFooter>
-                <Button color="info">Save</Button>
+                <Button color="primary">Save</Button>
               </CardFooter>
             </CardBody>
           </Card>

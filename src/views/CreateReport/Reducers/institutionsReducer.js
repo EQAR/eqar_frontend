@@ -1,5 +1,5 @@
 function institutionsReducer(state = {
-  institutions: []
+  institutions: [null]
 }, action) {
   switch (action.type) {
     case 'GET_INSTITUTIONS': {

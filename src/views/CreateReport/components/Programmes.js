@@ -69,7 +69,7 @@ class Programmes extends Component {
                   />
                 </FormGroup>
                 <CardFooter>
-                  <Button color="info">Add programme ></Button>
+                  <Button color="primary">Add programme ></Button>
                 </CardFooter>
               </CardBody>
             </Card>
@@ -97,7 +97,7 @@ class Programmes extends Component {
                       <td>third cycle</td>
                       <td>Germany</td>
                       <td>
-                        <Button color="info">Remove</Button>
+                        <Button color="primary">Remove</Button>
                       </td>
                     </tr>
                   </tbody>
