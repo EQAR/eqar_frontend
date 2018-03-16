@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardHeader, CardBody} from 'reactstrap';
+import {Badge, Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import getReports from '../Actions/ReportAjax';
@@ -22,6 +22,22 @@ class DataTable extends Component {
     getReports(sizePerPage, currentIndex);
   }
 
+  multiFormatter(cell, row) {
+    return cell.join('; ');
+  }
+
+  flagFormatter(cell, row) {
+    let badgeColor = "success";
+    if ( cell === "low level" ) {
+        badgeColor = "warning";
+    } else if ( cell === "high level" ) {
+        badgeColor = "danger";
+    }
+    return (
+        <Badge color={badgeColor} pill>{cell}</Badge>
+    );    
+  }
+
   render() {
     const fetchInfo = {
         dataTotalSize: this.props.reports.count
@@ -40,12 +56,12 @@ class DataTable extends Component {
               options={ options }
               version="4" striped remote pagination
               fetchInfo={ fetchInfo }>
-              <TableHeaderColumn isKey dataField="id">ID</TableHeaderColumn>
-              <TableHeaderColumn dataField="agency">Agency</TableHeaderColumn>
+              <TableHeaderColumn isKey dataField="id" dataAlign="center" width='10%'>Report ID</TableHeaderColumn>
+              <TableHeaderColumn dataField="agency" dataAlign="center" width='10%'>Agency</TableHeaderColumn>
               <TableHeaderColumn dataField="name">Name</TableHeaderColumn>
-              <TableHeaderColumn dataField="institutions">Institutions</TableHeaderColumn>
-              <TableHeaderColumn dataField="programmes">Programmes</TableHeaderColumn>
-              <TableHeaderColumn dataField="flag">Flag</TableHeaderColumn>
+              <TableHeaderColumn dataField="institutions" dataFormat={ this.multiFormatter }>Institutions</TableHeaderColumn>
+              <TableHeaderColumn dataField="programmes" dataFormat={ this.multiFormatter }>Programmes</TableHeaderColumn>
+              <TableHeaderColumn dataField="flag" width='10%' dataAlign="center" dataFormat={ this.flagFormatter }>Flag</TableHeaderColumn>
             </BootstrapTable>
           </CardBody>
         </Card>
