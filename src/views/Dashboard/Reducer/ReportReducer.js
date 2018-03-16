@@ -1,6 +1,5 @@
 function reportReducer(state = {
   count: 0,
-  agency: '',
   reports: [],
   next: '',
   previous: ''
