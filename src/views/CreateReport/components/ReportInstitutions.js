@@ -34,10 +34,6 @@ class ReportInstitutions extends Component {
     this.clearInstitutions = this.clearInstitutions.bind(this);
   }
 
-  componentWillMount() {
-    getInstitutions();
-  }
-
   toggle() {
     this.setState({
       modal: !this.state.modal
