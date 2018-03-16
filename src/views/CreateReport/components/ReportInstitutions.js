@@ -19,7 +19,6 @@ import getInstitutions from '../Actions/InstitutionsAjax.js';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import SelectTable from './SelectTable';
 import InstitutionsTable from '../../../components/InstitutionsTable';
 
 
@@ -32,10 +31,6 @@ class ReportInstitutions extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.clearInstitutions = this.clearInstitutions.bind(this);
-  }
-
-  componentWillMount() {
-    getInstitutions();
   }
 
   toggle() {
@@ -64,26 +59,14 @@ class ReportInstitutions extends Component {
     return (
       <div>
         <Row>
-            <Table bordered striped responsive>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>ETER Id</th>
-                  <th>Institutions</th>
-                  <th>Countries</th>
-                </tr>
-              </thead>
-              <tbody>
-                {institutions}
-              </tbody>
-            </Table>
+            <InstitutionsTable tableType="reportInstitutions"/>
         </Row>
         <Row>
           <Button color="primary" onClick={this.toggle}>Add Institution</Button>
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
             <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
             <ModalBody>
-              <InstitutionsTable />
+              <InstitutionsTable tableType="allInstitutions"/>
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}

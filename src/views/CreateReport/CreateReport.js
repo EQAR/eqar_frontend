@@ -92,7 +92,7 @@ class CreateReport extends Component {
                     <ReportBaseData />
                   </TabPane>
                   <TabPane tabId="2">
-                    <Institutions />
+                    <ReportInstitutions />
                   </TabPane>
                   <TabPane tabId="3">
                     <Programmes />

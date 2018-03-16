@@ -27,7 +27,7 @@ class Institutions extends Component {
                 Institutions
               </CardHeader>
               <CardBody className="pb-0">
-                <InstitutionsTable />
+                <InstitutionsTable tableType="allInstitutions" />
               </CardBody>
             </Card>
           </Col>
