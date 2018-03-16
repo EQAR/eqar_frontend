@@ -36,18 +36,24 @@ class InstitutionsTable extends Component {
 
   getCountries(countries) {
     countries = countries.map(country => country.country);
-    const countriesString = countries.reduce((countryString, country) => countryString + ', ' + country);
-    return countriesString;
+    return countries;
+  }
+
+  selectInstitutionsState() {
+    return {
+      allInstitutions: this.props.institutions.institutions,
+      reportInstitutions: this.props.reportForm.institutions
+    }[this.props.tableType];
   }
 
   getInstitutionsRows() {
-    let institutions = this.props.institutions.institutions;
+    let institutions = this.selectInstitutionsState();
     if (institutions) {
       institutions = institutions.map(institution => {
         return {
           'id': institution.id,
           'eter_id': institution.eter_id,
-          'name': institution.name_primary,
+          'name_primary': institution.name_primary,
           'countries': this.getCountries(institution.countries)
         }
       });
@@ -62,7 +68,7 @@ class InstitutionsTable extends Component {
       <BootstrapTable data={this.getInstitutionsRows()} version="4" striped hover pagination search options={this.options} selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort>Id</TableHeaderColumn>
         <TableHeaderColumn isKey dataField="eter_id">ETER Id</TableHeaderColumn>
-        <TableHeaderColumn dataField="name" dataSort>Institution</TableHeaderColumn>
+        <TableHeaderColumn dataField="name_primary" dataSort>Institution</TableHeaderColumn>
         <TableHeaderColumn dataField="countries" dataSort>Countries</TableHeaderColumn>
       </BootstrapTable>
     )
