@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
 import { connect } from 'react-redux';
-import loginUser from './actions/loginAjax';
+import loginUser from './Actions/LoginAjax';
 import store from '../../main_store';
 import setStates from '../../state';
 
