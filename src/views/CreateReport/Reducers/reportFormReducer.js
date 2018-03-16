@@ -33,6 +33,9 @@ function reportFormReducer(state = {
     case 'CHANGE_VALID_TO': {
       return { ...state, valid_to: action.payload }
     }
+    case 'SELECT_INSTITUTION': {
+      return { ...state, institutions: action.payload }
+    }
     default: return { ...state };
   }
 }

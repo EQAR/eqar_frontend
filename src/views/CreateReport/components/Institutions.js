@@ -77,7 +77,7 @@ class Institutions extends Component {
               <SelectTable />
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+              <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
               <Button color="secondary" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Modal>

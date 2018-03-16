@@ -3,6 +3,7 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
+import {selectInstitution} from '../Actions/selectInstitution'
 
 class SelectTable extends Component {
   constructor(props) {
@@ -18,8 +19,20 @@ class SelectTable extends Component {
     }
     this.selectRowProp = {
       mode: 'checkbox',
-      clickToSelect: true
-    }
+      clickToSelect: true,
+      onSelect: this.onRowSelect,
+      reportFormInt: this.props.reportForm.institutions
+    };
+  }
+
+  onRowSelect(row, isSelected){
+    console.log(this)
+    selectInstitution(row, this.reportFormInt);
+    // var rowStr = "";
+    // for(var prop in row){
+    //   rowStr+=prop+": '"+row[prop]+"' ";
+    // }
+    // alert("is selected: " + isSelected + ", " + rowStr);
   }
 
   getCountries(countries) {
