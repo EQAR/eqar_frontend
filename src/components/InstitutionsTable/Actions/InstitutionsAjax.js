@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../../../main_store';
 
+let query = '';
 
 function InstitutionsRequest(params) {
   store.dispatch((dispatch) => {
@@ -13,14 +14,16 @@ function InstitutionsRequest(params) {
 export function getInstitutionsByOffset(limit=null, offset=null) {
   const params = {
     limit: limit,
-    offset: offset
+    offset: offset,
+    query: query
   };
   InstitutionsRequest(params);
 }
 
-export function getInstitutionsByName(query='') {
+export function getInstitutionsByName(q='') {
+  query = q.name_primary.value
   const params = {
-    query: query.name_primary.value
+    query: query
   };
   InstitutionsRequest(params);
 }

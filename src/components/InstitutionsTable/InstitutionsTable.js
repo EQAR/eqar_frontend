@@ -12,26 +12,26 @@ class InstitutionsTable extends Component {
     this.options = {
       sortIndicator: true,
       hideSizePerPage: true,
-      paginationSize: 3,
+      paginationSize: 5,
       hidePageListOnlyOnePage: true,
       clearSearch: true,
       alwaysShowAllBtns: false,
       withFirstAndLast: false,
       onPageChange: this.onPageChange,
-      onFilterChange: this.afterColumnFilter
+      onFilterChange: this.afterColumnFilter,
     }
     this.selectRowProp = {
       mode: 'checkbox',
       clickToSelect: true,
       onSelect: this.onRowSelect,
       reportFormInt: this.props.reportForm.institutions
-    };
+    }
   }
 
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
     getInstitutionsByOffset(sizePerPage, currentIndex);
-  }
+  };
 
   afterColumnFilter(filterConds) {
     getInstitutionsByName(filterConds);
@@ -62,10 +62,10 @@ class InstitutionsTable extends Component {
     if (institutions) {
       institutions = institutions.map(institution => {
         return {
-          'id': institution.id,
-          'eter_id': institution.eter_id,
-          'name_primary': institution.name_primary,
-          'countries': this.getCountries(institution.countries)
+          id: institution.id,
+          eter_id: institution.eter_id,
+          name_primary: institution.name_primary,
+          countries: this.getCountries(institution.countries)
         }
       });
     } else {
