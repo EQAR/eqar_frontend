@@ -59,14 +59,14 @@ class ReportInstitutions extends Component {
     return (
       <div>
         <Row>
-            <InstitutionsTable tableType="reportInstitutions"/>
+            <InstitutionsTable tableType="reportInstitutions" select="nonSelect"/>
         </Row>
         <Row>
           <Button color="primary" onClick={this.toggle}>Add Institution</Button>
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
             <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
             <ModalBody>
-              <InstitutionsTable tableType="allInstitutions"/>
+              <InstitutionsTable tableType="allInstitutions" select="select"/>
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
