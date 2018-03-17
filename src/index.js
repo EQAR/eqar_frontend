@@ -13,11 +13,16 @@ import '../scss/style.scss';
 import '../scss/core/_dropdown-menu-right.scss';
 import testUserToken from './TestUserToken';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
     testUserToken();
   }
+
   render() {
     return (
       <Provider store={store}>

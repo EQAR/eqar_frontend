@@ -6,6 +6,7 @@ import loginReducer from './views/Login/Reducer/login_reducer';
 import reportReducer from './views/Dashboard/Reducer/ReportReducer.js';
 import reportFormReducer from './views/CreateReport/Reducers/reportFormReducer.js';
 import institutionsReducer from './views/CreateReport/Reducers/institutionsReducer.js';
+import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer.js'
 
 export const history = createBrowserHistory();
 
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   reports: reportReducer,
   reportForm: reportFormReducer,
   institutions: institutionsReducer,
+  countries: coutriesReducer,
   router: routerReducer
 });
 

@@ -5,6 +5,7 @@ import store from '../../main_store';
 import setStates from '../../state';
 import selectInstitution from './Actions/SelectInstitution';
 import { getInstitutionsByOffset, getInstitutionsByName } from './Actions/InstitutionsAjax';
+import countriesAjax from './Actions/countriesAjax';
 
 class InstitutionsTable extends Component {
   constructor(props) {
@@ -28,6 +29,11 @@ class InstitutionsTable extends Component {
     }
   }
 
+  componentDidMount(){
+    getInstitutionsByOffset();
+    countriesAjax();
+  }
+
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
     getInstitutionsByOffset(sizePerPage, currentIndex);
@@ -37,15 +43,11 @@ class InstitutionsTable extends Component {
     getInstitutionsByName(filterConds);
   }
 
-  componentDidMount(){
-    getInstitutionsByOffset();
-  }
-
   onRowSelect(row, isSelected){
     selectInstitution(row, this.reportFormInt);
   }
 
-  getCountries(countries) {
+  institutionCountries(countries) {
     countries = countries.map(country => country.country);
     return countries;
   }
@@ -65,7 +67,7 @@ class InstitutionsTable extends Component {
           id: institution.id,
           eter_id: institution.eter_id,
           name_primary: institution.name_primary,
-          countries: this.getCountries(institution.countries)
+          countries: this.institutionCountries(institution.countries)
         }
       });
     } else {
@@ -78,17 +80,34 @@ class InstitutionsTable extends Component {
     return(this.props.tableType === 'allInstitutions' ? this.props.institutions.count : this.props.reportForm.institutions.length)
   }
 
+  filterCountries() {
+    let countries = this.props.countries.countries;
+    let filterCountries = new Object();
+    if (countries.length > 0) {
+      countries.forEach((country) => {
+        filterCountries[country.id] = country.name_english
+      });
+    } else {
+      filterCountries = {
+        0: 'No data'
+      }
+    }
+    return filterCountries;
+  }
+
   render() {
     const fetchInfo = {
       dataTotalSize: this.getfetchInfo()
     };
+
+    const countries = this.filterCountries()
 
     return (
       <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort isKey>Id</TableHeaderColumn>
         <TableHeaderColumn dataField="eter_id" dataSort>ETER Id</TableHeaderColumn>
         <TableHeaderColumn dataField="name_primary" filter={ { type: 'TextFilter' } } dataSort>Institution</TableHeaderColumn>
-        <TableHeaderColumn dataField="countries" dataSort>Countries</TableHeaderColumn>
+        <TableHeaderColumn dataField="countries" dataSort filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
       </BootstrapTable>
     )
   }
