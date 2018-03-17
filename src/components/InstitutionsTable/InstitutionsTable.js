@@ -21,12 +21,7 @@ class InstitutionsTable extends Component {
       onPageChange: this.onPageChange,
       onFilterChange: this.afterColumnFilter,
     }
-    this.selectRowProp = {
-      mode: 'checkbox',
-      clickToSelect: true,
-      onSelect: this.onRowSelect,
-      reportFormInt: this.props.reportForm.institutions
-    }
+    this.selectRowProp = this.selection();
   }
 
   componentDidMount(){
@@ -34,6 +29,17 @@ class InstitutionsTable extends Component {
     countriesAjax();
   }
 
+  selection(){
+    return {
+      select: {
+        mode: 'checkbox',
+        clickToSelect: true,
+        onSelect: this.onRowSelect,
+        reportFormInt: this.props.reportForm.institutions
+      },
+      nonSelect: {}
+    }[this.props.select];
+  }
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
     getInstitutionsByOffset(sizePerPage, currentIndex);
