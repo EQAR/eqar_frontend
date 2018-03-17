@@ -19,7 +19,7 @@ class InstitutionsTable extends Component {
       alwaysShowAllBtns: false,
       withFirstAndLast: false,
       onPageChange: this.onPageChange,
-      onFilterChange: this.afterColumnFilter,
+      onFilterChange: this.afterColumnFilter.bind(this)
     }
     this.selectRowProp = this.selection();
   }
@@ -46,6 +46,11 @@ class InstitutionsTable extends Component {
   };
 
   afterColumnFilter(filterConds) {
+    if (filterConds.countries) {
+      let countryFilterValue = filterConds.countries.value;
+      let countryFilterObject = this.props.countries.countries.find(o => o.name_english === countryFilterValue);
+      filterConds.countries.value = countryFilterObject.id;
+    }
     getInstitutionsByName(filterConds);
   }
 
@@ -91,7 +96,7 @@ class InstitutionsTable extends Component {
     let filterCountries = new Object();
     if (countries.length > 0) {
       countries.forEach((country) => {
-        filterCountries[country.id] = country.name_english
+        filterCountries[country.name_english] = country.name_english
       });
     } else {
       filterCountries = {
