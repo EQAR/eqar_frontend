@@ -26,7 +26,12 @@ export function getInstitutionsByName(param={}) {
   if (param.name_primary) {
     query = param.name_primary.value;
   } else {
+    query = '';
+  }
+  if (param.countries){
     country = param.countries.value;
+  } else {
+    country = null
   }
   const params = {
     query: query,

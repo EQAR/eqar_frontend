@@ -46,6 +46,7 @@ class InstitutionsTable extends Component {
   };
 
   afterColumnFilter(filterConds) {
+    console.log(filterConds)
     getInstitutionsByName(filterConds);
   }
 
