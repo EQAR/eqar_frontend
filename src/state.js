@@ -3,7 +3,8 @@ const setStates = state => ({
   dashboard: state.dashboardBadges,
   reports: state.reports,
   reportForm: state.reportForm,
-  institutions: state.institutions
+  institutions: state.institutions,
+  countries: state.countries
 });
 
 export default setStates;
