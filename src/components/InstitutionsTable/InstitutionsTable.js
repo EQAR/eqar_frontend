@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
-import selectInstitution from './Actions/selectInstitution';
+import { selectInstitution, removeInstitution } from './Actions/selectInstitution';
 import { getInstitutionsByOffset, getInstitutionsByName } from './Actions/InstitutionsAjax';
 import countriesAjax from './Actions/countriesAjax';
 
@@ -22,6 +22,7 @@ class InstitutionsTable extends Component {
       onFilterChange: this.afterColumnFilter.bind(this)
     }
     this.selectRowProp = this.selection();
+    // this.onRowSelect = this.onRowSelect.bind(this);
   }
 
   componentDidMount(){
@@ -34,8 +35,7 @@ class InstitutionsTable extends Component {
       select: {
         mode: 'checkbox',
         clickToSelect: true,
-        onSelect: this.onRowSelect,
-        reportFormInt: this.props.reportForm.institutions
+        onSelect: this.onRowSelect.bind(this)
       },
       nonSelect: {}
     }[this.props.select];
@@ -55,7 +55,11 @@ class InstitutionsTable extends Component {
   }
 
   onRowSelect(row, isSelected){
-    selectInstitution(row, this.reportFormInt);
+    if (isSelected) {
+      selectInstitution(row, this.props.reportForm.institutions);
+    } else {
+      removeInstitution(row, this.props.reportForm.institutions);
+    }
   }
 
   institutionCountries(countries) {

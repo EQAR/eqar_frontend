@@ -20,17 +20,20 @@ export default {
     {
       name: 'Create Report',
       url: '/create-report',
-      icon: 'icon-doc'
+      icon: 'icon-doc',
     },
     {
-      name: 'Upload Report',
-      url: '/upload-report',
-      icon: 'icon-cloud-upload'
+      name: '//Upload Report',
+      // url: '/upload-report',
+      url: '#',
+      icon: 'icon-cloud-upload',
     },
     {
-      name: 'Edit Report',
-      url: '/edit-report',
-      icon: 'icon-cloud-upload'
+      name: '//Edit Report',
+      // url: '/edit-report',
+      url: '#',
+      icon: 'icon-cloud-upload',
+      active: 'disabled'
     },
     {
       name: 'Reference Data',
@@ -38,8 +41,9 @@ export default {
       icon: 'icon-book-open',
       children: [
         {
-          name: 'Agency profile',
-          url: '/reference-data/agency-profile',
+          name: '//Agency profile',
+          // url: '/reference-data/agency-profile',
+          url: '#',
           icon: 'icon-home'
         },
         {
@@ -48,20 +52,23 @@ export default {
           icon: 'icon-graduation'
         },
         {
-          name: 'Countries',
-          url: '/reference-data/countries',
+          name: '//Countries',
+          // url: '/reference-data/countries',
+          url: '#',
           icon: 'icon-globe-alt'
         }
       ]
     },
       {
-        name: 'Alerts and flags',
-        url: '/alerts-and-flags',
+        name: '//Alerts and flags',
+        // url: '/alerts-and-flags',
+        url: '#',
         icon: 'icon-flag'
     },
       {
-        name: 'Statistics',
-        url: '/statistics',
+        name: '//Statistics',
+        // url: '/statistics',
+        url: '#',
         icon: 'icon-chart'
     }
   ]
