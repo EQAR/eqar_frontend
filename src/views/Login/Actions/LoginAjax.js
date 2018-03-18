@@ -11,13 +11,14 @@ function loginUser(username, password) {
       password: password,
     }).then((response) => {
       if (response.data.state === "success") {
-        console.log(response.data.state);
-        dispatch({ type: 'TOKEN_PROVIDED', payload: response.data, username: username });
         localStorage.setItem('token', response.data.token);
-        dispatch(push('/'));
+        axios.defaults.headers.common['authorization'] = `Bearer ${response.data.token}`;
+        dispatch({ type: 'TOKEN_PROVIDED', payload: response.data, username: username })
       } else {
         console.log('Error');
       }
+    }).then(() => {
+      dispatch(push('/'));
     });
   });
 }
