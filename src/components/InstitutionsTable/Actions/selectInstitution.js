@@ -1,7 +1,7 @@
 import store from '../../../main_store';
 
 
-function selectInstitution(institution, institutions) {
+export function selectInstitution(institution, institutions=[]) {
   institution.countries = [{
     country: institution.countries
   }]
@@ -9,4 +9,7 @@ function selectInstitution(institution, institutions) {
   store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions})
 }
 
-export default selectInstitution
+export function removeInstitution(institution, institutions=[]) {
+  institutions.splice(institutions.indexOf(institution), 1);
+  store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions})
+}
