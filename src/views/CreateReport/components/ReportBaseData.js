@@ -26,7 +26,7 @@ class ReportBaseData extends Component {
         <Row>
           <Col>
             <FormGroup>
-              <Label for="localIdentifier">Password</Label>
+              <Label for="localIdentifier">Local Identifier</Label>
               <Input type="text" name="text" id="localIdentifier" placeholder="Enter the report local identifier" onChange={this.handleInput}/>
             </FormGroup>
           </Col>
@@ -41,7 +41,7 @@ class ReportBaseData extends Component {
           </Col>
           <Col>
             <FormGroup>
-              <Label for="agencyActivity">Agency ESG Activity (Dependent of Agency)</Label>
+              <Label for="agencyActivity">Agency ESG Activity</Label>
               <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
                 <option>Please Select</option>
                 <option>Programme accreditation in Germany</option>
@@ -53,7 +53,7 @@ class ReportBaseData extends Component {
         <Row>
           <Col>
             <FormGroup>
-              <Label for="reportTitle">Title of the report (Auto generated)</Label>
+              <Label for="reportTitle">Title of the report</Label>
               <Input type="text" name="text" id="reportTitle" placeholder="Enter the report local identifier" value="Programme external evaluation/accreditation (First Cycle, Second Cycle) (by ARACIS)" readOnly/>
             </FormGroup>
           </Col>

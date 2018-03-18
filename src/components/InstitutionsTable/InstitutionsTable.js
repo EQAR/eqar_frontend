@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
-import selectInstitution from './Actions/selectInstitution';
+import { selectInstitution, removeInstitution } from './Actions/selectInstitution';
 import { getInstitutionsByOffset, getInstitutionsByName } from './Actions/InstitutionsAjax';
 import countriesAjax from './Actions/countriesAjax';
 
@@ -19,9 +19,10 @@ class InstitutionsTable extends Component {
       alwaysShowAllBtns: false,
       withFirstAndLast: false,
       onPageChange: this.onPageChange,
-      onFilterChange: this.afterColumnFilter,
+      onFilterChange: this.afterColumnFilter.bind(this)
     }
     this.selectRowProp = this.selection();
+    // this.onRowSelect = this.onRowSelect.bind(this);
   }
 
   componentDidMount(){
@@ -34,8 +35,7 @@ class InstitutionsTable extends Component {
       select: {
         mode: 'checkbox',
         clickToSelect: true,
-        onSelect: this.onRowSelect,
-        reportFormInt: this.props.reportForm.institutions
+        onSelect: this.onRowSelect.bind(this)
       },
       nonSelect: {}
     }[this.props.select];
@@ -46,11 +46,20 @@ class InstitutionsTable extends Component {
   };
 
   afterColumnFilter(filterConds) {
+    if (filterConds.countries) {
+      let countryFilterValue = filterConds.countries.value;
+      let countryFilterObject = this.props.countries.countries.find(o => o.name_english === countryFilterValue);
+      filterConds.countries.value = countryFilterObject.id;
+    }
     getInstitutionsByName(filterConds);
   }
 
   onRowSelect(row, isSelected){
-    selectInstitution(row, this.reportFormInt);
+    if (isSelected) {
+      selectInstitution(row, this.props.reportForm.institutions);
+    } else {
+      removeInstitution(row, this.props.reportForm.institutions);
+    }
   }
 
   institutionCountries(countries) {
@@ -91,7 +100,7 @@ class InstitutionsTable extends Component {
     let filterCountries = new Object();
     if (countries.length > 0) {
       countries.forEach((country) => {
-        filterCountries[country.id] = country.name_english
+        filterCountries[country.name_english] = country.name_english
       });
     } else {
       filterCountries = {
