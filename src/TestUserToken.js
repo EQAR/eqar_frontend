@@ -7,10 +7,11 @@ function testUserToken() {
   const token = localStorage.getItem('token');
   if (!token) {
     store.dispatch(push('/login'));
-  } else {
+  }
+  else {
     axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
   }
-  return token;
+  return;
 }
 
 export default testUserToken;
