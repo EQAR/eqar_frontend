@@ -36,6 +36,9 @@ function reportFormReducer(state = {
     case 'SELECT_INSTITUTION': {
       return { ...state, institutions: action.payload }
     }
+    case 'REMOVE_INSTITUTION': {
+      return { ...state, institutions: action.payload }
+    }
     default: return { ...state };
   }
 }
