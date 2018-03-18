@@ -49,7 +49,9 @@ class InstitutionsTable extends Component {
     if (filterConds.countries) {
       let countryFilterValue = filterConds.countries.value;
       let countryFilterObject = this.props.countries.countries.find(o => o.name_english === countryFilterValue);
-      filterConds.countries.value = countryFilterObject.id;
+      if (countryFilterObject) {
+        filterConds.countries.value = countryFilterObject.id;
+      }
     }
     getInstitutionsByName(filterConds);
   }
