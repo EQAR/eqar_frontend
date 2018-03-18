@@ -18,22 +18,22 @@ export default {
       class: ''
     },
     {
-      name: 'Create Report',
-      url: '/create-report',
+      name: 'Report Data',
+      url: '/report-data',
       icon: 'icon-doc',
-    },
-    {
-      name: '//Upload Report',
-      // url: '/upload-report',
-      url: '#',
-      icon: 'icon-cloud-upload',
-    },
-    {
-      name: '//Edit Report',
-      // url: '/edit-report',
-      url: '#',
-      icon: 'icon-cloud-upload',
-      active: 'disabled'
+      children: [
+        {
+          name: 'Add/Modify/Delete',
+          url: '/create-report',
+          icon: 'icon-doc'
+        },
+        {
+          name: '# Upload CSV',
+          // url: '/upload-report',
+          url: '#',
+          icon: 'icon-cloud-upload'
+        }
+      ]
     },
     {
       name: 'Reference Data',
@@ -41,7 +41,7 @@ export default {
       icon: 'icon-book-open',
       children: [
         {
-          name: '//Agency profile',
+          name: '# Agency profile',
           // url: '/reference-data/agency-profile',
           url: '#',
           icon: 'icon-home'
@@ -52,7 +52,7 @@ export default {
           icon: 'icon-graduation'
         },
         {
-          name: '//Countries',
+          name: '# Countries',
           // url: '/reference-data/countries',
           url: '#',
           icon: 'icon-globe-alt'
@@ -60,13 +60,13 @@ export default {
       ]
     },
       {
-        name: '//Alerts and flags',
+        name: '# Alerts and flags',
         // url: '/alerts-and-flags',
         url: '#',
         icon: 'icon-flag'
     },
       {
-        name: '//Statistics',
+        name: '# Statistics',
         // url: '/statistics',
         url: '#',
         icon: 'icon-chart'
