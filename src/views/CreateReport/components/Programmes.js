@@ -80,7 +80,7 @@ class Programmes extends Component {
                 Assigned programmes
               </CardHeader>
               <CardBody className="pb-0">
-                <Table>
+                <Table responsive>
                   <thead>
                     <tr>
                       <th>Primary Name</th>

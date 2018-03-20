@@ -22,7 +22,6 @@ class InstitutionsTable extends Component {
       onFilterChange: this.afterColumnFilter.bind(this)
     }
     this.selectRowProp = this.selection();
-    // this.onRowSelect = this.onRowSelect.bind(this);
   }
 
   componentDidMount(){
@@ -40,6 +39,7 @@ class InstitutionsTable extends Component {
       nonSelect: {}
     }[this.props.select];
   }
+  
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
     getInstitutionsByOffset(sizePerPage, currentIndex);
