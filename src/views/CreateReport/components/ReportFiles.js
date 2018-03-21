@@ -9,6 +9,9 @@ import {
 import Select from 'react-select';
 import countries from './data/countries';
 import '../../../../scss/vendors/react-select/react-select.scss';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { connect } from 'react-redux';
 
 const options = countries;
 
@@ -24,6 +27,15 @@ class ReportFiles extends Component {
 
   saveChanges(value) {
     this.setState({ value });
+  }
+
+  getCountries() {
+    return this.props.countries.countries.map((country) => {
+      return {
+        value: country.id,
+        label: country.name_english
+      }
+    });
   }
 
   render() {
@@ -54,7 +66,7 @@ class ReportFiles extends Component {
                 <Select
                   name="form-field-name2"
                   value={this.state.value}
-                  options={options}
+                  options={this.getCountries()}
                   onChange={this.saveChanges}
                   id="fileLanguages"
                   multi
@@ -67,4 +79,4 @@ class ReportFiles extends Component {
   }
 }
 
-export default ReportFiles;
+export default connect(setStates)(ReportFiles);

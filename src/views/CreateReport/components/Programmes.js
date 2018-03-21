@@ -12,23 +12,33 @@ import {
   Button,
   Table } from 'reactstrap';
 import Select from 'react-select';
-import countries from './data/countries';
 import '../../../../scss/vendors/react-select/react-select.scss';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { connect } from 'react-redux';
 
-const options = countries;
 
 class Programmes extends Component {
   constructor(props) {
     super(props)
     this.saveChanges = this.saveChanges.bind(this);
-
+    this.getCountries = this.getCountries.bind(this);
     this.state = {
       value: []
     }
   }
 
   saveChanges(value) {
-    this.setState({ value });
+    this.setState({value: value});
+  }
+
+  getCountries() {
+    return this.props.countries.countries.map((country) => {
+      return {
+        value: country.id,
+        label: country.name_english
+      }
+    });
   }
 
   render() {
@@ -51,7 +61,7 @@ class Programmes extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Label for="QFEHEALevel">QF EHEA Level</Label>
-                  <Input type="select" name="select" id="exampleSelect">
+                  <Input type="select" name="select" id="QFEHEALevel">
                     <option>Please select</option>
                     <option>first cycle</option>
                     <option>short cycle</option>
@@ -63,7 +73,7 @@ class Programmes extends Component {
                   <Select
                     name="form-field-name2"
                     value={this.state.value}
-                    options={options}
+                    options={this.getCountries()}
                     onChange={this.saveChanges}
                     multi
                   />
@@ -111,4 +121,4 @@ class Programmes extends Component {
   }
 }
 
-export default Programmes;
+export default connect(setStates)(Programmes);

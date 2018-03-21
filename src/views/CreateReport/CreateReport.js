@@ -17,7 +17,8 @@ import classnames from 'classnames';
 import ReportBaseData from './components/ReportBaseData';
 import ReportInstitutions from './components/ReportInstitutions';
 import Programmes from './components/Programmes';
-import ReportFiles from './components/ReportFiles'
+import ReportFiles from './components/ReportFiles';
+import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
 
 class CreateReport extends Component {
@@ -28,6 +29,10 @@ class CreateReport extends Component {
     this.state = {
       activeTab: '1'
     };
+  }
+
+  componentDidMount() {
+    countriesAjax();
   }
 
   toggle(tab) {
