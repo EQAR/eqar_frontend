@@ -24,12 +24,23 @@ class Programmes extends Component {
     this.saveChanges = this.saveChanges.bind(this);
     this.getCountries = this.getCountries.bind(this);
     this.state = {
-      value: []
+      value: [],
+      country: [],
+      primaryName: '',
+      NQFLevel: '',
+      QFEHEALevel: ''
     }
   }
 
   saveChanges(value) {
-    this.setState({value: value});
+    const count = this.state.country;
+    count.push(value);
+    this.setState({value: value, country: count});
+  }
+
+  handleInput(event) {
+    this.setState({event.target.id: event.target.value})
+    console.log(this.state)
   }
 
   getCountries() {
@@ -39,6 +50,20 @@ class Programmes extends Component {
         label: country.name_english
       }
     });
+  }
+
+  programmesOfReport() {
+    return this.props.reportForm.programmes.map(programme => {
+      <tr>
+        <td>{ programme.primaryName }</td>
+        <td>{ programme.NQFLevel }</td>
+        <td>{ programme.QFEHEALevel }</td>
+        <td>{ programme.country }</td>
+        <td>
+          <Button color="primary">Remove</Button>
+        </td>
+      </tr>
+    })
   }
 
   render() {
@@ -53,15 +78,15 @@ class Programmes extends Component {
               <CardBody className="pb-0">
                 <FormGroup>
                   <Label for="primaryName">Primary name</Label>
-                  <Input type="text" name="text" id="primaryName" />
+                  <Input type="text" name="text" id="primaryName" onChange={ this.handleInput } />
                 </FormGroup>
                 <FormGroup>
                   <Label for="NQFLevel">NQF Level</Label>
-                  <Input type="text" name="text" id="NQFLevel" />
+                  <Input type="text" name="text" id="NQFLevel" onChange={ this.handleInput } />
                 </FormGroup>
                 <FormGroup>
                   <Label for="QFEHEALevel">QF EHEA Level</Label>
-                  <Input type="select" name="select" id="QFEHEALevel">
+                  <Input type="select" name="select" id="QFEHEALevel" onChange={ this.handleInput } >
                     <option>Please select</option>
                     <option>first cycle</option>
                     <option>short cycle</option>
@@ -101,15 +126,7 @@ class Programmes extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Programme name</td>
-                      <td>ACQUIN</td>
-                      <td>third cycle</td>
-                      <td>Germany</td>
-                      <td>
-                        <Button color="primary">Remove</Button>
-                      </td>
-                    </tr>
+                    { this.programmesOfReport() }
                   </tbody>
                 </Table>
               </CardBody>

@@ -7,13 +7,11 @@ import {
   Label,
   Button } from 'reactstrap';
 import Select from 'react-select';
-import countries from './data/countries';
 import '../../../../scss/vendors/react-select/react-select.scss';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
 
-const options = countries;
 
 class ReportFiles extends Component {
   constructor(props) {
