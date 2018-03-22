@@ -16,6 +16,7 @@ import '../../../../scss/vendors/react-select/react-select.scss';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
+import { addProgrammeToReport } from '../Actions/reportFormActions';
 
 
 class Programmes extends Component {
@@ -23,6 +24,9 @@ class Programmes extends Component {
     super(props)
     this.saveChanges = this.saveChanges.bind(this);
     this.getCountries = this.getCountries.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.addProgramme = this.addProgramme.bind(this);
+    this.programmesOfReport = this.programmesOfReport.bind(this);
     this.state = {
       value: [],
       country: [],
@@ -33,14 +37,20 @@ class Programmes extends Component {
   }
 
   saveChanges(value) {
-    const count = this.state.country;
-    count.push(value);
-    this.setState({value: value, country: count});
+    let countries = this.props.reportForm.programmes.countries ? this.props.reportForm.programmes.countries : [];
+    countries.push(value)
+    this.setState({value: value, country: countries});
   }
 
   handleInput(event) {
-    this.setState({event.target.id: event.target.value})
-    console.log(this.state)
+    this.setState({
+      ...this.state,
+      [event.target.id]: event.target.value
+    })
+  }
+
+  addProgramme(event) {
+    addProgrammeToReport(this.state, event.target.id, this.props.reportForm.programmes);
   }
 
   getCountries() {
@@ -54,19 +64,23 @@ class Programmes extends Component {
 
   programmesOfReport() {
     return this.props.reportForm.programmes.map(programme => {
-      <tr>
-        <td>{ programme.primaryName }</td>
-        <td>{ programme.NQFLevel }</td>
-        <td>{ programme.QFEHEALevel }</td>
-        <td>{ programme.country }</td>
-        <td>
-          <Button color="primary">Remove</Button>
-        </td>
-      </tr>
-    })
+      return (
+        <tr>
+          <td>{ programme.primaryName }</td>
+          <td>{ programme.NQFLevel }</td>
+          <td>{ programme.QFEHEALevel }</td>
+          <td>{ programme.country[0].label }</td>
+          <td>
+            <Button color="primary">Remove</Button>
+          </td>
+        </tr>
+      );
+    });
   }
 
   render() {
+    const addedProgrammes = this.programmesOfReport();
+    console.log(addedProgrammes)
     return (
       <div>
         <Row>
@@ -104,7 +118,7 @@ class Programmes extends Component {
                   />
                 </FormGroup>
                 <CardFooter>
-                  <Button color="primary">Add programme ></Button>
+                  <Button id="addProgramme" color="primary" onClick={ this.addProgramme }>Add programme ></Button>
                 </CardFooter>
               </CardBody>
             </Card>
@@ -126,7 +140,7 @@ class Programmes extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    { this.programmesOfReport() }
+                    { addedProgrammes }
                   </tbody>
                 </Table>
               </CardBody>
