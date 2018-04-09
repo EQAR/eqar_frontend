@@ -27,6 +27,7 @@ class Programmes extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.addProgramme = this.addProgramme.bind(this);
     this.programmesOfReport = this.programmesOfReport.bind(this);
+    this.selectedCountry = this.selectedCountry.bind(this);
     this.state = {
       value: [],
       country: [],
@@ -62,6 +63,13 @@ class Programmes extends Component {
     });
   }
 
+  selectedCountry(countries) {
+    console.log(countries);
+    return countries.map(country => {
+      return country.label;
+    })
+  }
+
   programmesOfReport() {
     return this.props.reportForm.programmes.map(programme => {
       return (
@@ -69,7 +77,7 @@ class Programmes extends Component {
           <td>{ programme.primaryName }</td>
           <td>{ programme.NQFLevel }</td>
           <td>{ programme.QFEHEALevel }</td>
-          <td>{ programme.country[0].label }</td>
+          <td>{ this.selectedCountry(programme.country) }</td>
           <td>
             <Button color="primary">Remove</Button>
           </td>
@@ -80,7 +88,6 @@ class Programmes extends Component {
 
   render() {
     const addedProgrammes = this.programmesOfReport();
-    console.log(addedProgrammes)
     return (
       <div>
         <Row>
