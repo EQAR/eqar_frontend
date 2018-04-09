@@ -14,7 +14,7 @@ import {
   CardFooter,
   Button } from 'reactstrap';
 import classnames from 'classnames';
-import ReportBaseData from './components/ReportBaseData';
+import CoreData from './components/CoreData';
 import ReportInstitutions from './components/ReportInstitutions';
 import Programmes from './components/Programmes';
 import ReportFiles from './components/ReportFiles';
@@ -59,7 +59,7 @@ class CreateReport extends Component {
                         className={classnames({ active: this.state.activeTab === '1' })}
                         onClick={() => { this.toggle('1'); }}
                       >
-                        Report Base Data
+                        Core Data
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -94,7 +94,7 @@ class CreateReport extends Component {
               <Col>
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
-                    <ReportBaseData />
+                    <CoreData />
                   </TabPane>
                   <TabPane tabId="2">
                     <ReportInstitutions />

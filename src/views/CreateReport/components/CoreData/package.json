@@ -1,0 +1,6 @@
+{
+  "name": "CoreData",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CoreData.js"
+}
