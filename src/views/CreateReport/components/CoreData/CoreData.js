@@ -37,7 +37,7 @@ class CoreData extends Component {
                   </Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="agencyActivity">Agency ESG Activity</Label>
+                  <Label for="agencyActivity">Activity</Label>
                   <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
                     <option>Please Select</option>
                     <option>Programme accreditation in Germany</option>
@@ -45,7 +45,7 @@ class CoreData extends Component {
                   </Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="localIdentifier">Local Identifier</Label>
+                  <Label for="localIdentifier">Local Report Identifier</Label>
                   <Input type="text" name="text" id="localIdentifier" placeholder="Enter the report local identifier" onChange={this.handleInput}/>
                 </FormGroup>
                 <FormGroup>
@@ -74,6 +74,12 @@ class CoreData extends Component {
                   <Label for="reportValidTo">Report valid to</Label>
                   <Input type="date" name="date" id="reportValidTo" placeholder="Enter the report local identifier" onChange={this.handleInput} />
                 </FormGroup>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="6">
+            <Card>
+              <CardBody>
               </CardBody>
             </Card>
           </Col>
