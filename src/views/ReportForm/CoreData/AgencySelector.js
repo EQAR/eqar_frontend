@@ -1,0 +1,39 @@
+import React, { Component } from 'react';
+import {
+  FormGroup,
+  Input,
+  Label } from 'reactstrap';
+import { connect } from 'react-redux';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { formFill } from '../Actions/reportFormActions';
+import getAgencies from './actions';
+
+class AgencySelector extends Component {
+  constructor(props) {
+    super(props);
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  componentDidMount() {
+    getAgencies();
+  }
+
+  handleInput(e) {
+    formFill(e.target.value, e.target.id)
+  }
+
+  render() {
+    return (
+      <FormGroup>
+        <Label for="agencyName">Agency</Label>
+        <Input type="select" name="select" id="agencyName" onChange={this.handleInput}>
+          <option>ACQUIN</option>
+          <option>MUSIQUE</option>
+        </Input>
+      </FormGroup>
+    )
+  }
+}
+
+export default connect(setStates)(AgencySelector);

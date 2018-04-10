@@ -11,9 +11,10 @@ import {
   Button,
   Col } from 'reactstrap';
 import { connect } from 'react-redux';
-import store from '../../../../main_store';
-import setStates from '../../../../state';
-import { formFill } from '../../Actions/reportFormActions';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import AgencySelector from './AgencySelector';
+import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class CoreData extends Component {
                     <option>MUSIQUE</option>
                   </Input>
                 </FormGroup>
+                <AgencySelector />
                 <FormGroup>
                   <Label for="agencyActivity">Activity</Label>
                   <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
