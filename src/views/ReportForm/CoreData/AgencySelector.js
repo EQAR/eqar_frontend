@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { formFill } from '../Actions/reportFormActions';
-import getAgencies from './actions';
+import { getAgencies } from './actions';
 
 class AgencySelector extends Component {
   constructor(props) {

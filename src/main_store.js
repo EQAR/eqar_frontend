@@ -8,7 +8,7 @@ import badgeReducer from './views/Dashboard/Reducer/BadgeReducer';
 import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
 import institutionsReducer from './views/ReportForm/reducers/institutionsReducer';
 import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
-import agencyReducer from './views/ReportForm/CoreData/reducer';
+import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 
 export const history = createBrowserHistory();
 
