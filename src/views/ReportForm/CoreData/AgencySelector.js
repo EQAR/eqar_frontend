@@ -21,7 +21,7 @@ class AgencySelector extends Component {
   }
 
   handleInput(e) {
-    formFill(e.target.value, e.target.id)
+    formFill(e.target.value, e.target.id);
   }
 
   agencies() {

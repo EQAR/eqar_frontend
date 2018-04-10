@@ -3,7 +3,7 @@ function activityReducer(state = {
 }, action) {
   switch (action.type) {
     case 'GET_ACTIVITIES': {
-      return { ...state, agencies: action.payload};
+      return { ...state, activities: action.payload};
     }
     default: return { ...state };
   }

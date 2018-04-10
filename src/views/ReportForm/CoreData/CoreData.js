@@ -35,14 +35,6 @@ class CoreData extends Component {
             <Card>
               <CardBody>
                 <AgencySelector />
-                <FormGroup>
-                  <Label for="agencyActivity">Activity</Label>
-                  <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
-                    <option>Please Select</option>
-                    <option>Programme accreditation in Germany</option>
-                    <option>Instiutional accreditation in Austria</option>
-                  </Input>
-                </FormGroup>
                 <AgencyActivity />
                 <FormGroup>
                   <Label for="localIdentifier">Local Report Identifier</Label>

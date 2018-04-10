@@ -13,7 +13,7 @@ class agencyActivity extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
-    this.agencies = this.agencies.bind(this);
+    this.activities = this.activities.bind(this);
   }
 
   componentDidMount() {
@@ -24,10 +24,11 @@ class agencyActivity extends Component {
     formFill(e.target.value, e.target.id)
   }
 
-  agencies() {
-    return this.props.agencies.agencies.map(agency => {
+  activities() {
+    const agencyActivities = this.props.activities.activities.filter(activity => activity.agency === this.props.reportForm.agency);
+    return agencyActivities.map(activity => {
       return (
-        <option key={agency.id}>{agency.acronym_primary}</option>
+        <option key={activity.id}>{activity.activity}</option>
       )
     })
   }
@@ -37,9 +38,8 @@ class agencyActivity extends Component {
       <FormGroup>
         <Label for="agencyActivity">Activity</Label>
         <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
-          <option>Please Select</option>
-          <option>Programme accreditation in Germany</option>
-          <option>Instiutional accreditation in Austria</option>
+          <option>Please select</option>
+          {this.activities()}
         </Input>
       </FormGroup>
     )
