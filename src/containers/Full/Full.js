@@ -5,7 +5,7 @@ import Header from '../../components/Header/';
 import Sidebar from '../../components/Sidebar/';
 import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
-import CreateReport from '../../views/CreateReport';
+import ReportForm from '../../views/ReportForm';
 import Dashboard from '../../views/Dashboard/';
 import Institutions from '../../views/Institutions';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class Full extends Component {
             <Container fluid>
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Route path="/create-report" name="Create Report" component={CreateReport}/>
+                <Route path="/report-form" name="Report Form" component={ReportForm}/>
                 <Route path="/institutions" name="Institutions" component={Institutions}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>

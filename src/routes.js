@@ -1,7 +1,7 @@
 const routes = {
   '/': 'Home',
   '/dashboard': 'Dashboard',
-  '/create-report': 'Create report',
+  '/report-form': 'Report Form',
   '/upload-report':'Upload report',
   '/edit-report': 'Edit report',
   '/institutions': 'Institutions'

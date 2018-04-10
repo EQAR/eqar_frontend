@@ -21,7 +21,7 @@ import ReportFiles from './components/ReportFiles';
 import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
 
-class CreateReport extends Component {
+class ReportForm extends Component {
   constructor(props) {
     super(props);
 
@@ -117,4 +117,4 @@ class CreateReport extends Component {
   }
 }
 
-export default CreateReport;
+export default ReportForm;
