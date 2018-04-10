@@ -5,7 +5,8 @@ const setStates = state => ({
   reportForm: state.reportForm,
   institutions: state.institutions,
   countries: state.countries,
-  agencies: state.agencies
+  agencies: state.agencies,
+  activities: state.activities
 });
 
 export default setStates;

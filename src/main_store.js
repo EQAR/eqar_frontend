@@ -9,6 +9,7 @@ import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
 import institutionsReducer from './views/ReportForm/reducers/institutionsReducer';
 import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
+import activityReducer from './views/ReportForm/CoreData/activityReducer';
 
 export const history = createBrowserHistory();
 
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   institutions: institutionsReducer,
   countries: coutriesReducer,
   agencies: agencyReducer,
+  activities: activityReducer,
   router: routerReducer
 });
 
