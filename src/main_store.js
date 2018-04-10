@@ -3,11 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
 import loginReducer from './views/Login/Reducer/login_reducer';
-import reportReducer from './views/Dashboard/Reducer/ReportReducer.js';
+import reportReducer from './views/Dashboard/Reducer/ReportReducer';
 import badgeReducer from './views/Dashboard/Reducer/BadgeReducer';
-import reportFormReducer from './views/CreateReport/Reducers/reportFormReducer.js';
-import institutionsReducer from './views/CreateReport/Reducers/institutionsReducer.js';
-import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer.js'
+import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
+import institutionsReducer from './views/ReportForm/reducers/institutionsReducer';
+import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
+import agencyReducer from './views/ReportForm/CoreData/reducers';
 
 export const history = createBrowserHistory();
 
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   reportForm: reportFormReducer,
   institutions: institutionsReducer,
   countries: coutriesReducer,
+  agencies: agencyReducer,
   router: routerReducer
 });
 
