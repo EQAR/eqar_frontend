@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import AgencySelector from './AgencySelector';
+import AgencyActivity from './AgencyActivity';
 import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
@@ -42,6 +43,7 @@ class CoreData extends Component {
                     <option>Instiutional accreditation in Austria</option>
                   </Input>
                 </FormGroup>
+                <AgencyActivity />
                 <FormGroup>
                   <Label for="localIdentifier">Local Report Identifier</Label>
                   <Input type="text" name="text" id="localIdentifier" placeholder="Enter the report local identifier" onChange={this.handleInput}/>

@@ -1,12 +1,12 @@
-function agencyReducer(state = {
-  agencies: [],
+function activityReducer(state = {
+  activities: [],
 }, action) {
   switch (action.type) {
-    case 'GET_AGENCIES': {
+    case 'GET_ACTIVITIES': {
       return { ...state, agencies: action.payload};
     }
     default: return { ...state };
   }
 }
 
-export default agencyReducer;
+export default activityReducer;
