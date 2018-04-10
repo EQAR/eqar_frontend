@@ -14,7 +14,7 @@ import {
   CardFooter,
   Button } from 'reactstrap';
 import classnames from 'classnames';
-import CoreData from './components/CoreData';
+import CoreData from './CoreData';
 import ReportInstitutions from './components/ReportInstitutions';
 import Programmes from './components/Programmes';
 import ReportFiles from './components/ReportFiles';
