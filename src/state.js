@@ -4,7 +4,8 @@ const setStates = state => ({
   reports: state.reports,
   reportForm: state.reportForm,
   institutions: state.institutions,
-  countries: state.countries
+  countries: state.countries,
+  agencies: state.agencies
 });
 
 export default setStates;
