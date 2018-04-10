@@ -33,13 +33,6 @@ class CoreData extends Component {
           <Col xs="6">
             <Card>
               <CardBody>
-                <FormGroup>
-                  <Label for="agencyName">Agency</Label>
-                  <Input type="select" name="select" id="agencyName" onChange={this.handleInput}>
-                    <option>ACQUIN</option>
-                    <option>MUSIQUE</option>
-                  </Input>
-                </FormGroup>
                 <AgencySelector />
                 <FormGroup>
                   <Label for="agencyActivity">Activity</Label>

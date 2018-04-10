@@ -13,6 +13,7 @@ class AgencySelector extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
+    this.agencies = this.agencies.bind(this);
   }
 
   componentDidMount() {
@@ -23,13 +24,20 @@ class AgencySelector extends Component {
     formFill(e.target.value, e.target.id)
   }
 
+  agencies() {
+    return this.props.agencies.agencies.map(agency => {
+      return (
+        <option key={agency.id}>{agency.acronym_primary}</option>
+      )
+    })
+  }
+
   render() {
     return (
       <FormGroup>
         <Label for="agencyName">Agency</Label>
         <Input type="select" name="select" id="agencyName" onChange={this.handleInput}>
-          <option>ACQUIN</option>
-          <option>MUSIQUE</option>
+          {this.agencies()}
         </Input>
       </FormGroup>
     )
