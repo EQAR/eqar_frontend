@@ -12,18 +12,18 @@ import { formFill } from '../Actions/reportFormActions';
 class ValidTo extends Component {
   constructor(props) {
     super(props);
-    this.checkValidFrom = this.checkValidFrom.bind(this);
+    this.checkValidTo = this.checkValidFrom.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
 
 
-  checkValidFrom(fromDate) {
+  checkValidTo(fromDate) {
     return this.props.agency.registrationValidTo > fromDate ? true : false;
   }
 
   handleInput(e) {
     if (this.props.agency.registrationValidTo){
-      this.checkValidFrom(e.target.value) ? formFill(e.target.value, e.target.id) : false;
+      this.checkValidTo(e.target.value) ? formFill(e.target.value, e.target.id) : false;
     }
   }
 
