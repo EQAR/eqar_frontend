@@ -16,6 +16,7 @@ import setStates from '../../../state';
 import Agency from './Agency';
 import AgencyActivity from './AgencyActivity';
 import LocalIdentifier from './LocalIdentifier';
+import Status from './Status';
 import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
@@ -38,14 +39,7 @@ class CoreData extends Component {
                 <Agency />
                 <AgencyActivity />
                 <LocalIdentifier />
-                <FormGroup>
-                  <Label for="status">Status</Label>
-                  <Input type="select" name="select" id="status" onChange={this.handleInput}>
-                    <option>Please Select</option>
-                    <option>part of obligatory EQA system</option>
-                    <option>voluntary</option>
-                  </Input>
-                </FormGroup>
+                <Status />
                 <FormGroup>
                   <Label for="decision">Decision</Label>
                   <Input type="select" name="select" id="decision" onChange={this.handleInput}>
