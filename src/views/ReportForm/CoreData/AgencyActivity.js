@@ -36,7 +36,7 @@ class agencyActivity extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="agencyActivity">Activity</Label>
+        <Label for="agencyActivity" className="required-input">Activity</Label>
         <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
           <option>Please select</option>
           {this.activities()}
