@@ -13,8 +13,9 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import AgencySelector from './AgencySelector';
+import Agency from './Agency';
 import AgencyActivity from './AgencyActivity';
+import LocalIdentifier from './LocalIdentifier';
 import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
@@ -34,12 +35,9 @@ class CoreData extends Component {
           <Col xs="6">
             <Card>
               <CardBody>
-                <AgencySelector />
+                <Agency />
                 <AgencyActivity />
-                <FormGroup>
-                  <Label for="localIdentifier">Local Report Identifier</Label>
-                  <Input type="text" name="text" id="localIdentifier" placeholder="Enter the report local identifier" onChange={this.handleInput}/>
-                </FormGroup>
+                <LocalIdentifier />
                 <FormGroup>
                   <Label for="status">Status</Label>
                   <Input type="select" name="select" id="status" onChange={this.handleInput}>

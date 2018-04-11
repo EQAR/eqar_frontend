@@ -9,7 +9,7 @@ import setStates from '../../../state';
 import { formFill } from '../Actions/reportFormActions';
 import { getAgencies } from './actions';
 
-class AgencySelector extends Component {
+class Agency extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
@@ -44,4 +44,4 @@ class AgencySelector extends Component {
   }
 }
 
-export default connect(setStates)(AgencySelector);
+export default connect(setStates)(Agency);
