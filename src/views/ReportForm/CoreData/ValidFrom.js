@@ -18,11 +18,11 @@ class ValidFrom extends Component {
 
 
   checkValidFrom(fromDate) {
-    return this.props.agency.registration_start < fromDate ? true : false;
+    return this.props.agency.rregistrationStart < fromDate ? true : false;
   }
 
   handleInput(e) {
-    if (this.props.agency.registration_start){
+    if (this.props.agency.registrationStart){
       this.checkValidFrom(e.target.value) ? formFill(e.target.value, e.target.id) : false;
     }
   }
