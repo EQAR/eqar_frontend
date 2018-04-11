@@ -19,6 +19,7 @@ import LocalIdentifier from './LocalIdentifier';
 import Status from './Status';
 import Decision from './Decision';
 import ValidFrom from './ValidFrom';
+import ValidTo from './ValidTo';
 import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
@@ -44,10 +45,7 @@ class CoreData extends Component {
                 <Status />
                 <Decision />
                 <ValidFrom />
-                <FormGroup>
-                  <Label for="reportValidTo">Report valid to</Label>
-                  <Input type="date" name="date" id="reportValidTo" placeholder="Enter the report local identifier" onChange={this.handleInput} />
-                </FormGroup>
+                <ValidTo />
                 <Card>
                   <CardHeader>
                     View Report on Agency Website
