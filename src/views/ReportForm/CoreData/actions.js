@@ -11,7 +11,6 @@ export function getAgencies() {
 }
 
 export function getAgency(agencyId) {
-  console.log(agencyId)
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/webapi/v1/browse/agencies/' + agencyId).then((response) => {
       dispatch({ type: 'GET_AGENCY', payload: response.data });

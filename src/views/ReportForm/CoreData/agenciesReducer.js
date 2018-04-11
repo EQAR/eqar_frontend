@@ -1,4 +1,4 @@
-function agencyReducer(state = {
+function agenciesReducer(state = {
   agencies: [],
 }, action) {
   switch (action.type) {
@@ -9,4 +9,4 @@ function agencyReducer(state = {
   }
 }
 
-export default agencyReducer;
+export default agenciesReducer;
