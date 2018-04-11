@@ -9,7 +9,7 @@ import setStates from '../../../state';
 import { formFill } from '../Actions/reportFormActions';
 
 
-class ReportValidFrom extends Component {
+class ValidFrom extends Component {
   constructor(props) {
     super(props);
     this.checkValidFrom = this.checkValidFrom.bind(this);
@@ -37,4 +37,4 @@ class ReportValidFrom extends Component {
   }
 }
 
-export default connect(setStates)(ReportValidFrom);
+export default connect(setStates)(ValidFrom);
