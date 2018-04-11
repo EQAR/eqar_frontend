@@ -10,3 +10,10 @@
 .info-box {
   height: 100%;
 }
+
+.required-input:after {
+  color: #d00;
+  content: "*";
+  margin-left: 8px;
+  top:7px;
+}
