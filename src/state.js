@@ -6,6 +6,7 @@ const setStates = state => ({
   institutions: state.institutions,
   countries: state.countries,
   agencies: state.agencies,
+  agency: state.agency,
   activities: state.activities
 });
 
