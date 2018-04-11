@@ -17,6 +17,7 @@ import Agency from './Agency';
 import AgencyActivity from './AgencyActivity';
 import LocalIdentifier from './LocalIdentifier';
 import Status from './Status';
+import Decision from './Decision';
 import { formFill } from '../actions/reportFormActions';
 
 class CoreData extends Component {
@@ -40,16 +41,7 @@ class CoreData extends Component {
                 <AgencyActivity />
                 <LocalIdentifier />
                 <Status />
-                <FormGroup>
-                  <Label for="decision">Decision</Label>
-                  <Input type="select" name="select" id="decision" onChange={this.handleInput}>
-                    <option>Please Select</option>
-                    <option>positive</option>
-                    <option>positive with conditions or restrictions</option>
-                    <option>negative</option>
-                    <option>not applicable</option>
-                  </Input>
-                </FormGroup>
+                <Decision />
                 <FormGroup>
                   <Label for="reportValidFrom">Report valid from</Label>
                   <Input type="date" name="date" id="reportValidFrom" placeholder="Enter the report local identifier" onChange={this.handleInput} />
