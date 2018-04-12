@@ -34,7 +34,6 @@ class ReportUrl extends Component {
   }
 
   handleRemove(e) {
-    console.log(e.target.id)
     removeLink(e.target.id, this.props.reportForm.reportLinks);
   }
 
