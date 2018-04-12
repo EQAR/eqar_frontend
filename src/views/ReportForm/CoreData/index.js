@@ -20,18 +20,10 @@ import Status from './Status';
 import Decision from './Decision';
 import ValidFrom from './ValidFrom';
 import ValidTo from './ValidTo';
-import { formFill } from '../actions/reportFormActions';
+import ReportUrl from './ReportUrl';
+
 
 class CoreData extends Component {
-  constructor(props) {
-    super(props);
-    this.handleInput = this.handleInput.bind(this);
-  }
-
-  handleInput(e) {
-    formFill(e.target.value, e.target.id)
-  }
-
   render() {
     return (
       <div>
@@ -46,31 +38,7 @@ class CoreData extends Component {
                 <Decision />
                 <ValidFrom />
                 <ValidTo />
-                <Card>
-                  <CardHeader>
-                    View Report on Agency Website
-                  </CardHeader>
-                  <CardBody>
-                    <FormGroup>
-                      <Label for="urlToReport">URL to Page</Label>
-                      <Input type="text" name="text" id="urlToReport" placeholder="Enter URL to page of report"/>
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="textOfUrl">Display Text for URL</Label>
-                      <Input type="text" name="text" id="textOfUrl" placeholder="Enter display text for URL"/>
-                    </FormGroup>
-                  </CardBody>
-                  <CardFooter>
-                    <Row>
-                      <Col>
-                        <Button color="primary">Add More</Button>
-                      </Col>
-                      <Col>
-                        <Button color="primary" className="float-right">Remove</Button>
-                      </Col>
-                    </Row>
-                  </CardFooter>
-                </Card>
+                <ReportUrl />
               </CardBody>
             </Card>
           </Col>
