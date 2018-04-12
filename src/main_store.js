@@ -6,7 +6,7 @@ import loginReducer from './views/Login/Reducer/login_reducer';
 import reportReducer from './views/Dashboard/Reducer/ReportReducer';
 import badgeReducer from './views/Dashboard/Reducer/BadgeReducer';
 import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
-import institutionsReducer from './views/ReportForm/reducers/institutionsReducer';
+import institutionsReducer from './views/ReportForm/Institutions/institutionsReducer';
 import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
