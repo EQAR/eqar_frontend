@@ -39,6 +39,9 @@ function reportFormReducer(state = {
     case 'CHANGE_REPORTLINK': {
       return { ...state, reportLinks: action.payload }
     }
+    case 'REMOVE_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
+    }
     case 'SELECT_INSTITUTION': {
       return { ...state, institutions: action.payload }
     }

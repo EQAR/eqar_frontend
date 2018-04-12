@@ -7,14 +7,20 @@ export function formFill(inputValue, inputId) {
 }
 
 export function addEmptyReportLink(reportLinks=[]) {
-  reportLinks.push({link: '', text: ''});
+  reportLinks.push({url: '', text: ''});
   store.dispatch({ type: 'ADD_EMPTY_REPORTLINK', payload: reportLinks });
 }
 
 export function addReportLink(inputValue, inputId, indexOfLink, reportLinks=[]) {
-  inputId === 'urlToReport' ? reportLinks[indexOfLink].link = inputValue : reportLinks[indexOfLink].text = inputValue;
+  inputId === 'urlToReport' ? reportLinks[indexOfLink].url = inputValue : reportLinks[indexOfLink].text = inputValue;
   store.dispatch({ type: 'CHANGE_REPORTLINK', payload: reportLinks });
 }
+
+export function removeLink(index, reportLinks=[]) {
+  reportLinks.splice(index, 1);
+  store.dispatch({ type: 'REMOVE_REPORTLINK', payload: reportLinks });
+}
+
 
 export function addProgrammeToReport(inputValue, inputId, programmes=[]) {
   programmes.push(inputValue);
