@@ -12,7 +12,7 @@ import { formFill } from '../Actions/reportFormActions';
 class ValidTo extends Component {
   constructor(props) {
     super(props);
-    this.checkValidTo = this.checkValidFrom.bind(this);
+    this.checkValidTo = this.checkValidTo.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
 
