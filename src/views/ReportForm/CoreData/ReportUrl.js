@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyReportLink } from '../Actions/reportFormActions';
+import { addEmptyReportLink, addReportLink } from '../Actions/reportFormActions';
 
 
 class ReportUrl extends Component {
@@ -28,13 +28,8 @@ class ReportUrl extends Component {
     addEmptyReportLink(this.props.reportForm.reportLinks);
   }
 
-  handleInput(e) {
-    if (event.key !== 'Enter' && event.key !== undefined) {
-      return;
-    } else {
-      loginUser(this.username, this.password);
-    }
-    addReportLink(e.target.value, e.target.id);
+  handleInput(indexOfInput, e) {
+    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.reportLinks);
   }
 
   createLinkCard() {
@@ -47,11 +42,11 @@ class ReportUrl extends Component {
           <CardBody>
             <FormGroup>
               <Label for="urlToReport">URL to Page</Label>
-              <Input type="text" name="text" id="urlToReport" placeholder="Enter URL to page of report" onChange={this.handleInput} className={''+i+''}/>
+              <Input type="text" name="text" id="urlToReport" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} />
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="text" id="textOfUrl" placeholder="Enter display text for URL" onChange={this.handleInput} className={''+i+''}/>
+              <Input type="text" name="text" id="textOfUrl" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} />
             </FormGroup>
           </CardBody>
           <CardFooter>

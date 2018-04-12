@@ -33,6 +33,12 @@ function reportFormReducer(state = {
     case 'CHANGE_VALID_TO': {
       return { ...state, validTo: action.payload }
     }
+    case 'ADD_EMPTY_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
+    }
+    case 'CHANGE_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
+    }
     case 'SELECT_INSTITUTION': {
       return { ...state, institutions: action.payload }
     }
