@@ -64,7 +64,6 @@ class Programmes extends Component {
   }
 
   selectedCountry(countries) {
-    console.log(countries);
     return countries.map(country => {
       return country.label;
     })

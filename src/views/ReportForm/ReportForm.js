@@ -15,7 +15,7 @@ import {
   Button } from 'reactstrap';
 import classnames from 'classnames';
 import CoreData from './CoreData';
-import ReportInstitutions from './components/ReportInstitutions';
+import Institutions from './Institutions';
 import Programmes from './components/Programmes';
 import ReportFiles from './components/ReportFiles';
 import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
@@ -97,7 +97,7 @@ class ReportForm extends Component {
                     <CoreData />
                   </TabPane>
                   <TabPane tabId="2">
-                    <ReportInstitutions />
+                    <Institutions />
                   </TabPane>
                   <TabPane tabId="3">
                     <Programmes />

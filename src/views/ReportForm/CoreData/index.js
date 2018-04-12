@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {
-  FormGroup,
-  Input,
-  Label,
   Row,
   Card,
   CardBody,
