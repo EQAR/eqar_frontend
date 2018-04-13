@@ -21,3 +21,18 @@ export function removeName(index, alternativeNames=[]) {
   alternativeNames.splice(index, 1);
   store.dispatch({ type: 'REMOVE_ALTERNATIVE_NAME', payload: alternativeNames });
 }
+
+export function addEmptyIdentifier(identifiers=[]) {
+  identifiers.push({identifier: '', source: ''});
+  store.dispatch({ type: 'ADD_EMPTY_IDENTIFIER', payload: identifiers });
+}
+
+export function addIdentifier(inputValue, inputId, indexOfAlter, identifiers=[]) {
+  identifiers[indexOfAlter][inputId] = inputValue
+  store.dispatch({ type: 'CHANGE_IDENTIFIERS', payload: identifiers });
+}
+
+export function removeIdentifier(index, identifiers=[]) {
+  identifiers.splice(index, 1);
+  store.dispatch({ type: 'REMOVE_IDENTIFIER', payload: identifiers });
+}

@@ -20,6 +20,7 @@ import { addProgrammeToReport } from '../Actions/reportFormActions';
 import ProgrammeName from './ProgrammeName';
 import Qualification from './Qualification';
 import AlternativeNames from './AlternativeNames';
+import Identifiers from './Identifiers';
 
 
 class Programmes extends Component {
@@ -99,6 +100,7 @@ class Programmes extends Component {
                 <ProgrammeName />
                 <Qualification />
                 <AlternativeNames />
+                <Identifiers />
               </CardBody>
             </Card>
           </Col>
