@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import programmeForm from './actions';
+import { programmeForm } from './actions';
 
 
 class Qualification extends Component {
@@ -16,14 +16,14 @@ class Qualification extends Component {
   }
 
   handleInput(e) {
-    programmeForm(e.target.value, e.target.id, this.props.programme.programme[0]);
+    programmeForm(e.target.value, e.target.id);
   }
 
   render() {
     return (
       <FormGroup>
         <Label for="qualificationName">Qualification name</Label>
-        <Input type="text" name="text" id="qualificatioName" placeholder="Enter qualification name for display" onChange={ this.handleInput } />
+        <Input type="text" name="text" id="qualificationName" placeholder="Enter qualification name for display" onChange={ this.handleInput } />
       </FormGroup>
     )
   }

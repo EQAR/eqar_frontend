@@ -1,9 +1,13 @@
 function programmeReducer(state = {
-  programme: [],
+  programmeName: '',
+  qualification: ''
 }, action) {
   switch (action.type) {
-    case 'CHANGE_PROGRAMME': {
-      return { ...state, programme: action.payload};
+    case 'CHANGE_PROGRAMME_NAME': {
+      return { ...state, programmeName: action.payload};
+    }
+    case 'CHANGE_QUALIFICATION': {
+      return { ...state, qualification: action.payload};
     }
     default: return { ...state };
   }
