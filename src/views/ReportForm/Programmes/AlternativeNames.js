@@ -13,32 +13,32 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyAlterName, addReportLink, removeLink } from '../Actions/reportFormActions';
+import { addEmptyAlterName, addAlterName, removeLink } from './actions';
 
 
 class AlternativeNames extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
-    this.createLinkCard = this.createLinkCard.bind(this);
+    this.createNameCard = this.createNameCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleClick() {
-    addEmptyAlterName(this.props.reportForm.reportLinks);
+    addEmptyAlterName(this.props.programme.alternativeNames);
   }
 
   handleInput(indexOfInput, e) {
-    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.reportLinks);
+    addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternativeNames);
   }
 
   handleRemove(e) {
     removeLink(e.target.id, this.props.reportForm.reportLinks);
   }
 
-  createLinkCard() {
-    return this.props.programme.programme.alternativeNames.map((alternative, i) => {
+  createNameCard() {
+    return this.props.programme.alternativeNames.map((alternative, i) => {
       return (
         <Card key={i}>
           <CardHeader>
@@ -65,7 +65,7 @@ class AlternativeNames extends Component {
   render() {
     return (
       <div>
-        {this.createLinkCard()}
+        {this.createNameCard()}
         <Button color="primary" onClick={this.handleClick}>Add More</Button>
       </div>
     )

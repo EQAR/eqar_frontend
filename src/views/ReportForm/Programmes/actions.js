@@ -9,5 +9,11 @@ export function programmeForm(value, id) {
 
 export function addEmptyAlterName(alternativeNames=[]) {
   alternativeNames.push({alternativeName: '', alternativeQualification: ''});
-  store.dispatch({ type: 'ADD_EMPTY_REPORTLINK', payload: reportLinks });
+  store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_NAME', payload: alternativeNames });
+}
+
+export function addAlterName(inputValue, inputId, indexOfAlter, alternativeNames=[]) {
+  // inputId === 'urlToReport' ? reportLinks[indexOfLink].url = inputValue : reportLinks[indexOfLink].text = inputValue;
+  alternativeNames[indexOfAlter][inputId] = inputValue
+  store.dispatch({ type: 'CHANGE_ALTERNATIVE_NAME', payload: alternativeNames });
 }
