@@ -4,7 +4,8 @@ function programmeReducer(state = {
   alternativeNames: [],
   identifiers: [],
   qfeheaLevel: '',
-  nqfLevel: ''
+  nqfLevel: '',
+  countries: []
 }, action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
@@ -36,6 +37,9 @@ function programmeReducer(state = {
     }
     case 'CHANGE_NQF_LEVEL': {
       return { ...state, nqfLevel: action.payload};
+    }
+    case 'ADD_COUNTRY': {
+      return { ...state, countries: action.payload};
     }
     default: return { ...state };
   }

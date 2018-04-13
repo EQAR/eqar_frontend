@@ -16,13 +16,14 @@ import '../../../../scss/vendors/react-select/react-select.scss';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
-import { addProgrammeToReport } from '../Actions/reportFormActions';
+import { addProgrammeToReport } from '../actions/reportFormActions';
 import ProgrammeName from './ProgrammeName';
 import Qualification from './Qualification';
 import AlternativeNames from './AlternativeNames';
 import Identifiers from './Identifiers';
 import QFEHEALevel from './QFEHEALevel';
 import NQFLevel from './NQFLevel';
+import Countries from './Countries';
 
 
 class Programmes extends Component {
@@ -76,9 +77,9 @@ class Programmes extends Component {
   }
 
   programmesOfReport() {
-    return this.props.reportForm.programmes.map(programme => {
+    return this.props.reportForm.programmes.map((programme, i) => {
       return (
-        <tr>
+        <tr key={i}>
           <td>{ programme.primaryName }</td>
           <td>{ programme.NQFLevel }</td>
           <td>{ programme.QFEHEALevel }</td>
@@ -105,45 +106,19 @@ class Programmes extends Component {
                 <Identifiers />
                 <QFEHEALevel />
                 <NQFLevel />
+                <Countries />
               </CardBody>
+              <CardFooter>
+                <Button id="addProgramme" color="primary" onClick={ this.addProgramme }>Add programme ></Button>
+              </CardFooter>
             </Card>
           </Col>
           <Col xs="6">
             <Card className="info-box">
-              <CardBody>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="6">
-            <Card>
-              <CardHeader>
-                Add programme
-              </CardHeader>
-              <CardBody className="pb-0">
-
-                <FormGroup>
-                  <Select
-                    name="form-field-name2"
-                    value={this.state.value}
-                    options={this.getCountries()}
-                    onChange={this.saveChanges}
-                    multi
-                  />
-                </FormGroup>
-                <CardFooter>
-                  <Button id="addProgramme" color="primary" onClick={ this.addProgramme }>Add programme ></Button>
-                </CardFooter>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col xs="6">
-            <Card>
               <CardHeader>
                 Assigned programmes
               </CardHeader>
-              <CardBody className="pb-0">
+              <CardBody>
                 <Table responsive>
                   <thead>
                     <tr>
