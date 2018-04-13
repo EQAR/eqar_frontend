@@ -47,11 +47,11 @@ class ReportUrl extends Component {
           <CardBody>
             <FormGroup>
               <Label for="urlToReport">URL to Page</Label>
-              <Input type="text" name="text" id="urlToReport" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.url}/>
+              <Input type="text" name="text" id="url" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.url}/>
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="text" id="textOfUrl" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.text}/>
+              <Input type="text" name="text" id="text" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.text}/>
             </FormGroup>
           </CardBody>
           <CardFooter>

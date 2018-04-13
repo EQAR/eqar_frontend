@@ -12,7 +12,7 @@ export function addEmptyReportLink(reportLinks=[]) {
 }
 
 export function addReportLink(inputValue, inputId, indexOfLink, reportLinks=[]) {
-  inputId === 'urlToReport' ? reportLinks[indexOfLink].url = inputValue : reportLinks[indexOfLink].text = inputValue;
+  reportLinks[indexOfLink][inputId] = inputValue;
   store.dispatch({ type: 'CHANGE_REPORTLINK', payload: reportLinks });
 }
 
