@@ -7,6 +7,5 @@ export default function eventActions(inputId) {
     decision: 'CHANGE_DECISION',
     reportValidFrom: 'CHANGE_VALID_FROM',
     reportValidTo: 'CHANGE_VALID_TO',
-    addProgramme: 'ADD_PROGRAMME'
   }[inputId];
 }

@@ -21,8 +21,7 @@ export function removeLink(index, reportLinks=[]) {
   store.dispatch({ type: 'REMOVE_REPORTLINK', payload: reportLinks });
 }
 
-
 export function addProgrammeToReport(inputValue, inputId, programmes=[]) {
   programmes.push(inputValue);
-  store.dispatch({ type: eventActions(inputId), payload: programmes });
+  store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
 }

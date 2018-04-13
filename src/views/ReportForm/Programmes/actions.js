@@ -49,3 +49,13 @@ export function addCountry(country, countries=[]) {
   countries.push({identifier: '', source: ''});
   store.dispatch({ type: 'ADD_COUNTRY', payload: country });
 }
+
+export function addProgrammeToReport(inputValue, inputId, programmes=[]) {
+  programmes.push(inputValue);
+  store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
+}
+
+export function removeProgramme(index, programmes=[]) {
+  programmes.splice(index, 1);
+  store.dispatch({ type: 'REMOVE_IDENTIFIER', payload: programmes });
+}
