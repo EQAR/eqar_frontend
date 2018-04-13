@@ -66,7 +66,7 @@ class AlternativeNames extends Component {
     return (
       <div>
         {this.createNameCard()}
-        <Button color="primary" onClick={this.handleClick}>Add More</Button>
+        <Button color="primary" onClick={this.handleClick}>Add Alternative Name/Qualification</Button>
       </div>
     )
   }
