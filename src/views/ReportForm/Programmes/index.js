@@ -17,6 +17,7 @@ import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
 import { addProgrammeToReport } from '../Actions/reportFormActions';
+import ProgrammeName from './ProgrammeName';
 
 
 class Programmes extends Component {
@@ -92,14 +93,26 @@ class Programmes extends Component {
         <Row>
           <Col xs="6">
             <Card>
+              <CardBody>
+                <ProgrammeName />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="6">
+            <Card className="info-box">
+              <CardBody>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="6">
+            <Card>
               <CardHeader>
                 Add programme
               </CardHeader>
               <CardBody className="pb-0">
-                <FormGroup>
-                  <Label for="primaryName">Primary name</Label>
-                  <Input type="text" name="text" id="primaryName" onChange={ this.handleInput } />
-                </FormGroup>
+
                 <FormGroup>
                   <Label for="NQFLevel">NQF Level</Label>
                   <Input type="text" name="text" id="NQFLevel" onChange={ this.handleInput } />

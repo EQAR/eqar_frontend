@@ -16,7 +16,7 @@ import {
 import classnames from 'classnames';
 import CoreData from './CoreData';
 import Institutions from './Institutions';
-import Programmes from './components/Programmes';
+import Programmes from './Programmes';
 import ReportFiles from './components/ReportFiles';
 import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
