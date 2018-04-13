@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyAlterName, addAlterName, removeLink } from './actions';
+import { addEmptyAlterName, addAlterName, removeName } from './actions';
 
 
 class AlternativeNames extends Component {
@@ -34,7 +34,7 @@ class AlternativeNames extends Component {
   }
 
   handleRemove(e) {
-    removeLink(e.target.id, this.props.reportForm.reportLinks);
+    removeName(e.target.id, this.props.programme.alternativeNames);
   }
 
   createNameCard() {

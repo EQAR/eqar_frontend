@@ -13,7 +13,11 @@ export function addEmptyAlterName(alternativeNames=[]) {
 }
 
 export function addAlterName(inputValue, inputId, indexOfAlter, alternativeNames=[]) {
-  // inputId === 'urlToReport' ? reportLinks[indexOfLink].url = inputValue : reportLinks[indexOfLink].text = inputValue;
   alternativeNames[indexOfAlter][inputId] = inputValue
   store.dispatch({ type: 'CHANGE_ALTERNATIVE_NAME', payload: alternativeNames });
+}
+
+export function removeName(index, alternativeNames=[]) {
+  alternativeNames.splice(index, 1);
+  store.dispatch({ type: 'REMOVE_ALTERNATIVE_NAME', payload: alternativeNames });
 }

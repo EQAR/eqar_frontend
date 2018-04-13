@@ -16,6 +16,9 @@ function programmeReducer(state = {
     case 'CHANGE_ALTERNATIVE_NAME': {
       return { ...state, alternativeNames: action.payload};
     }
+    case 'REMOVE_ALTERNATIVE_NAME': {
+      return { ...state, alternativeNames: action.payload};
+    }
     default: return { ...state };
   }
 }
