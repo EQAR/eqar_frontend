@@ -11,26 +11,40 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import Autosuggest from 'react-autosuggest';
 import { formFill } from '../Actions/reportFormActions';
-import { getInstitutions } from './actions';
+import { getInstitutions, selectInstitution } from './actions';
 
 
 class Institution extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       value: {}
     }
   }
 
   handleChange(newValue) {
+    console.log('fsfsdf:', newValue)
     getInstitutions(newValue);
     this.setState({
       value: newValue
     });
+  }
+
+  handleSelect(institution) {
+    console.log('select', institution.label);
+    selectInstitution(institution.value);
+    // this.setState({
+    //   value: institution.label
+    // });
+  }
+
+  handleClick(e) {
+    console.log(this.props.institutions.institutions)
   }
 
   getOptions() {
@@ -55,7 +69,7 @@ class Institution extends Component {
             value={this.state.value}
             options={options}
             onInputChange={this.handleChange}
-            onChange={this.handleChange}
+            onChange={this.handleSelect}
           />
           <Button color="primary" onClick={this.handleClick}>Add</Button>
       </FormGroup>
