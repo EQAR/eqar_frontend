@@ -41,9 +41,6 @@ class Identifiers extends Component {
     return this.props.programme.identifiers.map((identifier, i) => {
       return (
         <Card key={i}>
-          <CardHeader>
-            Identifiers
-          </CardHeader>
           <CardBody>
             <FormGroup>
               <Label for="identifier">Identifier</Label>
@@ -64,10 +61,17 @@ class Identifiers extends Component {
 
   render() {
     return (
-      <div>
-        {this.createNameCard()}
-        <Button color="primary" onClick={this.handleClick}>Add Identifier</Button>
-      </div>
+      <Card>
+        <CardHeader>
+          Identifiers
+        </CardHeader>
+        <CardBody>
+          {this.createNameCard()}
+        </CardBody>
+        <CardFooter>
+          <Button color="primary" onClick={this.handleClick}>Add Identifier</Button>
+        </CardFooter>
+      </Card>
     )
   }
 }

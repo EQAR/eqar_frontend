@@ -41,9 +41,6 @@ class AlternativeNames extends Component {
     return this.props.programme.alternativeNames.map((alternative, i) => {
       return (
         <Card key={i}>
-          <CardHeader>
-            Alternative Names/Qualifications
-          </CardHeader>
           <CardBody>
             <FormGroup>
               <Label for="alternativeName">Altenative Programme Name</Label>
@@ -64,10 +61,17 @@ class AlternativeNames extends Component {
 
   render() {
     return (
-      <div>
-        {this.createNameCard()}
-        <Button color="primary" onClick={this.handleClick}>Add Alternative Name/Qualification</Button>
-      </div>
+      <Card>
+        <CardHeader>
+          Alternative Names/Qualifications
+        </CardHeader>
+        <CardBody>
+          {this.createNameCard()}
+        </CardBody>
+        <CardFooter>
+          <Button color="primary" onClick={this.handleClick}>Add Alternative Name</Button>
+        </CardFooter>
+      </Card>
     )
   }
 }
