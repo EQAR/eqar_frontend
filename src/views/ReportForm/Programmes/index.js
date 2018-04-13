@@ -22,6 +22,7 @@ import Qualification from './Qualification';
 import AlternativeNames from './AlternativeNames';
 import Identifiers from './Identifiers';
 import QFEHEALevel from './QFEHEALevel';
+import NQFLevel from './NQFLevel';
 
 
 class Programmes extends Component {
@@ -103,6 +104,7 @@ class Programmes extends Component {
                 <AlternativeNames />
                 <Identifiers />
                 <QFEHEALevel />
+                <NQFLevel />
               </CardBody>
             </Card>
           </Col>
@@ -121,20 +123,6 @@ class Programmes extends Component {
               </CardHeader>
               <CardBody className="pb-0">
 
-                <FormGroup>
-                  <Label for="NQFLevel">NQF Level</Label>
-                  <Input type="text" name="text" id="NQFLevel" onChange={ this.handleInput } />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="QFEHEALevel">QF EHEA Level</Label>
-                  <Input type="select" name="select" id="QFEHEALevel" onChange={ this.handleInput } >
-                    <option>Please select</option>
-                    <option>first cycle</option>
-                    <option>short cycle</option>
-                    <option>second cycle</option>
-                    <option>third cycle</option>
-                  </Input>
-                </FormGroup>
                 <FormGroup>
                   <Select
                     name="form-field-name2"
