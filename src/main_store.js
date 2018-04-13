@@ -11,7 +11,8 @@ import coutriesReducer from './components/InstitutionsTable/Reducers/countriesRe
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
-import programmeReducer from './views/ReportForm/Programmes/programmeReducer'
+import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
+import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 
 export const history = createBrowserHistory();
 
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   agencies: agenciesReducer,
   activities: activityReducer,
   programme: programmeReducer,
+  qfeheaLevels: qfeheaReducer,
   router: routerReducer
 });
 

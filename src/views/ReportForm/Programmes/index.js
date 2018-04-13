@@ -21,6 +21,7 @@ import ProgrammeName from './ProgrammeName';
 import Qualification from './Qualification';
 import AlternativeNames from './AlternativeNames';
 import Identifiers from './Identifiers';
+import QFEHEALevel from './QFEHEALevel';
 
 
 class Programmes extends Component {
@@ -101,6 +102,7 @@ class Programmes extends Component {
                 <Qualification />
                 <AlternativeNames />
                 <Identifiers />
+                <QFEHEALevel />
               </CardBody>
             </Card>
           </Col>

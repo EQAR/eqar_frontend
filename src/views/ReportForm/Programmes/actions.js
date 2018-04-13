@@ -36,3 +36,11 @@ export function removeIdentifier(index, identifiers=[]) {
   identifiers.splice(index, 1);
   store.dispatch({ type: 'REMOVE_IDENTIFIER', payload: identifiers });
 }
+
+export function getQFEHEA() {
+  store.dispatch((dispatch) => {
+    axios.get('https://backend.deqar.eu/adminapi/v1/select/qf_ehea_level').then((response) => {
+      dispatch({ type: 'GET_QFEHEA_LEVELS', payload: response.data});
+    });
+  });
+}

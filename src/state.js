@@ -8,7 +8,8 @@ const setStates = state => ({
   agencies: state.agencies,
   agency: state.agency,
   programme: state.programme,
-  activities: state.activities
+  activities: state.activities,
+  qfeheaLevels: state.qfeheaLevels
 });
 
 export default setStates;

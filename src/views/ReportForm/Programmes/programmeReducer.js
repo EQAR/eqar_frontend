@@ -2,7 +2,8 @@ function programmeReducer(state = {
   programmeName: '',
   qualification: '',
   alternativeNames: [],
-  identifiers: []
+  identifiers: [],
+  qfeheaLevel: ''
 }, action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
@@ -28,6 +29,9 @@ function programmeReducer(state = {
     }
     case 'REMOVE_IDENTIFIER': {
       return { ...state, identifiers: action.payload};
+    }
+    case 'CHANGE_QFEHEA_LEVEL': {
+      return { ...state, qfeheaLevel: action.payload};
     }
     default: return { ...state };
   }
