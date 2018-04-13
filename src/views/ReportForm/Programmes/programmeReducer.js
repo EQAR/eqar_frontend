@@ -1,15 +1,10 @@
 function programmeReducer(state = {
-  id: null,
-  registrationStart: '',
-  registrationValidTo: ''
+  programme: [],
 }, action) {
   switch (action.type) {
-    case 'GET_AGENCY': {
-      return { ...state,
-               id: action.payload.id,
-               registrationStart: action.payload.registration_start,
-               registrationValidTo: action.payload.registration_valid_to};
-    };
+    case 'CHANGE_PROGRAMME': {
+      return { ...state, programme: action.payload};
+    }
     default: return { ...state };
   }
 }

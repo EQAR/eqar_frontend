@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { formFill } from '../Actions/reportFormActions';
+import programmeForm from './actions';
 
 
 class ProgrammeName extends Component {
@@ -16,7 +16,7 @@ class ProgrammeName extends Component {
   }
 
   handleInput(e) {
-    formFill(e.target.value, e.target.id);
+    programmeForm(e.target.value, e.target.id, this.props.programme.programme[0]);
   }
 
   render() {
