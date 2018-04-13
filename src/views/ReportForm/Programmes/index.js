@@ -18,6 +18,7 @@ import setStates from '../../../state';
 import { connect } from 'react-redux';
 import { addProgrammeToReport } from '../Actions/reportFormActions';
 import ProgrammeName from './ProgrammeName';
+import Qualification from './Qualification';
 
 
 class Programmes extends Component {
@@ -95,6 +96,7 @@ class Programmes extends Component {
             <Card>
               <CardBody>
                 <ProgrammeName />
+                <Qualification />
               </CardBody>
             </Card>
           </Col>
