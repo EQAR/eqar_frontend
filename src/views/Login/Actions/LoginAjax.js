@@ -14,11 +14,14 @@ function loginUser(username, password) {
         localStorage.setItem('token', response.data.token);
         axios.defaults.headers.common['authorization'] = `Bearer ${response.data.token}`;
         dispatch({ type: 'TOKEN_PROVIDED', payload: response.data, username: username })
-      } else {
-        console.log('Error');
+        dispatch({ type: 'LOGIN_ALERT', payload: false })
       }
     }).then(() => {
       dispatch(push('/'));
+    }).catch(function (error) {
+      if (error.response.status === 401) {
+        dispatch({ type: 'LOGIN_ALERT', payload: true  })
+      }
     });
   });
 }

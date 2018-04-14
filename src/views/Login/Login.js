@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import { Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import LoginAlert from './LoginAlert';
 import { connect } from 'react-redux';
 import loginUser from './Actions/LoginAjax';
 import store from '../../main_store';
 import setStates from '../../state';
-
 
 class Login extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ class Login extends Component {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
+                    <LoginAlert />
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
@@ -64,10 +65,8 @@ class Login extends Component {
                 <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <h2>Welcome to DEQAR</h2>
+                      <p>DEQAR is a database that will enhance access to reports and decisions on higher education institutions/programmes externally reviewed against the ESG, by an EQAR-registered agency.</p>
                     </div>
                   </CardBody>
                 </Card>
