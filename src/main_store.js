@@ -4,10 +4,10 @@ import { createBrowserHistory, routerReducer, routerMiddleware, startListener } 
 import thunk from 'redux-thunk';
 import loginReducer from './views/Login/Reducer/login_reducer';
 import reportReducer from './views/Dashboard/Reducer/ReportReducer';
-import badgeReducer from './views/Dashboard/Reducer/BadgeReducer';
+import dashboardReducer from './views/Dashboard/Reducer/dashboardReducer';
 import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
-import institutionsReducer from './components/InstitutionsTable/Reducers/institutionsReducer';
-import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
+import institutionsReducer from './views/ReportForm/Institutions/institutionsReducer';
+import countriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
@@ -22,8 +22,8 @@ const reducers = combineReducers({
   activities: activityReducer,
   agencies: agenciesReducer,
   agency: agencyReducer,
-  countries: coutriesReducer,
-  dashboardBadges: badgeReducer,
+  countries: countriesReducer,
+  dashboard: dashboardReducer,
   institutions: institutionsReducer,
   login: loginReducer,
   languages: languagesReducer,

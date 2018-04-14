@@ -3,7 +3,7 @@ const setStates = state => ({
   agencies: state.agencies,
   agency: state.agency,
   countries: state.countries,
-  dashboard: state.dashboardBadges,
+  dashboard: state.dashboard,
   institutions: state.institutions,
   languages: state.languages,
   login: state.login,
