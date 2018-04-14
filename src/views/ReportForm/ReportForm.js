@@ -3,6 +3,7 @@ import {
   Badge,
   Row,
   Col,
+  Form,
   TabContent,
   TabPane,
   Nav,
@@ -24,7 +25,7 @@ import countriesAjax from '../../components/InstitutionsTable/Actions/countriesA
 class ReportForm extends Component {
   constructor(props) {
     super(props);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1'
@@ -38,9 +39,15 @@ class ReportForm extends Component {
       });
     }
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(event)
+  }
+
   render() {
     return (
-      <div className="animated fadeIn">
+      <Form onClick={this.handleSubmit} className="animated fadeIn">
           <Card>
             <CardHeader>
               <Row>
@@ -104,11 +111,11 @@ class ReportForm extends Component {
                 </TabContent>
               </Col>
               <CardFooter>
-                <Button color="primary">Save Record</Button>
+                <Button type="submit" color="primary">Save Record</Button>
               </CardFooter>
             </CardBody>
           </Card>
-      </div>
+      </Form>
     );
   }
 }
