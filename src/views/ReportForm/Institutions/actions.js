@@ -14,3 +14,8 @@ export function selectInstitution(institution, institutions=[]) {
   institutions.push(institution);
   store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions});
 }
+
+export function removeInstitution(institutionId, institutions=[]) {
+  institutions.splice(institutionId, 1);
+  store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions});
+}

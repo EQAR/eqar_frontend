@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { removeProgramme, editProgramme } from './actions';
+import { removeInstitution } from './actions';
 
 
 class AssignedInstitutions extends Component {
@@ -17,15 +17,10 @@ class AssignedInstitutions extends Component {
     super(props);
     this.handleRemove = this.handleRemove.bind(this);
     this.reportInstitutions = this.reportInstitutions.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleRemove(e) {
-    removeProgramme(e.target.id, this.props.reportForm.programmes);
-  }
-
-  handleEdit(e) {
-    editProgramme(e.target.id, this.props.reportForm.programmes);
+    removeInstitution(e.target.id, this.props.reportForm.institutions);
   }
 
   reportInstitutions() {
