@@ -11,9 +11,7 @@ import { Async } from 'react-select';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { formFill } from '../Actions/reportFormActions';
 import { getInstitutions, selectInstitution } from './actions';
-import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
 
