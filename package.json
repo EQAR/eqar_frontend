@@ -64,6 +64,7 @@
     "react-text-mask-hoc": "0.10.6",
     "react-toastify": "3.0.0",
     "react-transition-group": "2.2.1",
+    "react-user-avatar": "^1.10.0",
     "reactstrap": "5.0.0-alpha.4",
     "redux": "^3.7.2",
     "redux-first-routing": "^0.3.0",

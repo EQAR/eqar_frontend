@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Badge, Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import getReports from '../Actions/ReportAjax';
+import getReports from '../Actions/getReports';
 
 import { connect } from 'react-redux';
 import store from '../../../main_store';

@@ -7,6 +7,9 @@ import {
   Button
 } from 'reactstrap';
 import HeaderDropdown from './HeaderDropdown';
+import { connect } from 'react-redux';
+import store from '../../main_store';
+import setStates from '../../state';
 
 class Header extends Component {
 
@@ -41,6 +44,7 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <Nav className="ml-auto" navbar>
+          <NavItem className="nav-greeting">Welcome, {this.props.dashboard.user.username}!</NavItem>
           <HeaderDropdown accnt/>
         </Nav>
       </header>
@@ -48,4 +52,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(setStates)(Header);

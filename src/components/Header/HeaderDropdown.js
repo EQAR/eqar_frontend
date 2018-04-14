@@ -9,6 +9,11 @@ import {
   Progress,
 } from 'reactstrap';
 import logoutUser from './Actions/Logout';
+import { connect } from 'react-redux';
+import store from '../../main_store';
+import setStates from '../../state';
+import UserAvatar from 'react-user-avatar';
+import getUser from './Actions/getUser';
 
 class HeaderDropdown extends Component {
 
@@ -28,6 +33,10 @@ class HeaderDropdown extends Component {
     });
   }
 
+  componentDidMount() {
+    getUser();
+  }
+
   logout(){
     logoutUser();
   }
@@ -36,13 +45,11 @@ class HeaderDropdown extends Component {
     return (
       <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <img src={'img/avatars/2.png'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
+          <UserAvatar size="40" name={this.props.dashboard.user.username} />
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
+          <DropdownItem header tag="div" className="text-center"><strong>{this.props.dashboard.user.username} </strong></DropdownItem>
           <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
-          <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-          <DropdownItem divider/>
           <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
         </DropdownMenu>
       </Dropdown>
@@ -50,4 +57,4 @@ class HeaderDropdown extends Component {
   }
 }
 
-export default HeaderDropdown;
+export default connect(setStates)(HeaderDropdown);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../../../main_store';
 
 
-function getReport(limit=null, offset=null) {
+function getReports(limit=null, offset=null) {
   const params = {
     limit: limit,
     offset: offset
@@ -16,4 +16,4 @@ function getReport(limit=null, offset=null) {
   });
 }
 
-export default getReport;
+export default getReports;
