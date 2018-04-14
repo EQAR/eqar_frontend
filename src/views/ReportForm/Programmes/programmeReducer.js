@@ -1,3 +1,5 @@
+import { composeResetReducer } from 'redux-reset-store';
+
 const initialState = {
   programmeName: '',
   qualification: '',
@@ -8,7 +10,7 @@ const initialState = {
   countries: []
 }
 
-function programmeReducer(state = initialState, action) {
+const programmeReducer = composeResetReducer(function programmeReducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
       return { ...state, programmeName: action.payload};
@@ -43,11 +45,11 @@ function programmeReducer(state = initialState, action) {
     case 'ADD_COUNTRY': {
       return { ...state, countries: action.payload};
     }
-    case 'RESET_PROGRAMME': {
-      state = initialState
+    case 'EDIT_PROGRAMME': {
+      state = action.payload
     }
     default: return { ...state };
   }
-}
+}, initialState, 'RESET_PROGRAMME');
 
 export default programmeReducer;

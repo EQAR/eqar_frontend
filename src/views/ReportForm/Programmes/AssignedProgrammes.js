@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { removeProgramme } from './actions';
+import { removeProgramme, editProgramme } from './actions';
 
 
 class AssignedProgrammes extends Component {
@@ -17,10 +17,15 @@ class AssignedProgrammes extends Component {
     super(props);
     this.handleRemove = this.handleRemove.bind(this);
     this.reportProgrammes = this.reportProgrammes.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleRemove(e) {
     removeProgramme(e.target.id, this.props.reportForm.programmes);
+  }
+
+  handleEdit(e) {
+    editProgramme(e.target.id, this.props.reportForm.programmes);
   }
 
   reportProgrammes() {
@@ -29,7 +34,7 @@ class AssignedProgrammes extends Component {
         <ListGroupItem key={i} className="justify-content-between">
               {programme.programmeName}{' '}
               <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
-              <Button color="primary" id={i} onClick={this.handEdit} className="float-right programme-edit">Edit</Button>
+              <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
       )
     })

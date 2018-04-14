@@ -23,7 +23,7 @@ class Qualification extends Component {
     return (
       <FormGroup>
         <Label for="qualificationName">Qualification name</Label>
-        <Input type="text" name="text" id="qualificationName" placeholder="Enter qualification name for display" onChange={ this.handleInput } />
+        <Input type="text" name="text" id="qualificationName" value={this.props.programme.qualification} placeholder="Enter qualification name for display" onChange={ this.handleInput } />
       </FormGroup>
     )
   }
