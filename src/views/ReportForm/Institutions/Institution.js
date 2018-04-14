@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { getInstitutions, selectInstitution } from './actions';
-import axios from 'axios';
 
 
 class Institution extends Component {
@@ -46,19 +45,7 @@ class Institution extends Component {
     if (!input) {
       return Promise.resolve({ options: [] });
     }
-
-    return axios.get('https://backend.deqar.eu/adminapi/v1/select/institutions', {params: {query: input}})
-    .then((response) => {
-      return response.data.results.map(result => {
-        return {
-          value: result,
-          label: result.name_primary
-        }
-      })
-    })
-    .then(results => {
-      return ({ options: results })
-    })
+    return getInstitutions(input);
   }
 
   render() {
