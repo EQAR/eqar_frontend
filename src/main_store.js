@@ -13,6 +13,7 @@ import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
 import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
+import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 
 export const history = createBrowserHistory();
 
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   activities: activityReducer,
   programme: programmeReducer,
   qfeheaLevels: qfeheaReducer,
+  reportFile: fileReducer,
   router: routerReducer
 });
 

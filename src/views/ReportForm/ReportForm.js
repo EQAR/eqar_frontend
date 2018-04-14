@@ -17,7 +17,7 @@ import classnames from 'classnames';
 import CoreData from './CoreData';
 import Institutions from './Institutions';
 import Programmes from './Programmes';
-import ReportFiles from './components/ReportFiles';
+import ReportFiles from './ReportFiles';
 import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
 
@@ -29,10 +29,6 @@ class ReportForm extends Component {
     this.state = {
       activeTab: '1'
     };
-  }
-
-  componentDidMount() {
-    countriesAjax();
   }
 
   toggle(tab) {

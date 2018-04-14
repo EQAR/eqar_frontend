@@ -5,11 +5,7 @@ import {
   CardBody,
   CardHeader,
   CardFooter,
-  Button,
   Col } from 'reactstrap';
-import { connect } from 'react-redux';
-import store from '../../../main_store';
-import setStates from '../../../state';
 import Agency from './Agency';
 import AgencyActivity from './AgencyActivity';
 import LocalIdentifier from './LocalIdentifier';
@@ -51,4 +47,4 @@ class CoreData extends Component {
   }
 }
 
-export default connect(setStates)(CoreData);
+export default (CoreData);

@@ -5,17 +5,7 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardFooter,
-  FormGroup,
-  Input,
-  Label,
-  Button,
-  Table } from 'reactstrap';
-import '../../../../scss/vendors/react-select/react-select.scss';
-import store from '../../../main_store';
-import setStates from '../../../state';
-import { connect } from 'react-redux';
-import { addProgrammeToReport } from './actions';
+  CardFooter } from 'reactstrap';
 import ProgrammeName from './ProgrammeName';
 import Qualification from './Qualification';
 import AlternativeNames from './AlternativeNames';
@@ -28,10 +18,6 @@ import AddProgramme from './AddProgramme';
 
 
 class Programmes extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div>
@@ -68,4 +54,4 @@ class Programmes extends Component {
   }
 }
 
-export default connect(setStates)(Programmes);
+export default Programmes;

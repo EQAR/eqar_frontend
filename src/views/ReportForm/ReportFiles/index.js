@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
+  Card,
+  CardBody,
   FormGroup,
   Input,
   Label,
@@ -11,6 +13,7 @@ import '../../../../scss/vendors/react-select/react-select.scss';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
+import FileUrl from './FileUrl';
 
 
 class ReportFiles extends Component {
@@ -39,6 +42,22 @@ class ReportFiles extends Component {
   render() {
     return (
       <div>
+        <Row>
+          <Col xs="6">
+            <Card>
+              <CardBody>
+                <FileUrl />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="6">
+            <Card className="info-box">
+              <CardBody>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
         <Row>
           <Col xs="6">
             <FormGroup>
