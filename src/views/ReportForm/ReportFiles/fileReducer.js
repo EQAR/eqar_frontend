@@ -3,7 +3,7 @@ import { composeResetReducer } from 'redux-reset-store';
 const initialState = {
   url: '',
   uploadedFile: '',
-  language: '',
+  languages: [],
   name: ''
 }
 
@@ -14,6 +14,9 @@ const fileReducer = composeResetReducer(function fileReducer(state = initialStat
     }
     case 'CHANGE_UPLOADED_FILE': {
       return { ...state, uploadedFile: action.payload};
+    }
+    case 'ADD_LANGUAGE': {
+      return { ...state, languages: action.payload};
     }
     default: return { ...state };
   }

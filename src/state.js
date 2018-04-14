@@ -5,6 +5,7 @@ const setStates = state => ({
   countries: state.countries,
   dashboard: state.dashboardBadges,
   institutions: state.institutions,
+  languages: state.languages,
   login: state.login,
   programme: state.programme,
   qfeheaLevels: state.qfeheaLevels,

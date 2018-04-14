@@ -46,7 +46,6 @@ export function getQFEHEA() {
 }
 
 export function addCountry(country, countries=[]) {
-  countries.push({identifier: '', source: ''});
   store.dispatch({ type: 'ADD_COUNTRY', payload: country });
 }
 

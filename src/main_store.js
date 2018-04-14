@@ -14,22 +14,24 @@ import activityReducer from './views/ReportForm/CoreData/activityReducer';
 import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
+import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
 
 export const history = createBrowserHistory();
 
 const reducers = combineReducers({
-  login: loginReducer,
-  reports: reportReducer,
-  dashboardBadges: badgeReducer,
-  reportForm: reportFormReducer,
-  institutions: institutionsReducer,
-  countries: coutriesReducer,
-  agency: agencyReducer,
-  agencies: agenciesReducer,
   activities: activityReducer,
+  agencies: agenciesReducer,
+  agency: agencyReducer,
+  countries: coutriesReducer,
+  dashboardBadges: badgeReducer,
+  institutions: institutionsReducer,
+  login: loginReducer,
+  languages: languagesReducer,
   programme: programmeReducer,
   qfeheaLevels: qfeheaReducer,
   reportFile: fileReducer,
+  reportForm: reportFormReducer,
+  reports: reportReducer,
   router: routerReducer
 });
 

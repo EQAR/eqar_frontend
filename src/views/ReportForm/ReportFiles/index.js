@@ -15,6 +15,7 @@ import setStates from '../../../state';
 import { connect } from 'react-redux';
 import FileUrl from './FileUrl';
 import Upload from './Upload';
+import Languages from './Languages';
 
 
 class ReportFiles extends Component {
@@ -49,6 +50,7 @@ class ReportFiles extends Component {
               <CardBody>
                 <FileUrl />
                 <Upload />
+                <Languages />
               </CardBody>
             </Card>
           </Col>
@@ -68,23 +70,7 @@ class ReportFiles extends Component {
             </FormGroup>
           </Col>
           <Col xs="6">
-            <FormGroup>
-              <Label for="uploadedFile">File</Label>
-              <Input type="file" name="file" id="uploadedFile" />
-            </FormGroup>
-          </Col>
-          <Col xs="6">
-            <FormGroup>
-              <Label for="fileLanguages">Languages</Label>
-                <Select
-                  name="form-field-name2"
-                  value={this.state.value}
-                  options={this.getCountries()}
-                  onChange={this.saveChanges}
-                  id="fileLanguages"
-                  multi
-                />
-            </FormGroup>
+            
           </Col>
         </Row>
       </div>
