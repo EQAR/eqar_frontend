@@ -6,6 +6,6 @@ export default function eventActions(inputId) {
     status: 'CHANGE_STATUS',
     decision: 'CHANGE_DECISION',
     reportValidFrom: 'CHANGE_VALID_FROM',
-    reportValidTo: 'CHANGE_VALID_TO'
+    reportValidTo: 'CHANGE_VALID_TO',
   }[inputId];
 }

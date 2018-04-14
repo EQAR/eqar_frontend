@@ -1,19 +1,19 @@
 function reportFormReducer(state = {
   agency: '',
-  local_identifier: '',
+  localIdentifier: '',
   activity: '',
   status: '',
   decision: '',
-  valid_from: '',
-  valid_to: '',
-  report_links: [],
+  validFrom: '',
+  validTo: '',
+  reportLinks: [],
   institutions: [],
   programmes: [],
-  report_files: []
+  reportFiles: []
 }, action) {
   switch (action.type) {
     case 'CHANGE_LOCAL_IDENTIFIER': {
-      return { ...state, local_identifier: action.payload }
+      return { ...state, localIdentifier: action.payload }
     }
     case 'CHANGE_AGENCY_NAME': {
       return { ...state, agency: action.payload }
@@ -28,16 +28,31 @@ function reportFormReducer(state = {
       return { ...state, decision: action.payload }
     }
     case 'CHANGE_VALID_FROM': {
-      return { ...state, valid_from: action.payload }
+      return { ...state, validFrom: action.payload }
     }
     case 'CHANGE_VALID_TO': {
-      return { ...state, valid_to: action.payload }
+      return { ...state, validTo: action.payload }
+    }
+    case 'ADD_EMPTY_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
+    }
+    case 'CHANGE_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
+    }
+    case 'REMOVE_REPORTLINK': {
+      return { ...state, reportLinks: action.payload }
     }
     case 'SELECT_INSTITUTION': {
       return { ...state, institutions: action.payload }
     }
     case 'REMOVE_INSTITUTION': {
       return { ...state, institutions: action.payload }
+    }
+    case 'ADD_PROGRAMME': {
+      return { ...state, programmes: action.payload }
+    }
+    case 'ADD_FILE': {
+      return { ...state, reportFiles: action.payload }
     }
     default: return { ...state };
   }

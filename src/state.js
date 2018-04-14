@@ -1,10 +1,17 @@
 const setStates = state => ({
-  login: state.login,
+  activities: state.activities,
+  agencies: state.agencies,
+  agency: state.agency,
+  countries: state.countries,
   dashboard: state.dashboardBadges,
-  reports: state.reports,
-  reportForm: state.reportForm,
   institutions: state.institutions,
-  countries: state.countries
+  languages: state.languages,
+  login: state.login,
+  programme: state.programme,
+  qfeheaLevels: state.qfeheaLevels,
+  reportFile: state.reportFile,
+  reportForm: state.reportForm,
+  reports: state.reports
 });
 
 export default setStates;

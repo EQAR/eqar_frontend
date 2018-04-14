@@ -24,7 +24,7 @@ export default {
       children: [
         {
           name: 'Add/Modify/Delete',
-          url: '/create-report',
+          url: '/report-form',
           icon: 'icon-doc'
         },
         {

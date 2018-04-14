@@ -14,13 +14,14 @@ import {
   CardFooter,
   Button } from 'reactstrap';
 import classnames from 'classnames';
-import ReportBaseData from './components/ReportBaseData';
-import ReportInstitutions from './components/ReportInstitutions';
-import Programmes from './components/Programmes';
-import ReportFiles from './components/ReportFiles'
+import CoreData from './CoreData';
+import Institutions from './Institutions';
+import Programmes from './Programmes';
+import ReportFiles from './ReportFiles';
+import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
 
-class CreateReport extends Component {
+class ReportForm extends Component {
   constructor(props) {
     super(props);
 
@@ -54,7 +55,7 @@ class CreateReport extends Component {
                         className={classnames({ active: this.state.activeTab === '1' })}
                         onClick={() => { this.toggle('1'); }}
                       >
-                        Report Base Data
+                        Core Data
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -89,10 +90,10 @@ class CreateReport extends Component {
               <Col>
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
-                    <ReportBaseData />
+                    <CoreData />
                   </TabPane>
                   <TabPane tabId="2">
-                    <ReportInstitutions />
+                    <Institutions />
                   </TabPane>
                   <TabPane tabId="3">
                     <Programmes />
@@ -103,7 +104,7 @@ class CreateReport extends Component {
                 </TabContent>
               </Col>
               <CardFooter>
-                <Button color="primary">Save</Button>
+                <Button color="primary">Save Record</Button>
               </CardFooter>
             </CardBody>
           </Card>
@@ -112,4 +113,4 @@ class CreateReport extends Component {
   }
 }
 
-export default CreateReport;
+export default ReportForm;

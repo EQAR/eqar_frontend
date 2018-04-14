@@ -6,3 +6,18 @@
 .react-bs-table table td, .react-bs-table table th {
   white-space: normal;
 }
+
+.info-box {
+  height: 100%;
+}
+
+.required-input:after {
+  color: #d00;
+  content: "*";
+  margin-left: 8px;
+  top:7px;
+}
+
+.programme-edit {
+  margin-right: 3px;
+}

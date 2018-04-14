@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import InstitutionsTable from '../../../components/InstitutionsTable';
+import Institution from './Institution';
 
 
 class ReportInstitutions extends Component {
@@ -59,20 +60,19 @@ class ReportInstitutions extends Component {
     return (
       <div>
         <Row>
-            <InstitutionsTable tableType="reportInstitutions" select="nonSelect"/>
-        </Row>
-        <Row>
-          <Button color="primary" onClick={this.toggle}>Add Institution</Button>
-          <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-            <ModalBody>
-              <InstitutionsTable tableType="allInstitutions" select="select"/>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
-              <Button color="secondary" onClick={this.clearInstitutions}>Cancel</Button>
-            </ModalFooter>
-          </Modal>
+          <Col xs="6">
+            <Card>
+              <CardBody>
+                <Institution />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="6">
+            <Card className="info-box">
+              <CardBody>
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
       </div>
     )
