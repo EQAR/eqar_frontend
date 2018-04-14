@@ -24,40 +24,15 @@ import QFEHEALevel from './QFEHEALevel';
 import NQFLevel from './NQFLevel';
 import Countries from './Countries';
 import AssignedProgrammes from './AssignedProgrammes';
+import AddProgramme from './AddProgramme';
 
 
 class Programmes extends Component {
   constructor(props) {
     super(props)
-    this.programmesOfReport = this.programmesOfReport.bind(this);
-    this.addProgramme = this.addProgramme.bind(this);
-  }
-
-  addProgramme(event) {
-    addProgrammeToReport(this.props.programme, event.target.id, this.props.reportForm.programmes);
-  }
-
-  selectedCountry(countries) {
-    return countries.map(country => {
-      return country.label;
-    })
-  }
-
-  programmesOfReport() {
-    return this.props.reportForm.programmes.map((programme, i) => {
-      return (
-        <tr key={i}>
-          <td>{ programme.programmeName }</td>
-          <td>
-            <Button color="primary">Remove</Button>
-          </td>
-        </tr>
-      );
-    });
   }
 
   render() {
-    const addedProgrammes = this.programmesOfReport();
     return (
       <div>
         <Row>
@@ -73,7 +48,7 @@ class Programmes extends Component {
                 <Countries />
               </CardBody>
               <CardFooter>
-                <Button id="addProgramme" color="primary" onClick={ this.addProgramme }>Add programme ></Button>
+                <AddProgramme />
               </CardFooter>
             </Card>
           </Col>

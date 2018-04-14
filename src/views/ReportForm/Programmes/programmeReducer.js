@@ -1,4 +1,4 @@
-function programmeReducer(state = {
+const initialState = {
   programmeName: '',
   qualification: '',
   alternativeNames: [],
@@ -6,7 +6,9 @@ function programmeReducer(state = {
   qfeheaLevel: '',
   nqfLevel: '',
   countries: []
-}, action) {
+}
+
+function programmeReducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
       return { ...state, programmeName: action.payload};
@@ -40,6 +42,9 @@ function programmeReducer(state = {
     }
     case 'ADD_COUNTRY': {
       return { ...state, countries: action.payload};
+    }
+    case 'RESET_PROGRAMME': {
+      state = initialState
     }
     default: return { ...state };
   }

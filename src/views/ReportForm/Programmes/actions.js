@@ -55,6 +55,10 @@ export function addProgrammeToReport(inputValue, inputId, programmes=[]) {
   store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
 }
 
+export function resetProgramme() {
+  store.dispatch({ type: 'RESET_PROGRAMME'});
+}
+
 export function removeProgramme(index, programmes=[]) {
   programmes.splice(index, 1);
   store.dispatch({ type: 'REMOVE_IDENTIFIER', payload: programmes });
