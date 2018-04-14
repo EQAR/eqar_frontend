@@ -21,6 +21,7 @@ import store from '../../../main_store';
 import setStates from '../../../state';
 import InstitutionsTable from '../../../components/InstitutionsTable';
 import Institution from './Institution';
+import AssignedInstitutions from './AssignedInstitutions';
 
 
 class ReportInstitutions extends Component {
@@ -70,6 +71,7 @@ class ReportInstitutions extends Component {
           <Col xs="6">
             <Card className="info-box">
               <CardBody>
+                <AssignedInstitutions />
               </CardBody>
             </Card>
           </Col>

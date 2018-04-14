@@ -10,6 +10,7 @@ export function getInstitutions(filterValue=null) {
   });
 }
 
-export function selectInstitution(institution) {
-  store.dispatch({ type: 'GET_INSTITUTION', payload: institution});
+export function selectInstitution(institution, institutions=[]) {
+  institutions.push(institution);
+  store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions});
 }
