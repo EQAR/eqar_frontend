@@ -12,6 +12,9 @@ const fileReducer = composeResetReducer(function fileReducer(state = initialStat
     case 'CHANGE_FILE_URL': {
       return { ...state, url: action.payload};
     }
+    case 'CHANGE_UPLOADED_FILE': {
+      return { ...state, uploadedFile: action.payload};
+    }
     default: return { ...state };
   }
 }, initialState, 'RESET_FILE');

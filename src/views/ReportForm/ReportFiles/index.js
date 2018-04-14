@@ -14,6 +14,7 @@ import store from '../../../main_store';
 import setStates from '../../../state';
 import { connect } from 'react-redux';
 import FileUrl from './FileUrl';
+import Upload from './Upload';
 
 
 class ReportFiles extends Component {
@@ -47,6 +48,7 @@ class ReportFiles extends Component {
             <Card>
               <CardBody>
                 <FileUrl />
+                <Upload />
               </CardBody>
             </Card>
           </Col>
@@ -69,12 +71,6 @@ class ReportFiles extends Component {
             <FormGroup>
               <Label for="uploadedFile">File</Label>
               <Input type="file" name="file" id="uploadedFile" />
-            </FormGroup>
-          </Col>
-          <Col xs="6">
-            <FormGroup>
-              <Label for="fileUrl">File link</Label>
-              <Input type="text" name="text" id="fileUrl" />
             </FormGroup>
           </Col>
           <Col xs="6">
