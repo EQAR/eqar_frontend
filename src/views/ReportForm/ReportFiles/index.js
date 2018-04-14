@@ -4,6 +4,7 @@ import {
   Col,
   Card,
   CardBody,
+  CardFooter,
   FormGroup,
   Input,
   Label,
@@ -16,6 +17,8 @@ import { connect } from 'react-redux';
 import FileUrl from './FileUrl';
 import Upload from './Upload';
 import Languages from './Languages';
+import FileName from './FileName';
+import AddFile from './AddFile';
 
 
 class ReportFiles extends Component {
@@ -51,7 +54,11 @@ class ReportFiles extends Component {
                 <FileUrl />
                 <Upload />
                 <Languages />
+                <FileName />
               </CardBody>
+              <CardFooter>
+                <AddFile />
+              </CardFooter>
             </Card>
           </Col>
           <Col xs="6">
@@ -59,18 +66,6 @@ class ReportFiles extends Component {
               <CardBody>
               </CardBody>
             </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col xs="6">
-            <FormGroup>
-              <Label for="fileName">File name</Label>
-              <Input type="text" name="text" id="fileName" />
-            </FormGroup>
-          </Col>
-          <Col xs="6">
-            
           </Col>
         </Row>
       </div>

@@ -9,7 +9,7 @@ import setStates from '../../../state';
 import { fileForm } from './actions';
 
 
-class Upload extends Component {
+class FileName extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
@@ -22,11 +22,11 @@ class Upload extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="uploadedFile">Or Upload File</Label>
-        <Input type="file" name="file" id="uploadedFile" value={this.props.reportFile.uploadedFile} onChange={this.handleInput} />
+        <Label for="fileName">File Display Name</Label>
+        <Input type="text" name="text" id="fileName" onChange={this.handleInput} value={this.props.reportFile.name} placeholder="Enter file name for display" />
       </FormGroup>
     )
   }
 }
 
-export default connect(setStates)(Upload);
+export default connect(setStates)(FileName);

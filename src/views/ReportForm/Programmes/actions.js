@@ -49,7 +49,7 @@ export function addCountry(country, countries=[]) {
   store.dispatch({ type: 'ADD_COUNTRY', payload: country });
 }
 
-export function addProgrammeToReport(inputValue, inputId, programmes=[]) {
+export function addProgrammeToReport(inputValue, programmes=[]) {
   programmes.push(inputValue);
   store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
 }

@@ -14,7 +14,7 @@ class AddProgramme extends Component {
   }
 
   addProgramme(event) {
-    addProgrammeToReport(this.props.programme, event.target.id, this.props.reportForm.programmes);
+    addProgrammeToReport(this.props.programme, this.props.reportForm.programmes);
     resetProgramme();
   }
 

@@ -51,6 +51,9 @@ function reportFormReducer(state = {
     case 'ADD_PROGRAMME': {
       return { ...state, programmes: action.payload }
     }
+    case 'ADD_FILE': {
+      return { ...state, reportFiles: action.payload }
+    }
     default: return { ...state };
   }
 }

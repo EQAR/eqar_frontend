@@ -18,3 +18,12 @@ export function languagesAjax() {
 export function addLanguage(language) {
   store.dispatch({ type: 'ADD_LANGUAGE', payload: language });
 }
+
+export function addFileToReport(inputValue, reportFiles=[]) {
+  reportFiles.push(inputValue);
+  store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
+}
+
+export function resetFile() {
+  store.dispatch({ type: 'RESET_FILE'});
+}

@@ -18,6 +18,9 @@ const fileReducer = composeResetReducer(function fileReducer(state = initialStat
     case 'ADD_LANGUAGE': {
       return { ...state, languages: action.payload};
     }
+    case 'CHANGE_FILE_NAME': {
+      return { ...state, name: action.payload};
+    }
     default: return { ...state };
   }
 }, initialState, 'RESET_FILE');
