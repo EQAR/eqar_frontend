@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Row,
   Col,
   Form,
@@ -19,6 +18,10 @@ import CoreData from './CoreData';
 import Institutions from './Institutions';
 import Programmes from './Programmes';
 import ReportFiles from './ReportFiles';
+import sendForm from './Actions/sendForm';
+import store from '../../main_store';
+import setStates from '../../state';
+import { connect } from 'react-redux';
 import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
 
 
@@ -42,12 +45,12 @@ class ReportForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(event)
+    sendForm(this.props.reportForm);
   }
 
   render() {
     return (
-      <Form onClick={this.handleSubmit} className="animated fadeIn">
+      <Form onSubmit={this.handleSubmit} className="animated fadeIn">
           <Card>
             <CardHeader>
               <Row>
@@ -120,4 +123,4 @@ class ReportForm extends Component {
   }
 }
 
-export default ReportForm;
+export default connect(setStates)(ReportForm);

@@ -15,6 +15,7 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
+import { reducer as formReducer } from 'redux-form';
 
 export const history = createBrowserHistory();
 
@@ -32,7 +33,8 @@ const reducers = combineReducers({
   reportFile: fileReducer,
   reportForm: reportFormReducer,
   reports: reportReducer,
-  router: routerReducer
+  router: routerReducer,
+  form: formReducer
 });
 
 const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
