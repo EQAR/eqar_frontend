@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
 import loginReducer from './views/Login/Reducers/login_reducer';
-import reportReducer from './views/Dashboard/Reducers/ReportReducer';
+import reportReducer from './views/Dashboard/Reducers/reportReducer';
 import dashboardReducer from './views/Dashboard/Reducers/dashboardReducer';
 import reportFormReducer from './views/ReportForm/Reducers/reportFormReducer';
 import institutionReferencesReducer from './views/Institutions/Reducers/institutionsReducer'
