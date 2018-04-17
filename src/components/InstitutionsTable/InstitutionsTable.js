@@ -39,7 +39,7 @@ class InstitutionsTable extends Component {
       nonSelect: {}
     }[this.props.select];
   }
-  
+
   onPageChange(page, sizePerPage) {
     const currentIndex = (page - 1) * sizePerPage;
     getInstitutionsByOffset(sizePerPage, currentIndex);
@@ -83,6 +83,7 @@ class InstitutionsTable extends Component {
         return {
           id: institution.id,
           eter_id: institution.eter_id,
+          deqar_id: institution.deqar_id,
           name_primary: institution.name_primary,
           countries: this.institutionCountries(institution.countries)
         }

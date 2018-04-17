@@ -26,19 +26,19 @@ class ReportUrl extends Component {
   }
 
   handleClick() {
-    addEmptyReportLink(this.props.reportForm.reportLinks);
+    addEmptyReportLink(this.props.reportForm.report_links);
   }
 
   handleInput(indexOfInput, e) {
-    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.reportLinks);
+    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.report_links);
   }
 
   handleRemove(e) {
-    removeLink(e.target.id, this.props.reportForm.reportLinks);
+    removeLink(e.target.id, this.props.reportForm.report_links);
   }
 
   createLinkCard() {
-    return this.props.reportForm.reportLinks.map((link, i) => {
+    return this.props.reportForm.report_links.map((link, i) => {
       return (
         <Card key={i}>
           <CardHeader>
@@ -47,11 +47,11 @@ class ReportUrl extends Component {
           <CardBody>
             <FormGroup>
               <Label for="urlToReport">URL to Page</Label>
-              <Input type="text" name="text" id="url" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.url}/>
+              <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="text" id="text" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.text}/>
+              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.link_display_name}/>
             </FormGroup>
           </CardBody>
           <CardFooter>

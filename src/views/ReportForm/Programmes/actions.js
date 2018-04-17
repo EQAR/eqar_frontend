@@ -8,7 +8,7 @@ export function programmeForm(value, id) {
 }
 
 export function addEmptyAlterName(alternativeNames=[]) {
-  alternativeNames.push({alternativeName: '', alternativeQualification: ''});
+  alternativeNames.push({name_alternative: '', qualification_alternative: ''});
   store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_NAME', payload: alternativeNames });
 }
 
@@ -23,7 +23,7 @@ export function removeName(index, alternativeNames=[]) {
 }
 
 export function addEmptyIdentifier(identifiers=[]) {
-  identifiers.push({identifier: '', source: ''});
+  identifiers.push({identifier: '', resource: ''});
   store.dispatch({ type: 'ADD_EMPTY_IDENTIFIER', payload: identifiers });
 }
 
@@ -46,7 +46,8 @@ export function getQFEHEA() {
 }
 
 export function addCountry(country, countries=[]) {
-  store.dispatch({ type: 'ADD_COUNTRY', payload: country });
+  countries.push(country);
+  store.dispatch({ type: 'ADD_COUNTRY', payload: countries });
 }
 
 export function addProgrammeToReport(inputValue, programmes=[]) {

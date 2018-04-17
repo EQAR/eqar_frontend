@@ -7,7 +7,7 @@ export function formFill(inputValue, inputId) {
 }
 
 export function addEmptyReportLink(reportLinks=[]) {
-  reportLinks.push({url: '', text: ''});
+  reportLinks.push({link: '', link_display_name: ''});
   store.dispatch({ type: 'ADD_EMPTY_REPORTLINK', payload: reportLinks });
 }
 

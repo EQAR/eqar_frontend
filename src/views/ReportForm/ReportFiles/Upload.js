@@ -16,7 +16,7 @@ class Upload extends Component {
   }
 
   handleInput(e) {
-    fileForm(e.target.value, e.target.id);
+    // fileForm(e.target.value, e.target.id);
   }
 
   render() {

@@ -22,8 +22,7 @@ import sendForm from './Actions/sendForm';
 import store from '../../main_store';
 import setStates from '../../state';
 import { connect } from 'react-redux';
-import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
-
+import build from 'redux-object';
 
 class ReportForm extends Component {
   constructor(props) {

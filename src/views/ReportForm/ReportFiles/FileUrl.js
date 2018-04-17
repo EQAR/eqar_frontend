@@ -23,7 +23,7 @@ class FileUrl extends Component {
     return (
       <FormGroup>
         <Label for="fileUrl">File URL</Label>
-        <Input type="text" name="text" id="fileUrl" onChange={this.handleInput} value={this.props.reportFile.url} placeholder="Enter file location URL"/>
+        <Input type="text" name="text" id="fileUrl" onChange={this.handleInput} value={this.props.reportFile.original_location} placeholder="Enter file location URL"/>
       </FormGroup>
     )
   }

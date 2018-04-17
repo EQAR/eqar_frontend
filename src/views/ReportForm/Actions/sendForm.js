@@ -3,23 +3,17 @@ import store from '../../../main_store';
 
 
 function sendForm(formDatas) {
-  console.log(formDatas);
-  let formData = new FormData();
-  formData.append('agency', formDatas.agency);
-  formData.append('activity', formDatas.activity);
-  formData.append('decision', formDatas.decision);
-  formData.append('institutions', formDatas.institutions);
-  formData.append('programmes', formDatas.programmes);
-  formData.append('reportFiles', formDatas.reportFiles);
-  formData.append('reportLinks', formDatas.reportLinks);
-  formData.append('status', formDatas.status);
-  formData.append('validForm', formDatas.validForm);
-  formData.append('validTo', formDatas.validTo);
-
-  console.log(formData.get('agency'), typeof formData)
-  axios.post('https://witty-team.glitch.me/submissionapi/v1/submit/report/', {formData}, { headers: { 'Content-Type': 'multipart/form-data' } })
+  console.log(formDatas)
+  formDatas.date_format = '%Y-%m-%d';
+  formDatas.institutions = formDatas.institutions.map(institution => {
+    return {deqar_id: institution.deqar_id}})
+  console.log(formDatas)
+  axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formDatas, {
+        headers: {'Content-Type': 'application/json'}})
   .then((response) => {
-    console.log(response)
+    console.log(response.data)
+  }).catch((err) => {
+    console.log(err.response.data)
   });
 }
 

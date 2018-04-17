@@ -14,7 +14,7 @@ class AddFile extends Component {
   }
 
   addFile(event) {
-    addFileToReport(this.props.reportFile, this.props.reportForm.reportFiles);
+    addFileToReport(this.props.reportFile, this.props.reportForm.report_files);
     resetFile();
   }
 
