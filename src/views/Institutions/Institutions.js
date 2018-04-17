@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import store from '../../main_store';
 import setStates from '../../state';
-import InstitutionsTable from '../../components/InstitutionsTable';
+import InstitutionsReferenceTable from './InstitutionsReferenceTable';
 
 class Institutions extends Component {
   constructor(props) {
@@ -23,11 +23,15 @@ class Institutions extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <i className="icon-docs"></i>
+                <i className="icon-graduation"></i>
                 Institutions
               </CardHeader>
-              <CardBody className="pb-0">
-                <InstitutionsTable tableType="allInstitutions" select="nonSelect"/>
+              <CardBody>
+                <Row>
+                  <Col>
+                    <InstitutionsReferenceTable />
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </Col>
