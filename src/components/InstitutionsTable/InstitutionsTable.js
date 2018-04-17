@@ -120,11 +120,21 @@ class InstitutionsTable extends Component {
     const countries = this.filterCountries()
 
     return (
-      <BootstrapTable data={ this.getInstitutionsRows() } version="4" striped remote pagination options={ this.options } fetchInfo={ fetchInfo } selectRow={ this.selectRowProp }>
+      <BootstrapTable data={ this.getInstitutionsRows() }
+                      version="4"
+                      striped remote pagination condensed
+                      options={ this.options }
+                      fetchInfo={ fetchInfo }
+                      selectRow={ this.selectRowProp }>
         <TableHeaderColumn dataField="id" dataSort isKey>Id</TableHeaderColumn>
-        <TableHeaderColumn dataField="eter_id" dataSort>ETER Id</TableHeaderColumn>
-        <TableHeaderColumn dataField="name_primary" filter={ { type: 'TextFilter' } } dataSort>Institution</TableHeaderColumn>
-        <TableHeaderColumn dataField="countries" dataSort filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
+        <TableHeaderColumn dataField="eter_id"
+                           filter={ { type: 'TextFilter' } }
+                           dataSort>ETER Id</TableHeaderColumn>
+        <TableHeaderColumn dataField="name_primary"
+                           filter={ { type: 'TextFilter' } }
+                           dataSort>Institution</TableHeaderColumn>
+        <TableHeaderColumn dataField="countries"
+                           dataSort filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
       </BootstrapTable>
     )
   }
