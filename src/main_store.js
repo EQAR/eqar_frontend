@@ -2,10 +2,10 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
-import loginReducer from './views/Login/Reducer/login_reducer';
-import reportReducer from './views/Dashboard/Reducer/ReportReducer';
-import dashboardReducer from './views/Dashboard/Reducer/dashboardReducer';
-import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
+import loginReducer from './views/Login/Reducers/login_reducer';
+import reportReducer from './views/Dashboard/Reducers/ReportReducer';
+import dashboardReducer from './views/Dashboard/Reducers/dashboardReducer';
+import reportFormReducer from './views/ReportForm/Reducers/reportFormReducer';
 import institutionReferencesReducer from './views/Institutions/Reducers/institutionsReducer'
 import institutionsReducer from './components/InstitutionsTable/Reducers/institutionsReducer';
 import countriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
@@ -16,7 +16,6 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
-import { reducer as formReducer } from 'redux-form';
 
 export const history = createBrowserHistory();
 
@@ -35,8 +34,7 @@ const reducers = combineReducers({
   reportFile: fileReducer,
   reportForm: reportFormReducer,
   reports: reportReducer,
-  router: routerReducer,
-  form: formReducer
+  router: routerReducer
 });
 
 const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
