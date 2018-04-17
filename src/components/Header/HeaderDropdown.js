@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import { push } from 'redux-first-routing';
 import {
-  Badge,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  Dropdown,
-  Progress,
+  Dropdown
 } from 'reactstrap';
 import logoutUser from './Actions/Logout';
 import { connect } from 'react-redux';
-import store from '../../main_store';
 import setStates from '../../state';
 import UserAvatar from 'react-user-avatar';
 import getUser from './Actions/getUser';
+import store from '../../main_store'
 
 class HeaderDropdown extends Component {
 
@@ -41,16 +39,26 @@ class HeaderDropdown extends Component {
     logoutUser();
   }
 
+  goToProfilePage(){
+    store.dispatch(push('/my-profile'));
+  }
+
   render() {
     return (
       <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <UserAvatar size="40" name={this.props.dashboard.user.username} />
+          <UserAvatar size="40" name={'('+this.props.dashboard.user.username+')'}/>
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem header tag="div" className="text-center"><strong>{this.props.dashboard.user.username} </strong></DropdownItem>
-          <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
-          <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
+          <DropdownItem header tag="div" className="text-center">
+              <strong>{this.props.dashboard.user.username} </strong>
+          </DropdownItem>
+          <DropdownItem onClick={this.goToProfilePage}>
+              <i className="fa fa-user"> </i> Profile
+          </DropdownItem>
+          <DropdownItem onClick={this.logout}>
+              <i className="fa fa-lock"> </i> Logout
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );

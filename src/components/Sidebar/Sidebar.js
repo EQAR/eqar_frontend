@@ -9,16 +9,13 @@ import SidebarHeader from './../SidebarHeader';
 import SidebarMinimizer from './../SidebarMinimizer';
 
 class Sidebar extends Component {
-
   handleClick(e) {
     e.preventDefault();
     e.target.parentElement.classList.toggle('open');
   }
 
   activeRoute(routeName, props) {
-    // return this.props.location.pathname.indexOf(routeName) > -1 ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
     return props.location.pathname.indexOf(routeName) > -1 ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
-
   }
 
   // todo Sidebar nav secondLevel
