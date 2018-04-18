@@ -37,7 +37,7 @@ class agencyActivity extends Component {
     return (
       <FormGroup>
         <Label for="agencyActivity" className="required-input">Activity</Label>
-        <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
+        <Input type="select" name="select" id="agencyActivity" value={this.props.reportForm.activity} onChange={this.handleInput}>
           <option>Please select</option>
           {this.activities()}
         </Input>
