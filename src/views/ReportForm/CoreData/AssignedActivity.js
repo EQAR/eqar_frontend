@@ -24,7 +24,6 @@ class AssignedActivity extends Component {
   }
 
   reportActivities() {
-    console.log(this.props.reportForm.activity)
     if (this.props.reportForm.activity) {
       return (
         <div>

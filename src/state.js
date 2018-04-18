@@ -4,6 +4,7 @@ const setStates = state => ({
   agency: state.agency,
   countries: state.countries,
   dashboard: state.dashboard,
+  decisions: state.decisions,
   institutions: state.institutions,
   institutionReferences: state.institutionsRef,
   languages: state.languages,

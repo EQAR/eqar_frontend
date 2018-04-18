@@ -18,6 +18,14 @@ export function getStatuses() {
   });
 }
 
+export function getDecisions() {
+  store.dispatch((dispatch) => {
+    axios.get('https://backend.deqar.eu/adminapi/v1/select/report_decision/').then((response) => {
+      dispatch({ type: 'GET_DECISIONS', payload: response.data });
+    });
+  });
+}
+
 export function getAgency(agencyId) {
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/webapi/v1/browse/agencies/' + agencyId).then((response) => {
