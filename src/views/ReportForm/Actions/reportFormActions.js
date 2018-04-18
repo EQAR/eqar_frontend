@@ -11,7 +11,7 @@ export function addEmptyReportLink(reportLinks=[]) {
   store.dispatch({ type: 'ADD_EMPTY_REPORTLINK', payload: reportLinks });
 }
 
-export function addReportLink(inputValue, inputId, indexOfLink, reportLinks=[]) {
+export function addReportLink(inputValue, inputId, reportLinks=[], indexOfLink) {
   reportLinks[indexOfLink][inputId] = inputValue;
   store.dispatch({ type: 'CHANGE_REPORTLINK', payload: reportLinks });
 }
