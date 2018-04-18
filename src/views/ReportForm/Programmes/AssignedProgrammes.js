@@ -32,7 +32,7 @@ class AssignedProgrammes extends Component {
     return this.props.reportForm.programmes.map((programme, i) => {
       return(
         <ListGroupItem key={i} className="justify-content-between">
-              {programme.programmeName}{' '}
+              {programme.name_primary}{' '}
               <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
               <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
