@@ -13,28 +13,39 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
+import { addFirstReportLink, addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
 
 
 class ReportUrl extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
+    this.handleInitialInput = this.handleInitialInput.bind(this);
     this.createLinkCard = this.createLinkCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
     addEmptyReportLink(this.props.reportForm.report_links);
   }
 
+  handleInitialInput(e) {
+    addReportLink(e.target.value, e.target.id, this.props.reportForm.report_links, 0);
+  }
+
   handleInput(indexOfInput, e) {
-    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.report_links);
+    addReportLink(e.target.value, e.target.id, this.props.reportForm.report_links, indexOfInput);
   }
 
   handleRemove(e) {
     removeLink(e.target.id, this.props.reportForm.report_links);
+  }
+
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
   }
 
   createLinkCard() {
@@ -51,11 +62,11 @@ class ReportUrl extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.link_display_name}/>
+              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} />
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+              {this.getButton(i)}
           </CardFooter>
         </Card>
       )
