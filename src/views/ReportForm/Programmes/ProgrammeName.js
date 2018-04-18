@@ -23,7 +23,7 @@ class ProgrammeName extends Component {
     return (
       <FormGroup>
         <Label for="programmeName" className="required-input">Programme name</Label>
-        <Input type="text" name="text" value={this.props.programme.programmeName} id="programmeName" placeholder="Enter programme name for display" onChange={ this.handleInput } />
+        <Input type="text" name="text" value={this.props.programme.name_primary} id="programmeName" placeholder="Enter programme name for display" onChange={ this.handleInput } />
       </FormGroup>
     )
   }

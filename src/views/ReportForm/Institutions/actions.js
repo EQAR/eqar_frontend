@@ -17,8 +17,8 @@ export function getInstitutions(input) {
   });
 }
 
-export function selectInstitution(institution, institutions=[]) {
-  institutions.push(institution);
+export function selectInstitution(institutionInput, institutions=[]) {
+  institutions.push(institutionInput);
   store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions});
 }
 

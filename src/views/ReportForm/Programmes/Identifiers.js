@@ -48,7 +48,7 @@ class Identifiers extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="source">Identifier Source</Label>
-              <Input type="text" name="text" id="source" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.source}/>
+              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource}/>
             </FormGroup>
           </CardBody>
           <CardFooter>

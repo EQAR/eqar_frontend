@@ -26,29 +26,29 @@ class AlternativeNames extends Component {
   }
 
   handleClick() {
-    addEmptyAlterName(this.props.programme.alternativeNames);
+    addEmptyAlterName(this.props.programme.alternative_names);
   }
 
   handleInput(indexOfInput, e) {
-    addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternativeNames);
+    addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
   }
 
   handleRemove(e) {
-    removeName(e.target.id, this.props.programme.alternativeNames);
+    removeName(e.target.id, this.props.programme.alternative_names);
   }
 
   createNameCard() {
-    return this.props.programme.alternativeNames.map((alternative, i) => {
+    return this.props.programme.alternative_names.map((alternative, i) => {
       return (
         <Card key={i}>
           <CardBody>
             <FormGroup>
               <Label for="alternativeName">Altenative Programme Name</Label>
-              <Input type="text" name="text" id="alternativeName" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.alternativeName}/>
+              <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
               <Label for="alternativeQualification">Display Text for URL</Label>
-              <Input type="text" name="text" id="alternativeQualification" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.alternativeQualification}/>
+              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
