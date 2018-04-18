@@ -4,6 +4,7 @@ const setStates = state => ({
   agency: state.agency,
   countries: state.countries,
   dashboard: state.dashboard,
+  decisions: state.decisions,
   institutions: state.institutions,
   institutionReferences: state.institutionsRef,
   languages: state.languages,
@@ -12,7 +13,8 @@ const setStates = state => ({
   qfeheaLevels: state.qfeheaLevels,
   reportFile: state.reportFile,
   reportForm: state.reportForm,
-  reports: state.reports
+  reports: state.reports,
+  statuses: state.statuses
 });
 
 export default setStates;
