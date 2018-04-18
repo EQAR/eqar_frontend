@@ -36,6 +36,7 @@
     "webpack-dev-server": "2.9.5"
   },
   "dependencies": {
+    "availity-reactstrap-validation": "^2.0.2",
     "axios": "^0.18.0",
     "bootstrap": "4.0.0-beta.2",
     "chart.js": "2.7.1",
