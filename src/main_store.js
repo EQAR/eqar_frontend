@@ -12,6 +12,7 @@ import countriesReducer from './components/InstitutionsTable/Reducers/countriesR
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
+import statusReducer from './views/ReportForm/CoreData/statusReducer';
 import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
@@ -34,7 +35,8 @@ const reducers = combineReducers({
   reportFile: fileReducer,
   reportForm: reportFormReducer,
   reports: reportReducer,
-  router: routerReducer
+  router: routerReducer,
+  statuses: statusReducer
 });
 
 const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));

@@ -12,7 +12,8 @@ const setStates = state => ({
   qfeheaLevels: state.qfeheaLevels,
   reportFile: state.reportFile,
   reportForm: state.reportForm,
-  reports: state.reports
+  reports: state.reports,
+  statuses: state.statuses
 });
 
 export default setStates;
