@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addFirstReportLink, addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
+import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
 
 
 class ReportUrl extends Component {
