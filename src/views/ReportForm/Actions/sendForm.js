@@ -10,6 +10,7 @@ function sendForm(formDatas) {
         headers: {'Content-Type': 'application/json'}})
   .then((response) => {
     console.log(response.data)
+    dispatch(push('/'));
   }).catch((err) => {
     console.log(err.response.data)
   });
