@@ -3,17 +3,12 @@ import { Row,
          Col,
          Card,
          CardBody,
-         CardHeader,
-         ButtonGroup,
-         Table,
-         Badge
+         ButtonGroup
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import store from '../../main_store';
 import setStates from '../../state';
-import getBadges from '../Dashboard/Actions/BadgesStatsAjax'
-import ReportTable from './components/ReportTable';
-import ReportDataTable from './components/ReportDataTable'
+import getBadges from '../Dashboard/Actions/getBadges';
+import ReportDataTable from './components/ReportDataTable';
 
 class Dashboard extends Component {
   constructor(props) {

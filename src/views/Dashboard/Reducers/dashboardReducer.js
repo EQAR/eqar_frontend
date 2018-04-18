@@ -1,8 +1,13 @@
-function badgeReducer(state = {
+function dashboardReducer(state = {
   reports_total: 0,
   high_level_flags_total: 0,
   institutions_total: 0,
-  programmes_total: 0
+  programmes_total: 0,
+  user: {
+    username: "user",
+    id: 0,
+    email: ""
+  }
 }, action) {
   switch (action.type) {
     case 'GET_BADGES': {
@@ -13,10 +18,15 @@ function badgeReducer(state = {
               programmes_total: action.payload.programmes_total
             };
     }
+    case 'GET_USER': {
+      return { ...state, 
+              user: action.payload
+      }
+    }
     default: {
       return { ...state };
     }
   }
 }
 
-export default badgeReducer;
+export default dashboardReducer;

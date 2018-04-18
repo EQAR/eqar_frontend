@@ -10,7 +10,7 @@ export default {
     },
     {
       title: true,
-      name: 'Menu',
+      name: 'My Data',
       wrapper: {
         element: 'span',
         attributes: {}
@@ -18,17 +18,34 @@ export default {
       class: ''
     },
     {
-      name: 'Report Data',
+      name: 'My Profile',
+      url: '/my-profile',
+      icon: 'fa fa-user-o'
+    }, {
+      name: 'My Agencies',
+      url: '/my-agency',
+      icon: 'fa fa-home'
+    },
+    {
+      title: true,
+      name: 'Menu',
+      wrapper: {
+        element: 'span',
+        attributes: {}
+      },
+    },
+    {
+      name: 'Submit Report',
       url: '/report-data',
       icon: 'icon-doc',
       children: [
         {
-          name: 'Add/Modify/Delete',
+          name: 'Report Form',
           url: '/report-form',
           icon: 'icon-doc'
         },
         {
-          name: '# Upload CSV',
+          name: 'Upload CSV',
           // url: '/upload-report',
           url: '#',
           icon: 'icon-cloud-upload'
@@ -41,33 +58,29 @@ export default {
       icon: 'icon-book-open',
       children: [
         {
-          name: '# Agency profile',
-          // url: '/reference-data/agency-profile',
+          name: 'Agencies',
           url: '#',
           icon: 'icon-home'
         },
         {
           name: 'Institutions',
-          url: '/institutions',
+          url: '/reference-data/institutions',
           icon: 'icon-graduation'
         },
         {
-          name: '# Countries',
-          // url: '/reference-data/countries',
+          name: 'Countries',
           url: '#',
           icon: 'icon-globe-alt'
         }
       ]
     },
       {
-        name: '# Alerts and flags',
-        // url: '/alerts-and-flags',
+        name: 'Alerts and flags',
         url: '#',
         icon: 'icon-flag'
     },
       {
-        name: '# Statistics',
-        // url: '/statistics',
+        name: 'Statistics',
         url: '#',
         icon: 'icon-chart'
     }

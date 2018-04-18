@@ -3,8 +3,17 @@
   max-width: 90vw;
 }
 
+.react-bs-table-bordered {
+  border-radius: 0px;
+}
+
 .react-bs-table table td, .react-bs-table table th {
   white-space: normal;
+  vertical-align: middle;
+}
+
+.react-bs-table .table-action-column {
+  text-align: center !important;
 }
 
 .info-box {
@@ -20,4 +29,34 @@
 
 .programme-edit {
   margin-right: 3px;
+}
+
+.UserAvatar--dark {
+  color: #FFF;
+}
+
+.nav-greeting {
+  padding-right: 10px;
+}
+
+.UserAvatar {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.social-box .UserAvatar {
+  background-color: #CCC;
+}
+
+.UserAvatar--inner {
+  margin: 0 auto;
+}
+
+.UserAvatar--light {
+  color: #333;
+}
+
+.social-box ul li strong {
+  font-size: 16px;
 }

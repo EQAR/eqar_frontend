@@ -2,12 +2,13 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
-import loginReducer from './views/Login/Reducer/login_reducer';
-import reportReducer from './views/Dashboard/Reducer/ReportReducer';
-import badgeReducer from './views/Dashboard/Reducer/BadgeReducer';
-import reportFormReducer from './views/ReportForm/reducers/reportFormReducer';
+import loginReducer from './views/Login/Reducers/login_reducer';
+import reportReducer from './views/Dashboard/Reducers/reportReducer';
+import dashboardReducer from './views/Dashboard/Reducers/dashboardReducer';
+import reportFormReducer from './views/ReportForm/Reducers/reportFormReducer';
+import institutionReferencesReducer from './views/Institutions/Reducers/institutionsReducer'
 import institutionsReducer from './components/InstitutionsTable/Reducers/institutionsReducer';
-import coutriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
+import countriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
@@ -22,9 +23,10 @@ const reducers = combineReducers({
   activities: activityReducer,
   agencies: agenciesReducer,
   agency: agencyReducer,
-  countries: coutriesReducer,
-  dashboardBadges: badgeReducer,
+  countries: countriesReducer,
+  dashboard: dashboardReducer,
   institutions: institutionsReducer,
+  institutionsRef: institutionReferencesReducer,
   login: loginReducer,
   languages: languagesReducer,
   programme: programmeReducer,
