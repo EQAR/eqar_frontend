@@ -72,7 +72,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" onClick={this.handleClick}>Add Link</Button>
+        <Button color="primary" onClick={this.handleClick}>Add More Link</Button>
       </div>
     )
   }

@@ -75,7 +75,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Alternative Name</Button>
+          <Button color="primary" onClick={this.handleClick}>Add Alternative More Name</Button>
         </CardFooter>
       </Card>
     )
