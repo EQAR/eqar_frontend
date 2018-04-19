@@ -33,8 +33,8 @@ class AssignedFiles extends Component {
       return(
         <ListGroupItem key={i} className="justify-content-between">
               {file.display_name}{' '}
-              <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
-              <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
+              <Button color="danger" size={'sm'} id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
+              <Button color="primary" size={'sm'} id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
       )
     })

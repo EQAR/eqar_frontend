@@ -39,7 +39,7 @@ class ReportUrl extends Component {
   }
 
   getButton(index) {
-    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.handleRemove}>Remove</Button>
     : null;
   }
 
@@ -72,7 +72,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" onClick={this.handleClick}>Add More Link</Button>
+        <Button color="primary" size={'sm'} onClick={this.handleClick}>Add More Link</Button>
       </div>
     )
   }

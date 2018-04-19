@@ -20,7 +20,7 @@ class AddFile extends Component {
 
   render() {
     return (
-      <Button id="addFile" color="primary" onClick={ this.addFile }>Add File ></Button>
+      <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile }>Add File ></Button>
     )
   }
 }

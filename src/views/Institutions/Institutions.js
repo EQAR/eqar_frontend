@@ -23,7 +23,7 @@ class Institutions extends Component {
           <Col>
             <Card>
               <CardHeader>
-                <i className="icon-graduation"></i>
+                <i className="icon-graduation"> </i>
                 Institutions
               </CardHeader>
               <CardBody>

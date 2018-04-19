@@ -67,52 +67,52 @@ class ReportForm extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} className="animated fadeIn">
-          <Card>
-            <CardHeader>
-              <Row>
-                <Col>
-                  <i className="icon-docs"></i>
-                  Create Report
-                </Col>
-                <Col xs="auto">
-                  <Nav tabs className="float-right">
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
-                      >
-                        Core Data
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
-                      >
-                        Institutions
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
-                      >
-                        Programmes
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === '4' })}
-                        onClick={() => { this.toggle('4'); }}
-                      >
-                        Report Files
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                </Col>
-              </Row>
-            </CardHeader>
-            <CardBody>
+        <Card>
+          <CardHeader>
+            <Row>
+              <Col>
+                <i className="icon-docs"> </i>Create Report
+              </Col>
+              <Col xs="auto">
+                <Nav tabs className="float-right">
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '1' })}
+                      onClick={() => { this.toggle('1'); }}
+                    >
+                      Core Data
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '2' })}
+                      onClick={() => { this.toggle('2'); }}
+                    >
+                      Institutions
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '3' })}
+                      onClick={() => { this.toggle('3'); }}
+                    >
+                      Programmes
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      className={classnames({ active: this.state.activeTab === '4' })}
+                      onClick={() => { this.toggle('4'); }}
+                    >
+                      Report Files
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              </Col>
+            </Row>
+          </CardHeader>
+          <CardBody>
+            <Row>
               <Col>
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="1">
@@ -129,11 +129,12 @@ class ReportForm extends Component {
                   </TabPane>
                 </TabContent>
               </Col>
-              <CardFooter>
-                <Button type="submit" color="primary" disabled={this.isDisabled()}  onClick={this.handleSubmit}>Save Record</Button>
-              </CardFooter>
-            </CardBody>
-          </Card>
+            </Row>
+          </CardBody>
+          <CardFooter>
+            <Button type="submit" color="primary" disabled={this.isDisabled()} onClick={this.handleSubmit}>Save Record</Button>
+          </CardFooter>
+        </Card>
       </Form>
     );
   }

@@ -46,7 +46,7 @@ class BrowseInstitution extends Component {
   render() {
     return (
       <FormGroup>
-        <Button color="primary" onClick={this.toggle}>Browse Institution</Button>
+        <Button color="primary" size={'sm'} onClick={this.toggle}>Browse Institutions</Button>
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
             <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
             <ModalBody>
