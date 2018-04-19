@@ -53,7 +53,7 @@ class AlternativeNames extends Component {
               <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
-              <Label for="alternativeQualification">Display Text for URL</Label>
+              <Label for="alternativeQualification">Alternative Qualification Name</Label>
               <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
             </FormGroup>
           </CardBody>
