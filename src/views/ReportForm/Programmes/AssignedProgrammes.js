@@ -33,7 +33,7 @@ class AssignedProgrammes extends Component {
       return(
         <ListGroupItem key={i} className="justify-content-between">
               {programme.name_primary}{' '}
-              <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
+              <Button color="danger" size={'sm'} id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
               <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
       )

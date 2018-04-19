@@ -28,7 +28,7 @@ class AssignedInstitutions extends Component {
       return(
         <ListGroupItem key={i} className="justify-content-between">
               {institution.name_primary}{' '}
-              <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
+              <Button color="danger" id={i} onClick={this.handleRemove} size={'sm'} className="float-right">Remove</Button>
         </ListGroupItem>
       )
     })
