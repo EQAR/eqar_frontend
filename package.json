@@ -36,6 +36,8 @@
     "webpack-dev-server": "2.9.5"
   },
   "dependencies": {
+    "ag-grid": "^17.1.1",
+    "ag-grid-react": "^17.1.0",
     "availity-reactstrap-validation": "^2.0.2",
     "axios": "^0.18.0",
     "bootstrap": "4.0.0-beta.2",
@@ -45,6 +47,7 @@
     "font-awesome": "^4.7.0",
     "formik": "^0.11.11",
     "history": "^4.7.2",
+    "papaparse": "^4.3.7",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-addons-shallow-compare": "15.6.2",
@@ -54,6 +57,7 @@
     "react-codemirror2": "3.0.7",
     "react-dates": "15.3.0",
     "react-dom": "16.2.0",
+    "react-dom-factories": "^1.0.2",
     "react-form": "^3.5.2",
     "react-google-maps": "9.4.1",
     "react-ladda": "5.0.7",

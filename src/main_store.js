@@ -18,6 +18,8 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
+import csvReducer from "./views/CSVUpload/Reducers/csvReducer";
+
 
 export const history = createBrowserHistory();
 
@@ -37,6 +39,7 @@ const reducers = combineReducers({
   reportFile: fileReducer,
   reportForm: reportFormReducer,
   reports: reportReducer,
+  csvData: csvReducer,
   router: routerReducer,
   statuses: statusReducer
 });

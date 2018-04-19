@@ -4,7 +4,7 @@ const routes = {
   '/my-agencies': 'My Agencies',
   '/dashboard': 'Dashboard',
   '/report-form': 'Report Form',
-  '/upload-report': 'Upload report',
+  '/upload-csv': 'CSV Upload',
   '/edit-report': 'Edit report',
   '/reference-data/institutions': 'Institutions'
 };

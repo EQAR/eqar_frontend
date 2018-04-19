@@ -46,8 +46,7 @@ export default {
         },
         {
           name: 'Upload CSV',
-          // url: '/upload-report',
-          url: '#',
+          url: '/upload-csv',
           icon: 'icon-cloud-upload'
         }
       ]
