@@ -23,6 +23,7 @@ class AlternativeNames extends Component {
     this.createNameCard = this.createNameCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
@@ -35,6 +36,11 @@ class AlternativeNames extends Component {
 
   handleRemove(e) {
     removeName(e.target.id, this.props.programme.alternative_names);
+  }
+
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
   }
 
   createNameCard() {
@@ -52,7 +58,7 @@ class AlternativeNames extends Component {
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+              {this.getButton(i)}
           </CardFooter>
         </Card>
       )

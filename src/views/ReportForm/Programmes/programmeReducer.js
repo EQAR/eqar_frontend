@@ -3,7 +3,10 @@ import { composeResetReducer } from 'redux-reset-store';
 const initialState = {
   name_primary: '',
   qualification_primary: '',
-  alternative_names: [],
+  alternative_names: [{
+    name_alternative: '',
+    qualification_alternative: ''
+  }],
   identifiers: [],
   qf_ehea_level: '',
   nqf_level: '',
