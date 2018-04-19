@@ -29,6 +29,7 @@ class ReportForm extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       activeTab: '1'
     };
@@ -43,8 +44,24 @@ class ReportForm extends Component {
   }
 
   handleSubmit(event) {
+    console.log(event);
     event.preventDefault();
-    sendForm(this.props.reportForm);
+    // sendForm(this.props.reportForm);
+  }
+
+
+  isDisabled(){
+    const reprtFormState = store.getState().reportForm;
+    const disabled =
+      reprtFormState.agency === '' ||
+      reprtFormState.activity === '' ||
+      reprtFormState.local_identifier === '' ||
+      reprtFormState.status === '' ||
+      reprtFormState.decision === '' ||
+      reprtFormState.valid_from === '' ||
+      reprtFormState.valid_to === '' ||
+      reprtFormState.institutions.length === 0;
+    return disabled;
   }
 
   render() {
@@ -113,7 +130,7 @@ class ReportForm extends Component {
                 </TabContent>
               </Col>
               <CardFooter>
-                <Button type="submit" color="primary">Save Record</Button>
+                <Button type="submit" color="primary" disabled={this.isDisabled()}  onClick={this.handleSubmit}>Save Record</Button>
               </CardFooter>
             </CardBody>
           </Card>
