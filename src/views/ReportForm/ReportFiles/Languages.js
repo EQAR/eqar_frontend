@@ -24,16 +24,15 @@ class Languages extends Component {
     languagesAjax();
   }
 
-  saveChanges(value) {
-    console.l
-    addLanguage(value)
-    this.setState({value: value});
+  saveChanges(values) {
+    addLanguage(values.map(value => value.value));
+    this.setState({value: values});
   }
 
   getLanguages() {
     return this.props.languages.languages.map((language) => {
       return {
-        value: language.id,
+        value: language.iso_639_2,
         label: language.language_name_en
       }
     });

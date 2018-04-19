@@ -23,22 +23,28 @@ class ReportUrl extends Component {
     this.createLinkCard = this.createLinkCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
-    addEmptyReportLink(this.props.reportForm.reportLinks);
+    addEmptyReportLink(this.props.reportForm.report_links);
   }
 
   handleInput(indexOfInput, e) {
-    addReportLink(e.target.value, e.target.id, indexOfInput, this.props.reportForm.reportLinks);
+    addReportLink(e.target.value, e.target.id, this.props.reportForm.report_links, indexOfInput);
   }
 
   handleRemove(e) {
-    removeLink(e.target.id, this.props.reportForm.reportLinks);
+    removeLink(e.target.id, this.props.reportForm.report_links);
+  }
+
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
   }
 
   createLinkCard() {
-    return this.props.reportForm.reportLinks.map((link, i) => {
+    return this.props.reportForm.report_links.map((link, i) => {
       return (
         <Card key={i}>
           <CardHeader>
@@ -47,15 +53,15 @@ class ReportUrl extends Component {
           <CardBody>
             <FormGroup>
               <Label for="urlToReport">URL to Page</Label>
-              <Input type="text" name="text" id="url" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.url}/>
+              <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="text" id="text" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} value={link.text}/>
+              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} />
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+              {this.getButton(i)}
           </CardFooter>
         </Card>
       )
@@ -66,7 +72,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" onClick={this.handleClick}>Add Link</Button>
+        <Button color="primary" onClick={this.handleClick}>Add More Link</Button>
       </div>
     )
   }

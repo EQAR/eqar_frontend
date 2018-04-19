@@ -32,14 +32,14 @@ class Countries extends Component {
   }
 
   saveChanges(value) {
-    addCountry(value, this.props.programme.countries)
+    addCountry(value[0].value, this.props.programme.countries)
     this.setState({value: value});
   }
 
   getCountries() {
     return this.props.countries.countries.map((country) => {
       return {
-        value: country.id,
+        value: country.iso_3166_alpha2,
         label: country.name_english
       }
     });

@@ -11,39 +11,15 @@ import {
   Button } from 'reactstrap';
 import Select from 'react-select';
 import '../../../../scss/vendors/react-select/react-select.scss';
-import store from '../../../main_store';
-import setStates from '../../../state';
-import { connect } from 'react-redux';
 import FileUrl from './FileUrl';
 import Upload from './Upload';
 import Languages from './Languages';
 import FileName from './FileName';
 import AddFile from './AddFile';
+import AssignedFiles from './AssignedFiles';
 
 
 class ReportFiles extends Component {
-  constructor(props) {
-    super(props)
-    this.saveChanges = this.saveChanges.bind(this);
-
-    this.state = {
-      value: []
-    }
-  }
-
-  saveChanges(value) {
-    this.setState({ value });
-  }
-
-  getCountries() {
-    return this.props.countries.countries.map((country) => {
-      return {
-        value: country.id,
-        label: country.name_english
-      }
-    });
-  }
-
   render() {
     return (
       <div>
@@ -64,6 +40,7 @@ class ReportFiles extends Component {
           <Col xs="6">
             <Card className="info-box">
               <CardBody>
+                <AssignedFiles />
               </CardBody>
             </Card>
           </Col>
@@ -73,4 +50,4 @@ class ReportFiles extends Component {
   }
 }
 
-export default connect(setStates)(ReportFiles);
+export default ReportFiles;

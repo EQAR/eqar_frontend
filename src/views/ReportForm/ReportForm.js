@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Row,
   Col,
   Form,
@@ -19,14 +18,18 @@ import CoreData from './CoreData';
 import Institutions from './Institutions';
 import Programmes from './Programmes';
 import ReportFiles from './ReportFiles';
-import countriesAjax from '../../components/InstitutionsTable/Actions/countriesAjax.js';
-
+import sendForm from './Actions/sendForm';
+import store from '../../main_store';
+import setStates from '../../state';
+import { connect } from 'react-redux';
+import build from 'redux-object';
 
 class ReportForm extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       activeTab: '1'
     };
@@ -41,13 +44,29 @@ class ReportForm extends Component {
   }
 
   handleSubmit(event) {
+    console.log(event);
     event.preventDefault();
-    console.log(event)
+    // sendForm(this.props.reportForm);
+  }
+
+
+  isDisabled(){
+    const reprtFormState = store.getState().reportForm;
+    const disabled =
+      reprtFormState.agency === '' ||
+      reprtFormState.activity === '' ||
+      reprtFormState.local_identifier === '' ||
+      reprtFormState.status === '' ||
+      reprtFormState.decision === '' ||
+      reprtFormState.valid_from === '' ||
+      reprtFormState.valid_to === '' ||
+      reprtFormState.institutions.length === 0;
+    return disabled;
   }
 
   render() {
     return (
-      <Form onClick={this.handleSubmit} className="animated fadeIn">
+      <Form onSubmit={this.handleSubmit} className="animated fadeIn">
           <Card>
             <CardHeader>
               <Row>
@@ -111,7 +130,7 @@ class ReportForm extends Component {
                 </TabContent>
               </Col>
               <CardFooter>
-                <Button type="submit" color="primary">Save Record</Button>
+                <Button type="submit" color="primary" disabled={this.isDisabled()}  onClick={this.handleSubmit}>Save Record</Button>
               </CardFooter>
             </CardBody>
           </Card>
@@ -120,4 +139,4 @@ class ReportForm extends Component {
   }
 }
 
-export default ReportForm;
+export default connect(setStates)(ReportForm);

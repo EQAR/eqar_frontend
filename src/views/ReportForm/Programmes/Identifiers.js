@@ -23,6 +23,7 @@ class Identifiers extends Component {
     this.createNameCard = this.createNameCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
@@ -37,6 +38,11 @@ class Identifiers extends Component {
     removeIdentifier(e.target.id, this.props.programme.identifiers);
   }
 
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
+  }
+
   createNameCard() {
     return this.props.programme.identifiers.map((identifier, i) => {
       return (
@@ -48,11 +54,11 @@ class Identifiers extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="source">Identifier Source</Label>
-              <Input type="text" name="text" id="source" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.source}/>
+              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+            {this.getButton(i)}
           </CardFooter>
         </Card>
       )
@@ -69,7 +75,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Identifier</Button>
+          <Button color="primary" onClick={this.handleClick}>Add More Identifier</Button>
         </CardFooter>
       </Card>
     )

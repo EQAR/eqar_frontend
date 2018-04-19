@@ -1,31 +1,41 @@
 import { composeResetReducer } from 'redux-reset-store';
 
 const initialState = {
-  programmeName: '',
-  qualification: '',
-  alternativeNames: [],
-  identifiers: [],
-  qfeheaLevel: '',
-  nqfLevel: '',
+  name_primary: '',
+  qualification_primary: '',
+  alternative_names: [
+    {
+      name_alternative: '',
+      qualification_alternative: ''
+    }
+  ],
+  identifiers: [
+    {
+      identifier: '',
+      resource: ''
+    }
+  ],
+  qf_ehea_level: '',
+  nqf_level: '',
   countries: []
 }
 
 const programmeReducer = composeResetReducer(function programmeReducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
-      return { ...state, programmeName: action.payload};
+      return { ...state, name_primary: action.payload};
     }
     case 'CHANGE_QUALIFICATION': {
-      return { ...state, qualification: action.payload};
+      return { ...state, qualification_primary: action.payload};
     }
     case 'ADD_EMPTY_ALTERNATIVE_NAME': {
-      return { ...state, alternativeNames: action.payload};
+      return { ...state, alternative_names: action.payload};
     }
     case 'CHANGE_ALTERNATIVE_NAME': {
-      return { ...state, alternativeNames: action.payload};
+      return { ...state, alternative_names: action.payload};
     }
     case 'REMOVE_ALTERNATIVE_NAME': {
-      return { ...state, alternativeNames: action.payload};
+      return { ...state, alternative_names: action.payload};
     }
     case 'ADD_EMPTY_IDENTIFIER': {
       return { ...state, identifiers: action.payload};
@@ -37,10 +47,10 @@ const programmeReducer = composeResetReducer(function programmeReducer(state = i
       return { ...state, identifiers: action.payload};
     }
     case 'CHANGE_QFEHEA_LEVEL': {
-      return { ...state, qfeheaLevel: action.payload};
+      return { ...state, qf_ehea_level: action.payload};
     }
     case 'CHANGE_NQF_LEVEL': {
-      return { ...state, nqfLevel: action.payload};
+      return { ...state, nqf_level: action.payload};
     }
     case 'ADD_COUNTRY': {
       return { ...state, countries: action.payload};

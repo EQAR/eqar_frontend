@@ -1,19 +1,25 @@
 function reportFormReducer(state = {
   agency: '',
-  localIdentifier: '',
+  local_identifier: '',
   activity: '',
   status: '',
   decision: '',
-  validFrom: '',
-  validTo: '',
-  reportLinks: [],
+  valid_from: '',
+  valid_to: '',
+  report_links: [
+    {
+      link: '',
+      link_display_name: ''
+    }
+  ],
+  report_files: [],
   institutions: [],
   programmes: [],
-  reportFiles: []
+  date_format: '%Y-%m-%d'
 }, action) {
   switch (action.type) {
     case 'CHANGE_LOCAL_IDENTIFIER': {
-      return { ...state, localIdentifier: action.payload }
+      return { ...state, local_identifier: action.payload }
     }
     case 'CHANGE_AGENCY_NAME': {
       return { ...state, agency: action.payload }
@@ -28,19 +34,19 @@ function reportFormReducer(state = {
       return { ...state, decision: action.payload }
     }
     case 'CHANGE_VALID_FROM': {
-      return { ...state, validFrom: action.payload }
+      return { ...state, valid_from: action.payload }
     }
     case 'CHANGE_VALID_TO': {
-      return { ...state, validTo: action.payload }
+      return { ...state, valid_to: action.payload }
     }
     case 'ADD_EMPTY_REPORTLINK': {
-      return { ...state, reportLinks: action.payload }
+      return { ...state, report_links: action.payload }
     }
     case 'CHANGE_REPORTLINK': {
-      return { ...state, reportLinks: action.payload }
+      return { ...state, report_links: action.payload }
     }
     case 'REMOVE_REPORTLINK': {
-      return { ...state, reportLinks: action.payload }
+      return { ...state, report_links: action.payload }
     }
     case 'SELECT_INSTITUTION': {
       return { ...state, institutions: action.payload }
@@ -51,8 +57,14 @@ function reportFormReducer(state = {
     case 'ADD_PROGRAMME': {
       return { ...state, programmes: action.payload }
     }
+    case 'REMOVE_PROGRAMME': {
+      return { ...state, programmes: action.payload }
+    }
     case 'ADD_FILE': {
-      return { ...state, reportFiles: action.payload }
+      return { ...state, report_files: action.payload }
+    }
+    case 'REMOVE_FILES': {
+      return { ...state, report_files: action.payload }
     }
     default: return { ...state };
   }

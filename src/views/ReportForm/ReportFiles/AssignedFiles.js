@@ -9,30 +9,30 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { removeProgramme, editProgramme } from './actions';
+import { removeFile, editFile } from './actions';
 
 
-class AssignedProgrammes extends Component {
+class AssignedFiles extends Component {
   constructor(props) {
     super(props);
     this.handleRemove = this.handleRemove.bind(this);
-    this.reportProgrammes = this.reportProgrammes.bind(this);
+    this.reportFiles = this.reportFiles.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleRemove(e) {
-    removeProgramme(e.target.id, this.props.reportForm.programmes);
+    removeFile(e.target.id, this.props.reportForm.report_files);
   }
 
   handleEdit(e) {
-    editProgramme(e.target.id, this.props.reportForm.programmes);
+    editFile(e.target.id, this.props.reportForm.report_files);
   }
 
-  reportProgrammes() {
-    return this.props.reportForm.programmes.map((programme, i) => {
+  reportFiles() {
+    return this.props.reportForm.report_files.map((file, i) => {
       return(
         <ListGroupItem key={i} className="justify-content-between">
-              {programme.name_primary}{' '}
+              {file.display_name}{' '}
               <Button color="primary" id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
               <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
@@ -44,11 +44,11 @@ class AssignedProgrammes extends Component {
     return (
       <FormGroup>
         <ListGroup>
-          {this.reportProgrammes()}
+          {this.reportFiles()}
         </ListGroup>
       </FormGroup>
     )
   }
 }
 
-export default connect(setStates)(AssignedProgrammes);
+export default connect(setStates)(AssignedFiles);

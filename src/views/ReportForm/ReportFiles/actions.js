@@ -27,3 +27,13 @@ export function addFileToReport(inputValue, reportFiles=[]) {
 export function resetFile() {
   store.dispatch({ type: 'RESET_FILE'});
 }
+
+export function editFile(id, files=[]) {
+  const programme = programmes[id]
+  store.dispatch({ type: 'EDIT_FILE', payload: programme});
+}
+
+export function removeFile(index, files=[]) {
+  files.splice(index, 1);
+  store.dispatch({ type: 'REMOVE_FILES', payload: files });
+}

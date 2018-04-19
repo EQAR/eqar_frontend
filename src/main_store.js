@@ -12,6 +12,8 @@ import countriesReducer from './components/InstitutionsTable/Reducers/countriesR
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
+import statusReducer from './views/ReportForm/CoreData/statusReducer';
+import decisionReducer from './views/ReportForm/CoreData/decisionReducer';
 import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
@@ -27,6 +29,7 @@ const reducers = combineReducers({
   agency: agencyReducer,
   countries: countriesReducer,
   dashboard: dashboardReducer,
+  decisions: decisionReducer,
   institutions: institutionsReducer,
   institutionsRef: institutionReferencesReducer,
   login: loginReducer,
@@ -37,7 +40,8 @@ const reducers = combineReducers({
   reportForm: reportFormReducer,
   reports: reportReducer,
   csvData: csvReducer,
-  router: routerReducer
+  router: routerReducer,
+  statuses: statusReducer
 });
 
 const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));

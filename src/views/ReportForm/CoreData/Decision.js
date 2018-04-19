@@ -7,16 +7,30 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { formFill } from '../Actions/reportFormActions';
+import { getDecisions } from './actions';
 
 
 class Decision extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
+    this.decisions = this.decisions.bind(this);
+  }
+
+  componentDidMount() {
+    getDecisions();
   }
 
   handleInput(e) {
     formFill(e.target.value, e.target.id);
+  }
+
+  decisions() {
+    return this.props.decisions.decisions.map(decision => {
+      return (
+        <option key={decision.id}>{decision.decision}</option>
+      );
+    });
   }
 
   render() {
@@ -25,10 +39,7 @@ class Decision extends Component {
         <Label for="decision" className="required-input">Decision</Label>
         <Input type="select" name="select" id="decision" onChange={this.handleInput}>
           <option>Please Select</option>
-          <option>positive</option>
-          <option>positive with conditions or restrictions</option>
-          <option>negative</option>
-          <option>not applicable</option>
+          {this.decisions()}
         </Input>
       </FormGroup>
     )

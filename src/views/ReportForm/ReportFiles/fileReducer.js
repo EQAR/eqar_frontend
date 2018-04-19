@@ -1,25 +1,25 @@
 import { composeResetReducer } from 'redux-reset-store';
 
 const initialState = {
-  url: '',
-  uploadedFile: '',
-  languages: [],
-  name: ''
+  original_location: '',
+  // uploadedFile: '',
+  report_language: [],
+  display_name: ''
 }
 
 const fileReducer = composeResetReducer(function fileReducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_FILE_URL': {
-      return { ...state, url: action.payload};
+      return { ...state, original_location: action.payload};
     }
     case 'CHANGE_UPLOADED_FILE': {
       return { ...state, uploadedFile: action.payload};
     }
     case 'ADD_LANGUAGE': {
-      return { ...state, languages: action.payload};
+      return { ...state, report_language: action.payload};
     }
     case 'CHANGE_FILE_NAME': {
-      return { ...state, name: action.payload};
+      return { ...state, display_name: action.payload};
     }
     default: return { ...state };
   }

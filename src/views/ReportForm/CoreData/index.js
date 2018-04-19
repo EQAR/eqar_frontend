@@ -14,6 +14,7 @@ import Decision from './Decision';
 import ValidFrom from './ValidFrom';
 import ValidTo from './ValidTo';
 import ReportUrl from './ReportUrl';
+import AssignedActivity from './AssignedActivity';
 
 
 class CoreData extends Component {
@@ -38,6 +39,7 @@ class CoreData extends Component {
           <Col xs="6">
             <Card className="info-box">
               <CardBody>
+                <AssignedActivity />
               </CardBody>
             </Card>
           </Col>
