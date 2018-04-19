@@ -23,6 +23,7 @@ class Identifiers extends Component {
     this.createNameCard = this.createNameCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
@@ -35,6 +36,11 @@ class Identifiers extends Component {
 
   handleRemove(e) {
     removeIdentifier(e.target.id, this.props.programme.identifiers);
+  }
+
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
   }
 
   createNameCard() {
@@ -52,7 +58,7 @@ class Identifiers extends Component {
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+            {this.getButton(i)}
           </CardFooter>
         </Card>
       )
@@ -69,7 +75,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Identifier</Button>
+          <Button color="primary" onClick={this.handleClick}>Add More Identifier</Button>
         </CardFooter>
       </Card>
     )

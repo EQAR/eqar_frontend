@@ -20,7 +20,6 @@ class ReportUrl extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
-    this.handleInitialInput = this.handleInitialInput.bind(this);
     this.createLinkCard = this.createLinkCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -29,10 +28,6 @@ class ReportUrl extends Component {
 
   handleClick() {
     addEmptyReportLink(this.props.reportForm.report_links);
-  }
-
-  handleInitialInput(e) {
-    addReportLink(e.target.value, e.target.id, this.props.reportForm.report_links, 0);
   }
 
   handleInput(indexOfInput, e) {
@@ -77,7 +72,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" onClick={this.handleClick}>Add Link</Button>
+        <Button color="primary" onClick={this.handleClick}>Add More Link</Button>
       </div>
     )
   }

@@ -2,10 +2,11 @@ import axios from 'axios';
 import store from '../../../main_store';
 
 
-export function getInstitutions(input) {
+export function getInstitutions(input, reportInstitutions) {
+  const reportInstitutionsIds = reportInstitutions.map(institution => institution.id);
   return axios.get('https://backend.deqar.eu/adminapi/v1/select/institutions', {params: {query: input}})
   .then((response) => {
-    return response.data.results.map(result => {
+    return response.data.results.filter(result => !reportInstitutionsIds.includes(result)).map(result => {
       return {
         value: result,
         label: result.name_primary

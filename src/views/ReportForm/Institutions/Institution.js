@@ -32,20 +32,20 @@ class Institution extends Component {
   }
 
   handleClick(e) {
+    selectInstitution(this.state.value.value, this.props.reportForm.institutions);
     this.setState({
       value: {
-        value: [],
+        value: {},
         label: ''
       }
     });
-    selectInstitution(this.state.value.value, this.props.reportForm.institutions);
   }
 
   getOptions(input) {
     if (!input) {
       return Promise.resolve({ options: [] });
     }
-    return getInstitutions(input);
+    return getInstitutions(input, this.props.reportForm.institutions);
   }
 
   render() {

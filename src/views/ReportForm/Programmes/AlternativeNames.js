@@ -23,6 +23,7 @@ class AlternativeNames extends Component {
     this.createNameCard = this.createNameCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleClick() {
@@ -37,6 +38,11 @@ class AlternativeNames extends Component {
     removeName(e.target.id, this.props.programme.alternative_names);
   }
 
+  getButton(index) {
+    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    : null;
+  }
+
   createNameCard() {
     return this.props.programme.alternative_names.map((alternative, i) => {
       return (
@@ -47,12 +53,12 @@ class AlternativeNames extends Component {
               <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
-              <Label for="alternativeQualification">Display Text for URL</Label>
+              <Label for="alternativeQualification">Alternative Qualification Name</Label>
               <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
-              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
+              {this.getButton(i)}
           </CardFooter>
         </Card>
       )
@@ -69,7 +75,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Alternative Name</Button>
+          <Button color="primary" onClick={this.handleClick}>Add Alternative More Name</Button>
         </CardFooter>
       </Card>
     )
