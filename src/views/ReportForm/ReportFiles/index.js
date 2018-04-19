@@ -16,6 +16,7 @@ import Upload from './Upload';
 import Languages from './Languages';
 import FileName from './FileName';
 import AddFile from './AddFile';
+import AssignedFiles from './AssignedFiles';
 
 
 class ReportFiles extends Component {
@@ -39,6 +40,7 @@ class ReportFiles extends Component {
           <Col xs="6">
             <Card className="info-box">
               <CardBody>
+                <AssignedFiles />
               </CardBody>
             </Card>
           </Col>
