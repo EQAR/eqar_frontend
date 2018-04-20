@@ -18,6 +18,7 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
+import alertReducer from './views/ReportForm/FormAlert/alertReducer';
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   activities: activityReducer,
   agencies: agenciesReducer,
   agency: agencyReducer,
+  alert: alertReducer,
   countries: countriesReducer,
   dashboard: dashboardReducer,
   decisions: decisionReducer,

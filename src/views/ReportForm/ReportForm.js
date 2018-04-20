@@ -22,7 +22,7 @@ import sendForm from './Actions/sendForm';
 import store from '../../main_store';
 import setStates from '../../state';
 import { connect } from 'react-redux';
-import build from 'redux-object';
+import AlertModal from './AlertModal'
 
 class ReportForm extends Component {
   constructor(props) {
@@ -44,9 +44,8 @@ class ReportForm extends Component {
   }
 
   handleSubmit(event) {
-    console.log(event);
     event.preventDefault();
-    // sendForm(this.props.reportForm);
+    sendForm(this.props.reportForm);
   }
 
 
@@ -131,6 +130,7 @@ class ReportForm extends Component {
               </Col>
               <CardFooter>
                 <Button type="submit" color="primary" disabled={this.isDisabled()}  onClick={this.handleSubmit}>Save Record</Button>
+                <AlertModal />
               </CardFooter>
             </CardBody>
           </Card>
