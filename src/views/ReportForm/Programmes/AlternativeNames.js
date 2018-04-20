@@ -13,7 +13,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyAlterName, addAlterName, removeName } from './actions';
+import { addEmptyAlterName, addAlterName, removeName, addFirstAlterName } from './actions';
 
 
 class AlternativeNames extends Component {
@@ -28,6 +28,10 @@ class AlternativeNames extends Component {
 
   handleClick() {
     addEmptyAlterName(this.props.programme.alternative_names);
+  }
+
+  handleInput(indexOfInput, e) {
+    addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
   }
 
   handleInput(indexOfInput, e) {
@@ -53,12 +57,12 @@ class AlternativeNames extends Component {
               <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
-              <Label for="alternativeQualification">Alternative Qualification Name</Label>
+              <Label for="alternativeQualification">Display Text for URL</Label>
               <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
-              {this.getButton(i)}
+              <Button color="primary" id={i} onClick={this.handleRemove}>Remove</Button>
           </CardFooter>
         </Card>
       )
@@ -75,7 +79,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Alternative More Name</Button>
+          <Button color="primary" onClick={this.handleClick}>Add Alternative Name</Button>
         </CardFooter>
       </Card>
     )

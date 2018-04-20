@@ -3,7 +3,7 @@ import { Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-// import Alertmessage from './Alertmessage';
+
 
 class FormAlert extends React.Component {
   constructor(props) {

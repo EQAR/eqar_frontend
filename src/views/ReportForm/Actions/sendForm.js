@@ -9,10 +9,8 @@ function sendForm(formDatas) {
   axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formDatas, {
         headers: {'Content-Type': 'application/json'}})
   .then((response) => {
-    console.log(response.data)
     dispatch(push('/'));
   }).catch((err) => {
-    console.log(err.response.data)
     store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: err.response.data.errors })
   });
 }

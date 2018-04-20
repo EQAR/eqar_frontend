@@ -75,7 +75,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add More Identifier</Button>
+          <Button color="primary" onClick={this.handleClick}>Add Identifier</Button>
         </CardFooter>
       </Card>
     )

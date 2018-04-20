@@ -1,7 +1,10 @@
 function alertReducer(state = {
   alertDisplay: false,
   errorMessage: {
-    report_links: []
+    report_links: [],
+    programmes: {
+      alternative_names: []
+    }
   }
 }, action) {
   switch (action.type) {

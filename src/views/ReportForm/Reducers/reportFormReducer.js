@@ -6,12 +6,7 @@ function reportFormReducer(state = {
   decision: '',
   valid_from: '',
   valid_to: '',
-  report_links: [
-    {
-      link: '',
-      link_display_name: ''
-    }
-  ],
+  report_links: [],
   report_files: [],
   institutions: [],
   programmes: [],
