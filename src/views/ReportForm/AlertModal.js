@@ -4,6 +4,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
   Button} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../main_store';
@@ -17,37 +21,57 @@ class AlertModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.getMessages = this.getMessages.bind(this);
-    // this.mapErrorMessage = this.mapErrorMessage.bind(this);
+    this.mapErrorMessage = this.mapErrorMessage.bind(this);
     this.concatErrors = this.concatErrors.bind(this);
+    this.getKey = this.getKey.bind(this);
     this.errors = []
   }
 
-  concatErrors(error) {
-    this.errors.push(error)
-    console.log(this.errors);
+  concatErrors(error, key) {
+    lodash.last(this.errors).message = error;
     return error;
   }
 
-  // mapErrorMessage(obj, callback, index=0) {
-  //   if (lodash.isArray(obj)) {
-  //     return obj.map(innerObj => this.mapErrorMessage(innerObj, callback));
-  //   } else if (lodash.isObject(obj)) {
-  //     return lodash.mapValues(obj, val => this.mapErrorMessage(val, callback));
-  //   } else {
-  //     return callback(obj);
-  // }
+  getKey(key){
+    return {
+      link: {inputField: 'Report link: '},
+      link_display_name: {inputField: 'Report link display name: '}
+    }[key]
+  }
+
+  mapErrorMessage(obj, callback, key) {
+    const inputField = this.getKey(key);
+    if (inputField) {
+      this.errors.push(inputField)
+    }
+    if (lodash.isArray(obj)) {
+      return obj.map(innerObj => this.mapErrorMessage(innerObj, callback));
+    } else if (lodash.isObject(obj)) {
+      return lodash.forEach(obj, (val, k) => this.mapErrorMessage(val, callback, k));
+    } else {
+      return callback(obj);
+    }
+  }
 
   getMessages() {
-    let errorMessages = [];
-    if (this.props.alert.errorMessage.report_links){
-      errorMessages = errorMessages.concat(this.props.alert.errorMessage.report_links.map((linkError, i) => {
-        return {inputField: 'Report Link ' + i, errorMessages: linkError}
-      }));
-    }
-    return 'errorMessages';
+    this.mapErrorMessage(this.props.alert.errorMessage, this.concatErrors)
+    console.log(this.errors)
+    return this.errors.map((error, i) => {
+      return (
+        <ListGroupItem key={i}>
+          <ListGroupItemHeading>
+            {error.inputField}
+          </ListGroupItemHeading>
+          <ListGroupItemText>
+            {error.message}
+          </ListGroupItemText>
+        </ListGroupItem>
+      )
+    })
   }
 
   toggle() {
+    this.errors = [];
     toggleAlert()
   }
 
@@ -56,7 +80,9 @@ class AlertModal extends Component {
       <Modal size="xl" isOpen={this.props.alert.alertDisplay} toggle={this.toggle} className="my-modal">
         <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
         <ModalBody>
-          {this.getMessages()}
+          <ListGroup>
+            {this.getMessages()}
+          </ListGroup>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.toggle}>Close</Button>
