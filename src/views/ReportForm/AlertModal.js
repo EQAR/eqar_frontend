@@ -35,7 +35,12 @@ class AlertModal extends Component {
   getKey(key){
     return {
       link: {inputField: 'Report link: '},
-      link_display_name: {inputField: 'Report link display name: '}
+      link_display_name: {inputField: 'Report link display name: '},
+      resource: {inputField: 'Programme identifier resource: '},
+      identifier: {inputField: 'Programme identifier: '},
+      qualification_primary: {inputField: 'Qualification: '},
+      name_alternative: {inputField: 'Alternative name: '},
+      alternative: {inputField: 'Alternative qualification: '}
     }[key]
   }
 
@@ -55,7 +60,6 @@ class AlertModal extends Component {
 
   getMessages() {
     this.mapErrorMessage(this.props.alert.errorMessage, this.concatErrors)
-    console.log(this.errors)
     return this.errors.map((error, i) => {
       return (
         <ListGroupItem key={i}>
@@ -76,12 +80,17 @@ class AlertModal extends Component {
   }
 
   render() {
+    const messages = () => {
+      if (this.props.alert.alertDisplay) {
+        return this.getMessages();
+      }
+    }
     return (
-      <Modal size="xl" isOpen={this.props.alert.alertDisplay} toggle={this.toggle} className="my-modal">
+      <Modal isOpen={this.props.alert.alertDisplay} toggle={this.toggle} className="my-modal">
         <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
         <ModalBody>
           <ListGroup>
-            {this.getMessages()}
+            {messages()}
           </ListGroup>
         </ModalBody>
         <ModalFooter>
