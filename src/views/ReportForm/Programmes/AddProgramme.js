@@ -36,7 +36,7 @@ class AddProgramme extends Component {
 
   render() {
     return (
-      <Button id="addProgramme" color="primary" onClick={ this.addProgramme } disabled={this.isDisabled()} >Add programme ></Button>
+      <Button id="addProgramme" size={'sm'} color="primary" onClick={ this.addProgramme } disabled={this.isDisabled()} >Add programme ></Button>
     )
   }
 }

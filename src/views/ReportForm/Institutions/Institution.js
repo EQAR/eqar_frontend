@@ -51,7 +51,7 @@ class Institution extends Component {
   render() {
     return (
       <FormGroup>
-      <Label for="institution" className="required-input">Institution</Label>
+        <Label for="institution" className="required-input">Institution</Label>
         <Async
           id="institution"
           placeholder="Enter institution informations"
@@ -60,7 +60,8 @@ class Institution extends Component {
           loadOptions={this.getOptions}
           onChange={this.handleSelect}
         />
-        <Button color="primary" onClick={this.handleClick}>Add</Button>
+        <br/>
+        <Button color="primary" size={'sm'} onClick={this.handleClick}>Add</Button>
       </FormGroup>
     )
   }

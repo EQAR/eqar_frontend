@@ -43,7 +43,7 @@ class AlternativeNames extends Component {
   }
 
   getButton(index) {
-    return index !== 0 ? <Button color="primary" id={index} onClick={this.handleRemove}>Remove</Button>
+    return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.handleRemove}>Remove</Button>
     : null;
   }
 
@@ -79,7 +79,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" onClick={this.handleClick}>Add Alternative Name</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick}>Add Alternative Name</Button>
         </CardFooter>
       </Card>
     )

@@ -15,6 +15,7 @@ const setStates = state => ({
   reportFile: state.reportFile,
   reportForm: state.reportForm,
   reports: state.reports,
+  csvData: state.csvData,
   statuses: state.statuses
 });
 
