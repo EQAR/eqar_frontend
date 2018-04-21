@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addFileToReport, resetFile } from './actions';
+import lodash from 'lodash';
 
 
 class AddFile extends Component {
   constructor(props) {
     super(props);
     this.addFile = this.addFile.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
   }
 
   addFile(event) {
@@ -18,9 +20,13 @@ class AddFile extends Component {
     resetFile();
   }
 
+  isDisabled() {
+    return lodash.isEmpty(this.props.reportFile.report_language);
+  }
+
   render() {
     return (
-      <Button id="addFile" color="primary" onClick={ this.addFile }>Add File ></Button>
+      <Button id="addFile" color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
     )
   }
 }

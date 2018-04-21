@@ -43,7 +43,8 @@ const reducers = combineReducers({
   statuses: statusReducer
 });
 
-const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
+// const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
+const middleWare = applyMiddleware(thunk, routerMiddleware(history));
 
 const store = createStore(reducers, middleWare);
 

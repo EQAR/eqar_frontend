@@ -15,6 +15,7 @@ import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
 import FormAlert from '../FormAlert';
+import lodash from 'lodash';
 
 
 class ReportUrl extends Component {
@@ -47,7 +48,7 @@ class ReportUrl extends Component {
   }
 
   isAlert(index, key) {
-    if (this.props.alert.errorMessage.report_links[index]) {
+    if (!lodash.isEmpty(this.props.alert.errorMessage.report_links)) {
       return this.props.alert.errorMessage.report_links[index][key] ? true : false;
     } else {
       return false;
@@ -55,7 +56,7 @@ class ReportUrl extends Component {
   }
 
   getErrorMessage(index, key) {
-    if (this.props.alert.errorMessage.report_links[index]) {
+    if (!lodash.isEmpty(this.props.alert.errorMessage.report_links)) {
       return this.props.alert.errorMessage.report_links[index][key];
     }
   }

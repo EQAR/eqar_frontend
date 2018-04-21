@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '../../../main_store';
+import { push } from 'redux-first-routing';
 
 
 function sendForm(formDatas) {
@@ -9,7 +10,7 @@ function sendForm(formDatas) {
   axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formDatas, {
         headers: {'Content-Type': 'application/json'}})
   .then((response) => {
-    dispatch(push('/'));
+    store.dispatch(push('/'));
   }).catch((err) => {
     store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: err.response.data.errors })
   });

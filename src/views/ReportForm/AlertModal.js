@@ -40,6 +40,9 @@ class AlertModal extends Component {
       identifier: {inputField: 'Programme identifier: '},
       qualification_primary: {inputField: 'Qualification: '},
       name_alternative: {inputField: 'Alternative name: '},
+      original_location: {inputField: 'File location: '},
+      display_name: {inputField: 'File display name: '},
+      non_field_errors: {inputField: 'Error: '},
       alternative: {inputField: 'Alternative qualification: '}
     }[key]
   }
