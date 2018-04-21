@@ -13,6 +13,7 @@ class AddProgramme extends Component {
     super(props);
     this.addProgramme = this.addProgramme.bind(this);
     this.removeEmptyValues = this.removeEmptyValues.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
   }
 
   removeEmptyValues(obj, callback) {
@@ -29,9 +30,13 @@ class AddProgramme extends Component {
     resetProgramme();
   }
 
+  isDisabled() {
+    return this.props.programme.name_primary === '';
+  }
+
   render() {
     return (
-      <Button id="addProgramme" color="primary" onClick={ this.addProgramme }>Add programme ></Button>
+      <Button id="addProgramme" color="primary" onClick={ this.addProgramme } disabled={this.isDisabled()} >Add programme ></Button>
     )
   }
 }
