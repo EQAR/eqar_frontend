@@ -34,7 +34,7 @@ class AssignedProgrammes extends Component {
         <ListGroupItem key={i} className="justify-content-between">
               {programme.name_primary}{' '}
               <Button color="danger" size={'sm'} id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
-              <Button color="primary" id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
+              <Button color="primary" id={i} size={'sm'} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>
       )
     })
