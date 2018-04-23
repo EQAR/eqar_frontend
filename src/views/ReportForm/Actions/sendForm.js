@@ -1,13 +1,12 @@
 import axios from 'axios';
 import store from '../../../main_store';
 import { push } from 'redux-first-routing';
+import { clearReportRequest } from './clearReportRequest';
 
 
 function sendForm(formDatas) {
-  formDatas.date_format = '%Y-%m-%d';
-  formDatas.institutions = formDatas.institutions.map(institution => {
-    return {deqar_id: institution.deqar_id}})
-  axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formDatas, {
+  const formRequest = clearReportRequest(formDatas);
+  axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formRequest, {
         headers: {'Content-Type': 'application/json'}})
   .then((response) => {
     store.dispatch(push('/'));

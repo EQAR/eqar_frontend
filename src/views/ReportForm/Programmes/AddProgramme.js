@@ -26,7 +26,7 @@ class AddProgramme extends Component {
   }
 
   addProgramme(event) {
-    addProgrammeToReport(this.removeEmptyValues(this.props.programme, this.deleteObject), this.props.reportForm.programmes);
+    addProgrammeToReport(this.props.programme, this.props.reportForm.programmes);
     resetProgramme();
   }
 

@@ -34,10 +34,6 @@ class AlternativeNames extends Component {
     addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
   }
 
-  handleInput(indexOfInput, e) {
-    addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
-  }
-
   handleRemove(e) {
     removeName(e.target.id, this.props.programme.alternative_names);
   }
