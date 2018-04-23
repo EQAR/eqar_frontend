@@ -5,7 +5,8 @@ export const clearReportRequest = (formDatas) => {
   formDatas = clearInstitution(formDatas);
   formDatas = removeEmptyStrings(formDatas);
   formDatas.programmes = clearProgrammes(formDatas);
-  console.log(lodash.omitBy(formDatas, removeEmptyArrays));
+  formDatas.report_links = clearLinks(formDatas);
+  return lodash.omitBy(formDatas, removeEmptyArrays);
 }
 
 const addDateFormat = (formDatas) => {
@@ -33,17 +34,22 @@ const removeEmptyStrings = (object) => {
   return object;
 }
 
-const removeEmptyArrays = (value, key) => lodash.isEmpty(value);
 
 const clearProgrammes = (object) => {
-  return object.programmes.map(elem => {
-    elem.alternative_names = lodash.remove(elem.alternative_names, (e) => !lodash.isEmpty(e));
-    elem.identifiers = lodash.remove(elem.identifiers, (e) => !lodash.isEmpty(e));
-    lodash.forEach(elem, (value, key, object) => {
+  return object.programmes.map(programme => {
+    programme.alternative_names = lodash.remove(programme.alternative_names, (e) => !lodash.isEmpty(e));
+    programme.identifiers = lodash.remove(programme.identifiers, (e) => !lodash.isEmpty(e));
+    lodash.forEach(programme, (value, key, object) => {
       if (lodash.isEmpty(value)) {
         lodash.unset(object, key);
       }
     })
-    return elem;
+    return programme;
   })
 }
+
+const clearLinks = (object) => {
+  return lodash.remove(object.report_links, (e) => !lodash.isEmpty(e));
+}
+
+const removeEmptyArrays = (value, key) => lodash.isEmpty(value);
