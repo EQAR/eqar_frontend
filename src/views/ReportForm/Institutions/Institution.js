@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { getInstitutions, selectInstitution } from './actions';
+import lodash from 'lodash';
 
 
 class Institution extends Component {
@@ -20,6 +21,7 @@ class Institution extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       value: {}
     }
@@ -39,6 +41,10 @@ class Institution extends Component {
         label: ''
       }
     });
+  }
+
+  isDisabled() {
+    return lodash.isEmpty(this.state.value.value);
   }
 
   getOptions(input) {
@@ -61,7 +67,7 @@ class Institution extends Component {
           onChange={this.handleSelect}
         />
         <br/>
-        <Button color="primary" size={'sm'} onClick={this.handleClick}>Add</Button>
+        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add</Button>
       </FormGroup>
     )
   }
