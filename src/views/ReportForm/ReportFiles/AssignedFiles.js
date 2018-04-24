@@ -18,6 +18,7 @@ class AssignedFiles extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.reportFiles = this.reportFiles.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.getDisplayText = this.getDisplayText.bind(this);
   }
 
   handleRemove(e) {
@@ -28,11 +29,23 @@ class AssignedFiles extends Component {
     editFile(e.target.id, this.props.reportForm.report_files);
   }
 
+  getDisplayText(file){
+    let disPlayText = ''
+    if (file.display_name) {
+      disPlayText = file.display_name;
+    } else if (file.original_location) {
+      disPlayText = file.original_location;
+    } else {
+      disPlayText = file.uploaded_file.slice(file.uploaded_file.lastIndexOf('\\') + 1);
+    }
+    return disPlayText;
+  }
+
   reportFiles() {
     return this.props.reportForm.report_files.map((file, i) => {
       return(
         <ListGroupItem key={i} className="justify-content-between">
-              {file.display_name}{' '}
+              {this.getDisplayText(file)}{' '}
               <Button color="danger" size={'sm'} id={i} onClick={this.handleRemove} className="float-right">Remove</Button>
               <Button color="primary" size={'sm'} id={i} onClick={this.handleEdit} className="float-right programme-edit">Edit</Button>
         </ListGroupItem>

@@ -3,6 +3,7 @@ import lodash from 'lodash';
 export const clearReportRequest = (formDatas) => {
   formDatas = addDateFormat(formDatas);
   formDatas = clearInstitution(formDatas);
+  formDatas = removeUploadFile(formDatas);
   formDatas = removeEmptyStrings(formDatas);
   formDatas.programmes = clearProgrammes(formDatas);
   formDatas.report_links = clearLinks(formDatas);
@@ -19,6 +20,8 @@ const clearInstitution = (formDatas) => {
     return {deqar_id: institution.deqar_id}})
   return formDatas;
 }
+
+const removeUploadFile = (formDatas) => lodash.unset(formDatas, 'uploaded_file');
 
 const removeEmptyStrings = (object) => {
   if (lodash.isArray(object)) {
