@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyIdentifier, addIdentifier, removeIdentifier } from './actions';
+import lodash from 'lodash';
 
 
 class Identifiers extends Component {
@@ -24,6 +25,7 @@ class Identifiers extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
   }
 
   handleClick() {
@@ -41,6 +43,10 @@ class Identifiers extends Component {
   getButton(index) {
     return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.handleRemove}>Remove</Button>
     : null;
+  }
+
+  isDisabled() {
+    return lodash.isEmpty(lodash.last(this.props.programme.identifiers).identifier);
   }
 
   createNameCard() {
@@ -75,7 +81,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick}>Add Identifier</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Identifier</Button>
         </CardFooter>
       </Card>
     )
