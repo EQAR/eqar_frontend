@@ -29,6 +29,7 @@ class ReportUrl extends Component {
     this.isAlert = this.isAlert.bind(this);
     this.getErrorMessage = this.getErrorMessage.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
+    this.isLink = this.isLink.bind(this);
   }
 
   handleClick() {
@@ -62,6 +63,10 @@ class ReportUrl extends Component {
     }
   }
 
+  isLink(index) {
+    return lodash.isEmpty(this.props.reportForm.report_links[index].link);
+  }
+
   isDisabled() {
     return lodash.isEmpty(lodash.last(this.props.reportForm.report_links).link);
   }
@@ -81,7 +86,7 @@ class ReportUrl extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="textOfUrl">Display Text for URL</Label>
-              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} />
+              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
               <FormAlert isOpen={this.isAlert(i, 'link_display_name')} message={this.getErrorMessage(i, 'link_display_name')}/>
             </FormGroup>
           </CardBody>

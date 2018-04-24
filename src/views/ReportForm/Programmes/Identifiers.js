@@ -26,6 +26,7 @@ class Identifiers extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
+    this.isIdentifier = this.isIdentifier.bind(this);
   }
 
   handleClick() {
@@ -45,6 +46,10 @@ class Identifiers extends Component {
     : null;
   }
 
+  isIdentifier(index) {
+    return lodash.isEmpty(this.props.programme.identifiers[index].identifier);
+  }
+
   isDisabled() {
     return lodash.isEmpty(lodash.last(this.props.programme.identifiers).identifier);
   }
@@ -60,7 +65,7 @@ class Identifiers extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="source">Identifier Source</Label>
-              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource}/>
+              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource} disabled={this.isIdentifier(i)}/>
             </FormGroup>
           </CardBody>
           <CardFooter>

@@ -26,6 +26,7 @@ class AlternativeNames extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
+    this.isQualification = this.isQualification.bind(this);
   }
 
   handleClick() {
@@ -45,6 +46,10 @@ class AlternativeNames extends Component {
     : null;
   }
 
+  isQualification(index) {
+    return lodash.isEmpty(this.props.programme.alternative_names[index].name_alternative);
+  }
+
   isDisabled() {
     return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative);
   }
@@ -60,7 +65,7 @@ class AlternativeNames extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="alternativeQualification">Alternative qualification</Label>
-              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
+              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
