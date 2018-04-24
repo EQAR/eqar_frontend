@@ -22,7 +22,8 @@ import sendForm from './Actions/sendForm';
 import store from '../../main_store';
 import setStates from '../../state';
 import { connect } from 'react-redux';
-import build from 'redux-object';
+import AlertModal from './AlertModal'
+import lodash from 'lodash';
 
 class ReportForm extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class ReportForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
+    this.removeEmptyValues = this.removeEmptyValues.bind(this);
     this.state = {
       activeTab: '1'
     };
@@ -44,11 +46,17 @@ class ReportForm extends Component {
   }
 
   handleSubmit(event) {
-    console.log(event);
     event.preventDefault();
-    // sendForm(this.props.reportForm);
+    sendForm(this.props.reportForm);
   }
 
+  removeEmptyValues() {
+    if (this.props.reportForm.report_links[0].link === '' && this.props.reportForm.report_links[0].link_display_name === '') {
+      lodash.unset(this.props.reportForm.report_links[0], link);
+      lodash.unset(this.props.reportForm.report_links[0], link_display_name);
+    }
+    return this.props.reportForm
+  }
 
   isDisabled(){
     const reprtFormState = store.getState().reportForm;
@@ -133,6 +141,7 @@ class ReportForm extends Component {
           </CardBody>
           <CardFooter>
             <Button type="submit" color="primary" disabled={this.isDisabled()} onClick={this.handleSubmit}>Save Record</Button>
+            <AlertModal />
           </CardFooter>
         </Card>
       </Form>

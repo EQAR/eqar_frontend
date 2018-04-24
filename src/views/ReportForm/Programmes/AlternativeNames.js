@@ -13,7 +13,8 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addEmptyAlterName, addAlterName, removeName } from './actions';
+import { addEmptyAlterName, addAlterName, removeName, addFirstAlterName } from './actions';
+import lodash from 'lodash';
 
 
 class AlternativeNames extends Component {
@@ -24,6 +25,8 @@ class AlternativeNames extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
+    this.isQualification = this.isQualification.bind(this);
   }
 
   handleClick() {
@@ -43,18 +46,26 @@ class AlternativeNames extends Component {
     : null;
   }
 
+  isQualification(index) {
+    return lodash.isEmpty(this.props.programme.alternative_names[index].name_alternative);
+  }
+
+  isDisabled() {
+    return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative);
+  }
+
   createNameCard() {
     return this.props.programme.alternative_names.map((alternative, i) => {
       return (
         <Card key={i}>
           <CardBody>
             <FormGroup>
-              <Label for="alternativeName">Altenative Programme Name</Label>
+              <Label for="alternativeName">Altenative programme name</Label>
               <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
-              <Label for="alternativeQualification">Alternative Qualification Name</Label>
-              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative}/>
+              <Label for="alternativeQualification">Alternative qualification</Label>
+              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
@@ -75,7 +86,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick}>Add Alternative More Name</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Alternative Name</Button>
         </CardFooter>
       </Card>
     )

@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyIdentifier, addIdentifier, removeIdentifier } from './actions';
+import lodash from 'lodash';
 
 
 class Identifiers extends Component {
@@ -24,6 +25,8 @@ class Identifiers extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
+    this.isIdentifier = this.isIdentifier.bind(this);
   }
 
   handleClick() {
@@ -43,6 +46,14 @@ class Identifiers extends Component {
     : null;
   }
 
+  isIdentifier(index) {
+    return lodash.isEmpty(this.props.programme.identifiers[index].identifier);
+  }
+
+  isDisabled() {
+    return lodash.isEmpty(lodash.last(this.props.programme.identifiers).identifier);
+  }
+
   createNameCard() {
     return this.props.programme.identifiers.map((identifier, i) => {
       return (
@@ -54,7 +65,7 @@ class Identifiers extends Component {
             </FormGroup>
             <FormGroup>
               <Label for="source">Identifier Source</Label>
-              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource}/>
+              <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource} disabled={this.isIdentifier(i)}/>
             </FormGroup>
           </CardBody>
           <CardFooter>
@@ -75,7 +86,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick}>Add More Identifier</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Identifier</Button>
         </CardFooter>
       </Card>
     )

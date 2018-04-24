@@ -2,6 +2,7 @@ const setStates = state => ({
   activities: state.activities,
   agencies: state.agencies,
   agency: state.agency,
+  alert: state.alert,
   countries: state.countries,
   dashboard: state.dashboard,
   decisions: state.decisions,

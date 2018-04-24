@@ -36,8 +36,8 @@ class Agency extends Component {
   render() {
     return (
       <FormGroup>
-        <Label className="required-input" for="agencyName">Agency</Label>
-        <Input type="select" name="select" id="agencyName" value={this.props.reportForm.agency} onChange={this.handleInput}>
+        <Label for="agencyName">Agency</Label>
+        <Input type="select" name="select" id="agencyName" value={this.props.reportForm.agency} onChange={this.handleInput} >
           <option>Please select</option>
           {this.agencies()}
         </Input>
