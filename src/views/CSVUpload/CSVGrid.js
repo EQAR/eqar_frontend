@@ -62,7 +62,7 @@ class CSVGrid extends Component {
   onButtonIngest() {
     this.loadingToggle();
     csvResultDisplay({infoMessage: "Data is being ingested..."});
-    axios.post('https://backend.deqar.eu:8000/submissionapi/v1/submit/csv', this.gridApi.getDataAsCsv(), {
+    axios.post('https://backend.deqar.eu/submissionapi/v1/submit/csv', this.gridApi.getDataAsCsv(), {
       headers: {'Content-Type': 'text/csv'}
     })
     .then(response => {
