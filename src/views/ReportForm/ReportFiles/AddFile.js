@@ -21,7 +21,12 @@ class AddFile extends Component {
   }
 
   isDisabled() {
-    return lodash.isEmpty(this.props.reportFile.report_language);
+    return (
+      lodash.isEmpty(this.props.reportFile.report_language) || (
+        this.props.reportFile.original_location === '' &&
+        this.props.reportFile.uploaded_file === ''
+      )
+    )
   }
 
   render() {

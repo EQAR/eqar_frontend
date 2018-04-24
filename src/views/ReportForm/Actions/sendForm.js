@@ -6,6 +6,7 @@ import { clearReportRequest } from './clearReportRequest';
 
 function sendForm(formDatas) {
   const formRequest = clearReportRequest(formDatas);
+  console.log(formRequest);
   axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formRequest, {
         headers: {'Content-Type': 'application/json'}})
   .then((response) => {

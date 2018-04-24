@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { fileForm, languagesAjax, addLanguage } from './actions';
+import lodash from 'lodash';
 
 
 class Languages extends Component {
@@ -15,9 +16,6 @@ class Languages extends Component {
     super(props);
     this.getLanguages = this.getLanguages.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
-    this.state = {
-      value: ''
-    }
   }
 
   componentDidMount() {
@@ -25,8 +23,7 @@ class Languages extends Component {
   }
 
   saveChanges(values) {
-    addLanguage(values.map(value => value.value));
-    this.setState({value: values});
+    addLanguage(values);
   }
 
   getLanguages() {
@@ -45,7 +42,7 @@ class Languages extends Component {
         <Select
           id="languages"
           name="form-field-name2"
-          value={this.state.value}
+          value={this.props.reportFile.report_language}
           options={this.getLanguages()}
           onChange={this.saveChanges}
           multi
