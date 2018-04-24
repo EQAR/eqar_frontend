@@ -1,6 +1,9 @@
+import update from 'immutability-helper';
+
 function csvReducer(state = {
     columns: [],
-    data: []
+    data: [],
+    errorObject: ""
 }, action) {
   switch (action.type) {
     case 'SET_CSV_DATA': {
@@ -8,14 +11,30 @@ function csvReducer(state = {
         columns: action.payload.columns,
         data: action.payload.data
       };
-      return { ...state,
+      return {
+        ...state,
         ...csvData
       }
     }
     case 'UNSET_CSV_DATA': {
-      return { ...state,
+      return {
+        ...state,
         columns: [],
-        data: []
+        data: [],
+        errorObject: ""
+      }
+    }
+    case 'UPDATE_CSV_DATA': {
+      return update(state,
+        { data: {
+          [action.payload.idx]: {$merge: {report_id: action.payload.report}}
+        }
+      });
+    }
+    case 'SET_CSV_RESULT_DISPLAY': {
+      return {
+        ...state,
+        errorObject: action.payload.errorObject
       }
     }
     default: return { ...state };

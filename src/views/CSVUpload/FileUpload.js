@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 import {connect} from "react-redux";
 import setStates from "../../state";
-import {csvSet} from "./Actions/csvAction";
+import {csvSet, csvUnset} from "./Actions/csvAction";
 
 class FileUpload extends Component {
   constructor(props) {
@@ -19,12 +19,25 @@ class FileUpload extends Component {
     if(result.errors.length > 0) {
       console.log(result.errors);
     } else {
-      csvSet(this.createColumns(result), result.data);
+      csvSet(this.createColumns(result), this.createData(result.data));
     }
   }
 
+  createData(data) {
+    data.forEach(function(value, idx){
+      data[idx]['row_number'] = idx + 1;
+    });
+    return data;
+  }
+
   createColumns(result) {
-    let columns = [];
+    let columns = [{
+      headerName: 'row',
+      field: 'row_number'
+    }, {
+      headerName: 'report_id',
+      field: 'report_id'
+    }];
     result.meta.fields.forEach(function(column) {
       columns.push({
         headerName: column,
@@ -38,16 +51,16 @@ class FileUpload extends Component {
   onChange(e) {
     this.setState({
       file: e.target.files[0]
-    })
+    });
+    csvUnset();
   }
 
   onFormSubmit(e) {
     e.preventDefault();
+    csvUnset();
     let file = this.state.file;
 
     if(file) {
-      console.log(file);
-
       let Papa = require("papaparse/papaparse.min");
       Papa.parse(this.state.file, {
         header: true,
