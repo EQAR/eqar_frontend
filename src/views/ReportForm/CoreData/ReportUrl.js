@@ -28,6 +28,7 @@ class ReportUrl extends Component {
     this.getButton = this.getButton.bind(this);
     this.isAlert = this.isAlert.bind(this);
     this.getErrorMessage = this.getErrorMessage.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
   }
 
   handleClick() {
@@ -61,6 +62,10 @@ class ReportUrl extends Component {
     }
   }
 
+  isDisabled() {
+    return lodash.isEmpty(lodash.last(this.props.reportForm.report_links).link);
+  }
+
   createLinkCard() {
     return this.props.reportForm.report_links.map((link, i) => {
       return (
@@ -92,7 +97,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" size={'sm'} onClick={this.handleClick}>Add Link</Button>
+        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Link</Button>
       </div>
     )
   }
