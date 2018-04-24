@@ -28,7 +28,7 @@ class AssignedActivity extends Component {
       return (
         <div>
           <div>
-            Assigned Activity Type:
+            Assigned activity type:
           </div>
           <ul>
             <li>

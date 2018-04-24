@@ -22,7 +22,7 @@ class NQFLevel extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="NQFLevel">NQF Level</Label>
+        <Label for="NQFLevel">NQF level</Label>
         <Input type="text" name="text" id="NQFLevel" value={this.props.programme.nqfLevel} onChange={ this.handleInput } />
       </FormGroup>
     )

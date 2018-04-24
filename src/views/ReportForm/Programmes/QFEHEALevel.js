@@ -35,7 +35,7 @@ class QFEHEALevel extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="qfeheaLevel">QF-EHEA Level</Label>
+        <Label for="qfeheaLevel">QF-EHEA level</Label>
         <Input type="select" name="select" id="qfeheaLevel" value={this.props.programme.qfeheaLevel} onChange={ this.handleInput } >
           <option>Please select</option>
           {this.qfeheaLevels()}

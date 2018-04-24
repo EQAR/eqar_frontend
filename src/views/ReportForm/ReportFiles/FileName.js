@@ -22,7 +22,7 @@ class FileName extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="fileName">File Display Name</Label>
+        <Label for="fileName">File display name</Label>
         <Input type="text" name="text" id="fileName" onChange={this.handleInput} value={this.props.reportFile.display_name} placeholder="Enter file name for display" />
       </FormGroup>
     )

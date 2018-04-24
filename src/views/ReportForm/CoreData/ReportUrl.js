@@ -76,16 +76,16 @@ class ReportUrl extends Component {
       return (
         <Card key={i}>
           <CardHeader>
-            View Report on Agency Website
+            View report on agency website
           </CardHeader>
           <CardBody>
             <FormGroup>
-              <Label for="urlToReport">URL to Page</Label>
+              <Label for="urlToReport">URL to page</Label>
               <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
               <FormAlert isOpen={this.isAlert(i, 'link')} message={this.getErrorMessage(i, 'link')}/>
             </FormGroup>
             <FormGroup>
-              <Label for="textOfUrl">Display Text for URL</Label>
+              <Label for="textOfUrl">Display text for URL</Label>
               <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
               <FormAlert isOpen={this.isAlert(i, 'link_display_name')} message={this.getErrorMessage(i, 'link_display_name')}/>
             </FormGroup>
@@ -102,7 +102,7 @@ class ReportUrl extends Component {
     return (
       <div>
         {this.createLinkCard()}
-        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Link</Button>
+        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add More Link</Button>
       </div>
     )
   }

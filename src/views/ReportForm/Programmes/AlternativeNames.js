@@ -64,7 +64,7 @@ class AlternativeNames extends Component {
               <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
             </FormGroup>
             <FormGroup>
-              <Label for="alternativeQualification">Alternative qualification</Label>
+              <Label for="alternativeQualification">Alternative qualification name</Label>
               <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
             </FormGroup>
           </CardBody>
@@ -86,7 +86,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Alternative Name</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add more alternative name</Button>
         </CardFooter>
       </Card>
     )

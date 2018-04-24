@@ -22,7 +22,7 @@ class Upload extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="uploadedFile">Or Upload File</Label>
+        <Label for="uploadedFile">Or upload file</Label>
         <Input type="file" name="file" id="uploadedFile" value={this.props.reportFile.uploadedFile} onChange={this.handleInput} />
       </FormGroup>
     )

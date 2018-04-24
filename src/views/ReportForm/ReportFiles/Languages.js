@@ -38,7 +38,7 @@ class Languages extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="languages" className="required-input">File Languages</Label>
+        <Label for="languages" className="required-input">File languages</Label>
         <Select
           id="languages"
           name="form-field-name2"

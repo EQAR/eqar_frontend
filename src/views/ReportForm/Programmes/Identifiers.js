@@ -64,7 +64,7 @@ class Identifiers extends Component {
               <Input type="text" name="text" id="identifier" placeholder="Enter identifier" onChange={this.handleInput.bind(null, i)} value={identifier.identifier}/>
             </FormGroup>
             <FormGroup>
-              <Label for="source">Identifier Source</Label>
+              <Label for="source">Identifier source</Label>
               <Input type="text" name="text" id="resource" placeholder="Enter source of identifier" onChange={this.handleInput.bind(null, i)} value={identifier.resource} disabled={this.isIdentifier(i)}/>
             </FormGroup>
           </CardBody>
@@ -86,7 +86,7 @@ class Identifiers extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Identifier</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add more identifier</Button>
         </CardFooter>
       </Card>
     )
