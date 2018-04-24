@@ -12,6 +12,15 @@ export function addEmptyAlterName(alternativeNames=[]) {
   store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_NAME', payload: alternativeNames });
 }
 
+export function addFirstAlterName(inputValue, inputId, indexOfAlter, alternativeNames=[]) {
+  if (!alternativeNames[0].name_alternative) {
+    alternativeNames.push({name_alternative: '', qualification_alternative: ''});
+    store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_NAME', payload: alternativeNames });
+  }
+  alternativeNames[indexOfAlter][inputId] = inputValue;
+  store.dispatch({ type: 'CHANGE_ALTERNATIVE_NAME', payload: alternativeNames });
+}
+
 export function addAlterName(inputValue, inputId, indexOfAlter, alternativeNames=[]) {
   alternativeNames[indexOfAlter][inputId] = inputValue
   store.dispatch({ type: 'CHANGE_ALTERNATIVE_NAME', payload: alternativeNames });

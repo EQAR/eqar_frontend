@@ -18,6 +18,7 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
+import alertReducer from './views/ReportForm/FormAlert/alertReducer';
 import csvReducer from "./views/CSVUpload/Reducers/csvReducer";
 
 
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   activities: activityReducer,
   agencies: agenciesReducer,
   agency: agencyReducer,
+  alert: alertReducer,
   countries: countriesReducer,
   dashboard: dashboardReducer,
   decisions: decisionReducer,
@@ -45,6 +47,7 @@ const reducers = combineReducers({
 });
 
 const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
+// const middleWare = applyMiddleware(thunk, routerMiddleware(history));
 
 const store = createStore(reducers, middleWare);
 

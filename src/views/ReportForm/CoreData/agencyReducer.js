@@ -1,14 +1,14 @@
 function agencyReducer(state = {
   id: null,
-  registrationStart: '',
-  registrationValidTo: ''
+  valid_from: '',
+  valid_to: ''
 }, action) {
   switch (action.type) {
     case 'GET_AGENCY': {
       return { ...state,
                id: action.payload.id,
-               registrationStart: action.payload.registration_start,
-               registrationValidTo: action.payload.registration_valid_to};
+               valid_from: action.payload.registration_start,
+               valid_to: action.payload.registration_valid_to};
     };
     default: return { ...state };
   }
