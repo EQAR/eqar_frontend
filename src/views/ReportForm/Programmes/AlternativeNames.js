@@ -46,8 +46,7 @@ class AlternativeNames extends Component {
   }
 
   isDisabled() {
-    console.log(lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative))
-    return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative)
+    return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative);
   }
 
   createNameCard() {
