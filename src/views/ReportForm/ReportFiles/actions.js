@@ -21,7 +21,6 @@ export function addLanguage(language) {
 
 export function addFileToReport(inputValue, reportFiles=[]) {
   inputValue.report_language = inputValue.report_language.map(language => language.value)
-  console.log(inputValue)
   reportFiles.push(inputValue);
   store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
 }

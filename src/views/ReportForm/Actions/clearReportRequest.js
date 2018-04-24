@@ -1,13 +1,14 @@
 import lodash from 'lodash';
 
 export const clearReportRequest = (formDatas) => {
-  formDatas = addDateFormat(formDatas);
-  formDatas = clearInstitution(formDatas);
-  formDatas = removeUploadFile(formDatas);
-  formDatas = removeEmptyStrings(formDatas);
-  formDatas.programmes = clearProgrammes(formDatas);
-  formDatas.report_links = clearLinks(formDatas);
-  return lodash.omitBy(formDatas, removeEmptyArrays);
+  let reqData = lodash.cloneDeep(formDatas);
+  reqData = addDateFormat(reqData);
+  reqData = clearInstitution(reqData);
+  reqData = removeEmptyStrings(reqData);
+  reqData.report_files = removeUploadFile(reqData);
+  reqData.programmes = clearProgrammes(reqData);
+  reqData.report_links = clearLinks(reqData);
+  return lodash.omitBy(reqData, removeEmptyArrays);
 }
 
 const addDateFormat = (formDatas) => {
@@ -21,7 +22,12 @@ const clearInstitution = (formDatas) => {
   return formDatas;
 }
 
-const removeUploadFile = (formDatas) => lodash.unset(formDatas, 'uploaded_file');
+const removeUploadFile = (formDatas) => {
+  return formDatas.report_files.map(reportFile => {
+    lodash.unset(reportFile, 'uploaded_file');
+    return reportFile;
+  })
+}
 
 const removeEmptyStrings = (object) => {
   if (lodash.isArray(object)) {

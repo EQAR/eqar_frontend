@@ -1,4 +1,6 @@
-function reportFormReducer(state = {
+import { composeResetReducer } from 'redux-reset-store';
+
+const initialState = {
   agency: '',
   local_identifier: '',
   activity: '',
@@ -16,7 +18,9 @@ function reportFormReducer(state = {
   institutions: [],
   programmes: [],
   date_format: '%Y-%m-%d'
-}, action) {
+}
+
+const reportFormReducer = composeResetReducer(function reportFormReducer(state = initialState, action) {
   switch (action.type) {
     case 'CHANGE_LOCAL_IDENTIFIER': {
       return { ...state, local_identifier: action.payload }
@@ -68,6 +72,6 @@ function reportFormReducer(state = {
     }
     default: return { ...state };
   }
-}
+}, initialState, 'RESET_REPORT_FORM');
 
 export default reportFormReducer;

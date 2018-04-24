@@ -43,7 +43,8 @@ class AlertModal extends Component {
       original_location: {inputField: 'File location: '},
       display_name: {inputField: 'File display name: '},
       non_field_errors: {inputField: 'Error: '},
-      alternative: {inputField: 'Alternative qualification: '}
+      alternative: {inputField: 'Alternative qualification: '},
+      report_files: {inputField: 'Report file:'}
     }[key]
   }
 
