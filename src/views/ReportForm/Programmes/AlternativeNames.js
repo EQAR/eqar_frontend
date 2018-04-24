@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyAlterName, addAlterName, removeName, addFirstAlterName } from './actions';
+import lodash from 'lodash';
 
 
 class AlternativeNames extends Component {
@@ -24,6 +25,7 @@ class AlternativeNames extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
   }
 
   handleClick() {
@@ -41,6 +43,11 @@ class AlternativeNames extends Component {
   getButton(index) {
     return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.handleRemove}>Remove</Button>
     : null;
+  }
+
+  isDisabled() {
+    console.log(lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative))
+    return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative)
   }
 
   createNameCard() {
@@ -75,7 +82,7 @@ class AlternativeNames extends Component {
           {this.createNameCard()}
         </CardBody>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={this.handleClick}>Add Alternative Name</Button>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add Alternative Name</Button>
         </CardFooter>
       </Card>
     )
