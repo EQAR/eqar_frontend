@@ -7,6 +7,10 @@ export function fileForm(value, id) {
   store.dispatch({ type: getType(id), payload: value });
 }
 
+export function addUpload(value) {
+  store.dispatch({ type: 'CHANGE_UPLOADED_FILE', payload: value});
+}
+
 export function languagesAjax() {
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/adminapi/v1/select/language').then((response) => {

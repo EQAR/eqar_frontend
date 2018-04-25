@@ -4,7 +4,7 @@ import lodash from 'lodash';
 const initialState = {
   file_index: null,
   original_location: '',
-  uploaded_file: '',
+  uploaded_file: [],
   report_language: [],
   display_name: ''
 }

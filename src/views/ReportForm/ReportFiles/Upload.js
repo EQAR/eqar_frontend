@@ -6,7 +6,8 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { fileForm } from './actions';
+import { addUpload } from './actions';
+import lodash from 'lodash';
 
 
 class Upload extends Component {
@@ -16,14 +17,14 @@ class Upload extends Component {
   }
 
   handleInput(e) {
-    fileForm(e.target.files, e.target.id);
+    addUpload(e.target.files);
   }
 
   render() {
     return (
       <FormGroup>
         <Label for="uploadedFile">Or upload file</Label>
-        <Input type="file" name="file" id="uploadedFile" value={this.props.reportFile.uploadedFile} onChange={this.handleInput} />
+        <Input type="file" name="file" id="uploadedFile" onChange={this.handleInput} />
       </FormGroup>
     )
   }

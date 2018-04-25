@@ -25,6 +25,7 @@ const clearInstitution = (formDatas) => {
 const removeUploadFile = (formDatas) => {
   return formDatas.report_files.map(reportFile => {
     lodash.unset(reportFile, 'uploaded_file');
+    lodash.unset(reportFile, 'file_index');
     return reportFile;
   })
 }
