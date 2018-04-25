@@ -25,13 +25,19 @@ export function addFileToReport(inputValue, reportFiles=[]) {
   store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
 }
 
+export function addEditedFileToReport(editedValue, reportFiles=[]) {
+  editedValue.report_language = editedValue.report_language.map(language => language.value)
+  reportFiles[editedValue.file_index] = editedValue;
+  store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
+}
+
 export function resetFile() {
   store.dispatch({ type: 'RESET_FILE'} );
 }
 
 export function editFile(id, files=[]) {
-  const programme = programmes[id]
-  store.dispatch({ type: 'EDIT_FILE', payload: programme});
+  const file = files[id]
+  store.dispatch({ type: 'EDIT_FILE', payload: file, fileIndex: parseInt(id, 10)});
 }
 
 export function removeFile(index, files=[]) {

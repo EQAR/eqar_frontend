@@ -1,13 +1,15 @@
 import { composeResetReducer } from 'redux-reset-store';
+import lodash from 'lodash';
 
 const initialState = {
+  file_index: null,
   original_location: '',
   uploaded_file: '',
   report_language: [],
   display_name: ''
 }
 
-const fileReducer = composeResetReducer(function fileReducer(state = initialState, action) {
+const fileReducer = composeResetReducer(function fileReducer(state = lodash.cloneDeep(initialState), action) {
   switch (action.type) {
     case 'CHANGE_FILE_URL': {
       return { ...state, original_location: action.payload};
@@ -20,6 +22,9 @@ const fileReducer = composeResetReducer(function fileReducer(state = initialStat
     }
     case 'CHANGE_FILE_NAME': {
       return { ...state, display_name: action.payload};
+    }
+    case 'EDIT_FILE': {
+      return { ...state, ...action.payload, file_index: action.fileIndex};
     }
     default: return { ...state };
   }

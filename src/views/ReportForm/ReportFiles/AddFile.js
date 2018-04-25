@@ -4,7 +4,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { addFileToReport, resetFile } from './actions';
+import { addFileToReport, resetFile, addEditedFileToReport } from './actions';
 import lodash from 'lodash';
 
 
@@ -13,10 +13,17 @@ class AddFile extends Component {
     super(props);
     this.addFile = this.addFile.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
+    this.getButton = this.getButton.bind(this);
+    this.addEditedFile = this.addEditedFile.bind(this);
   }
 
-  addFile(event) {
+  addFile() {
     addFileToReport(this.props.reportFile, this.props.reportForm.report_files);
+    resetFile();
+  }
+
+  addEditedFile() {
+    addEditedFileToReport(this.props.reportFile, this.props.reportForm.report_files)
     resetFile();
   }
 
@@ -29,9 +36,23 @@ class AddFile extends Component {
     )
   }
 
+  getButton() {
+    if (this.props.reportFile.file_index !== null) {
+      return (
+        <Button id={this.props.reportFile.file_index} size={'sm'} color="warning" onClick={ this.addEditedFile } disabled={this.isDisabled()}>Save File ></Button>
+      )
+    } else {
+      return (
+        <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
+      )
+    }
+  }
+
   render() {
     return (
-      <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
+      <div>
+        {this.getButton()}
+      </div>
     )
   }
 }
