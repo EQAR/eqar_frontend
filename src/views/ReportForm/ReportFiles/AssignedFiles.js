@@ -36,7 +36,7 @@ class AssignedFiles extends Component {
     } else if (file.original_location) {
       disPlayText = file.original_location;
     } else {
-      disPlayText = file.uploaded_file.slice(file.uploaded_file.lastIndexOf('\\') + 1);
+      disPlayText = file.uploaded_file[0].name;
     }
     return disPlayText;
   }

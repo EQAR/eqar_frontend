@@ -1,4 +1,6 @@
 import { composeResetReducer } from 'redux-reset-store';
+import lodash from 'lodash';
+
 
 const initialState = {
   agency: '',
@@ -20,7 +22,7 @@ const initialState = {
   date_format: '%Y-%m-%d'
 }
 
-const reportFormReducer = composeResetReducer(function reportFormReducer(state = initialState, action) {
+const reportFormReducer = composeResetReducer(function reportFormReducer(state = lodash.cloneDeep(initialState), action) {
   switch (action.type) {
     case 'CHANGE_LOCAL_IDENTIFIER': {
       return { ...state, local_identifier: action.payload }
