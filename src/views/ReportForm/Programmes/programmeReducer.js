@@ -1,4 +1,6 @@
 import { composeResetReducer } from 'redux-reset-store';
+import lodash from 'lodash';
+
 
 const initialState = {
   name_primary: '',
@@ -20,7 +22,7 @@ const initialState = {
   countries: []
 }
 
-const programmeReducer = composeResetReducer(function programmeReducer(state = initialState, action) {
+const programmeReducer = composeResetReducer(function programmeReducer(state = lodash.cloneDeep(initialState), action) {
   switch (action.type) {
     case 'CHANGE_PROGRAMME_NAME': {
       return { ...state, name_primary: action.payload};

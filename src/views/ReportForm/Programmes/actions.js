@@ -75,5 +75,5 @@ export function editProgramme(id, programmes=[]) {
 
 export function removeProgramme(index, programmes=[]) {
   programmes.splice(index, 1);
-  store.dispatch({ type: 'REMOVE_IDENTIFIER', payload: programmes });
+  store.dispatch({ type: 'REMOVE_PROGRAMME', payload: programmes });
 }

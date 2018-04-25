@@ -12,17 +12,7 @@ class AddProgramme extends Component {
   constructor(props) {
     super(props);
     this.addProgramme = this.addProgramme.bind(this);
-    this.removeEmptyValues = this.removeEmptyValues.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
-  }
-
-  removeEmptyValues(obj, callback) {
-    lodash.forEach(obj, (val, k, obj) => {
-      if (val === '') {
-        lodash.unset(obj, k);
-      }
-    })
-    return obj;
   }
 
   addProgramme(event) {
