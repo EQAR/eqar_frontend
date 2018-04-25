@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Button } from 'reactstrap';
+  Button,
+  Col,
+  Row} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -15,6 +17,7 @@ class AddFile extends Component {
     this.isDisabled = this.isDisabled.bind(this);
     this.getButton = this.getButton.bind(this);
     this.addEditedFile = this.addEditedFile.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   addFile() {
@@ -24,6 +27,10 @@ class AddFile extends Component {
 
   addEditedFile() {
     addEditedFileToReport(this.props.reportFile, this.props.reportForm.report_files)
+    resetFile();
+  }
+
+  cancel() {
     resetFile();
   }
 
@@ -39,21 +46,31 @@ class AddFile extends Component {
   getButton() {
     if (this.props.reportFile.file_index !== null) {
       return (
-        <Button id={this.props.reportFile.file_index} size={'sm'} color="warning" onClick={ this.addEditedFile } disabled={this.isDisabled()}>Save File ></Button>
+        <Row>
+          <Col>
+            <Button id={this.props.reportFile.file_index} size={'sm'} color="warning" onClick={ this.addEditedFile } disabled={this.isDisabled()}>Save File ></Button>
+          </Col>
+          <Col>
+            <Button id="cancelFile" size={'sm'} color="warning" onClick={ this.cancel } >Cancel</Button>
+          </Col>
+        </Row>
       )
     } else {
       return (
-        <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
+        <Row>
+          <Col>
+            <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
+          </Col>
+          <Col>
+            <Button id="resetFile" size={'sm'} color="primary" onClick={ this.cancel } >Reset</Button>
+          </Col>
+        </Row>
       )
     }
   }
 
   render() {
-    return (
-      <div>
-        {this.getButton()}
-      </div>
-    )
+    return this.getButton()
   }
 }
 
