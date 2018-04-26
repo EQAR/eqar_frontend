@@ -22,7 +22,7 @@ class LocalIdentifier extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="localIdentifier" className="required-input">Local report identifier</Label>
+        <Label for="localIdentifier">Local report identifier</Label>
         <Input type="text" name="text" id="localIdentifier" placeholder="Enter the report local identifier" onChange={this.handleInput}/>
       </FormGroup>
     )
