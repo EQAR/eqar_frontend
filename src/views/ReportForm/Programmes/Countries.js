@@ -18,9 +18,6 @@ class Countries extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.getCountries = this.getCountries.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
-    this.state = {
-      value: ''
-    }
   }
 
   componentDidMount() {
@@ -32,8 +29,7 @@ class Countries extends Component {
   }
 
   saveChanges(value) {
-    addCountry(value[0].value, this.props.programme.countries)
-    this.setState({value: value});
+    addCountry(value)
   }
 
   getCountries() {
@@ -52,7 +48,7 @@ class Countries extends Component {
         <Select
           id="countries"
           name="form-field-name2"
-          value={this.state.value}
+          value={this.props.programme.countries}
           options={this.getCountries()}
           onChange={this.saveChanges}
           multi

@@ -54,8 +54,7 @@ export function getQFEHEA() {
   });
 }
 
-export function addCountry(country, countries=[]) {
-  countries.push(country);
+export function addCountry(countries) {
   store.dispatch({ type: 'ADD_COUNTRY', payload: countries });
 }
 
@@ -70,7 +69,7 @@ export function resetProgramme() {
 
 export function editProgramme(id, programmes=[]) {
   const programme = programmes[id]
-  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme});
+  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme, programme_index: id});
 }
 
 export function removeProgramme(index, programmes=[]) {
