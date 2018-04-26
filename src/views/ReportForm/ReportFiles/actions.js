@@ -24,15 +24,11 @@ export function addLanguage(language) {
 }
 
 export function addFileToReport(inputValue, reportFiles=[]) {
-  inputValue.report_language = inputValue.report_language.map(language => language.value)
   reportFiles.push(inputValue);
   store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
 }
 
 export function addEditedFileToReport(editedValue, reportFiles=[]) {
-  if (editedValue.report_language.value) {
-    editedValue.report_language = editedValue.report_language.map(language => language.value)
-  }
   reportFiles[editedValue.file_index] = editedValue;
   store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
 }
