@@ -3,6 +3,7 @@ import lodash from 'lodash';
 
 
 const initialState = {
+  programme_index: null,
   name_primary: '',
   qualification_primary: '',
   alternative_names: [
@@ -58,7 +59,7 @@ const programmeReducer = composeResetReducer(function programmeReducer(state = l
       return { ...state, countries: action.payload};
     }
     case 'EDIT_PROGRAMME': {
-      state = action.payload
+      return {...state, ...action.payload, programme_index: action.programme_index}
     }
     default: return { ...state };
   }

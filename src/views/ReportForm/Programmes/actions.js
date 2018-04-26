@@ -54,13 +54,17 @@ export function getQFEHEA() {
   });
 }
 
-export function addCountry(country, countries=[]) {
-  countries.push(country);
+export function addCountry(countries) {
   store.dispatch({ type: 'ADD_COUNTRY', payload: countries });
 }
 
 export function addProgrammeToReport(inputValue, programmes=[]) {
   programmes.push(inputValue);
+  store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
+}
+
+export function addEditedProgrammeToReport(editedValue, programmes=[]) {
+  programmes[editedValue.programme_index] = editedValue;
   store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
 }
 
@@ -70,7 +74,7 @@ export function resetProgramme() {
 
 export function editProgramme(id, programmes=[]) {
   const programme = programmes[id]
-  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme});
+  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme, programme_index: parseInt(id, 10)});
 }
 
 export function removeProgramme(index, programmes=[]) {
