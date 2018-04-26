@@ -63,13 +63,18 @@ export function addProgrammeToReport(inputValue, programmes=[]) {
   store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
 }
 
+export function addEditedProgrammeToReport(editedValue, programmes=[]) {
+  programmes[editedValue.programme_index] = editedValue;
+  store.dispatch({ type: 'ADD_PROGRAMME', payload: programmes });
+}
+
 export function resetProgramme() {
   store.dispatch({ type: 'RESET_PROGRAMME'});
 }
 
 export function editProgramme(id, programmes=[]) {
   const programme = programmes[id]
-  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme, programme_index: id});
+  store.dispatch({ type: 'EDIT_PROGRAMME', payload: programme, programme_index: parseInt(id, 10)});
 }
 
 export function removeProgramme(index, programmes=[]) {

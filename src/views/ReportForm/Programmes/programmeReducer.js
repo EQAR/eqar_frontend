@@ -59,7 +59,7 @@ const programmeReducer = composeResetReducer(function programmeReducer(state = l
       return { ...state, countries: action.payload};
     }
     case 'EDIT_PROGRAMME': {
-      return {...state, ...action.payload, proramme_index: action.proramme_index}
+      return {...state, ...action.payload, programme_index: action.programme_index}
     }
     default: return { ...state };
   }
