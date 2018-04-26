@@ -7,6 +7,10 @@ export function fileForm(value, id) {
   store.dispatch({ type: getType(id), payload: value });
 }
 
+export function addUpload(value) {
+  store.dispatch({ type: 'CHANGE_UPLOADED_FILE', payload: value});
+}
+
 export function languagesAjax() {
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/adminapi/v1/select/language').then((response) => {
@@ -20,8 +24,12 @@ export function addLanguage(language) {
 }
 
 export function addFileToReport(inputValue, reportFiles=[]) {
-  inputValue.report_language = inputValue.report_language.map(language => language.value)
   reportFiles.push(inputValue);
+  store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
+}
+
+export function addEditedFileToReport(editedValue, reportFiles=[]) {
+  reportFiles[editedValue.file_index] = editedValue;
   store.dispatch({ type: 'ADD_FILE', payload: reportFiles });
 }
 
@@ -30,8 +38,8 @@ export function resetFile() {
 }
 
 export function editFile(id, files=[]) {
-  const programme = programmes[id]
-  store.dispatch({ type: 'EDIT_FILE', payload: programme});
+  const file = files[id]
+  store.dispatch({ type: 'EDIT_FILE', payload: file, fileIndex: parseInt(id, 10)});
 }
 
 export function removeFile(index, files=[]) {

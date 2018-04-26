@@ -25,6 +25,8 @@ const clearInstitution = (formDatas) => {
 const removeUploadFile = (formDatas) => {
   return formDatas.report_files.map(reportFile => {
     lodash.unset(reportFile, 'uploaded_file');
+    lodash.unset(reportFile, 'file_index');
+    reportFile.report_language = reportFile.report_language.map(language => language.value)
     return reportFile;
   })
 }
