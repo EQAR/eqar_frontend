@@ -54,6 +54,7 @@ class Institution extends Component {
           name="form-field-name2"
           value={this.state.value}
           loadOptions={this.getOptions}
+          clearable={false}
           onChange={this.handleSelect}
         />
       </FormGroup>
