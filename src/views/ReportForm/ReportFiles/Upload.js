@@ -18,6 +18,7 @@ class Upload extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.renderFileName = this.renderFileName.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       value: ''
     }
@@ -53,13 +54,17 @@ class Upload extends Component {
     }
   }
 
+  isDisabled(index) {
+    return !lodash.isEmpty(this.props.reportFile.original_location);
+  }
+
   render() {
     return (
       <div>
         <FormGroup>
           <p>Or upload file</p>
-          <Label for="uploadedFile" className="upload-label">Choose File</Label>
-          <Input type="file" name="file" id="uploadedFile" className="file-upload" onChange={this.handleInput} value={this.state.value}/>
+          <Label for="uploadedFile" className="upload-label" disabled={this.isDisabled()}>Choose File</Label>
+          <Input type="file" name="file" id="uploadedFile" className="file-upload" onChange={this.handleInput} value={this.state.value} disabled={this.isDisabled()}/>
         </FormGroup>
         {this.renderFileName()}
       </div>

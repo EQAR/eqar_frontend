@@ -16,7 +16,6 @@ function sendFiles(formDatas, files) {
           console.log(response);
         }).catch((err) => {
           console.log(err.response);
-          // store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: err.response.data.errors })
         });
     }
   });
