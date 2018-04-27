@@ -8,6 +8,7 @@ import setStates from "../../state";
 import ChangePasswordForm from "./ChangePasswordForm";
 import ChangeTokenForm from "./ChangeTokenForm";
 import UserProfile from "./UserProfile";
+import ChangeEmailForm from "./ChangeEmailForm";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class MyProfile extends Component {
           </Col>
           <Col md={6} xs={12}>
             <ChangePasswordForm />
+            <ChangeEmailForm />
           </Col>
         </Row>
       </div>
