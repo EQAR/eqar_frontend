@@ -5,7 +5,7 @@ export const clearReportRequest = (formDatas) => {
   reqData = addDateFormat(reqData);
   reqData = clearInstitution(reqData);
   reqData = removeEmptyStrings(reqData);
-  reqData.report_files = removeUploadFile(reqData);
+  reqData.report_files = clearUploadFile(reqData);
   reqData.programmes = clearProgrammes(reqData);
   reqData.report_links = clearLinks(reqData);
   return lodash.omitBy(reqData, removeEmptyArrays);
@@ -22,7 +22,7 @@ const clearInstitution = (formDatas) => {
   return formDatas;
 }
 
-const removeUploadFile = (formDatas) => {
+const clearUploadFile = (formDatas) => {
   return formDatas.report_files.map(reportFile => {
     lodash.unset(reportFile, 'uploaded_file');
     lodash.unset(reportFile, 'file_index');
@@ -50,6 +50,8 @@ const clearProgrammes = (object) => {
   return object.programmes.map(programme => {
     programme.alternative_names = lodash.remove(programme.alternative_names, (e) => !lodash.isEmpty(e));
     programme.identifiers = lodash.remove(programme.identifiers, (e) => !lodash.isEmpty(e));
+    programme.countries = programme.countries.map(country => country.value)
+    lodash.unset(programme, 'programme_index');
     lodash.forEach(programme, (value, key, object) => {
       if (lodash.isEmpty(value)) {
         lodash.unset(object, key);
