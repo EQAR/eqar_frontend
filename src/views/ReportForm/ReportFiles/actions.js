@@ -11,6 +11,10 @@ export function addUpload(value) {
   store.dispatch({ type: 'CHANGE_UPLOADED_FILE', payload: value});
 }
 
+export function removeUploadedFile() {
+  store.dispatch({ type: 'REMOVE_UPLOADED_FILE'});
+}
+
 export function languagesAjax() {
   store.dispatch((dispatch) => {
     axios.get('https://backend.deqar.eu/adminapi/v1/select/language').then((response) => {

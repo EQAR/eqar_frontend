@@ -17,6 +17,9 @@ const fileReducer = composeResetReducer(function fileReducer(state = lodash.clon
     case 'CHANGE_UPLOADED_FILE': {
       return { ...state, uploaded_file: action.payload};
     }
+    case 'REMOVE_UPLOADED_FILE': {
+      return { ...state, uploaded_file: []};
+    }
     case 'ADD_LANGUAGE': {
       return { ...state, report_language: action.payload};
     }
