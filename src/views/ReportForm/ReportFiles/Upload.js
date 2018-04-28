@@ -45,7 +45,7 @@ class Upload extends Component {
   renderFileName() {
     if (this.props.reportFile.uploaded_file[0]) {
       return (
-        <FormGroup>
+        <FormGroup className="animated fadeIn">
           <span>{this.props.reportFile.uploaded_file[0].name}</span>
           <Button color="danger" size={'sm'} onClick={this.handleRemove} className="float-right">Remove</Button>
         </FormGroup>
