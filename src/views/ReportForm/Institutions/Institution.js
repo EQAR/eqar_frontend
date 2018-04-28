@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Row,
-  Col,
   FormGroup,
-  Input,
-  InputGroup,
-  Label,
-  Button} from 'reactstrap';
+  Label} from 'reactstrap';
 import { Async } from 'react-select';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
@@ -20,7 +15,6 @@ class Institution extends Component {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
     this.getOptions = this.getOptions.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       value: {}
@@ -28,18 +22,14 @@ class Institution extends Component {
   }
 
   handleSelect(institution) {
-    this.setState({
-      value: institution
-    });
-  }
-
-  handleClick(e) {
-    selectInstitution(this.state.value.value, this.props.reportForm.institutions);
-    this.setState({
-      value: {
-        value: {},
-        label: ''
-      }
+    this.setState({value: institution}, () => {
+      selectInstitution(this.state.value.value, this.props.reportForm.institutions)
+      this.setState({
+        value: {
+          value: {},
+          label: ''
+        }
+      });
     });
   }
 
@@ -64,10 +54,9 @@ class Institution extends Component {
           name="form-field-name2"
           value={this.state.value}
           loadOptions={this.getOptions}
+          clearable={false}
           onChange={this.handleSelect}
         />
-        <br/>
-        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add</Button>
       </FormGroup>
     )
   }

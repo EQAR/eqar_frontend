@@ -23,6 +23,7 @@ class Agency extends Component {
   handleInput(e) {
     formFill(e.target.value, e.target.id);
     getAgency(e.target[e.target.selectedIndex].id);
+    formFill(null, 'agencyActivity');
   }
 
   agencies() {

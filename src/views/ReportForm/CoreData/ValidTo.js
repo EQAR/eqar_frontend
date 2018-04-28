@@ -22,7 +22,7 @@ class ValidTo extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="reportValidTo" className="required-input">Valid to</Label>
+        <Label for="reportValidTo" >Valid to</Label>
         <Input type="date" name="date" id="reportValidTo" value={this.props.reportForm.validTo} onChange={this.handleInput} max={this.props.agency.valid_to}/>
       </FormGroup>
     )

@@ -21,14 +21,16 @@ class agencyActivity extends Component {
   }
 
   handleInput(e) {
-    formFill(e.target.value, e.target.id)
+    const selectedIndex = e.target.options.selectedIndex;
+    const optionKey = e.target.options[selectedIndex].getAttribute('data-key');
+    formFill(optionKey, e.target.id);
   }
 
   activities() {
     const agencyActivities = this.props.activities.activities.filter(activity => activity.agency === this.props.reportForm.agency);
     return agencyActivities.map(activity => {
       return (
-        <option key={activity.id}>{activity.activity}</option>
+        <option key={activity.id} data-key={activity.id}>{activity.id} - {activity.activity}</option>
       )
     })
   }
@@ -37,7 +39,7 @@ class agencyActivity extends Component {
     return (
       <FormGroup>
         <Label for="agencyActivity" className="required-input">Activity</Label>
-        <Input type="select" name="select" id="agencyActivity" value={this.props.reportForm.activity} onChange={this.handleInput}>
+        <Input type="select" name="select" id="agencyActivity" onChange={this.handleInput}>
           <option>Please select</option>
           {this.activities()}
         </Input>

@@ -22,13 +22,15 @@ class Status extends Component {
   }
 
   handleInput(e) {
-    formFill(e.target.value, e.target.id);
+    const selectedIndex = e.target.options.selectedIndex;
+    const optionKey = e.target.options[selectedIndex].getAttribute('data-key');
+    formFill(optionKey, e.target.id);
   }
 
   statuses() {
     return this.props.statuses.statuses.map(status => {
       return (
-        <option key={status.id}>{status.status}</option>
+        <option key={status.id} data-key={status.id}>{status.id} - {status.status}</option>
       )
     })
   }

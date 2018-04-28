@@ -22,13 +22,15 @@ class Decision extends Component {
   }
 
   handleInput(e) {
-    formFill(e.target.value, e.target.id);
+    const selectedIndex = e.target.options.selectedIndex;
+    const optionKey = e.target.options[selectedIndex].getAttribute('data-key');
+    formFill(optionKey, e.target.id);
   }
 
   decisions() {
     return this.props.decisions.decisions.map(decision => {
       return (
-        <option key={decision.id}>{decision.decision}</option>
+        <option key={decision.id} data-key={decision.id}>{decision.id} - {decision.decision}</option>
       );
     });
   }
