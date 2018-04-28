@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {
-  FormGroup,
-  Input,
-  Label } from 'reactstrap';
+  FormGroup, FormText,
+  Input, InputGroup,
+  Label
+} from 'reactstrap';
+import { TextMask, InputAdapter } from 'react-text-mask-hoc';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -22,8 +24,19 @@ class ValidTo extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="reportValidTo" >Valid to</Label>
-        <Input type="date" name="date" id="reportValidTo" value={this.props.reportForm.validTo} onChange={this.handleInput} max={this.props.agency.valid_to}/>
+        <Label for="reportValidTo">Valid from</Label>
+        <InputGroup>
+          <TextMask
+            mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            Component={InputAdapter}
+            id="reportValidTo"
+            onChange={this.handleInput}
+            min={this.props.agency.valid_to}
+            value={this.props.reportForm.validTo}
+            className="form-control"
+          />
+        </InputGroup>
+        <FormText color="muted">ex. 2018-01-25</FormText>
       </FormGroup>
     )
   }
