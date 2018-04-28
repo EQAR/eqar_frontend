@@ -90,7 +90,7 @@ class AlertModal extends Component {
       }
     }
     return (
-      <Modal isOpen={this.props.alert.alertDisplay} toggle={this.toggle} className="my-modal">
+      <Modal isOpen={this.props.alert.alertDisplay} toggle={this.toggle} >
         <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
         <ModalBody>
           <ListGroup>
