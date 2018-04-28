@@ -6,9 +6,6 @@ import sendFiles from './sendFiles';
 import lodash from 'lodash'
 
 
-function reportAjax(formDatas) {
-
-}
 
 function sendForm(formDatas) {
   const formRequest = clearReportRequest(formDatas);
@@ -19,7 +16,7 @@ function sendForm(formDatas) {
       store.dispatch({type: 'RESET_REPORT_FORM'});
       store.dispatch(push('/'));
     })
-    .catch(error => console.log(error.response));
+    .catch(error => console.log(error));
   })
   .catch(error => {
     store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: error.response.data.errors })
