@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
   FormGroup,
-  Input,
-  Label,
-  FormFeedback} from 'reactstrap';
+  InputGroup,
+  FormText,
+  Label} from 'reactstrap';
+import { TextMask, InputAdapter } from 'react-text-mask-hoc';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -24,7 +25,18 @@ class ValidFrom extends Component {
     return (
       <FormGroup>
         <Label for="reportValidFrom" className="required-input">Valid from</Label>
-        <Input type="date" name="date" value={this.props.reportForm.validFrom} id="reportValidFrom" onChange={this.handleInput} min={this.props.agency.valid_from}/>
+        <InputGroup>
+          <TextMask
+            mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            Component={InputAdapter}
+            id="reportValidFrom"
+            onChange={this.handleInput}
+            min={this.props.agency.valid_from}
+            value={this.props.reportForm.validFrom}
+            className="form-control"
+          />
+        </InputGroup>
+        <FormText color="muted">ex. 2018-01-15</FormText>
       </FormGroup>
     )
   }
