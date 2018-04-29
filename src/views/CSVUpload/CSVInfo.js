@@ -90,7 +90,7 @@ class CSVInfo extends Component {
     return (
       <dl className="animated fadeIn row">
         <dt className="col-sm-4">Report ID</dt>
-        <dd className="col-sm-8">N/A</dd>
+        <dd className="col-sm-8">{this.props.csvData.errorObject.report ? this.props.csvData.errorObject.report : 'N/A'}</dd>
         <dt className="col-sm-4">Submission status</dt>
         <dd className="col-sm-8">{this.props.csvData.errorObject.submission_status}</dd>
         <dt className="col-sm-4">Errors</dt>

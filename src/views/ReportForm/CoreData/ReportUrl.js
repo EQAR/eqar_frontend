@@ -64,16 +64,16 @@ class ReportUrl extends Component {
   }
 
   isAlert(index, key) {
-    if (!lodash.isEmpty(this.props.alert.errorMessage.report_links)) {
-      return this.props.alert.errorMessage.report_links[index][key] ? true : false;
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+      return this.props.message.errorMessage.report_links[index][key] ? true : false;
     } else {
       return false;
     }
   }
 
   getErrorMessage(index, key) {
-    if (!lodash.isEmpty(this.props.alert.errorMessage.report_links)) {
-      return this.props.alert.errorMessage.report_links[index][key];
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+      return this.props.message.errorMessage.report_links[index][key];
     }
   }
 
@@ -97,12 +97,12 @@ class ReportUrl extends Component {
           <FormGroup>
             <Label for="urlToReport">URL to page</Label>
             <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
-            <FormAlert isOpen={this.isAlert(i, 'link')} message={this.getErrorMessage(i, 'link')}/>
+            <FormAlert isOpen={this.isAlert(i, 'link')} alertMessage={this.getErrorMessage(i, 'link')}/>
           </FormGroup>
           <FormGroup>
             <Label for="textOfUrl">Display text for URL</Label>
             <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
-            <FormAlert isOpen={this.isAlert(i, 'link_display_name')} message={this.getErrorMessage(i, 'link_display_name')}/>
+            <FormAlert isOpen={this.isAlert(i, 'link_display_name')} alertMessage={this.getErrorMessage(i, 'link_display_name')}/>
           </FormGroup>
           {this.getButton(i)}
           {this.getHR()}

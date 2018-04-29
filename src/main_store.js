@@ -18,7 +18,7 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
-import alertReducer from './views/ReportForm/FormAlert/alertReducer';
+import messageReducer from './views/ReportForm/FormAlert/messageReducer';
 import csvReducer from "./views/CSVUpload/Reducers/csvReducer";
 
 
@@ -28,7 +28,7 @@ const reducers = combineReducers({
   activities: activityReducer,
   agencies: agenciesReducer,
   agency: agencyReducer,
-  alert: alertReducer,
+  message: messageReducer,
   countries: countriesReducer,
   dashboard: dashboardReducer,
   decisions: decisionReducer,

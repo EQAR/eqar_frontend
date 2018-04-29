@@ -34,10 +34,14 @@ class FileUpload extends Component {
     let columns = [{
       headerName: 'row',
       field: 'row_number'
-    }, {
-      headerName: 'report_id',
-      field: 'report_id'
     }];
+    console.log(result.meta.fields);
+    if(!result.meta.fields.includes('report_id')) {
+      columns.push({
+        headerName: 'report_id',
+        field: 'report_id'
+      })
+    }
     result.meta.fields.forEach(function(column) {
       columns.push({
         headerName: column,

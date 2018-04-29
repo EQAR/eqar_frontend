@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -10,20 +9,21 @@ import {
   ListGroupItemText,
   Button} from 'reactstrap';
 import { connect } from 'react-redux';
-import store from '../../main_store';
-import setStates from '../../state';
-import { toggleAlert } from './Actions/alertActions';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { toggleAlert } from '../Actions/alertActions';
 import lodash from 'lodash';
 
 
-class AlertModal extends Component {
+class ErrorMessage extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.getMessages = this.getMessages.bind(this);
+    this.getErrorMessages = this.getErrorMessages.bind(this);
     this.mapErrorMessage = this.mapErrorMessage.bind(this);
     this.concatErrors = this.concatErrors.bind(this);
     this.getKey = this.getKey.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
     this.errors = []
   }
 
@@ -62,8 +62,8 @@ class AlertModal extends Component {
     }
   }
 
-  getMessages() {
-    this.mapErrorMessage(this.props.alert.errorMessage, this.concatErrors)
+  getErrorMessages() {
+    this.mapErrorMessage(this.props.message.errorMessage, this.concatErrors)
     return this.errors.map((error, i) => {
       return (
         <ListGroupItem key={i}>
@@ -75,7 +75,7 @@ class AlertModal extends Component {
           </ListGroupItemText>
         </ListGroupItem>
       )
-    })
+    });
   }
 
   toggle() {
@@ -83,26 +83,31 @@ class AlertModal extends Component {
     toggleAlert()
   }
 
-  render() {
-    const messages = () => {
-      if (this.props.alert.alertDisplay) {
-        return this.getMessages();
-      }
+  renderErrors() {
+    if (this.props.message.error) {
+      return (
+        <div>
+          <ModalHeader toggle={this.toggle}>Some error occured!</ModalHeader>
+          <ModalBody>
+            <ListGroup>
+            {this.getErrorMessages()}
+            </ListGroup>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Close</Button>
+          </ModalFooter>
+        </div>
+      )
     }
+  }
+
+  render() {
     return (
-      <Modal isOpen={this.props.alert.alertDisplay} toggle={this.toggle} className="my-modal">
-        <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
-        <ModalBody>
-          <ListGroup>
-            {messages()}
-          </ListGroup>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.toggle}>Close</Button>
-        </ModalFooter>
-      </Modal>
+      <div>
+        {this.renderErrors()}
+      </div>
     )
   }
 }
 
-export default connect(setStates)(AlertModal);
+export default connect(setStates)(ErrorMessage);
