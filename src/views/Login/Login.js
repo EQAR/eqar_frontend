@@ -53,11 +53,8 @@ class Login extends Component {
                       <Input type="password" placeholder="Password" onKeyUp={this.handleLogin} onChange={this.setPassword} />
                     </InputGroup>
                     <Row>
-                      <Col xs="6">
+                      <Col xs="12">
                         <Button onClick={this.handleLogin} color="primary" className="px-4">Login</Button>
-                      </Col>
-                      <Col xs="6" className="text-right">
-                        <Button color="link" className="px-0">Forgot password?</Button>
                       </Col>
                     </Row>
                   </CardBody>

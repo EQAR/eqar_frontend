@@ -9,7 +9,8 @@ import {
   Button,
   Row,
   Col,
-  Label } from 'reactstrap';
+  Label, Collapse
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -27,6 +28,12 @@ class AlternativeNames extends Component {
     this.getButton = this.getButton.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.isQualification = this.isQualification.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      collapse: false,
+      fadeIn: true,
+      timeout: 300
+    };
   }
 
   handleClick() {
@@ -46,6 +53,14 @@ class AlternativeNames extends Component {
     : null;
   }
 
+  getHR() {
+    return this.props.programme.alternative_names.length > 1 ? <hr/> : null;
+  }
+
+  getToggleText() {
+    return this.state.collapse ? 'hide' : 'show'
+  }
+
   isQualification(index) {
     return lodash.isEmpty(this.props.programme.alternative_names[index].name_alternative);
   }
@@ -54,37 +69,44 @@ class AlternativeNames extends Component {
     return lodash.isEmpty(lodash.last(this.props.programme.alternative_names).name_alternative);
   }
 
+  toggle(e) {
+    e.preventDefault();
+    this.setState({collapse: !this.state.collapse});
+  }
+
   createNameCard() {
     return this.props.programme.alternative_names.map((alternative, i) => {
       return (
-        <Card key={i}>
-          <CardBody>
-            <FormGroup>
-              <Label for="alternativeName">Altenative programme name</Label>
-              <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
-            </FormGroup>
-            <FormGroup>
-              <Label for="alternativeQualification">Alternative qualification name</Label>
-              <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
-            </FormGroup>
-          </CardBody>
-          <CardFooter>
-              {this.getButton(i)}
-          </CardFooter>
-        </Card>
+        <div key={i}>
+          <FormGroup>
+            <Label for="alternativeName">Altenative programme name</Label>
+            <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="alternativeQualification">Alternative qualification name</Label>
+            <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
+          </FormGroup>
+          {this.getButton(i)}
+          {this.getHR()}
+        </div>
       )
     })
   }
 
   render() {
     return (
-      <Card>
+      <Card className={'subform'}>
         <CardHeader>
           Alternative Names/Qualifications
+          <div className={'pull-right'}>
+            (<a href="#" onClick={this.toggle}>{this.getToggleText()}</a>)
+          </div>
         </CardHeader>
-        <CardBody>
-          {this.createNameCard()}
-        </CardBody>
+        <Collapse isOpen={this.state.collapse}>
+          <CardBody>
+            {this.createNameCard()}
+          </CardBody>
+        </Collapse>
         <CardFooter>
           <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add more alternative name</Button>
         </CardFooter>

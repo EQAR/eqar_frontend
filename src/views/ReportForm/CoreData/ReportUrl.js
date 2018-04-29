@@ -7,8 +7,7 @@ import {
   CardHeader,
   CardFooter,
   Button,
-  Row,
-  Col,
+  Collapse,
   Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
@@ -30,6 +29,13 @@ class ReportUrl extends Component {
     this.getErrorMessage = this.getErrorMessage.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.isLink = this.isLink.bind(this);
+    this.getHR = this.getHR.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      collapse: false,
+      fadeIn: true,
+      timeout: 300
+    };
   }
 
   handleClick() {
@@ -47,6 +53,14 @@ class ReportUrl extends Component {
   getButton(index) {
     return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.handleRemove}>Remove</Button>
     : null;
+  }
+
+  getHR() {
+    return this.props.reportForm.report_links.length > 1 ? <hr/> : null;
+  }
+
+  getToggleText() {
+    return this.state.collapse ? 'hide' : 'show'
   }
 
   isAlert(index, key) {
@@ -71,39 +85,50 @@ class ReportUrl extends Component {
     return lodash.isEmpty(lodash.last(this.props.reportForm.report_links).link);
   }
 
+  toggle(e) {
+    e.preventDefault();
+    this.setState({collapse: !this.state.collapse});
+  }
+
   createLinkCard() {
     return this.props.reportForm.report_links.map((link, i) => {
       return (
-        <Card key={i}>
-          <CardHeader>
-            View report on agency website
-          </CardHeader>
-          <CardBody>
-            <FormGroup>
-              <Label for="urlToReport">URL to page</Label>
-              <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
-              <FormAlert isOpen={this.isAlert(i, 'link')} alertMessage={this.getErrorMessage(i, 'link')}/>
-            </FormGroup>
-            <FormGroup>
-              <Label for="textOfUrl">Display text for URL</Label>
-              <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
-              <FormAlert isOpen={this.isAlert(i, 'link_display_name')} alertMessage={this.getErrorMessage(i, 'link_display_name')}/>
-            </FormGroup>
-          </CardBody>
-          <CardFooter>
-              {this.getButton(i)}
-          </CardFooter>
-        </Card>
+        <div key={i}>
+          <FormGroup>
+            <Label for="urlToReport">URL to page</Label>
+            <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
+            <FormAlert isOpen={this.isAlert(i, 'link')} alertMessage={this.getErrorMessage(i, 'link')}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="textOfUrl">Display text for URL</Label>
+            <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
+            <FormAlert isOpen={this.isAlert(i, 'link_display_name')} alertMessage={this.getErrorMessage(i, 'link_display_name')}/>
+          </FormGroup>
+          {this.getButton(i)}
+          {this.getHR()}
+        </div>
       )
     })
   }
 
   render() {
     return (
-      <div>
-        {this.createLinkCard()}
-        <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add More Link</Button>
-      </div>
+      <Card className={'subform'}>
+        <CardHeader>
+          View report on agency website
+          <div className={'pull-right'}>
+            (<a href="#" onClick={this.toggle}>{this.getToggleText()}</a>)
+          </div>
+        </CardHeader>
+        <Collapse isOpen={this.state.collapse}>
+          <CardBody>
+            {this.createLinkCard()}
+          </CardBody>
+        </Collapse>
+        <CardFooter>
+          <Button color="primary" size={'sm'} onClick={this.handleClick} disabled={this.isDisabled()}>Add More Link</Button>
+        </CardFooter>
+      </Card>
     )
   }
 }

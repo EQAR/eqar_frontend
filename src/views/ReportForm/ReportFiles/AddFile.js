@@ -60,9 +60,9 @@ class AddFile extends Component {
         <Row>
           <Col>
             <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
-          </Col>
-          <Col>
-            <Button id="resetFile" size={'sm'} color="primary" onClick={ this.cancel } >Reset</Button>
+            <div className={'pull-right'}>
+              <Button id="resetFile" size={'sm'} color="danger" onClick={ this.cancel } >Reset</Button>
+            </div>
           </Col>
         </Row>
       )
