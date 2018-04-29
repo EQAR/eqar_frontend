@@ -18,7 +18,7 @@ class CSVGrid extends Component {
     this.state = {
       loading: false,
       response: []
-    }
+    };
   }
 
   loadingToggle() {
@@ -54,7 +54,11 @@ class CSVGrid extends Component {
       if(data.submission_status === 'success') {
         csvUpdate(idx, data.report);
       } else {
-        csvUpdate(idx, "");
+        if(data.report) {
+          csvUpdate(idx, data.report);
+        } else {
+          csvUpdate(idx, "");
+        }
       }
     })
   }
@@ -62,7 +66,7 @@ class CSVGrid extends Component {
   onButtonIngest() {
     this.loadingToggle();
     csvResultDisplay({infoMessage: "Data is being ingested..."});
-    axios.post('https://backend.deqar.eu/submissionapi/v1/submit/csv', this.gridApi.getDataAsCsv(), {
+    axios.post('http://127.0.0.1:8000/submissionapi/v1/submit/csv', this.gridApi.getDataAsCsv(), {
       headers: {'Content-Type': 'text/csv'}
     })
     .then(response => {
@@ -72,6 +76,7 @@ class CSVGrid extends Component {
       this.displayResults(response);
     })
     .catch(error => {
+      console.log(error);
       this.loadingToggle();
       toast.error("There was a problem with ingesting.");
     });
