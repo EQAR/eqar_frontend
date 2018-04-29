@@ -30,7 +30,6 @@ function messageReducer(state = {
     case 'SPINNER_STOP': {
       return {
         ...state,
-        messageDisplay: false,
         spinner: false
       };
     }

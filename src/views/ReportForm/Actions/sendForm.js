@@ -24,6 +24,7 @@ function sendForm(formDatas) {
     });
   })
   .catch(error => {
+    store.dispatch({type: 'SPINNER_STOP'})
     store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: error.response.data.errors })
   });
 }

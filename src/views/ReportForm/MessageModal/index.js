@@ -25,6 +25,7 @@ class MessageModal extends Component {
     this.mapErrorMessage = this.mapErrorMessage.bind(this);
     this.concatErrors = this.concatErrors.bind(this);
     this.getKey = this.getKey.bind(this);
+    this.getHeader = this.getHeader.bind(this);
     this.errors = []
   }
 
@@ -65,18 +66,22 @@ class MessageModal extends Component {
 
   getMessages() {
     this.mapErrorMessage(this.props.message.errorMessage, this.concatErrors)
-    return this.errors.map((error, i) => {
-      return (
-        <ListGroupItem key={i}>
-          <ListGroupItemHeading>
-            {error.inputField}
-          </ListGroupItemHeading>
-          <ListGroupItemText>
-            {error.message}
-          </ListGroupItemText>
-        </ListGroupItem>
-      )
-    })
+    return (
+      <ListGroup>
+        {this.errors.map((error, i) => {
+          return (
+            <ListGroupItem key={i}>
+              <ListGroupItemHeading>
+                {error.inputField}
+              </ListGroupItemHeading>
+              <ListGroupItemText>
+                {error.message}
+              </ListGroupItemText>
+            </ListGroupItem>
+          )
+        })}
+      </ListGroup>
+    )
   }
 
   getSpinner() {
@@ -89,6 +94,14 @@ class MessageModal extends Component {
         <div className="sk-rect sk-rect5"></div>
       </div>
     )
+  }
+
+  getHeader() {
+    if (this.props.message.messageDisplay && this.props.message.spinner) {
+      return 'Uploading';
+    } else if (this.props.message.messageDisplay) {
+      return 'Some error occured!';
+    }
   }
 
   toggle() {
@@ -106,11 +119,9 @@ class MessageModal extends Component {
     }
     return (
       <Modal isOpen={this.props.message.messageDisplay} toggle={this.toggle} >
-        <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
+        <ModalHeader toggle={this.toggle}>{this.getHeader()}</ModalHeader>
         <ModalBody>
-          <ListGroup>
             {messages()}
-          </ListGroup>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.toggle}>Close</Button>
