@@ -13,7 +13,7 @@ class FormAlert extends React.Component {
   render() {
     return (
       <Alert color="danger" isOpen={this.props.isOpen} >
-        {this.props.message}
+        {this.props.alertMessage}
       </Alert>
     );
   }
