@@ -18,6 +18,7 @@
 
 .info-box {
   height: 100%;
+  margin-bottom: 0px;
 }
 
 .required-input:after {
@@ -75,4 +76,12 @@
 
 .card .Select--multi {
   word-wrap: normal;
+}
+
+.subform .card-header {
+  background-color: #f0f3f540;
+}
+
+.subform .card-footer {
+  background-color: #f0f3f540;
 }
