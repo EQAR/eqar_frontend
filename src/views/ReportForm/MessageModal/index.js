@@ -10,13 +10,14 @@ import {
   ListGroupItemText,
   Button} from 'reactstrap';
 import { connect } from 'react-redux';
-import store from '../../main_store';
-import setStates from '../../state';
-import { toggleAlert } from './Actions/alertActions';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { toggleAlert } from '../Actions/alertActions';
 import lodash from 'lodash';
+import 'spinkit/css/spinkit.css';
 
 
-class AlertModal extends Component {
+class MessageModal extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -63,7 +64,7 @@ class AlertModal extends Component {
   }
 
   getMessages() {
-    this.mapErrorMessage(this.props.alert.errorMessage, this.concatErrors)
+    this.mapErrorMessage(this.props.message.errorMessage, this.concatErrors)
     return this.errors.map((error, i) => {
       return (
         <ListGroupItem key={i}>
@@ -78,6 +79,18 @@ class AlertModal extends Component {
     })
   }
 
+  getSpinner() {
+    return(
+      <div className="sk-wave">
+        <div className="sk-rect sk-rect1"></div>&nbsp;
+        <div className="sk-rect sk-rect2"></div>&nbsp;
+        <div className="sk-rect sk-rect3"></div>&nbsp;
+        <div className="sk-rect sk-rect4"></div>&nbsp;
+        <div className="sk-rect sk-rect5"></div>
+      </div>
+    )
+  }
+
   toggle() {
     this.errors = [];
     toggleAlert()
@@ -85,12 +98,14 @@ class AlertModal extends Component {
 
   render() {
     const messages = () => {
-      if (this.props.alert.alertDisplay) {
+      if (this.props.message.messageDisplay && this.props.message.spinner) {
+        return this.getSpinner();
+      } else if (this.props.message.messageDisplay) {
         return this.getMessages();
       }
     }
     return (
-      <Modal isOpen={this.props.alert.alertDisplay} toggle={this.toggle} >
+      <Modal isOpen={this.props.message.messageDisplay} toggle={this.toggle} >
         <ModalHeader toggle={this.toggle}>Error!</ModalHeader>
         <ModalBody>
           <ListGroup>
@@ -105,4 +120,4 @@ class AlertModal extends Component {
   }
 }
 
-export default connect(setStates)(AlertModal);
+export default connect(setStates)(MessageModal);

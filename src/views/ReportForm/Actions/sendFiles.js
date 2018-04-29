@@ -12,7 +12,7 @@ function sendFiles(formDatas, responseDatas) {
         if (file.file_original_location === '') {
           return new Promise((resolve, reject) => {
             const fileName = getFilename(file, formDatas, i);
-            axios.put(`https://backend.deqar.eu/submissionapi/v1/submit/reportfle/${file.id}/${fileName}`, formDatas[i].uploaded_file[0])
+            axios.put(`https://backend.deqar.eu/submissionapi/v1/submit/reportfile/${file.id}/${fileName}`, formDatas[i].uploaded_file[0])
             .then(response => {
               resolve(response)
             })
