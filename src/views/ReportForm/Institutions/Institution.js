@@ -17,19 +17,20 @@ class Institution extends Component {
     this.getOptions = this.getOptions.bind(this);
     this.isDisabled = this.isDisabled.bind(this);
     this.state = {
-      value: {}
+      value: {},
+      label: ''
     }
   }
 
   handleSelect(institution) {
-    this.setState({value: institution}, () => {
-      selectInstitution(this.state.value.value, this.props.reportForm.institutions)
-      this.setState({
-        value: {
-          value: {},
-          label: ''
-        }
-      });
+    if(institution){
+      selectInstitution(institution.value, this.props.reportForm.institutions);
+    }
+    this.setState({
+      value: {
+        value: {},
+        label: ''
+      }
     });
   }
 
