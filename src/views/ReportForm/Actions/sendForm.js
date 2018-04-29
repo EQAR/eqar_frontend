@@ -1,31 +1,34 @@
 import axios from 'axios';
 import store from '../../../main_store';
-import { push } from 'redux-first-routing';
 import { clearReportRequest } from './clearReportRequest';
 import sendFiles from './sendFiles';
 import lodash from 'lodash'
 
 
-
-function sendForm(formDatas) {
+export default function sendForm(formDatas) {
   const formRequest = clearReportRequest(formDatas);
   store.dispatch({type: 'SPINNER_START'});
   axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formRequest, { headers: {'Content-Type': 'application/json'}})
   .then(response => {
+    let warnings = getWarnings(response.data);
     Promise.all(sendFiles(formDatas.report_files, response.data))
     .then(response => {
       store.dispatch({type: 'SPINNER_STOP'});
-      store.dispatch({type: 'RESET_REPORT_FORM'});
-      store.dispatch(push('/'));
+      store.dispatch({type: 'UPLOAD_FINISH', payload: warnings});
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
+      store.dispatch({type: 'RESET_MESSAGE'});
       console.log(error);
     });
   })
   .catch(error => {
-    store.dispatch({type: 'CHANGE_ALERT', alertDisplay: true, errorMessage: error.response.data.errors })
+    store.dispatch({type: 'SPINNER_STOP'})
+    store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: error.response.data.errors })
   });
 }
 
-export default sendForm;
+function getWarnings(response) {
+  let warnings = response.report_warnings.filter(element => element !== 'File location was not provided.')
+  return lodash.concat(warnings, response.institution_warnings);
+}

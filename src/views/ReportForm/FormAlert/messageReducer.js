@@ -1,23 +1,33 @@
-function messageReducer(state = {
+import { composeResetReducer } from 'redux-reset-store';
+import lodash from 'lodash';
+
+
+const initialState = {
   messageDisplay: false,
   spinner: false,
-  errorMessage: {
+  error: false,
+  warning: false,
+  errorMessage  : {
     report_links: [],
     programmes: []
-  }
-}, action) {
+  },
+  warningMessages: []
+}
+
+const messageReducer = composeResetReducer(function messageReducer(state = lodash.cloneDeep(initialState), action) {
   switch (action.type) {
-    case 'CHANGE_ALERT': {
+    case 'CHANGE_ERROR': {
       return {
         ...state,
-        messageDisplay: action.alertDisplay,
+        error: action.error,
         errorMessage: action.errorMessage
       };
     }
-    case 'TOGGLE_ALERT': {
+    case 'TOGGLE_ERROR': {
       return {
         ...state,
-        messageDisplay: action.payload
+        messageDisplay: action.payload,
+        error: action.payload
       };
     }
     case 'SPINNER_START': {
@@ -30,12 +40,18 @@ function messageReducer(state = {
     case 'SPINNER_STOP': {
       return {
         ...state,
-        messageDisplay: false,
         spinner: false
       };
     }
+    case 'UPLOAD_FINISH': {
+      return {
+        ...state,
+        warning: true,
+        warningMessages: action.payload
+      }
+    }
     default: return { ...state };
   }
-}
+}, initialState, 'RESET_MESSAGE');
 
 export default messageReducer;
