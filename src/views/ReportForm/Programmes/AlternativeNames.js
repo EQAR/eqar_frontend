@@ -70,7 +70,6 @@ class AlternativeNames extends Component {
   }
 
   toggle(e) {
-    e.preventDefault();
     this.setState({collapse: !this.state.collapse});
   }
 
@@ -98,8 +97,8 @@ class AlternativeNames extends Component {
       <Card className={'subform'}>
         <CardHeader>
           Alternative Names/Qualifications
-          <div className={'pull-right'}>
-            (<a href="#" onClick={this.toggle}>{this.getToggleText()}</a>)
+          <div className="pull-right">
+            (<Button color="link" onClick={this.toggle} className="link-button">{this.getToggleText()}</Button>)
           </div>
         </CardHeader>
         <Collapse isOpen={this.state.collapse}>

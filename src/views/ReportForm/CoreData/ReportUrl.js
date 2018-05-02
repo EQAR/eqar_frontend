@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
   FormGroup,
+  Row,
+  Col,
   Input,
   Card,
   CardBody,
@@ -13,6 +15,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
+import { removeLinkErrorMessage } from '../Actions/alertActions';
 import FormAlert from '../FormAlert';
 import lodash from 'lodash';
 
@@ -48,6 +51,7 @@ class ReportUrl extends Component {
 
   handleRemove(e) {
     removeLink(e.target.id, this.props.reportForm.report_links);
+    removeLinkErrorMessage(e.target.id, this.props.message.errorMessage);
   }
 
   getButton(index) {
@@ -64,7 +68,8 @@ class ReportUrl extends Component {
   }
 
   isAlert(index, key) {
-    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links) &&
+        this.props.message.errorMessage.report_links[index]) {
       return this.props.message.errorMessage.report_links[index][key] ? true : false;
     } else {
       return false;
@@ -72,7 +77,8 @@ class ReportUrl extends Component {
   }
 
   getErrorMessage(index, key) {
-    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links) &&
+        this.props.message.errorMessage.report_links[index]) {
       return this.props.message.errorMessage.report_links[index][key];
     }
   }
@@ -86,7 +92,6 @@ class ReportUrl extends Component {
   }
 
   toggle(e) {
-    e.preventDefault();
     this.setState({collapse: !this.state.collapse});
   }
 
@@ -96,12 +101,12 @@ class ReportUrl extends Component {
         <div key={i}>
           <FormGroup>
             <Label for="urlToReport">URL to page</Label>
-            <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
+            <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.link}/>
             <FormAlert isOpen={this.isAlert(i, 'link')} alertMessage={this.getErrorMessage(i, 'link')}/>
           </FormGroup>
           <FormGroup>
             <Label for="textOfUrl">Display text for URL</Label>
-            <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
+            <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)} value={link.link_display_name}/>
             <FormAlert isOpen={this.isAlert(i, 'link_display_name')} alertMessage={this.getErrorMessage(i, 'link_display_name')}/>
           </FormGroup>
           {this.getButton(i)}
@@ -116,8 +121,8 @@ class ReportUrl extends Component {
       <Card className={'subform'}>
         <CardHeader>
           View report on agency website
-          <div className={'pull-right'}>
-            (<a href="#" onClick={this.toggle}>{this.getToggleText()}</a>)
+          <div className="pull-right">
+            (<Button color="link" onClick={this.toggle} className="link-button">{this.getToggleText()}</Button>)
           </div>
         </CardHeader>
         <Collapse isOpen={this.state.collapse}>

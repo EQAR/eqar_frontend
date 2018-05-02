@@ -53,9 +53,9 @@ class AddProgramme extends Component {
         <Row>
           <Col>
             <Button id="addFile" size={'sm'} color="primary" onClick={ this.addProgramme } disabled={this.isDisabled()}>Add Programme ></Button>
-            <div className={'pull-right'}>
-              <Button id="resetFile" size={'sm'} color="danger" onClick={ this.cancel } >Reset</Button>
-            </div>
+          </Col>
+          <Col>
+            <Button id="resetFile" size={'sm'} color="danger" onClick={ this.cancel } className="float-right">Reset</Button>
           </Col>
         </Row>
       )
