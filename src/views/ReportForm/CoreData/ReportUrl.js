@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
+import { removeLinkErrorMessage } from '../Actions/alertActions';
 import FormAlert from '../FormAlert';
 import lodash from 'lodash';
 
@@ -50,6 +51,7 @@ class ReportUrl extends Component {
 
   handleRemove(e) {
     removeLink(e.target.id, this.props.reportForm.report_links);
+    removeLinkErrorMessage(e.target.id, this.props.message.errorMessage);
   }
 
   getButton(index) {

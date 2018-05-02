@@ -23,6 +23,12 @@ const messageReducer = composeResetReducer(function messageReducer(state = lodas
         errorMessage: action.errorMessage
       };
     }
+    case 'REMOVE_ERROR_MESSAGE': {
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
+    }
     case 'TOGGLE_ERROR': {
       return {
         ...state,
