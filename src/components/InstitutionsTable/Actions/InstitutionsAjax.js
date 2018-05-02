@@ -6,7 +6,7 @@ let country = null;
 
 function InstitutionsRequest(params) {
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/adminapi/v1/select/institutions', {params: params}).then((response) => {
+    axios.get('https://backend.deqar.eu/adminapi/v1/select/institutions/', {params: params}).then((response) => {
       dispatch({ type: 'GET_INSTITUTIONS', payload: response.data});
     });
   });
