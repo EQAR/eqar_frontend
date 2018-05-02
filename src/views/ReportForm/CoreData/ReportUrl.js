@@ -118,14 +118,10 @@ class ReportUrl extends Component {
     return (
       <Card className={'subform'}>
         <CardHeader>
-          <Row>
-            <Col xs="auto">
-              View report on agency website
-            </Col>
-            <Col>
-              (<Button color="link" onClick={this.toggle} className="float-right">({this.getToggleText()})</Button>)
-            </Col>
-          </Row>
+          View report on agency website
+          <div className="pull-right">
+            (<Button color="link" onClick={this.toggle} className="link-button">{this.getToggleText()}</Button>)
+          </div>
         </CardHeader>
         <Collapse isOpen={this.state.collapse}>
           <CardBody>

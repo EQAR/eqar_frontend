@@ -51,7 +51,7 @@ class AddFile extends Component {
             <Button id={this.props.reportFile.file_index} size={'sm'} color="warning" onClick={ this.addEditedFile } disabled={this.isDisabled()}>Save File ></Button>
           </Col>
           <Col>
-            <Button id="cancelFile" size={'sm'} color="warning" onClick={ this.cancel } >Cancel</Button>
+            <Button id="cancelFile" size={'sm'} color="warning" onClick={ this.cancel } className="pull-right" >Cancel</Button>
           </Col>
         </Row>
       )
@@ -62,7 +62,7 @@ class AddFile extends Component {
             <Button id="addFile" size={'sm'} color="primary" onClick={ this.addFile } disabled={this.isDisabled()}>Add File ></Button>
             </Col>
             <Col>
-              <Button id="resetFile" size={'sm'} color="danger" onClick={ this.cancel } className="float-right" >Reset</Button>
+              <Button id="resetFile" size={'sm'} color="danger" onClick={ this.cancel } className="pull-right" >Reset</Button>
             </Col>
         </Row>
       )
