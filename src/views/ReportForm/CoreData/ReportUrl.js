@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
   FormGroup,
+  Row,
+  Col,
   Input,
   Card,
   CardBody,
@@ -88,7 +90,6 @@ class ReportUrl extends Component {
   }
 
   toggle(e) {
-    e.preventDefault();
     this.setState({collapse: !this.state.collapse});
   }
 
@@ -98,12 +99,12 @@ class ReportUrl extends Component {
         <div key={i}>
           <FormGroup>
             <Label for="urlToReport">URL to page</Label>
-            <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)}/>
+            <Input type="text" name="urlToReport" id="link" placeholder="Enter URL to page of report" onChange={this.handleInput.bind(null, i)} value={link.link}/>
             <FormAlert isOpen={this.isAlert(i, 'link')} alertMessage={this.getErrorMessage(i, 'link')}/>
           </FormGroup>
           <FormGroup>
             <Label for="textOfUrl">Display text for URL</Label>
-            <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)}/>
+            <Input type="text" name="textOfUrl" id="link_display_name" placeholder="Enter display text for URL" onChange={this.handleInput.bind(null, i)} disabled={this.isLink(i)} value={link.link_display_name}/>
             <FormAlert isOpen={this.isAlert(i, 'link_display_name')} alertMessage={this.getErrorMessage(i, 'link_display_name')}/>
           </FormGroup>
           {this.getButton(i)}
@@ -117,10 +118,14 @@ class ReportUrl extends Component {
     return (
       <Card className={'subform'}>
         <CardHeader>
-          View report on agency website
-          <div className={'pull-right'}>
-            (<a href="#" onClick={this.toggle}>{this.getToggleText()}</a>)
-          </div>
+          <Row>
+            <Col xs="auto">
+              View report on agency website
+            </Col>
+            <Col>
+              (<Button color="link" onClick={this.toggle} className="float-right">({this.getToggleText()})</Button>)
+            </Col>
+          </Row>
         </CardHeader>
         <Collapse isOpen={this.state.collapse}>
           <CardBody>
