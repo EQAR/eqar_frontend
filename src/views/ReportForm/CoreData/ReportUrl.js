@@ -64,7 +64,8 @@ class ReportUrl extends Component {
   }
 
   isAlert(index, key) {
-    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links) &&
+        this.props.message.errorMessage.report_links[index]) {
       return this.props.message.errorMessage.report_links[index][key] ? true : false;
     } else {
       return false;
@@ -72,7 +73,8 @@ class ReportUrl extends Component {
   }
 
   getErrorMessage(index, key) {
-    if (!lodash.isEmpty(this.props.message.errorMessage.report_links)) {
+    if (!lodash.isEmpty(this.props.message.errorMessage.report_links) &&
+        this.props.message.errorMessage.report_links[index]) {
       return this.props.message.errorMessage.report_links[index][key];
     }
   }
