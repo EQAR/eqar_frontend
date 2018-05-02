@@ -17,7 +17,7 @@ export function removeUploadedFile() {
 
 export function languagesAjax() {
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/adminapi/v1/select/language').then((response) => {
+    axios.get('https://backend.deqar.eu/adminapi/v1/select/language/').then((response) => {
       dispatch({ type: 'GET_LANGUAGES', payload: response.data});
     });
   });
