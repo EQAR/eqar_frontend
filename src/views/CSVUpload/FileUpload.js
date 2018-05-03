@@ -17,7 +17,6 @@ class FileUpload extends Component {
 
   updateData(result) {
     if(result.errors.length > 0) {
-      console.log(result.errors);
     } else {
       csvSet(this.createColumns(result), this.createData(result.data));
     }
@@ -35,7 +34,6 @@ class FileUpload extends Component {
       headerName: 'row',
       field: 'row_number'
     }];
-    console.log(result.meta.fields);
     if(!result.meta.fields.includes('report_id')) {
       columns.push({
         headerName: 'report_id',

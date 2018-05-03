@@ -97,7 +97,6 @@ class ChangeEmailForm extends Component {
 
   handleSubmit(value, e, formApi) {
     this.loadingToggle();
-    console.log(value);
     axios.post('https://backend.deqar.eu/accounts/change_email/', value)
     .then( response => {
       this.loadingToggle();
