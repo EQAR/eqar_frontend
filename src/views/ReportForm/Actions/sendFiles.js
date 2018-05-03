@@ -30,7 +30,7 @@ function sendFiles(formDatas, responseDatas) {
 }
 
 function getFilename(file, formDatas, i) {
-  return file.file_display_name !== '' ? file.file_display_name : formDatas[i].uploaded_file[0].name;
+  return formDatas[i].uploaded_file[0].name;
 }
 
 export default sendFiles;

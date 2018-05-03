@@ -5,7 +5,7 @@ export const WEBAPI_URL = BACKEND_DOMAIN + '/webapi/v1';
 
 export const GET_BADGES = ADMINAPI_URL + '/dashboard/badges/';
 export const GET_REPORTS = ADMINAPI_URL + '/reports_by_agency/';
-export const GET_COUNTRIES = ADMINAPI_URL + '/select/country/';
+export const GET_COUNTRIES = ADMINAPI_URL + '/select/institutions/country/';
 export const GET_INSTITUTIONS = ADMINAPI_URL + '/select/institutions/';
 export const GET_AGENCIES = ADMINAPI_URL + '/select/agency/';
 export const GET_STATUSES = ADMINAPI_URL + '/select/report_status/';
