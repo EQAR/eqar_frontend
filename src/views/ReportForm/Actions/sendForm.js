@@ -2,13 +2,15 @@ import axios from 'axios';
 import store from '../../../main_store';
 import { clearReportRequest } from './clearReportRequest';
 import sendFiles from './sendFiles';
-import lodash from 'lodash'
+import lodash from 'lodash';
+import { POST_REPORT } from '../../../config';
+
 
 
 export default function sendForm(formDatas) {
   const formRequest = clearReportRequest(formDatas);
   store.dispatch({type: 'SPINNER_START'});
-  axios.post('https://backend.deqar.eu/submissionapi/v1/submit/report', formRequest, { headers: {'Content-Type': 'application/json'}})
+  axios.post(POST_REPORT, formRequest, { headers: {'Content-Type': 'application/json'}})
   .then(response => {
     let warnings = getWarnings(response.data);
     Promise.all(sendFiles(formDatas.report_files, response.data))
