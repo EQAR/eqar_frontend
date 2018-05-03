@@ -67,7 +67,6 @@ class ReportForm extends Component {
       reprtFormState.status === '' ||
       reprtFormState.decision === '' ||
       reprtFormState.valid_from === '' ||
-      reprtFormState.valid_to === '' ||
       reprtFormState.institutions.length === 0;
     return disabled;
   }
