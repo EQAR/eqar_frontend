@@ -45,7 +45,7 @@ class ValidTo extends Component {
   render() {
     return (
       <FormGroup>
-        <Label for="reportValidTo" className="required-input">Valid to</Label>
+        <Label for="reportValidTo" >Valid to</Label>
         <InputGroup>
           <MaskedInput
             mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
