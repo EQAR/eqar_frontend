@@ -30,7 +30,7 @@ export function getDecisions() {
 
 export function getAgency(agencyId) {
   store.dispatch((dispatch) => {
-    axios.get(GET_AGENCY + agencyId).then((response) => {
+    axios.get(GET_AGENCY + agencyId + '/').then((response) => {
       dispatch({ type: 'GET_AGENCY', payload: response.data });
     });
   });

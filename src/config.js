@@ -1,4 +1,4 @@
-import { BACKEND_DOMAIN } from './domainConfig'
+import { BACKEND_DOMAIN } from './domainConfig';
 
 
 export const ADMINAPI_URL = BACKEND_DOMAIN + '/adminapi/v1';
@@ -14,7 +14,7 @@ export const GET_STATUSES = ADMINAPI_URL + '/select/report_status/';
 export const GET_DECISIONS = ADMINAPI_URL + '/select/report_decision/';
 export const GET_ACTIVITIES = ADMINAPI_URL + '/select/agency_esg_activity/';
 export const GET_QFEHEA_LEVELS = ADMINAPI_URL + '/select/qf_ehea_level/';
-export const GET_LANGUAGES = ADMINAPI_URL + '/select/language';
+export const GET_LANGUAGES = ADMINAPI_URL + '/select/language/';
 
 export const GET_AGENCY = WEBAPI_URL + '/browse/agencies/';
 
