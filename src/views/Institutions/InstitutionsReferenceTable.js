@@ -56,7 +56,7 @@ class InstitutionsReferenceTable extends Component {
   };
 
   onFilterChange(filterConds) {
-    let param = {}
+    let param = {};
 
     if (filterConds.countries) {
       let countryFilterValue = filterConds.countries.value;

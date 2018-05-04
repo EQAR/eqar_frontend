@@ -21,7 +21,6 @@ export default function sendForm(formDatas) {
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
       store.dispatch({type: 'RESET_MESSAGE'});
-      console.log(error);
     });
   })
   .catch(error => {

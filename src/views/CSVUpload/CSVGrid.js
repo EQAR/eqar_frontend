@@ -77,7 +77,6 @@ class CSVGrid extends Component {
       this.displayResults(response);
     })
     .catch(error => {
-      console.log(error);
       this.loadingToggle();
       toast.error("There was a problem with ingesting.");
     });
