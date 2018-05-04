@@ -27,4 +27,4 @@ export const POST_EMAIL = BACKEND_DOMAIN + '/accounts/change_email/';
 
 export const POST_REPORT = SUBMISSIONAPI_URL + '/submit/report';
 export const POST_FILE = SUBMISSIONAPI_URL + '/submit/reportfile';
-export const POST_CSV = SUBMISSIONAPI_URL + 'submit/csv';
+export const POST_CSV = SUBMISSIONAPI_URL + '/submit/csv';
