@@ -1,4 +1,6 @@
-export const BACKEND_DOMAIN = 'https://backend.deqar.eu';
+import { BACKEND_DOMAIN } from './domainConfig'
+
+
 export const ADMINAPI_URL = BACKEND_DOMAIN + '/adminapi/v1';
 export const SUBMISSIONAPI_URL = BACKEND_DOMAIN + '/submissionapi/v1';
 export const WEBAPI_URL = BACKEND_DOMAIN + '/webapi/v1';
