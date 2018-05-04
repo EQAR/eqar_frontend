@@ -10,7 +10,7 @@ function getReports(limit=null, offset=null) {
   };
 
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/adminapi/v1/reports_by_agency', {params: params})
+    axios.get(GET_REPORTS, {params: params})
       .then((response) => {
         dispatch({ type: 'GET_REPORTS', payload: response.data});
       });

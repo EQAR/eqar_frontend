@@ -1,10 +1,10 @@
 import axios from 'axios';
 import store from '../../../main_store';
-import { GET_COUNTRIES } from '../../../config';
+import { GET_INSTITUTION_COUNTRIES } from '../../../config';
 
 function countriesAjax() {
   store.dispatch((dispatch) => {
-    axios.get(GET_COUNTRIES).then((response) => {
+    axios.get(GET_INSTITUTION_COUNTRIES).then((response) => {
       dispatch({ type: 'GET_COUNTRIES', payload: response.data});
     });
   });

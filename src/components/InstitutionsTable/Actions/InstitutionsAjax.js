@@ -1,12 +1,13 @@
 import axios from 'axios';
 import store from '../../../main_store';
+import GET_INSTITUTIONS from '../../../config';
 
 let query = '';
 let country = null;
 
 function InstitutionsRequest(params) {
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/adminapi/v1/select/institutions', {params: params}).then((response) => {
+    axios.get(GET_INSTITUTIONS, {params: params}).then((response) => {
       dispatch({ type: 'GET_INSTITUTIONS', payload: response.data});
     });
   });
