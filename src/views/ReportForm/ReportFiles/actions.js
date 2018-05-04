@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '../../../main_store';
+import {GET_LANGUAGES} from '../../../config';
 import getType from './types.js';
 
 
@@ -17,7 +18,7 @@ export function removeUploadedFile() {
 
 export function languagesAjax() {
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/adminapi/v1/select/language/').then((response) => {
+    axios.get(GET_LANGUAGES).then((response) => {
       dispatch({ type: 'GET_LANGUAGES', payload: response.data});
     });
   });

@@ -13,6 +13,8 @@ import Yup from 'yup'
 import axios from "axios/index";
 import { toast } from 'react-toastify';
 import TextInput from "../../components/FormComponents/TextInput";
+import { POST_PASSWORD } from '../../config';
+
 
 /* Validation */
 function equalTo(ref, msg) {
@@ -44,7 +46,7 @@ const initialValues = {
 };
 
 const onSubmit = (values, { resetForm, setErrors, setStatus, setSubmitting}) => {
-  return axios.post('https://backend.deqar.eu/auth/password/', values)
+  return axios.post(POST_PASSWORD, values)
     .then(function (response) {
       toast.success("Password has been updated!");
       resetForm();

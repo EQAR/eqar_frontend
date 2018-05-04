@@ -63,11 +63,9 @@ class ReportForm extends Component {
     const disabled =
       reprtFormState.agency === '' ||
       reprtFormState.activity === '' ||
-      reprtFormState.local_identifier === '' ||
       reprtFormState.status === '' ||
       reprtFormState.decision === '' ||
       reprtFormState.valid_from === '' ||
-      reprtFormState.valid_to === '' ||
       reprtFormState.institutions.length === 0;
     return disabled;
   }

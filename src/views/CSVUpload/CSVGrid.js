@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import setStates from "../../state";
 import axios from 'axios';
+import POST_CSV from "../../config";
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham.css';
@@ -66,7 +67,7 @@ class CSVGrid extends Component {
   onButtonIngest() {
     this.loadingToggle();
     csvResultDisplay({infoMessage: "Data is being ingested..."});
-    axios.post('https://backend.deqar.eu/submissionapi/v1/submit/csv', this.gridApi.getDataAsCsv(), {
+    axios.post(POST_CSV, this.gridApi.getDataAsCsv(), {
       headers: {'Content-Type': 'text/csv'}
     })
     .then(response => {

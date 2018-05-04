@@ -1,12 +1,13 @@
 import { push } from 'redux-first-routing';
 import axios from 'axios';
 import store from '../../../main_store';
+import { GET_TOKEN } from '../../../config';
 
 
 function loginUser(username, password) {
 
   store.dispatch((dispatch) => {
-    axios.post('https://backend.deqar.eu/accounts/get_token/', {
+    axios.post(GET_TOKEN, {
       username: username,
       password: password,
     }).then((response) => {

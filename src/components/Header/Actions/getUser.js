@@ -1,10 +1,12 @@
 import axios from 'axios';
 import store from '../../../main_store';
+import { GET_USER } from '../../../config';
+
 
 function getUser() {
 
   store.dispatch((dispatch) => {
-    axios.get('https://backend.deqar.eu/auth/me/').then((response) => {
+    axios.get(GET_USER).then((response) => {
       dispatch({ type: 'GET_USER', payload: response.data});
     });
   });

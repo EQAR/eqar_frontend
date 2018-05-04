@@ -11,10 +11,10 @@ import {
 import { Form, Text } from 'react-form';
 import LaddaButton, {EXPAND_RIGHT} from "react-ladda";
 import { toast } from 'react-toastify';
-
 import 'ladda/dist/ladda-themeless.min.css';
 import axios from "axios/index";
 import getUser from "../../components/Header/Actions/getUser";
+import { POST_EMAIL } from '../../config';
 
 
 class ChangeEmailForm extends Component {
@@ -97,7 +97,7 @@ class ChangeEmailForm extends Component {
 
   handleSubmit(value, e, formApi) {
     this.loadingToggle();
-    axios.post('https://backend.deqar.eu/accounts/change_email/', value)
+    axios.post(POST_EMAIL, value)
     .then( response => {
       this.loadingToggle();
       toast.success("Email has been updated!");

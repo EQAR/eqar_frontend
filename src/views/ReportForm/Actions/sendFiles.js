@@ -3,6 +3,7 @@ import store from '../../../main_store';
 import { push } from 'redux-first-routing';
 import { clearReportRequest } from './clearReportRequest';
 import lodash from 'lodash';
+import { POST_FILE } from '../../../config';
 
 
 function sendFiles(formDatas, responseDatas) {
@@ -12,7 +13,7 @@ function sendFiles(formDatas, responseDatas) {
         if (file.file_original_location === '') {
           return new Promise((resolve, reject) => {
             const fileName = getFilename(file, formDatas, i);
-            axios.put(`https://backend.deqar.eu/submissionapi/v1/submit/reportfile/${file.id}/${fileName}`, formDatas[i].uploaded_file[0])
+            axios.put(`${POST_FILE}/${file.id}/${fileName}`, formDatas[i].uploaded_file[0])
             .then(response => {
               resolve(response)
             })
