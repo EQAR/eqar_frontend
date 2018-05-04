@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../../../main_store';
-import GET_INSTITUTIONS from '../../../config';
+import { GET_INSTITUTIONS } from '../../../config';
 
 let query = '';
 let country = null;
