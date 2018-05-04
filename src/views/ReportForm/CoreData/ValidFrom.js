@@ -54,8 +54,6 @@ class ValidFrom extends Component {
     return (
       <FormGroup>
         <Label for="reportValidFrom" className="required-input">Valid from</Label>
-        <FormText color="muted">{"Agency's registration date: " + this.props.agency.valid_from}</FormText>
-        <FormText color="muted">{"Agency's registration end date: " + this.props.agency.valid_to}</FormText>
         <InputGroup>
           <MaskedInput
             mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}

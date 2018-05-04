@@ -21,17 +21,18 @@ class ValidTo extends Component {
     super(props);
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
     this.state = {
       isAlert: false,
       errorMessage: ','
     }
   }
   handleBlur(e) {
-    if (e.target.value < this.props.agency.valid_from && e.target.value !== '') {
+    if (e.target.value < this.props.reportForm.valid_from && e.target.value !== '') {
       formFill('', e.target.id);
       this.setState({
         isAlert: true,
-        errorMessage: 'The given date is earlier than the agency\'s registration date!'
+        errorMessage: 'The given date is earlier than the report\'s validation start date!'
       });
     }
   }
@@ -41,12 +42,17 @@ class ValidTo extends Component {
     formFill(e.target.value, e.target.id);
   }
 
+  isDisabled(index) {
+    return this.props.reportForm.valid_from === '';
+  }
+
   render() {
     return (
       <FormGroup>
         <Label for="reportValidTo" >Valid to</Label>
         <InputGroup>
           <MaskedInput
+            disabled={this.isDisabled()}
             mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
             id="reportValidTo"
             onChange={this.handleInput}
