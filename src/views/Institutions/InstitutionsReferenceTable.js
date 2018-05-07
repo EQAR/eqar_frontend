@@ -5,7 +5,7 @@ import store from '../../main_store';
 import setStates from '../../state';
 import { InstitutionsRequest } from './Actions/InstitutionsAjax';
 import { selectInstitution, removeInstitution } from './Actions/selectInstitution';
-import countriesAjax from './Actions/countriesAjax';
+import { getInstituionCountries } from '../services/countries/actions';
 import { Button } from 'reactstrap';
 
 class InstitutionsReferenceTable extends Component {
@@ -50,7 +50,7 @@ class InstitutionsReferenceTable extends Component {
 
   componentDidMount(){
     InstitutionsRequest();
-    countriesAjax();
+    getInstituionCountries();
   }
 
   onSortChange(sortName, sortOrder) {

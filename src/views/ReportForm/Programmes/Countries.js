@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { programmeForm, addCountry } from './actions';
-import countriesAjax from '../../../components/InstitutionsTable/Actions/countriesAjax.js';
+import { getCountries } from '../../services/countries/actions.js';
 
 
 
@@ -16,12 +16,12 @@ class Countries extends Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
-    this.getCountries = this.getCountries.bind(this);
+    this.countries = this.countries.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
 
   componentDidMount() {
-    countriesAjax();
+    getCountries();
   }
 
   handleInput(e) {
@@ -32,7 +32,7 @@ class Countries extends Component {
     addCountry(value)
   }
 
-  getCountries() {
+  countries() {
     return this.props.countries.countries.map((country) => {
       return {
         value: country.iso_3166_alpha2,
@@ -49,7 +49,7 @@ class Countries extends Component {
           id="countries"
           name="form-field-name2"
           value={this.props.programme.countries}
-          options={this.getCountries()}
+          options={this.countries()}
           onChange={this.saveChanges}
           multi
         />
