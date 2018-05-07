@@ -3,9 +3,8 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../main_store';
 import setStates from '../../state';
-import {
-  InstitutionsRequest
-} from './Actions/InstitutionsAjax';
+import { InstitutionsRequest } from './Actions/InstitutionsAjax';
+import { selectInstitution, removeInstitution } from './Actions/selectInstitution';
 import countriesAjax from './Actions/countriesAjax';
 import { Button } from 'reactstrap';
 
@@ -22,6 +21,31 @@ class InstitutionsReferenceTable extends Component {
       onSortChange: this.onSortChange.bind(this),
       sizePerPageList: [ 5, 10, 20 ]
     };
+    this.state = {
+      select: {}
+    }
+  }
+
+  componentWillMount() {
+    this.props.isSelect ?
+      this.setState( {
+        select: {
+          mode: 'checkbox',
+          clickToSelect: true,
+          onSelect: this.onRowSelect.bind(this)
+        }
+      }) :
+      this.setState( {
+        select: {}
+      })
+  }
+
+  onRowSelect(row, isSelected){
+    if (isSelected) {
+      selectInstitution(row, this.props.reportForm.institutions);
+    } else {
+      removeInstitution(row, this.props.reportForm.institutions);
+    }
   }
 
   componentDidMount(){
@@ -119,8 +143,7 @@ class InstitutionsReferenceTable extends Component {
   }
 
   render() {
-    const countries = this.filterCountries()
-
+    const countries = this.filterCountries();
     return (
       <BootstrapTable data={ this.getInstitutionsRows() }
                       version="4"
@@ -132,7 +155,8 @@ class InstitutionsReferenceTable extends Component {
                         {
                           dataTotalSize: this.props.institutionReferences.totalDataSize
                         }
-                      }>
+                      }
+                      selectRow={ this.state.select }>
         <TableHeaderColumn dataField="deqar_id"
                            dataSort={ true }
                            width='15%'

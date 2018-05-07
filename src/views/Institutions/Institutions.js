@@ -29,7 +29,7 @@ class Institutions extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <InstitutionsReferenceTable />
+                    <InstitutionsReferenceTable isSelect={false}/>
                   </Col>
                 </Row>
               </CardBody>
