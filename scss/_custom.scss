@@ -109,3 +109,22 @@
 .subform .card-footer {
   background-color: #f0f3f540;
 }
+
+.text-filter {
+  margin-top: 5px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.76562rem;
+  line-height: 1.5;
+}
+
+.select-filter {
+  margin-top: 5px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.76562rem;
+  line-height: 1.5;
+  height: calc(1.64844rem + 2px) !important;
+}
+
+.react-bs-table .order {
+  margin: 0px 0px 0px 5px !important;
+}

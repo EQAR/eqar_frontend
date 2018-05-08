@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import InstitutionsTable from '../../../components/InstitutionsTable';
+import InstitutionsReferenceTable from '../../services/InstitutionsReferenceTable';
 
 
 class BrowseInstitution extends Component {
@@ -48,9 +48,9 @@ class BrowseInstitution extends Component {
       <FormGroup>
         <Button color="primary" size={'sm'} onClick={this.toggle}>Browse Institutions</Button>
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalHeader toggle={this.toggle}>Browse Institutions</ModalHeader>
             <ModalBody>
-              <InstitutionsTable tableType="allInstitutions" select="select"/>
+              <InstitutionsReferenceTable isSelect={true}/>
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
