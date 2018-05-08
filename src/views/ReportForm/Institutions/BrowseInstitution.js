@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import InstitutionsReferenceTable from '../../Institutions/InstitutionsReferenceTable';
+import InstitutionsReferenceTable from '../../services/InstitutionsReferenceTable';
 
 
 class BrowseInstitution extends Component {

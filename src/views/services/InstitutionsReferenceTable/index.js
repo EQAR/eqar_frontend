@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
-import store from '../../main_store';
-import setStates from '../../state';
-import { InstitutionsRequest } from './Actions/InstitutionsAjax';
-import { selectInstitution, removeInstitution } from './Actions/selectInstitution';
-import { getInstituionCountries } from '../services/countries/actions';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
+import { getInstituionCountries } from '../countries/actions';
 import { Button } from 'reactstrap';
 
 class InstitutionsReferenceTable extends Component {

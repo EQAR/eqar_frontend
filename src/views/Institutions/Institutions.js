@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import store from '../../main_store';
 import setStates from '../../state';
-import InstitutionsReferenceTable from './InstitutionsReferenceTable';
+import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
 
 class Institutions extends Component {
   constructor(props) {
