@@ -18,9 +18,14 @@ class Countries extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.countries = this.countries.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
+    this.refreshCountries = this.refreshCountries.bind(this);
   }
 
   componentDidMount() {
+    getCountries();
+  }
+
+  refreshCountries() {
     getCountries();
   }
 
@@ -51,6 +56,7 @@ class Countries extends Component {
           value={this.props.programme.countries}
           options={this.countries()}
           onChange={this.saveChanges}
+          onFocus={this.refreshCountries}
           multi
         />
       </FormGroup>
