@@ -6,7 +6,8 @@ import {
   CardBody,
   CardHeader,
   CardFooter,
-  Button, FormGroup, Label
+  FormGroup,
+  Label
 } from 'reactstrap';
 import { Form, Text } from 'react-form';
 import LaddaButton, {EXPAND_RIGHT} from "react-ladda";
@@ -106,7 +107,7 @@ class ChangeEmailForm extends Component {
     })
     .catch( error => {
       this.loadingToggle();
-      toast.error("There was a problem with updateing your email.");
+      toast.error("There was a problem updating your email.");
     });
   }
 
@@ -120,7 +121,7 @@ class ChangeEmailForm extends Component {
         </CardHeader>
         <Form onSubmit={this.handleSubmit.bind(this)} validate={this.validate.bind(this)}>
           {formApi => (
-            <form onSubmit={formApi.submitForm} id="form1">
+            <form onSubmit={formApi.submitForm} id="changeEmailForm">
               <CardBody>
                 <FormGroup>
                   <Label htmlFor="new_email" className="required-input">New Email</Label>
