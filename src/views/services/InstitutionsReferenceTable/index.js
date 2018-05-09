@@ -23,6 +23,8 @@ class InstitutionsReferenceTable extends Component {
     this.state = {
       select: {}
     }
+    this.selectedInstitutions = this.selectedInstitutions.bind(this);
+    this.trClassFormat = this.trClassFormat.bind(this);
   }
 
   componentWillMount() {
@@ -31,7 +33,9 @@ class InstitutionsReferenceTable extends Component {
         select: {
           mode: 'checkbox',
           clickToSelect: true,
-          onSelect: this.onRowSelect.bind(this)
+          onSelect: this.onRowSelect.bind(this),
+          unselectable: this.selectedInstitutions(),
+          showOnlySelected: true
         }
       }) :
       this.setState( {
@@ -101,6 +105,12 @@ class InstitutionsReferenceTable extends Component {
     )
   }
 
+  selectedInstitutions() {
+    return this.props.reportForm.institutions.map(institution => {
+      return institution.deqar_id;
+    })
+  }
+
   getInstitutionsRows() {
     return this.props.institutionReferences.institutions.map(institution => {
       return {
@@ -141,6 +151,16 @@ class InstitutionsReferenceTable extends Component {
       <Button size="sm" color="primary">View</Button>)
   }
 
+  trClassFormat(row, rowIndex) {
+    let className = '';
+    this.props.reportForm.institutions.forEach(institution => {
+      if (institution.deqar_id === row.deqar_id) {
+        className = 'selected-row';
+      }
+    })
+    return className;
+  }
+
   render() {
     const countries = this.filterCountries();
     return (
@@ -155,7 +175,8 @@ class InstitutionsReferenceTable extends Component {
                           dataTotalSize: this.props.institutionReferences.totalDataSize
                         }
                       }
-                      selectRow={ this.state.select }>
+                      selectRow={ this.state.select }
+                      trClassName={ this.trClassFormat }>
         <TableHeaderColumn dataField="deqar_id"
                            dataSort={ true }
                            width='15%'
