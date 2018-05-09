@@ -25,6 +25,7 @@ class BrowseInstitution extends Component {
     this.toggle = this.toggle.bind(this);
     this.clearInstitutions = this.clearInstitutions.bind(this);
     this.getSelectedAmount = this.getSelectedAmount.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.state = {
       modal: false,
       selectedAmount: 0
@@ -43,6 +44,14 @@ class BrowseInstitution extends Component {
     this.toggle();
   }
 
+  handleKeyPress(event) {
+    if (event.key === 'Escape') {
+      this.clearInstitutions();
+    } else if (event.target.id !== 'browse' && event.key === 'Enter') {
+      this.toggle();
+    }
+  }
+
   toggle() {
     this.setState({
       modal: !this.state.modal
@@ -52,11 +61,11 @@ class BrowseInstitution extends Component {
   render() {
     return (
       <FormGroup>
-        <Button color="primary" size={'sm'} onClick={this.getSelectedAmount}>Browse Institutions</Button>
-          <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
+        <Button id="browse" color="primary" size={'sm'} onClick={this.getSelectedAmount} onKeyUp={this.handleKeyPress}>Browse Institutions</Button>
+          <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="table-modal" autoFocus={true} onKeyUp={this.handleKeyPress}>
             <ModalHeader toggle={this.toggle}>Browse Institutions</ModalHeader>
             <ModalBody>
-              <InstitutionsReferenceTable isSelect={true}/>
+              <InstitutionsReferenceTable isSelect={true} />
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
