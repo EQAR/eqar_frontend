@@ -15,16 +15,32 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import InstitutionsReferenceTable from '../../services/InstitutionsReferenceTable';
+import { removeSelectedInstitution } from './actions';
+
 
 
 class BrowseInstitution extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.clearInstitutions = this.clearInstitutions.bind(this);
+    this.getSelectedAmount = this.getSelectedAmount.bind(this);
     this.state = {
-      modal: false
+      modal: false,
+      selectedAmount: 0
     };
+  }
+
+  getSelectedAmount() {
+    this.setState({
+      selectedAmount: this.props.reportForm.institutions.length
+    })
+    this.toggle();
+  }
+
+  clearInstitutions() {
+    removeSelectedInstitution(this.state.selectedAmount, this.props.reportForm.institutions);
+    this.toggle();
   }
 
   toggle() {
@@ -33,20 +49,10 @@ class BrowseInstitution extends Component {
     });
   }
 
-  handleClick(e) {
-    this.setState({
-      value: {
-        value: [],
-        label: ''
-      }
-    });
-    selectInstitution(this.state.value.value, this.props.reportForm.institutions);
-  }
-
   render() {
     return (
       <FormGroup>
-        <Button color="primary" size={'sm'} onClick={this.toggle}>Browse Institutions</Button>
+        <Button color="primary" size={'sm'} onClick={this.getSelectedAmount}>Browse Institutions</Button>
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
             <ModalHeader toggle={this.toggle}>Browse Institutions</ModalHeader>
             <ModalBody>

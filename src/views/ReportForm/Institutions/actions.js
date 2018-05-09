@@ -29,3 +29,8 @@ export function removeInstitution(institutionId, institutions=[]) {
   institutions.splice(institutionId, 1);
   store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions});
 }
+
+export function removeSelectedInstitution(beforeSelectioAmount, institutions=[]) {
+  institutions = institutions.slice(0, beforeSelectioAmount);
+  store.dispatch({ type: 'REMOVE_SELECTED_INSTITUTION', payload: institutions});
+}
