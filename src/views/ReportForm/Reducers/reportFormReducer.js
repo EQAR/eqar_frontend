@@ -60,6 +60,9 @@ const reportFormReducer = composeResetReducer(function reportFormReducer(state =
     case 'REMOVE_INSTITUTION': {
       return { ...state, institutions: action.payload }
     }
+    case 'REMOVE_SELECTED_INSTITUTION': {
+      return { ...state, institutions: action.payload }
+    }
     case 'ADD_PROGRAMME': {
       return { ...state, programmes: action.payload }
     }
