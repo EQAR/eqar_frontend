@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 import 'ladda/dist/ladda-themeless.min.css';
 import axios from "axios/index";
 import { POST_TOKEN } from '../../config';
-import changeToken from "./Actions/ChangeToken";
 
 
 class ChangeTokenForm extends Component {
