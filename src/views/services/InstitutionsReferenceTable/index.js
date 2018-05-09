@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
-import store from '../../main_store';
-import setStates from '../../state';
-import {
-  InstitutionsRequest
-} from './Actions/InstitutionsAjax';
-import countriesAjax from './Actions/countriesAjax';
+import store from '../../../main_store';
+import setStates from '../../../state';
+import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
+import { getInstituionCountries } from '../countries/actions';
 import { Button } from 'reactstrap';
 
 class InstitutionsReferenceTable extends Component {
@@ -22,11 +20,40 @@ class InstitutionsReferenceTable extends Component {
       onSortChange: this.onSortChange.bind(this),
       sizePerPageList: [ 5, 10, 20 ]
     };
+    this.state = {
+      select: {}
+    }
+    this.selectedInstitutions = this.selectedInstitutions.bind(this);
+    this.trClassFormat = this.trClassFormat.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.isSelect ?
+      this.setState( {
+        select: {
+          mode: 'checkbox',
+          clickToSelect: true,
+          onSelect: this.onRowSelect.bind(this),
+          unselectable: this.selectedInstitutions(),
+          showOnlySelected: true
+        }
+      }) :
+      this.setState( {
+        select: {}
+      })
+  }
+
+  onRowSelect(row, isSelected){
+    if (isSelected) {
+      selectInstitution(row, this.props.reportForm.institutions);
+    } else {
+      removeInstitution(row, this.props.reportForm.institutions);
+    }
   }
 
   componentDidMount(){
     InstitutionsRequest();
-    countriesAjax();
+    getInstituionCountries();
   }
 
   onSortChange(sortName, sortOrder) {
@@ -78,6 +105,12 @@ class InstitutionsReferenceTable extends Component {
     )
   }
 
+  selectedInstitutions() {
+    return this.props.reportForm.institutions.map(institution => {
+      return institution.deqar_id;
+    })
+  }
+
   getInstitutionsRows() {
     return this.props.institutionReferences.institutions.map(institution => {
       return {
@@ -118,9 +151,18 @@ class InstitutionsReferenceTable extends Component {
       <Button size="sm" color="primary">View</Button>)
   }
 
-  render() {
-    const countries = this.filterCountries()
+  trClassFormat(row, rowIndex) {
+    let className = '';
+    this.props.reportForm.institutions.forEach(institution => {
+      if (institution.deqar_id === row.deqar_id) {
+        className = 'selected-row';
+      }
+    })
+    return className;
+  }
 
+  render() {
+    const countries = this.filterCountries();
     return (
       <BootstrapTable data={ this.getInstitutionsRows() }
                       version="4"
@@ -132,7 +174,9 @@ class InstitutionsReferenceTable extends Component {
                         {
                           dataTotalSize: this.props.institutionReferences.totalDataSize
                         }
-                      }>
+                      }
+                      selectRow={ this.state.select }
+                      trClassName={ this.trClassFormat }>
         <TableHeaderColumn dataField="deqar_id"
                            dataSort={ true }
                            width='15%'
