@@ -3,7 +3,11 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter} from 'reactstrap';
+  ModalFooter,
+  Row,
+  Col,
+  Card,
+  CardBody} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -26,7 +30,23 @@ class InstitutionModal extends Component {
         <ModalHeader toggle={this.toggle}>
         </ModalHeader>
         <ModalBody>
+          <Row>
+            <Col xs="6">
+              <Card className="info-box">
+                <CardBody>
 
+                </CardBody>
+
+              </Card>
+            </Col>
+            <Col xs="6">
+              <Card className="info-box">
+
+                <CardBody>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
         </ModalBody>
         <ModalFooter>
         </ModalFooter>
