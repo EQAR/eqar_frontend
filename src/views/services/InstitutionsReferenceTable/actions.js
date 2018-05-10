@@ -23,3 +23,7 @@ export function removeInstitution(institution, institutions=[]) {
   institutions.splice(institutions.indexOf(institution), 1);
   store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions})
 }
+
+export function openInstitutionForm() {
+  store.dispatch({ type: 'OPEN_INSTITUTION_FORM'})
+}

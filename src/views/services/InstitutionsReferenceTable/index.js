@@ -3,9 +3,10 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
+import { selectInstitution, removeInstitution, InstitutionsRequest, openInstitutionForm } from './actions';
 import { getInstituionCountries } from '../countries/actions';
-import { Button } from 'reactstrap';
+import { Button, Modal, ModalBody } from 'reactstrap';
+import InstitutionModal from '../InstitutionForm';
 
 class InstitutionsReferenceTable extends Component {
   constructor(props) {
@@ -18,13 +19,16 @@ class InstitutionsReferenceTable extends Component {
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
-      sizePerPageList: [ 5, 10, 20 ]
+      sizePerPageList: [ 5, 10, 20 ],
+      insertBtn: this.createInsertButton.bind(this),
     };
     this.state = {
       select: {}
     }
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
+    this.buttonFormatter = this.buttonFormatter.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   componentWillMount() {
@@ -43,17 +47,21 @@ class InstitutionsReferenceTable extends Component {
       })
   }
 
+  componentDidMount(){
+    InstitutionsRequest();
+    getInstituionCountries();
+  }
+
+  createInsertButton(onClick) {
+    return <Button size="sm" color="primary" onClick={onClick} className="add-institution">Add New Institution</Button>
+  }
+
   onRowSelect(row, isSelected){
     if (isSelected) {
       selectInstitution(row, this.props.reportForm.institutions);
     } else {
       removeInstitution(row, this.props.reportForm.institutions);
     }
-  }
-
-  componentDidMount(){
-    InstitutionsRequest();
-    getInstituionCountries();
   }
 
   onSortChange(sortName, sortOrder) {
@@ -148,7 +156,7 @@ class InstitutionsReferenceTable extends Component {
 
   buttonFormatter(cell, row) {
     return (
-      <Button size="sm" color="primary">View</Button>)
+      <Button size="sm" color="primary" onClick={this.toggle}>View</Button>)
   }
 
   trClassFormat(row, rowIndex) {
@@ -161,43 +169,52 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
+  toggle() {
+    openInstitutionForm();
+  }
+
   render() {
     const countries = this.filterCountries();
     return (
-      <BootstrapTable data={ this.getInstitutionsRows() }
-                      version="4"
-                      striped
-                      remote={ this.remote }
-                      pagination={ true }
-                      options={ this.options }
-                      fetchInfo = {
-                        {
-                          dataTotalSize: this.props.institutionReferences.totalDataSize
+      <div>
+        <InstitutionModal />
+        <BootstrapTable data={ this.getInstitutionsRows() }
+                        version="4"
+                        striped
+                        remote={ this.remote }
+                        pagination={ true }
+                        options={ this.options }
+                        fetchInfo = {
+                          {
+                            dataTotalSize: this.props.institutionReferences.totalDataSize
+                          }
                         }
-                      }
-                      selectRow={ this.state.select }
-                      trClassName={ this.trClassFormat }>
-        <TableHeaderColumn dataField="deqar_id"
-                           dataSort={ true }
-                           width='15%'
-                           filter={ { type: 'TextFilter' } }
-                           isKey>DEQARINST ID</TableHeaderColumn>
-        <TableHeaderColumn dataField="eter_id"
-                           filter={ { type: 'TextFilter' } }
-                           width='15%'
-                           dataSort={ true }>ETER ID</TableHeaderColumn>
-        <TableHeaderColumn dataField="name_primary"
-                           width='45%'
-                           filter={ { type: 'TextFilter' } }
-                           dataSort={ true }>Institution</TableHeaderColumn>
-        <TableHeaderColumn dataField="countries"
-                           width='15%'
-                           filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
-        <TableHeaderColumn dataField="id"
-                           dataAlign='center'
-                           width='10%'
-                           dataFormat={this.buttonFormatter}> </TableHeaderColumn>
-      </BootstrapTable>
+                        selectRow={ this.state.select }
+                        trClassName={ this.trClassFormat }
+                        insertRow
+                        id="institution-table">
+          <TableHeaderColumn dataField="deqar_id"
+                             dataSort={ true }
+                             width='15%'
+                             filter={ { type: 'TextFilter' } }
+                             isKey>DEQARINST ID</TableHeaderColumn>
+          <TableHeaderColumn dataField="eter_id"
+                             filter={ { type: 'TextFilter' } }
+                             width='15%'
+                             dataSort={ true }>ETER ID</TableHeaderColumn>
+          <TableHeaderColumn dataField="name_primary"
+                             width='45%'
+                             filter={ { type: 'TextFilter' } }
+                             dataSort={ true }>Institution</TableHeaderColumn>
+          <TableHeaderColumn dataField="countries"
+                             width='15%'
+                             filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
+          <TableHeaderColumn dataField="id"
+                             dataAlign='center'
+                             width='10%'
+                             dataFormat={this.buttonFormatter}> </TableHeaderColumn>
+        </BootstrapTable>
+      </div>
     )
   }
 }
