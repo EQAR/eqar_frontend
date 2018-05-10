@@ -6,7 +6,8 @@ import loginReducer from './views/Login/Reducers/login_reducer';
 import reportReducer from './views/Dashboard/Reducers/reportReducer';
 import dashboardReducer from './views/Dashboard/Reducers/dashboardReducer';
 import reportFormReducer from './views/ReportForm/Reducers/reportFormReducer';
-import institutionReferencesReducer from './views/services/InstitutionsReferenceTable/institutionsReducer'
+import institutionsReferencesReducer from './views/services/InstitutionsReferenceTable/institutionsReducer'
+import institutionFormReducer from './views/services/InstitutionForm/institutionFormReducer'
 import countriesReducer from './views/services/countries/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
@@ -31,7 +32,8 @@ const reducers = combineReducers({
   countries: countriesReducer,
   dashboard: dashboardReducer,
   decisions: decisionReducer,
-  institutionsRef: institutionReferencesReducer,
+  institutionsRef: institutionsReferencesReducer,
+  institutionForm: institutionFormReducer,
   login: loginReducer,
   languages: languagesReducer,
   programme: programmeReducer,
