@@ -12,15 +12,15 @@ export function InstitutionsRequest(params) {
 }
 
 export function selectInstitution(institution, institutions=[]) {
-  institution.countries = [{
-    country: institution.countries
-  }]
+  // institution.countries = [{
+  //   country: institution.countries
+  // }]
   institutions.push(institution);
   store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions})
 }
 
 export function removeInstitution(institution, institutions=[]) {
-  institutions.splice(institutions.indexOf(institution), 1);
+  institutions = institutions.filter(i => i.deqar_id !== institution.deqar_id)
   store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions})
 }
 

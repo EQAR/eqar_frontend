@@ -36,6 +36,7 @@ class InstitutionsReferenceTable extends Component {
       this.setState( {
         select: {
           mode: 'checkbox',
+          clickToSelect: true,
           onSelect: this.onRowSelect.bind(this),
           unselectable: this.selectedInstitutions(),
           showOnlySelected: true
@@ -146,7 +147,6 @@ class InstitutionsReferenceTable extends Component {
   }
 
   remote(remoteObj) {
-    // Only cell editing, insert and delete row will be handled by remote store
     remoteObj.sort = true;
     remoteObj.pagination = true;
     remoteObj.filter = true;
