@@ -23,7 +23,7 @@ class InstitutionModal extends Component {
   render() {
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
-        <ModalHeader>
+        <ModalHeader toggle={this.toggle}>
         </ModalHeader>
         <ModalBody>
 
