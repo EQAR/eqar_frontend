@@ -4,7 +4,6 @@ import lodash from 'lodash';
 
 const initialState = {
   formDisplay: false,
-  institutionId: null,
   institution: {
     id: null,
     deqar_id: '',
@@ -20,12 +19,7 @@ const initialState = {
         name_english: '',
         acronym: '',
         name_valid_to: null,
-        alternative_names: [
-          {
-            name_alternative: '',
-            name_transliterated: ''
-          }
-        ]
+        alternative_names: []
       }
     ],
     countries: [],
@@ -43,6 +37,9 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     }
     case 'CHANGE_INSTITUTION_ID': {
       return { ...state, institutionId: action.payload }
+    }
+    case 'GET_INSTITUTION_ALL': {
+      return { ...state, institution: action.payload }
     }
     default: return { ...state };
   }

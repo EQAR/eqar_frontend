@@ -22,7 +22,6 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.isDisabled = this.isDisabled.bind(this);
     this.getValueArray = this.getValueArray.bind(this);
   }
 
@@ -54,12 +53,8 @@ class InstitutionModal extends Component {
     return validName.alternative_names;
   }
 
-  isDisabled() {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    return _.isEmpty(_.last(validName.alternative_names).name_alternative);
-  }
-
   render() {
+    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
@@ -75,6 +70,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official"
                     name="text"
+                    value={validName.name_official}
                     handleInput={this.handleInput}
                     />
                   <CustomInputField
@@ -82,6 +78,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official_transliterated"
                     name="text"
+                    value={validName.name_official_transliterated}
                     handleInput={this.handleInput}
                     />
                   <CustomInputField
@@ -89,6 +86,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_english"
                     name="text"
+                    value={validName.name_english}
                     handleInput={this.handleInput}
                     />
                   <CustomInputField
@@ -96,6 +94,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="acronym"
                     name="text"
+                    value={validName.acronym}
                     handleInput={this.handleInput}
                     />
 
@@ -119,8 +118,7 @@ class InstitutionModal extends Component {
                     secondPlaceholder="Enter transliterated form"
                     firstDisplayValue="name_alternative"
                     secondDisplayValue="name_transliterated"
-                    inputDisabled={this.isDisabled}
-                    valueArray={this.getValueArray()}
+                    valueArray={validName.alternative_names}
                     />
 
 
@@ -145,6 +143,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="website_link"
                     name="text"
+                    value={this.props.institutionForm.institution.website_link}
                     handleInput={this.handleInput}
                     />
                 </CardBody>

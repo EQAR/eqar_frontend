@@ -82,7 +82,6 @@ export class CustomDynamicInput extends Component {
             handleInput={this.props.handleInput.bind(null, i)}
             value={elem[this.props.secondDisplayValue]}
             placeholder={this.props.firstPlaceholder}
-            disabled={this.props.inputDisabled(i)}
             />
           {this.getButton(i)}
           {this.getHR()}
@@ -106,7 +105,7 @@ export class CustomDynamicInput extends Component {
           </CardBody>
         </Collapse>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={ this.props.handleClick } disabled={this.props.isDisabled()}>{ this.props.addNewItemText }</Button>
+          <Button color="primary" size={'sm'} onClick={ this.props.handleClick }>{ this.props.addNewItemText }</Button>
         </CardFooter>
       </Card>
     )
