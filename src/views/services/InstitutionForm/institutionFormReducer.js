@@ -4,6 +4,27 @@ import lodash from 'lodash';
 
 const initialState = {
   formDisplay: false
+  institution: {
+    id: null,
+    deqar_id: '',
+    website_link: '',
+    founding_date: '',
+    closure_date: null,
+    identifiers: [],
+    names: [
+      {
+        id: null,
+        name_official: '',
+        name_official_transliterated: '',
+        name_english: '',
+        acronym: '',
+        name_valid_to: null,
+        alternative_names: []
+      }
+    ],
+    countries: [],
+    qf_ehea_levels: []
+  }
 }
 
 const institutionFormReducer = composeResetReducer(function institutionFormReducer(state = lodash.cloneDeep(initialState), action) {
