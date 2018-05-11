@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { closeInstitutionForm } from './actions';
-import { CustomInputField } from './CustomInputs';
+import { CustomInputField, CustomDynamicInput } from './CustomInputs';
 
 
 class InstitutionModal extends Component {
@@ -28,6 +28,25 @@ class InstitutionModal extends Component {
 
   handleInput(e) {
     console.log(e.target.value, e.target.id);
+  }
+
+  handleDynamicInput(indexOfInput, e) {
+    console.log(e.target.value, e.target.id, indexOfInput);
+    // addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
+  }
+
+  handleRemove(e) {
+    console.log(e.target.id);
+    // removeName(e.target.id, this.props.programme.alternative_names);
+  }
+
+  handleClick() {
+    console.log('add empty');
+    // addEmptyAlterName(this.props.programme.alternative_names);
+  }
+
+  isDisabled(i) {
+    return false
   }
 
   render() {
@@ -68,6 +87,29 @@ class InstitutionModal extends Component {
                     id="acronym"
                     name="text"
                     handleInput={this.handleInput}
+                    />
+
+                  <CustomDynamicInput
+                    headerName="Alternative Names"
+                    handleClick={this.handleClick}
+                    isDisabled={this.isDisabled}
+                    addNewItemText="Add More"
+                    valueArray={[{
+                      name_alternative: 'lajos',
+                      name_transliterated: 'feri'
+                    }]}
+                    handleInput={this.handleDynamicInput}
+                    firstLabelText="Alternative Institution Name"
+                    secondLabelText="Alternative Institution Name, Transliterated"
+                    type="text"
+                    firstId="alternative_name_official"
+                    secondId="alternative_name_transliterated"
+                    name="text"
+                    firstPlaceholder="Enter alternative institution name"
+                    secondPlaceholder="Enter transliterated form"
+                    firstDisplayValue="name_alternative"
+                    secondDisplayValue="name_transliterated"
+                    inputDisabled={this.isDisabled}
                     />
 
 
