@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { closeInstitutionForm } from './actions';
-import { CustomInputField, CustomDynamicInput } from './CustomInputs';
+import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import _ from 'lodash';
 
 
@@ -23,6 +23,7 @@ class InstitutionModal extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.getValueArray = this.getValueArray.bind(this);
+    this.getOptions = this.getOptions.bind(this);
   }
 
   toggle() {
@@ -51,6 +52,12 @@ class InstitutionModal extends Component {
   getValueArray() {
     const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
     return validName.alternative_names;
+  }
+
+  getOptions() {
+    return this.props.institutionForm.institution.qf_ehea_levels.map(level => {
+      return level.qf_ehea_level;
+    })
   }
 
   render() {
@@ -136,8 +143,12 @@ class InstitutionModal extends Component {
                     name="text"
                     handleInput={this.handleInput}
                     />
-
-
+                  <CustomSelectInput
+                    labelText="QF-EHEA Levels"
+                    id="qf_ehea_levels"
+                    handleInput={this.handleInput}
+                    options={this.getOptions()}
+                  />
                   <CustomInputField
                     labelText="Institution Website"
                     type="text"

@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardFooter,
   Button,
-  Collapse } from 'reactstrap';
+  Collapse} from 'reactstrap';
 
 
 export class CustomInputField extends Component {
@@ -27,6 +27,38 @@ export class CustomInputField extends Component {
           onChange={this.props.handleInput}
           value={this.props.value}
           placeholder={this.props.placeholder} />
+      </FormGroup>
+    )
+  }
+}
+
+export class CustomSelectInput extends Component {
+  constructor(props) {
+    super(props);
+    this.getOptions = this.getOptions.bind(this);
+  }
+
+  getOptions() {
+    return this.props.options.map((option, i) => {
+      return (
+        <option key={i}>{option}</option>
+      )
+    })
+  }
+
+  render() {
+    return (
+      <FormGroup>
+        <Label for={this.props.id} className={this.props.labelClassName}>{this.props.labelText}</Label>
+        <Input
+          type="select"
+          name="select"
+          id={this.props.id}
+          value={this.props.value}
+          onChange={this.props.handleInput} >
+          <option>Please select</option>
+          {this.getOptions()}
+        </Input>
       </FormGroup>
     )
   }
