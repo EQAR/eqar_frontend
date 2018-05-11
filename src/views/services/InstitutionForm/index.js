@@ -13,6 +13,8 @@ import store from '../../../main_store';
 import setStates from '../../../state';
 import { closeInstitutionForm } from './actions';
 import { CustomInputField, CustomDynamicInput } from './CustomInputs';
+import _ from 'lodash';
+
 
 
 class InstitutionModal extends Component {
@@ -20,6 +22,8 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.isDisabled = this.isDisabled.bind(this);
+    this.getValueArray = this.getValueArray.bind(this);
   }
 
   toggle() {
@@ -45,8 +49,14 @@ class InstitutionModal extends Component {
     // addEmptyAlterName(this.props.programme.alternative_names);
   }
 
-  isDisabled(i) {
-    return false
+  getValueArray() {
+    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
+    return validName.alternative_names;
+  }
+
+  isDisabled() {
+    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
+    return _.isEmpty(_.last(validName.alternative_names).name_alternative);
   }
 
   render() {
@@ -110,6 +120,7 @@ class InstitutionModal extends Component {
                     firstDisplayValue="name_alternative"
                     secondDisplayValue="name_transliterated"
                     inputDisabled={this.isDisabled}
+                    valueArray={this.getValueArray()}
                     />
 
 
