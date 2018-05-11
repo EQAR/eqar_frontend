@@ -42,7 +42,6 @@ export class CustomDynamicInput extends Component {
       fadeIn: true,
       timeout: 300
     };
-    console.log(this.props.valueArray);
   }
 
   getButton(index) {

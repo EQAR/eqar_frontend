@@ -4,6 +4,7 @@ import lodash from 'lodash';
 
 const initialState = {
   formDisplay: false,
+  institutionId: null,
   institution: {
     id: null,
     deqar_id: '',
@@ -39,6 +40,9 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     }
     case 'CLOSE_INSTITUTION_FORM': {
       return { ...state, formDisplay: false }
+    }
+    case 'CHANGE_INSTITUTION_ID': {
+      return { ...state, institutionId: action.payload }
     }
     default: return { ...state };
   }

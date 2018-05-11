@@ -27,3 +27,7 @@ export function removeInstitution(institution, institutions=[]) {
 export function openInstitutionForm() {
   store.dispatch({ type: 'OPEN_INSTITUTION_FORM'})
 }
+
+export function changeInstitutionId(institution) {
+  store.dispatch({ type: 'CHANGE_INSTITUTION_ID', payload: institution.id})
+}

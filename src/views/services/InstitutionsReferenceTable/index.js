@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { selectInstitution, removeInstitution, InstitutionsRequest, openInstitutionForm } from './actions';
+import { selectInstitution, removeInstitution, InstitutionsRequest, openInstitutionForm, changeInstitutionId } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import InstitutionModal from '../InstitutionForm';
@@ -155,7 +155,7 @@ class InstitutionsReferenceTable extends Component {
 
   buttonFormatter(cell, row) {
     return (
-      <Button size="sm" color="primary" onClick={this.toggle}>View</Button>)
+      <Button size="sm" color="primary" onClick={this.toggle.bind(null, row)}>View</Button>)
   }
 
   trClassFormat(row, rowIndex) {
@@ -168,7 +168,8 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
-  toggle() {
+  toggle(row) {
+    changeInstitutionId(row)
     openInstitutionForm();
   }
 
