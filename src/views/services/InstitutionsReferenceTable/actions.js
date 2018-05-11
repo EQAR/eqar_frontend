@@ -12,9 +12,9 @@ export function InstitutionsRequest(params) {
 }
 
 export function selectInstitution(institution, institutions=[]) {
-  // institution.countries = [{
-  //   country: institution.countries
-  // }]
+  institution.countries = [{
+    country: institution.countries
+  }]
   institutions.push(institution);
   store.dispatch({ type: 'SELECT_INSTITUTION', payload: institutions})
 }
