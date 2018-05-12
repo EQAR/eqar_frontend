@@ -94,28 +94,25 @@ export class CustomDynamicInput extends Component {
   }
 
   createCard() {
-    return this.props.valueArray.map((elem, i) => {
+    console.log(this.props.valueArray);
+    return this.props.valueArray.map((e, index) => {
       return (
-        <div key={i}>
-          <CustomInputField
-            labelText={this.props.firstLabelText}
-            type={this.props.type}
-            id={this.props.firstId}
-            name={this.props.name}
-            handleInput={this.props.handleInput.bind(null, i)}
-            value={elem[this.props.firstDisplayValue]}
-            placeholder={this.props.firstPlaceholder}
-            />
-          <CustomInputField
-            labelText={this.props.secondLabelText}
-            type={this.props.type}
-            id={this.props.secondtId}
-            name={this.props.name}
-            handleInput={this.props.handleInput.bind(null, i)}
-            value={elem[this.props.secondDisplayValue]}
-            placeholder={this.props.firstPlaceholder}
-            />
-          {this.getButton(i)}
+        <div key={index}>
+          {e.map((elem, i) => {
+            return (
+              <CustomInputField
+                key={i}
+                labelText={elem.labelText}
+                type={elem.type}
+                id={elem.id}
+                name={elem.name}
+                handleInput={elem.handleInput.bind(null, index)}
+                value={elem.value}
+                placeholder={elem.placeholder}
+              />
+            )
+          })}
+          {this.getButton(index)}
           {this.getHR()}
         </div>
       )

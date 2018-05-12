@@ -51,7 +51,29 @@ class InstitutionModal extends Component {
 
   getValueArray() {
     const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    return validName.alternative_names;
+    const array = validName.alternative_names.map(alternativeName => {
+      return [
+        {
+          labelText: "Alternative Institution Name",
+          type: "text",
+          id: "name",
+          name: "text",
+          placeholder: "Enter alternative institution name",
+          value: alternativeName.name,
+          handleInput: this.handleDynamicInput
+        },
+        {
+          labelText: "Alternative Institution Name, Transliterated",
+          type: "text",
+          Id: "transliteration",
+          name: "text",
+          placeholder: "Enter transliterated form",
+          value: alternativeName.transliteration,
+          handleInput: this.handleDynamicInput
+        }
+      ]
+    });
+    return array
   }
 
   getOptions() {
@@ -107,27 +129,11 @@ class InstitutionModal extends Component {
 
                   <CustomDynamicInput
                     headerName="Alternative Names"
-                    handleClick={this.handleClick}
+                    addNewItemText="Add New Name"
                     isDisabled={this.isDisabled}
-                    addNewItemText="Add More"
-                    valueArray={[{
-                      name_alternative: 'lajos',
-                      name_transliterated: 'feri'
-                    }]}
-                    handleInput={this.handleDynamicInput}
-                    firstLabelText="Alternative Institution Name"
-                    secondLabelText="Alternative Institution Name, Transliterated"
-                    type="text"
-                    firstId="alternative_name_official"
-                    secondId="alternative_name_transliterated"
-                    name="text"
-                    firstPlaceholder="Enter alternative institution name"
-                    secondPlaceholder="Enter transliterated form"
-                    firstDisplayValue="name_alternative"
-                    secondDisplayValue="name_transliterated"
-                    valueArray={validName.alternative_names}
+                    handleClick={this.handleClick}
+                    valueArray={this.getValueArray()}
                     />
-
 
                   <CustomInputField
                     labelText="National Identifier"
