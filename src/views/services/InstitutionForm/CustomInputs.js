@@ -135,7 +135,7 @@ export class CustomDynamicInput extends Component {
                 value={elem.value}
                 options={elem.options}
                 disabled={elem.disabled}
-                className={elem.labelClassName}
+                labelClassName={elem.labelClassName}
               />
               ) :
               (
@@ -149,7 +149,7 @@ export class CustomDynamicInput extends Component {
                 value={elem.value}
                 placeholder={elem.placeholder}
                 disabled={elem.disabled}
-                className={elem.labelClassName}
+                labelClassName={elem.labelClassName}
               />
             )
           })}
