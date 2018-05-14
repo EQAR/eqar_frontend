@@ -69,11 +69,22 @@ export class CustomDynamicInput extends Component {
     super(props);
     this.getButton = this.getButton.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.setInitialState = this.setInitialState.bind(this);
     this.state = {
       collapse: false,
       fadeIn: true,
       timeout: 300
     };
+  }
+
+  // componentDidMount() {
+  //   this.setState({collapse: this.props.open})
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.open !== this.state.collapse) {
+      this.toggle();
+    }
   }
 
   getButton(index) {
@@ -86,20 +97,42 @@ export class CustomDynamicInput extends Component {
   }
 
   getToggleText() {
-    return this.state.collapse ? 'hide' : 'show'
+    if (this.props.toggleButton){
+      return this.state.collapse ? 'hide' : 'show'
+    }
   }
 
-  toggle(e) {
+  getToggleButton() {
+    if (this.props.toggleButton){
+      return <Button color="link" onClick={this.toggle} className="link-button">{this.getToggleText()}</Button>
+    }
+  }
+
+  toggle() {
     this.setState({collapse: !this.state.collapse});
   }
 
+  setInitialState() {
+    this.setState({collapse: this.props.open})
+  }
+
   createCard() {
-    console.log(this.props.valueArray);
     return this.props.valueArray.map((e, index) => {
       return (
         <div key={index}>
           {e.map((elem, i) => {
-            return (
+            return elem.type === 'select' ?
+              (
+              <CustomInputField
+                key={i}
+                labelText={elem.labelText}
+                id={elem.id}
+                handleInput={elem.handleInput.bind(null, index)}
+                value={elem.value}
+                options={elem.options}
+              />
+              ) :
+              (
               <CustomInputField
                 key={i}
                 labelText={elem.labelText}
@@ -125,7 +158,7 @@ export class CustomDynamicInput extends Component {
         <CardHeader>
           {this.props.headerName}
           <div className="pull-right">
-            (<Button color="link" onClick={this.toggle} className="link-button">{this.getToggleText()}</Button>)
+            {this.getToggleButton()}
           </div>
         </CardHeader>
         <Collapse isOpen={this.state.collapse}>

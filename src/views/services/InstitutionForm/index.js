@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm } from './actions';
+import { closeInstitutionForm, institutionRequest } from './actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import _ from 'lodash';
 
@@ -24,6 +24,10 @@ class InstitutionModal extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.getValueArray = this.getValueArray.bind(this);
     this.getOptions = this.getOptions.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return _.isInteger(nextProps.institutionForm.institution.id);
   }
 
   toggle() {
@@ -84,6 +88,7 @@ class InstitutionModal extends Component {
 
   render() {
     const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
+    const isOpen = !_.isEmpty(validName.alternative_names)
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
@@ -126,15 +131,15 @@ class InstitutionModal extends Component {
                     value={validName.acronym}
                     handleInput={this.handleInput}
                     />
-
                   <CustomDynamicInput
                     headerName="Alternative Names"
+                    toggleButton={true}
                     addNewItemText="Add New Name"
                     isDisabled={this.isDisabled}
                     handleClick={this.handleClick}
                     valueArray={this.getValueArray()}
+                    open={isOpen}
                     />
-
                   <CustomInputField
                     labelText="National Identifier"
                     type="text"

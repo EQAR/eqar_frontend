@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
-import { institutionRequest, openInstitutionForm } from '../InstitutionForm/actions';
+import { openInstitutionForm, institutionRequest } from '../InstitutionForm/actions';
 import { getInstituionCountries } from '../countries/actions';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import InstitutionModal from '../InstitutionForm';
