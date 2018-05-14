@@ -20,6 +20,6 @@ export function selectInstitution(institution, institutions=[]) {
 }
 
 export function removeInstitution(institution, institutions=[]) {
-  institutions.splice(institutions.indexOf(institution), 1);
+  institutions = institutions.filter(i => i.deqar_id !== institution.deqar_id)
   store.dispatch({ type: 'REMOVE_INSTITUTION', payload: institutions})
 }

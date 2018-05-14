@@ -6,7 +6,7 @@ const routes = {
   '/report-form': 'Report Form',
   '/upload-csv': 'CSV Upload',
   '/edit-report': 'Edit report',
-  '/reference-data/institutions': 'Institutions'
+  '/institutions': 'Institutions'
 };
 
 export default routes;

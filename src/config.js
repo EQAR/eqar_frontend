@@ -12,6 +12,7 @@ export const GET_REPORTS = ADMINAPI_URL + '/reports_by_agency/';
 export const GET_INSTITUTION_COUNTRIES = ADMINAPI_URL + '/select/institutions/country/';
 export const GET_COUNTRIES = ADMINAPI_URL + '/select/country/';
 export const GET_INSTITUTIONS = ADMINAPI_URL + '/select/institutions/';
+export const GET_INSTITUTION = ADMINAPI_URL + '/institutions/';
 export const GET_AGENCIES = ADMINAPI_URL + '/select/agency/';
 export const GET_STATUSES = ADMINAPI_URL + '/select/report_status/';
 export const GET_DECISIONS = ADMINAPI_URL + '/select/report_decision/';
