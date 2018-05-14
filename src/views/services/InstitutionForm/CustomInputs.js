@@ -104,6 +104,12 @@ export class CustomDynamicInput extends Component {
     }
   }
 
+  getAddButton() {
+    if (this.props.addNewItemText) {
+      return <Button color="primary" size={'sm'} onClick={ this.props.handleClick }>{ this.props.addNewItemText }</Button>
+    }
+  }
+
   toggle() {
     this.setState({collapse: !this.state.collapse});
   }
@@ -163,7 +169,7 @@ export class CustomDynamicInput extends Component {
           </CardBody>
         </Collapse>
         <CardFooter>
-          <Button color="primary" size={'sm'} onClick={ this.props.handleClick }>{ this.props.addNewItemText }</Button>
+          {this.getAddButton()}
         </CardFooter>
       </Card>
     )
