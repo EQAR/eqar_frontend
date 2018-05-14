@@ -153,6 +153,7 @@ class InstitutionModal extends Component {
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
+          View {validName.name_official} records
         </ModalHeader>
         <ModalBody>
           <Row>

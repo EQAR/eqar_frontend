@@ -37,7 +37,7 @@ class InstitutionsReferenceTable extends Component {
       this.setState( {
         select: {
           mode: 'checkbox',
-          clickToSelect: true,
+          // clickToSelect: true,
           onSelect: this.onRowSelect.bind(this),
           unselectable: this.selectedInstitutions(),
           showOnlySelected: true

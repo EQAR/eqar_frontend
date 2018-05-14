@@ -53,7 +53,6 @@ export default {
     },
     {
       name: 'Reference Data',
-      url: '/reference-data',
       icon: 'icon-book-open',
       children: [
         {
@@ -63,7 +62,7 @@ export default {
         },
         {
           name: 'Institutions',
-          url: '/reference-data/institutions',
+          url: '/institutions',
           icon: 'icon-graduation'
         },
         {

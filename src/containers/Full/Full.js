@@ -36,7 +36,7 @@ class Full extends Component {
                 <Route path="/my-agency" name="My Profile" component={MyAgency}/>
                 <Route path="/report-form" name="Report Form" component={ReportForm}/>
                 <Route path="/upload-csv" name="CSV Upload" component={CSVUpload}/>
-                <Route path="/reference-data/institutions" name="Institutions" component={Institutions}/>
+                <Route path="/institutions" name="Institutions" component={Institutions}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
