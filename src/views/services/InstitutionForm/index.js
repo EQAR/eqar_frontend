@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { closeInstitutionForm, institutionRequest } from './actions';
+import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import _ from 'lodash';
 
@@ -22,8 +23,10 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.getValueArray = this.getValueArray.bind(this);
+    this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.getCountry = this.getCountry.bind(this);
+    this.getCountries = this.getCountries.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -53,7 +56,7 @@ class InstitutionModal extends Component {
     // addEmptyAlterName(this.props.programme.alternative_names);
   }
 
-  getValueArray() {
+  getAlternativeNames() {
     const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
     const array = validName.alternative_names.map(alternativeName => {
       return [
@@ -78,6 +81,53 @@ class InstitutionModal extends Component {
       ]
     });
     return array
+  }
+
+  getCountry(countryId) {
+    return _.find(this.props.countries.countries, {id: countryId})
+  }
+
+  getCountries() {
+    return this.props.institutionForm.institution.countries.map(country => {
+      return [
+        {
+          labelText: "Country",
+          labelClassName: "required-input",
+          type: "select",
+          id: "country",
+          value: this.getCountry(country.country).name_english,
+          options: this.props.institutionForm.countries,
+          handleInput: this.handleDynamicInput
+        },
+        {
+          labelText: "City",
+          type: "text",
+          Id: "city",
+          name: "text",
+          placeholder: "Enter city name",
+          value: country.city,
+          handleInput: this.handleDynamicInput
+        },
+        {
+          labelText: "Latitude",
+          type: "number",
+          Id: "lat",
+          name: "number",
+          placeholder: "Enter campus/city latitude",
+          value: country.lat,
+          handleInput: this.handleDynamicInput
+        },
+        {
+          labelText: "Longitude",
+          type: "number",
+          Id: "long",
+          name: "number",
+          placeholder: "Enter campus/city longitude",
+          value: country.long,
+          handleInput: this.handleDynamicInput
+        }
+      ]
+    });
   }
 
   getOptions() {
@@ -135,10 +185,16 @@ class InstitutionModal extends Component {
                     headerName="Alternative Names"
                     toggleButton={true}
                     addNewItemText="Add New Name"
-                    isDisabled={this.isDisabled}
                     handleClick={this.handleClick}
-                    valueArray={this.getValueArray()}
+                    valueArray={this.getAlternativeNames()}
                     open={isOpen}
+                    />
+                  <CustomDynamicInput
+                    headerName="Geographic Locations"
+                    labelClassName="required-input"
+                    toggleButton={false}
+                    valueArray={this.getCountries()}
+                    open={true}
                     />
                   <CustomInputField
                     labelText="National Identifier"

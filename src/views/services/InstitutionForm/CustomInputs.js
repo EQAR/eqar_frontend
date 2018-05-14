@@ -77,10 +77,6 @@ export class CustomDynamicInput extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({collapse: this.props.open})
-  // }
-
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.open !== this.state.collapse) {
       this.toggle();
