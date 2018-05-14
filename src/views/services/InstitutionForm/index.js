@@ -26,6 +26,7 @@ class InstitutionModal extends Component {
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.getCountry = this.getCountry.bind(this);
+    this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
   }
 
@@ -89,6 +90,10 @@ class InstitutionModal extends Component {
     return _.find(this.props.countries.countries, {id: countryId})
   }
 
+  getOptionsCountry() {
+    return this.props.countries.countries.map(country => country.name_english)
+  }
+
   getCountries() {
     return this.props.institutionForm.institution.countries.map(country => {
       return [
@@ -99,7 +104,7 @@ class InstitutionModal extends Component {
           id: "country",
           disabled:"true",
           value: this.getCountry(country.country).name_english,
-          options: this.props.institutionForm.countries,
+          options: this.getOptionsCountry(),
           handleInput: this.handleDynamicInput
         },
         {
@@ -195,13 +200,14 @@ class InstitutionModal extends Component {
                     headerName="Alternative Names"
                     toggleButton={true}
                     addNewItemText="Add New Name"
+                    buttonDisabled={true}
                     handleClick={this.handleClick}
                     valueArray={this.getAlternativeNames()}
                     open={isOpen}
                     />
                   <CustomDynamicInput
                     headerName="Geographic Locations"
-                    labelClassName="required-input"
+                    headerClassName="required-input"
                     toggleButton={false}
                     valueArray={this.getCountries()}
                     open={true}
@@ -244,8 +250,23 @@ class InstitutionModal extends Component {
             </Col>
             <Col xs="6">
               <Card className="info-box">
-
                 <CardBody>
+                  <CustomInputField
+                    labelText="DEQUARINST ID"
+                    type="text"
+                    id="deqar_id"
+                    name="text"
+                    value={this.props.institutionForm.institution.deqar_id}
+                    disabled="true"
+                    />
+                  <CustomInputField
+                    labelText="ETER ID"
+                    type="text"
+                    id="id"
+                    name="text"
+                    value={this.props.institutionForm.institution.id}
+                    disabled="true"
+                    />
                 </CardBody>
               </Card>
             </Col>

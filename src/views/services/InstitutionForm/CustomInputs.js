@@ -108,7 +108,7 @@ export class CustomDynamicInput extends Component {
 
   getAddButton() {
     if (this.props.addNewItemText) {
-      return <Button color="primary" size={'sm'} onClick={ this.props.handleClick }>{ this.props.addNewItemText }</Button>
+      return <Button color="primary" size={'sm'} onClick={ this.props.handleClick } disabled={this.props.buttonDisabled}>{ this.props.addNewItemText }</Button>
     }
   }
 
@@ -127,7 +127,7 @@ export class CustomDynamicInput extends Component {
           {e.map((elem, i) => {
             return elem.type === 'select' ?
               (
-              <CustomInputField
+              <CustomSelectInput
                 key={i}
                 labelText={elem.labelText}
                 id={elem.id}
@@ -135,6 +135,7 @@ export class CustomDynamicInput extends Component {
                 value={elem.value}
                 options={elem.options}
                 disabled={elem.disabled}
+                className={elem.labelClassName}
               />
               ) :
               (
@@ -148,6 +149,7 @@ export class CustomDynamicInput extends Component {
                 value={elem.value}
                 placeholder={elem.placeholder}
                 disabled={elem.disabled}
+                className={elem.labelClassName}
               />
             )
           })}
@@ -161,7 +163,7 @@ export class CustomDynamicInput extends Component {
   render() {
     return (
       <Card className={'subform'}>
-        <CardHeader>
+        <CardHeader className={this.props.headerClassName}>
           {this.props.headerName}
           <div className="pull-right">
             {this.getToggleButton()}
