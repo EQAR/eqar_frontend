@@ -26,7 +26,8 @@ export class CustomInputField extends Component {
           id={this.props.id}
           onChange={this.props.handleInput}
           value={this.props.value}
-          placeholder={this.props.placeholder} />
+          placeholder={this.props.placeholder}
+          disabled={this.props.disabled} />
       </FormGroup>
     )
   }
@@ -55,6 +56,7 @@ export class CustomSelectInput extends Component {
           name="select"
           id={this.props.id}
           value={this.props.value}
+          disabled={this.props.disabled}
           onChange={this.props.handleInput} >
           <option>Please select</option>
           {this.getOptions()}
@@ -132,6 +134,7 @@ export class CustomDynamicInput extends Component {
                 handleInput={elem.handleInput.bind(null, index)}
                 value={elem.value}
                 options={elem.options}
+                disabled={elem.disabled}
               />
               ) :
               (
@@ -144,6 +147,7 @@ export class CustomDynamicInput extends Component {
                 handleInput={elem.handleInput.bind(null, index)}
                 value={elem.value}
                 placeholder={elem.placeholder}
+                disabled={elem.disabled}
               />
             )
           })}

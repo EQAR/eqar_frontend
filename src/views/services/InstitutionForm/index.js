@@ -67,6 +67,7 @@ class InstitutionModal extends Component {
           name: "text",
           placeholder: "Enter alternative institution name",
           value: alternativeName.name,
+          disabled:"true",
           handleInput: this.handleDynamicInput
         },
         {
@@ -75,6 +76,7 @@ class InstitutionModal extends Component {
           Id: "transliteration",
           name: "text",
           placeholder: "Enter transliterated form",
+          disabled:"true",
           value: alternativeName.transliteration,
           handleInput: this.handleDynamicInput
         }
@@ -95,6 +97,7 @@ class InstitutionModal extends Component {
           labelClassName: "required-input",
           type: "select",
           id: "country",
+          disabled:"true",
           value: this.getCountry(country.country).name_english,
           options: this.props.institutionForm.countries,
           handleInput: this.handleDynamicInput
@@ -105,6 +108,7 @@ class InstitutionModal extends Component {
           Id: "city",
           name: "text",
           placeholder: "Enter city name",
+          disabled:"true",
           value: country.city,
           handleInput: this.handleDynamicInput
         },
@@ -114,6 +118,7 @@ class InstitutionModal extends Component {
           Id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
+          disabled:"true",
           value: country.lat,
           handleInput: this.handleDynamicInput
         },
@@ -123,6 +128,7 @@ class InstitutionModal extends Component {
           Id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
+          disabled:"true",
           value: country.long,
           handleInput: this.handleDynamicInput
         }
@@ -156,6 +162,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={validName.name_official}
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomInputField
                     labelText="Institution Name, Transliterated"
@@ -164,6 +171,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={validName.name_official_transliterated}
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomInputField
                     labelText="Institution Name, English"
@@ -172,6 +180,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={validName.name_english}
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomInputField
                     labelText="Institution Acronym"
@@ -180,6 +189,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={validName.acronym}
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomDynamicInput
                     headerName="Alternative Names"
@@ -202,6 +212,7 @@ class InstitutionModal extends Component {
                     id="national_identifier"
                     name="text"
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomInputField
                     labelText="Local Identifier"
@@ -209,12 +220,14 @@ class InstitutionModal extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"
                     id="qf_ehea_levels"
                     handleInput={this.handleInput}
                     options={this.getOptions()}
+                    disabled="true"
                   />
                   <CustomInputField
                     labelText="Institution Website"
@@ -223,6 +236,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.website_link}
                     handleInput={this.handleInput}
+                    disabled="true"
                     />
                 </CardBody>
 
