@@ -66,7 +66,10 @@ class ReportForm extends Component {
       reprtFormState.status === '' ||
       reprtFormState.decision === '' ||
       reprtFormState.valid_from === '' ||
-      reprtFormState.institutions.length === 0;
+      reprtFormState.institutions.length === 0 ||
+      reprtFormState.valid_from < this.props.agency.valid_from ||
+      reprtFormState.valid_from > this.props.agency.valid_to ||
+      (reprtFormState.valid_to < reprtFormState.valid_from && reprtFormState.valid_to !== '')
     return disabled;
   }
 
