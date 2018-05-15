@@ -29,7 +29,6 @@ class ValidTo extends Component {
   }
   handleBlur(e) {
     if (e.target.value < this.props.reportForm.valid_from && e.target.value !== '') {
-      formFill('', e.target.id);
       this.setState({
         isAlert: true,
         errorMessage: 'The given date is earlier than the report\'s validation start date!'
