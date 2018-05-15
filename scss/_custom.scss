@@ -73,7 +73,7 @@
   overflow: hidden;
 }
 
-.upload-label {
+.upload-label-active {
   background-color: black;
   display: inline-block;
   cursor: pointer;
@@ -81,18 +81,17 @@
   padding: 5px;
 }
 
-.upload-label:active {
+.upload-label-active:active {
   color: white;
   background-color: #9d9d9d;
 }
 
-/*
-.csv-info {
-  max-height: 124px;
-  overflow-y: scroll;
-  overflow: -moz-scrollbars-vertical;
+.upload-label-inactive {
+  color: #e4e5e6;
+  background-color: #f7f7f7;
+  display: inline-block;
+  padding: 5px;
 }
-*/
 
 .link-button {
   padding: 6px 0px;
