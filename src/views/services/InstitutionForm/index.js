@@ -7,7 +7,8 @@ import {
   Row,
   Col,
   Card,
-  CardBody} from 'reactstrap';
+  CardBody,
+  Button} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -147,6 +148,18 @@ class InstitutionModal extends Component {
     })
   }
 
+  getFooter() {
+    return (
+      <ModalFooter>
+       <Col>
+        <Button color="primary" onClick={ this.toggle }>Close</Button>
+      </Col>
+        <Button color="primary" onClick={ this.Edit }>Edit Record</Button>
+        <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
+      </ModalFooter>
+    )
+  }
+
   render() {
     const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
     const isOpen = !_.isEmpty(validName.alternative_names)
@@ -273,8 +286,7 @@ class InstitutionModal extends Component {
             </Col>
           </Row>
         </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
+          {this.getFooter()}
       </Modal>
     )
   }
