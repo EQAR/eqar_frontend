@@ -15,6 +15,7 @@ import setStates from '../../../state';
 import { closeInstitutionForm, institutionRequest } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
+import { selectInstitution } from '../../ReportForm/Institutions/actions';
 import _ from 'lodash';
 
 
@@ -29,6 +30,7 @@ class InstitutionModal extends Component {
     this.getCountry = this.getCountry.bind(this);
     this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
+    this.addToReport = this.addToReport.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -37,6 +39,12 @@ class InstitutionModal extends Component {
 
   toggle() {
     closeInstitutionForm();
+  }
+
+  addToReport() {
+    const institution = _.find(this.props.institutionReferences.institutions, {id: this.props.institutionForm.institution.id})
+    selectInstitution(institution, this.props.reportForm.institutions);
+    this.toggle();
   }
 
   handleInput(e) {
@@ -154,7 +162,7 @@ class InstitutionModal extends Component {
        <Col>
         <Button color="primary" onClick={ this.toggle }>Close</Button>
       </Col>
-        <Button color="primary" onClick={ this.Edit }>Edit Record</Button>
+        <Button color="primary" onClick={ this.edit }>Edit Record</Button>
         <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
       </ModalFooter>
     )
