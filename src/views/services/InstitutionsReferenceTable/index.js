@@ -8,6 +8,7 @@ import { openInstitutionForm, institutionRequest } from '../InstitutionForm/acti
 import { getInstituionCountries } from '../countries/actions';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import InstitutionModal from '../InstitutionForm';
+import _ from 'lodash';
 
 class InstitutionsReferenceTable extends Component {
   constructor(props) {
@@ -24,28 +25,28 @@ class InstitutionsReferenceTable extends Component {
       insertBtn: this.createInsertButton.bind(this),
     };
     this.state = {
-      select: {}
+      selected: [],
+      select: {},
+      unselectable: this.selectedInstitutions()
     }
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
     this.buttonFormatter = this.buttonFormatter.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.getSelectRow = this.getSelectRow.bind(this);
   }
 
-  componentWillMount() {
-    this.props.isSelect ?
-      this.setState( {
-        select: {
-          mode: 'checkbox',
-          // clickToSelect: true,
-          onSelect: this.onRowSelect.bind(this),
-          unselectable: this.selectedInstitutions(),
-          showOnlySelected: true
-        }
-      }) :
-      this.setState( {
-        select: {}
-      })
+  getSelectRow() {
+    return this.props.isSelect ?
+      {
+        mode: 'checkbox',
+        clickToSelect: true,
+        selected: this.state.selected,
+        onSelect: this.onRowSelect.bind(this),
+        unselectable: this.state.unselectable,
+        showOnlySelected: true
+      } :
+      {}
   }
 
   componentDidMount(){
@@ -57,12 +58,20 @@ class InstitutionsReferenceTable extends Component {
     return <Button size="sm" color="primary" onClick={onClick} className="add-institution">Add New Institution</Button>
   }
 
-  onRowSelect(row, isSelected){
+  onRowSelect(row, isSelected, e){
+    console.log(row, isSelected);
     if (isSelected) {
       selectInstitution(row, this.props.reportForm.institutions);
+      this.setState(() => ({
+        selected: [...this.state.selected, row.id]
+      }));
     } else {
       removeInstitution(row, this.props.reportForm.institutions);
+      this.setState(() => ({
+        selected: this.state.selected.filter(x => x !== row.id)
+      }));
     }
+    console.log('select', this.state.selected);
   }
 
   onSortChange(sortName, sortOrder) {
@@ -154,7 +163,7 @@ class InstitutionsReferenceTable extends Component {
     return remoteObj;
   }
 
-  buttonFormatter(cell, row) {
+  buttonFormatter(cell, row, formatExtraData, index) {
     return (
       <Button size="sm" color="primary" onClick={this.toggle.bind(null, row)}>View</Button>)
   }
@@ -170,11 +179,16 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggle(row) {
+    if (_.includes(this.state.selected, row.id)) {
+      console.log('toggle', this.state.selected);
+    }
     institutionRequest(row.id);
     openInstitutionForm();
   }
 
   render() {
+    const selectRow = this.getSelectRow();
+    console.log(selectRow);
     const countries = this.filterCountries();
     return (
       <div>
@@ -190,7 +204,7 @@ class InstitutionsReferenceTable extends Component {
                             dataTotalSize: this.props.institutionReferences.totalDataSize
                           }
                         }
-                        selectRow={ this.state.select }
+                        selectRow={ selectRow }
                         trClassName={ this.trClassFormat }
                         insertRow
                         id="institution-table">
