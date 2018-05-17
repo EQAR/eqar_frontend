@@ -31,6 +31,10 @@ class InstitutionModal extends Component {
     this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
     this.addToReport = this.addToReport.bind(this);
+    this.edit = this.edit.bind(this);
+    this.state = {
+      isEdit: false,
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -45,6 +49,17 @@ class InstitutionModal extends Component {
     const institution = _.find(this.props.institutionReferences.institutions, {id: this.props.institutionForm.institution.id})
     selectInstitution(institution, this.props.reportForm.institutions);
     this.toggle();
+  }
+
+  edit() {
+    this.setState({
+      isEdit: true
+    })
+  }
+
+  isEditable(inputId) {
+    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
+
   }
 
   handleInput(e) {
@@ -67,8 +82,7 @@ class InstitutionModal extends Component {
   }
 
   getAlternativeNames() {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    const array = validName.alternative_names.map(alternativeName => {
+    const array = this.props.institutionForm.institution.names.alternative_names.map(alternativeName => {
       return [
         {
           labelText: "Alternative Institution Name",
@@ -169,12 +183,11 @@ class InstitutionModal extends Component {
   }
 
   render() {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    const isOpen = !_.isEmpty(validName.alternative_names)
+    const isOpen = !_.isEmpty(this.props.institutionForm.institution.names.alternative_names)
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
-          View {validName.name_official} records
+          View {this.props.institutionForm.institution.names.name_official} records
         </ModalHeader>
         <ModalBody>
           <Row>
@@ -187,7 +200,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official"
                     name="text"
-                    value={validName.name_official}
+                    value={this.props.institutionForm.institution.names.name_official}
                     handleInput={this.handleInput}
                     disabled="true"
                     />
@@ -196,7 +209,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official_transliterated"
                     name="text"
-                    value={validName.name_official_transliterated}
+                    value={this.props.institutionForm.institution.names.name_official_transliterated}
                     handleInput={this.handleInput}
                     disabled="true"
                     />
@@ -205,7 +218,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_english"
                     name="text"
-                    value={validName.name_english}
+                    value={this.props.institutionForm.institution.names.name_english}
                     handleInput={this.handleInput}
                     disabled="true"
                     />
@@ -214,7 +227,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="acronym"
                     name="text"
-                    value={validName.acronym}
+                    value={this.props.institutionForm.institution.names.acronym}
                     handleInput={this.handleInput}
                     disabled="true"
                     />
@@ -248,7 +261,7 @@ class InstitutionModal extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.state.isEdit}
                     />
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"

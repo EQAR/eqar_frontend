@@ -11,17 +11,15 @@ const initialState = {
     founding_date: '',
     closure_date: null,
     identifiers: [],
-    names: [
-      {
-        id: null,
-        name_official: '',
-        name_official_transliterated: '',
-        name_english: '',
-        acronym: '',
-        name_valid_to: null,
-        alternative_names: []
-      }
-    ],
+    names: {
+      id: null,
+      name_official: '',
+      name_official_transliterated: '',
+      name_english: '',
+      acronym: '',
+      name_valid_to: null,
+      alternative_names: []
+    },
     countries: [],
     qf_ehea_levels: []
   }
