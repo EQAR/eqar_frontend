@@ -58,8 +58,7 @@ class InstitutionModal extends Component {
   }
 
   isEditable(inputId) {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-
+    return this.state.isEdit ? !_.isEmpty(_.find(this.props.institutionForm.institution, inputId)) : true;
   }
 
   handleInput(e) {
@@ -100,7 +99,7 @@ class InstitutionModal extends Component {
           Id: "transliteration",
           name: "text",
           placeholder: "Enter transliterated form",
-          disabled:"true",
+          disabled: this.isEditable('transliteration'),
           value: alternativeName.transliteration,
           handleInput: this.handleDynamicInput
         }
@@ -136,7 +135,7 @@ class InstitutionModal extends Component {
           Id: "city",
           name: "text",
           placeholder: "Enter city name",
-          disabled:"true",
+          disabled: this.isEditable('city'),
           value: country.city,
           handleInput: this.handleDynamicInput
         },
@@ -146,7 +145,7 @@ class InstitutionModal extends Component {
           Id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
-          disabled:"true",
+          disabled: this.isEditable('lat'),
           value: country.lat,
           handleInput: this.handleDynamicInput
         },
@@ -156,7 +155,7 @@ class InstitutionModal extends Component {
           Id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
-          disabled:"true",
+          disabled: this.isEditable('long'),
           value: country.long,
           handleInput: this.handleDynamicInput
         }
@@ -211,7 +210,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.names.name_official_transliterated}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditable('name_official_transliterated')}
                     />
                   <CustomInputField
                     labelText="Institution Name, English"
@@ -220,7 +219,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.names.name_english}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditable('name_english')}
                     />
                   <CustomInputField
                     labelText="Institution Acronym"
@@ -229,7 +228,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.names.acronym}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditable('acronym')}
                     />
                   <CustomDynamicInput
                     headerName="Alternative Names"
@@ -253,7 +252,7 @@ class InstitutionModal extends Component {
                     id="national_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditable('national_identifier')}
                     />
                   <CustomInputField
                     labelText="Local Identifier"
