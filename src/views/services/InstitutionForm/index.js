@@ -26,12 +26,14 @@ class InstitutionModal extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
-    this.getOptions = this.getOptions.bind(this);
+    this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
     this.getCountry = this.getCountry.bind(this);
     this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
     this.addToReport = this.addToReport.bind(this);
     this.edit = this.edit.bind(this);
+    this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
+    this.checkFields = this.checkFields.bind(this);
     this.state = {
       isEdit: false,
     }
@@ -42,6 +44,9 @@ class InstitutionModal extends Component {
   }
 
   toggle() {
+    this.setState({
+      isEdit: false
+    })
     closeInstitutionForm();
   }
 
@@ -54,11 +59,26 @@ class InstitutionModal extends Component {
   edit() {
     this.setState({
       isEdit: true
-    })
+    });
   }
 
-  isEditable(inputId) {
-    return this.state.isEdit ? !_.isEmpty(_.find(this.props.institutionForm.institution, inputId)) : true;
+  checkFields(inputId, index) {
+    if (inputId === 'qf_ehea_levels') {
+      return !_.isEmpty(this.props.institutionForm.institution.qf_ehea_levels);
+    } else if (inputId === 'city') {
+      return !_.isEmpty(this.props.institutionForm.institution.countries[index].city);
+    } else if (inputId === 'lat') {
+      return !this.props.institutionForm.institution.countries[index].lat === 0;
+    } else if (inputId === 'long') {
+      return !this.props.institutionForm.institution.countries[index].long === 0;
+    } else {
+      return !_.isEmpty(this.props.institutionForm.institution.names[inputId])
+    }
+  }
+
+  isEditable(inputId, index) {
+    console.log(inputId, this.checkFields(inputId, index))
+    return this.state.isEdit ? this.checkFields(inputId, index) : true;
   }
 
   handleInput(e) {
@@ -117,25 +137,25 @@ class InstitutionModal extends Component {
   }
 
   getCountries() {
-    return this.props.institutionForm.institution.countries.map(country => {
+    return this.props.institutionForm.institution.countries.map((country, i) => {
       return [
-        {
-          labelText: "Country",
-          labelClassName: "required-input",
-          type: "select",
-          id: "country",
-          disabled:"true",
-          value: this.getCountry(country.country).name_english,
-          options: this.getOptionsCountry(),
-          handleInput: this.handleDynamicInput
-        },
+        // {
+        //   labelText: "Country",
+        //   labelClassName: "required-input",
+        //   type: "select",
+        //   id: "country",
+        //   disabled:"true",
+        //   value: this.getCountry(country.country).name_english,
+        //   options: this.getOptionsCountry(),
+        //   handleInput: this.handleDynamicInput
+        // },
         {
           labelText: "City",
           type: "text",
           Id: "city",
           name: "text",
           placeholder: "Enter city name",
-          disabled: this.isEditable('city'),
+          disabled: this.isEditable('city', i),
           value: country.city,
           handleInput: this.handleDynamicInput
         },
@@ -145,7 +165,7 @@ class InstitutionModal extends Component {
           Id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
-          disabled: this.isEditable('lat'),
+          disabled: this.isEditable('lat', i),
           value: country.lat,
           handleInput: this.handleDynamicInput
         },
@@ -155,7 +175,7 @@ class InstitutionModal extends Component {
           Id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
-          disabled: this.isEditable('long'),
+          disabled: this.isEditable('long', i),
           value: country.long,
           handleInput: this.handleDynamicInput
         }
@@ -163,9 +183,29 @@ class InstitutionModal extends Component {
     });
   }
 
-  getOptions() {
+  getQFEHEALabel(qf_ehea_level) {
+    return {
+      1: 'short cycle',
+      2: 'first cycle',
+      3: 'second cycle',
+      4: 'third cycle'
+    }[qf_ehea_level]
+  }
+
+  getQFEHEAOptions() {
+    return this.props.qfeheaLevels.levels.map(level => {
+      return {
+        value: level.id,
+        label: level.level
+      }
+    })
+  }
+
+  getQFEHEAValues() {
     return this.props.institutionForm.institution.qf_ehea_levels.map(level => {
-      return level.qf_ehea_level;
+      return {
+        value: level.qf_ehea_level,
+        label: this.getQFEHEALabel(level.qf_ehea_level)};
     })
   }
 
@@ -234,7 +274,7 @@ class InstitutionModal extends Component {
                     headerName="Alternative Names"
                     toggleButton={true}
                     addNewItemText="Add New Name"
-                    buttonDisabled={true}
+                    buttonDisabled={!this.state.isEdit}
                     handleClick={this.handleClick}
                     valueArray={this.getAlternativeNames()}
                     open={isOpen}
@@ -266,8 +306,10 @@ class InstitutionModal extends Component {
                     labelText="QF-EHEA Levels"
                     id="qf_ehea_levels"
                     handleInput={this.handleInput}
-                    options={this.getOptions()}
-                    disabled="true"
+                    options={this.getQFEHEAOptions()}
+                    value={this.getQFEHEAValues()}
+                    multi={true}
+                    disabled={this.isEditable('qf_ehea_levels')}
                   />
                   <CustomInputField
                     labelText="Institution Website"
