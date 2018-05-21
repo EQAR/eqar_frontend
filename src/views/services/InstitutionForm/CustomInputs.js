@@ -54,7 +54,6 @@ export class CustomSelectInput extends Component {
       <FormGroup>
         <Label for={this.props.id} className={this.props.labelClassName}>{this.props.labelText}</Label>
         <Select
-          type="select"
           name="select"
           id={this.props.id}
           value={this.props.value}
@@ -140,6 +139,7 @@ export class CustomDynamicInput extends Component {
                 options={elem.options}
                 disabled={elem.disabled}
                 labelClassName={elem.labelClassName}
+                multi={elem.multi}
               />
               ) :
               (

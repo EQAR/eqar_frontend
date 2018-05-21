@@ -133,22 +133,28 @@ class InstitutionModal extends Component {
   }
 
   getOptionsCountry() {
-    return this.props.countries.countries.map(country => country.name_english)
+    return this.props.countries.countries.map(country => {
+      return {
+        value: country.name_english,
+        label: country.name_english
+      }
+    })
   }
 
   getCountries() {
     return this.props.institutionForm.institution.countries.map((country, i) => {
       return [
-        // {
-        //   labelText: "Country",
-        //   labelClassName: "required-input",
-        //   type: "select",
-        //   id: "country",
-        //   disabled:"true",
-        //   value: this.getCountry(country.country).name_english,
-        //   options: this.getOptionsCountry(),
-        //   handleInput: this.handleDynamicInput
-        // },
+        {
+          labelText: "Country",
+          labelClassName: "required-input",
+          type: "select",
+          id: "country",
+          disabled:true,
+          value: this.getCountry(country.country).name_english,
+          options: this.getOptionsCountry(),
+          handleInput: this.handleDynamicInput,
+          multi: false
+        },
         {
           labelText: "City",
           type: "text",
