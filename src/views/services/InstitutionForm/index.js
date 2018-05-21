@@ -35,6 +35,7 @@ class InstitutionModal extends Component {
     this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
     this.checkFields = this.checkFields.bind(this);
     this.checkCountryFields = this.checkCountryFields.bind(this);
+    this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.state = {
       isEdit: false,
       editableFields: {
@@ -76,21 +77,15 @@ class InstitutionModal extends Component {
         national_identifier: this.checkFields('national_identifier'),
         qf_ehea_levels: this.checkFields('qf_ehea_levels'),
         countries: this.checkCountryFields(),
-        // alternative_names: this.checkFields('name_official_transliterated'),
+        alternative_names: this.checkAlternativeNameFields()
       }
     })
     this.checkFields('name_official_transliterated')
   }
 
-  checkFields(inputId, index) {
+  checkFields(inputId) {
     if (inputId === 'qf_ehea_levels') {
       return _.isEmpty(this.props.institutionForm.institution.qf_ehea_levels);
-    } else if (inputId === 'city') {
-      return _.isEmpty(this.props.institutionForm.institution.countries[index].city);
-    } else if (inputId === 'lat') {
-      return this.props.institutionForm.institution.countries[index].lat === 0;
-    } else if (inputId === 'long') {
-      return this.props.institutionForm.institution.countries[index].long === 0;
     } else {
       return _.isEmpty(this.props.institutionForm.institution.names[inputId])
     }
@@ -106,12 +101,25 @@ class InstitutionModal extends Component {
     })
   }
 
+  checkAlternativeNameFields() {
+    return this.props.institutionForm.institution.names.alternative_names.map(name => {
+      return {
+        name: _.isEmpty(name.name),
+        transliteration: _.isEmpty(name.transliteration)
+      }
+    })
+  }
+
   isEditableSimple(inputId) {
     return this.state.isEdit ? !this.state.editableFields[inputId] : true;
   }
 
-  isEditableFromArray(inputId, index) {
+  isEditableCountry(inputId, index) {
     return this.state.isEdit ? !this.state.editableFields.countries[index][inputId] : true;
+  }
+
+  isEditableAlternativeNames(inputId, index) {
+    return this.state.isEdit ? !this.state.editableFields.alternative_names[index][inputId] : true;
   }
 
   handleInput(e) {
@@ -194,7 +202,7 @@ class InstitutionModal extends Component {
           Id: "city",
           name: "text",
           placeholder: "Enter city name",
-          disabled: this.isEditableFromArray('city', i),
+          disabled: this.isEditableCountry('city', i),
           value: country.city,
           handleInput: this.handleDynamicInput
         },
@@ -204,7 +212,7 @@ class InstitutionModal extends Component {
           Id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
-          disabled: this.isEditableFromArray('lat', i),
+          disabled: this.isEditableCountry('lat', i),
           value: country.lat,
           handleInput: this.handleDynamicInput
         },
@@ -214,7 +222,7 @@ class InstitutionModal extends Component {
           Id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
-          disabled: this.isEditableFromArray('long', i),
+          disabled: this.isEditableCountry('long', i),
           value: country.long,
           handleInput: this.handleDynamicInput
         }
