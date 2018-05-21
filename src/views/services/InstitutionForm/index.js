@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -125,6 +125,11 @@ class InstitutionModal extends Component {
 
   handleInput(e) {
     saveToForm(e.target.value, e.target.id)
+  }
+
+  handleQFEHEAInput(value) {
+    console.log(value);
+    changeQFEHEALEVELS(value)
   }
 
   handleCountriesInput(indexOfInput, e) {
@@ -353,7 +358,7 @@ class InstitutionModal extends Component {
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"
                     id="qf_ehea_levels"
-                    handleInput={this.handleInput}
+                    handleInput={this.handleQFEHEAInput}
                     options={this.getQFEHEAOptions()}
                     value={this.getQFEHEAValues()}
                     multi={true}

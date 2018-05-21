@@ -4,6 +4,6 @@ export default function getType(inputId) {
     name_english: 'CHANGE_NAME_ENGLISH',
     acronym: 'CHANGE_ACRONYM',
     national_identifier: 'CHANGE_NATIONAL_IDENTIFIER',
-    local_identifier: 'CHANGE_LOCAL_IDENTIFIER'
+    local_identifier: 'CHANGE_LOCAL_IDENTIFIER',
   }[inputId];
 }

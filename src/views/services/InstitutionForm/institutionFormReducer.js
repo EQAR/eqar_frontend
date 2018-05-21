@@ -105,6 +105,15 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         }
       }
     }
+    case 'CHANGE_QF_EHEA_LEVELS': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          qf_ehea_levels: action.payload
+        }
+      }
+    }
     default: return { ...state };
   }
 }, initialState, 'RESET_INSTITUTION_FORM');
