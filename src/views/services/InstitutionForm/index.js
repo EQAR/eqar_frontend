@@ -128,7 +128,6 @@ class InstitutionModal extends Component {
   }
 
   handleQFEHEAInput(value) {
-    console.log(value);
     changeQFEHEALEVELS(value)
   }
 
@@ -261,7 +260,18 @@ class InstitutionModal extends Component {
     })
   }
 
-  getFooter() {
+  editFooter () {
+    return (
+      <ModalFooter>
+       <Col>
+        <Button color="primary">Save Record</Button>
+      </Col>
+        <Button color="primary">Cancel</Button>
+      </ModalFooter>
+    )
+  }
+
+  viewFooter() {
     return (
       <ModalFooter>
        <Col>
@@ -271,6 +281,10 @@ class InstitutionModal extends Component {
         <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
       </ModalFooter>
     )
+  }
+
+  getFooter() {
+    return this.state.isEdit ? this.editFooter() : this.viewFooter();
   }
 
   render() {
