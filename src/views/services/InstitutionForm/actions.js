@@ -19,7 +19,7 @@ export function institutionRequest(id) {
           }
           return country;
         })
-        dispatch({ type: 'GET_INSTITUTION_ALL', payload: response.data });
+        dispatch({ type: 'CHANGE_INSTITUTION_ALL', payload: response.data });
     })
   });
 }
@@ -53,6 +53,10 @@ export function addAlternativeName(inputValue, inputId, indexOfAlter, alternativ
 export function removeAlterName(index, alternativeNames) {
   alternativeNames.splice(index, 1);
   store.dispatch({ type: 'CHANGE_INSTITUTION_ALTERNATIVE_NAME', payload: alternativeNames });
+}
+
+export function resetFields() {
+  store.dispatch({ type: 'RESET_INSTITUTION_FORM',});
 }
 
 export function closeInstitutionForm() {

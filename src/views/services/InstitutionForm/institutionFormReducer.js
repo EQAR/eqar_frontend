@@ -33,7 +33,7 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     case 'CLOSE_INSTITUTION_FORM': {
       return { ...state, formDisplay: false }
     }
-    case 'GET_INSTITUTION_ALL': {
+    case 'CHANGE_INSTITUTION_ALL': {
       return { ...state, institution: action.payload }
     }
     case 'CHANGE_NAME_TRANSLITERATED': {

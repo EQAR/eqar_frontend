@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName, resetFields } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -24,6 +24,7 @@ class InstitutionModal extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.cancel = this.cancel.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
     this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
@@ -50,14 +51,20 @@ class InstitutionModal extends Component {
         national_identifier: false,
         qf_ehea_levels: false,
         countries: [],
-        alternative_names: [],
-        added_alternative_names: []
+        alternative_names: []
       }
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return _.isInteger(nextProps.institutionForm.institution.id);
+  }
+
+  cancel() {
+    this.state.isEdit ? institutionRequest(this.props.institutionForm.institution.id) : resetFields();
+    this.setState({
+      isEdit: false
+    })
   }
 
   toggle() {
@@ -273,7 +280,7 @@ class InstitutionModal extends Component {
        <Col>
         <Button color="primary">Save Record</Button>
       </Col>
-        <Button color="primary">Cancel</Button>
+        <Button color="primary" onClick={this.cancel}>Cancel</Button>
       </ModalFooter>
     )
   }
