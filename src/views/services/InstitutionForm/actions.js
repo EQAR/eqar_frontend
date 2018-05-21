@@ -34,14 +34,16 @@ export function changeCountryData(value, id, index, countries) {
 }
 
 export function changeQFEHEALEVELS(values) {
-  console.log(values);
   values = values.map(value => {
     return { qf_ehea_level: value.value};
   });
-  console.log(values);
   store.dispatch({ type: 'CHANGE_QF_EHEA_LEVELS', payload: values });
 }
 
+export function addEmptyAlternativeName(alternativeNames) {
+  alternativeNames.push({name: '', transliteration: ''});
+  store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_INSTITUION_NAME', payload: alternativeNames });
+}
 export function closeInstitutionForm() {
   store.dispatch({ type: 'CLOSE_INSTITUTION_FORM'})
 }

@@ -72,6 +72,18 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         }
       }
     }
+    case 'ADD_EMPTY_ALTERNATIVE_INSTITUION_NAME': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            alternative_names: action.payload
+          }
+        }
+      }
+    }
     case 'CHANGE_NATIONAL_IDENTIFIER': {
       return {
         ...state,

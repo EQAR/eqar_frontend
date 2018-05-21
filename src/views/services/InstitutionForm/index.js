@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -26,6 +26,7 @@ class InstitutionModal extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
+    this.addEmptyAlterName = this.addEmptyAlterName.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
     this.getCountry = this.getCountry.bind(this);
@@ -81,7 +82,6 @@ class InstitutionModal extends Component {
         alternative_names: this.checkAlternativeNameFields()
       }
     })
-    this.checkFields('name_official_transliterated')
   }
 
   checkFields(inputId) {
@@ -140,13 +140,14 @@ class InstitutionModal extends Component {
     // removeName(e.target.id, this.props.programme.alternative_names);
   }
 
-  handleClick() {
+  addEmptyAlterName() {
     console.log('add empty');
-    // addEmptyAlterName(this.props.programme.alternative_names);
+    addEmptyAlternativeName(this.props.institutionForm.institution.names.alternative_names);
+    this.edit();
   }
 
   getAlternativeNames() {
-    const array = this.props.institutionForm.institution.names.alternative_names.map(alternativeName => {
+    const array = this.props.institutionForm.institution.names.alternative_names.map((alternativeName, i) => {
       return [
         {
           labelText: "Alternative Institution Name",
@@ -155,8 +156,8 @@ class InstitutionModal extends Component {
           name: "text",
           placeholder: "Enter alternative institution name",
           value: alternativeName.name,
-          disabled:"true",
-          handleInput: this.handleDynamicInput
+          disabled: this.isEditableAlternativeNames('name', i),
+          handleInput: this.handleInput
         },
         {
           labelText: "Alternative Institution Name, Transliterated",
@@ -164,9 +165,9 @@ class InstitutionModal extends Component {
           Id: "transliteration",
           name: "text",
           placeholder: "Enter transliterated form",
-          disabled: this.isEditableSimple('transliteration'),
+          disabled: this.isEditableAlternativeNames('transliteration', i),
           value: alternativeName.transliteration,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleInput
         }
       ]
     });
@@ -342,7 +343,7 @@ class InstitutionModal extends Component {
                     toggleButton={true}
                     addNewItemText="Add New Name"
                     buttonDisabled={!this.state.isEdit}
-                    handleClick={this.handleClick}
+                    handleClick={this.addEmptyAlterName}
                     valueArray={this.getAlternativeNames()}
                     open={isOpen}
                     />
