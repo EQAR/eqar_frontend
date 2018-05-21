@@ -42,8 +42,14 @@ export function changeQFEHEALEVELS(values) {
 
 export function addEmptyAlternativeName(alternativeNames) {
   alternativeNames.push({name: '', transliteration: ''});
-  store.dispatch({ type: 'ADD_EMPTY_ALTERNATIVE_INSTITUION_NAME', payload: alternativeNames });
+  store.dispatch({ type: 'CHANGE_ALTERNATIVE_INSTITUTION_NAME', payload: alternativeNames });
 }
+
+export function addAlternativeName(inputValue, inputId, indexOfAlter, alternativeNames) {
+  alternativeNames[indexOfAlter][inputId] = inputValue
+  store.dispatch({ type: 'CHANGE_ALTERNATIVE_INSTITUTION_NAME', payload: alternativeNames });
+}
+
 export function closeInstitutionForm() {
   store.dispatch({ type: 'CLOSE_INSTITUTION_FORM'})
 }
