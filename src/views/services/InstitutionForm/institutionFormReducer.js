@@ -38,15 +38,63 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     }
     case 'CHANGE_NAME_TRANSLITERATED': {
       return {
-              ...state,
-              institution: {
-                ...state.institution,
-                names: {
-                  ...state.institution.names,
-                  name_official_transliterated: action.payload
-                }
-              }
-            }
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            name_official_transliterated: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_NAME_ENGLISH': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            name_english: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_ACRONYM': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            acronym: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_NATIONAL_IDENTIFIER': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          identifiers: {
+            ...state.institution.identifiers,
+            national_identifier: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_LOCAL_IDENTIFIER': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          identifiers: {
+            ...state.institution.identifiers,
+            local_identifier: action.payload
+          }
+        }
+      }
     }
     default: return { ...state };
   }
