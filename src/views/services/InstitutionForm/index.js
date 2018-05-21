@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -27,6 +27,7 @@ class InstitutionModal extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
     this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     this.addEmptyAlterName = this.addEmptyAlterName.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
@@ -41,6 +42,7 @@ class InstitutionModal extends Component {
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.state = {
       isEdit: false,
+      removeButtonIndex: null,
       editableFields: {
         name_official_transliterated: false,
         name_english: false,
@@ -73,6 +75,7 @@ class InstitutionModal extends Component {
 
   edit() {
     this.setState({
+      removeButtonIndex: this.props.institutionForm.institution.names.alternative_names.length,
       isEdit: true,
       editableFields: {
         name_official_transliterated: this.checkFields('name_official_transliterated'),
@@ -81,7 +84,7 @@ class InstitutionModal extends Component {
         national_identifier: this.checkFields('national_identifier'),
         qf_ehea_levels: this.checkFields('qf_ehea_levels'),
         countries: this.checkCountryFields(),
-        alternative_names: this.checkAlternativeNameFields()
+        alternative_names: this.checkAlternativeNameFields(),
       }
     })
   }
@@ -142,8 +145,7 @@ class InstitutionModal extends Component {
   }
 
   handleRemove(e) {
-    console.log(e.target.id);
-    // removeName(e.target.id, this.props.programme.alternative_names);
+    removeAlterName(e.target.id, this.props.institutionForm.institution.names.alternative_names);
   }
 
   addEmptyAlterName() {
@@ -293,7 +295,7 @@ class InstitutionModal extends Component {
   }
 
   render() {
-    const isOpen = !_.isEmpty(this.props.institutionForm.institution.names.alternative_names)
+    const isOpen = !_.isEmpty(this.props.institutionForm.institution.names.alternative_names);
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
@@ -347,6 +349,9 @@ class InstitutionModal extends Component {
                     addNewItemText="Add New Name"
                     buttonDisabled={!this.state.isEdit}
                     handleClick={this.addEmptyAlterName}
+                    handleRemove={this.handleRemove}
+                    removeButton={this.state.isEdit}
+                    removeButtonIndex={this.state.removeButtonIndex}
                     valueArray={this.getAlternativeNames()}
                     open={isOpen}
                     />
@@ -354,6 +359,7 @@ class InstitutionModal extends Component {
                     headerName="Geographic Locations"
                     headerClassName="required-input"
                     toggleButton={false}
+                    removeButton={false}
                     valueArray={this.getCountries()}
                     open={true}
                     />

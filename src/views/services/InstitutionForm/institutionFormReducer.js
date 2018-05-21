@@ -72,7 +72,7 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         }
       }
     }
-    case 'CHANGE_ALTERNATIVE_INSTITUTION_NAME': {
+    case 'CHANGE_INSTITUTION_ALTERNATIVE_NAME': {
       return {
         ...state,
         institution: {

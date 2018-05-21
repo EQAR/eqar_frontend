@@ -86,7 +86,7 @@ export class CustomDynamicInput extends Component {
   }
 
   getButton(index) {
-    return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
+    return this.props.removeButton && index >= this.props.removeButtonIndex ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
     : null;
   }
 
