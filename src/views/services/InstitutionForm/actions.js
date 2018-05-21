@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../../../main_store';
 import { GET_INSTITUTION } from '../../../config';
+import getType from './types.js';
 import _ from 'lodash';
 
 
@@ -12,6 +13,10 @@ export function institutionRequest(id) {
         dispatch({ type: 'GET_INSTITUTION_ALL', payload: response.data })
     })
   });
+}
+
+export function saveToForm(value, id, institutionForm) {
+  store.dispatch({ type: getType(id), payload: value });
 }
 
 export function closeInstitutionForm() {

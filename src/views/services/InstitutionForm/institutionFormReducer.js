@@ -36,6 +36,18 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     case 'GET_INSTITUTION_ALL': {
       return { ...state, institution: action.payload }
     }
+    case 'CHANGE_NAME_TRANSLITERATED': {
+      return {
+              ...state,
+              institution: {
+                ...state.institution,
+                names: {
+                  ...state.institution.names,
+                  name_official_transliterated: action.payload
+                }
+              }
+            }
+    }
     default: return { ...state };
   }
 }, initialState, 'RESET_INSTITUTION_FORM');
