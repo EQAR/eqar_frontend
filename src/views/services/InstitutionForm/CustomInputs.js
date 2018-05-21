@@ -126,7 +126,7 @@ export class CustomDynamicInput extends Component {
         <div key={index}>
           {e.map((elem, i) => {
             if (elem.value === null) {
-              elem.value = 0;
+              elem.value = '';
             }
             return elem.type === 'select' ?
               (

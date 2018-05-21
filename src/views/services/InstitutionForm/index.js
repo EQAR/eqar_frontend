@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -25,6 +25,7 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleCountriesInput = this.handleCountriesInput.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
     this.getCountry = this.getCountry.bind(this);
@@ -123,12 +124,11 @@ class InstitutionModal extends Component {
   }
 
   handleInput(e) {
-    saveToForm(e.target.value, e.target.id, this.props.institutionForm)
+    saveToForm(e.target.value, e.target.id)
   }
 
-  handleDynamicInput(indexOfInput, e) {
-    console.log(e.target.value, e.target.id, indexOfInput);
-    // addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
+  handleCountriesInput(indexOfInput, e) {
+    changeCountryData(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.countries);
   }
 
   handleRemove(e) {
@@ -193,38 +193,38 @@ class InstitutionModal extends Component {
           disabled:true,
           value: this.getCountry(country.country).name_english,
           options: this.getOptionsCountry(),
-          handleInput: this.handleDynamicInput,
+          handleInput: this.handleCountriesInput,
           multi: false
         },
         {
           labelText: "City",
           type: "text",
-          Id: "city",
+          id: "city",
           name: "text",
           placeholder: "Enter city name",
           disabled: this.isEditableCountry('city', i),
           value: country.city,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         },
         {
           labelText: "Latitude",
           type: "number",
-          Id: "lat",
+          id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
           disabled: this.isEditableCountry('lat', i),
           value: country.lat,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         },
         {
           labelText: "Longitude",
           type: "number",
-          Id: "long",
+          id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
           disabled: this.isEditableCountry('long', i),
           value: country.long,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         }
       ]
     });

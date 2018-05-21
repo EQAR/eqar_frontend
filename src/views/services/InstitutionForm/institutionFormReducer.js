@@ -96,6 +96,15 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         }
       }
     }
+    case 'CHANGE_INSTITUITON_COUNTRY': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          countries: action.payload
+        }
+      }
+    }
     default: return { ...state };
   }
 }, initialState, 'RESET_INSTITUTION_FORM');
