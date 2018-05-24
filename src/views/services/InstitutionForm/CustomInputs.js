@@ -9,6 +9,8 @@ import {
   CardFooter,
   Button,
   Collapse} from 'reactstrap';
+import Select from 'react-select';
+
 
 
 export class CustomInputField extends Component {
@@ -51,16 +53,14 @@ export class CustomSelectInput extends Component {
     return (
       <FormGroup>
         <Label for={this.props.id} className={this.props.labelClassName}>{this.props.labelText}</Label>
-        <Input
-          type="select"
+        <Select
           name="select"
           id={this.props.id}
           value={this.props.value}
           disabled={this.props.disabled}
-          onChange={this.props.handleInput} >
-          <option>Please select</option>
-          {this.getOptions()}
-        </Input>
+          onChange={this.props.handleInput}
+          options={this.props.options}
+          multi={this.props.multi} />
       </FormGroup>
     )
   }
@@ -86,7 +86,7 @@ export class CustomDynamicInput extends Component {
   }
 
   getButton(index) {
-    return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
+    return this.props.removeButton && index >= this.props.removeButtonIndex ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
     : null;
   }
 
@@ -125,6 +125,9 @@ export class CustomDynamicInput extends Component {
       return (
         <div key={index}>
           {e.map((elem, i) => {
+            if (elem.value === null) {
+              elem.value = '';
+            }
             return elem.type === 'select' ?
               (
               <CustomSelectInput
@@ -136,6 +139,7 @@ export class CustomDynamicInput extends Component {
                 options={elem.options}
                 disabled={elem.disabled}
                 labelClassName={elem.labelClassName}
+                multi={elem.multi}
               />
               ) :
               (

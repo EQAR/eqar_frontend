@@ -26,6 +26,8 @@ export const GET_TOKEN = BACKEND_DOMAIN + '/accounts/get_token/';
 export const POST_PASSWORD = BACKEND_DOMAIN + '/auth/password/';
 export const POST_EMAIL = BACKEND_DOMAIN + '/accounts/change_email/';
 export const POST_TOKEN = BACKEND_DOMAIN + '/accounts/get_new_token/';
+export const POST_PASSWORD_RESET = BACKEND_DOMAIN + '/auth/password/reset/';
+export const POST_PASSWORD_RESET_CONFIRM = BACKEND_DOMAIN + '/auth/password/reset/confirm/';
 
 export const POST_REPORT = SUBMISSIONAPI_URL + '/submit/report';
 export const POST_FILE = SUBMISSIONAPI_URL + '/submit/reportfile';

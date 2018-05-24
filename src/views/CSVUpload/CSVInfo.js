@@ -75,15 +75,22 @@ class CSVInfo extends Component {
     Object.keys(errorObj).map(function(key, index) {
       if(key !== 'non_field_errors') {
         errorObj[key].forEach(function(value){
-          errors.push({field: key, message: value});
+          console.log(value);
+          if(typeof value === 'object') {
+            Object.keys(value).map(function(k, idx) {
+              errors.push({field: k, message: value[k]});
+            })
+          } else {
+            errors.push({field: key, message: value});
+          }
         });
       }
     });
     return(
-      errors.map((error, index) => (
-        <p key={index}><i>({error.field})</i> {error.message}</p>
-      )
-    ))
+        errors.map((error, index) => (
+          <div key={index}><i>({error.field})</i> {error.message}<br/></div>
+        ))
+    )
   }
 
   renderErrorInfo() {
