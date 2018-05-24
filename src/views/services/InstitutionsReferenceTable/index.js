@@ -36,6 +36,13 @@ class InstitutionsReferenceTable extends Component {
     this.getSelectRow = this.getSelectRow.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('next', nextProps.reportForm.institutions, this.props.reportForm.institutions);
+    // if (this.props.isSelect && nextProps.reportForm.institutions.length > this.props.institutions.length) {
+    //   console.log(nextProps.reportForm.institutions, this.props.institutions.length);
+    // }
+  }
+
   getSelectRow() {
     return this.props.isSelect ?
       {
@@ -59,19 +66,18 @@ class InstitutionsReferenceTable extends Component {
   }
 
   onRowSelect(row, isSelected, e){
-    console.log(row, isSelected);
-    if (isSelected) {
+    console.log(e.target.id);
+    if (isSelected && e.target.id !== 'open-form') {
       selectInstitution(row, this.props.reportForm.institutions);
       this.setState(() => ({
-        selected: [...this.state.selected, row.id]
+        selected: [...this.state.selected, row.deqar_id]
       }));
     } else {
       removeInstitution(row, this.props.reportForm.institutions);
       this.setState(() => ({
-        selected: this.state.selected.filter(x => x !== row.id)
+        selected: this.state.selected.filter(x => x !== row.deqar_id)
       }));
     }
-    console.log('select', this.state.selected);
   }
 
   onSortChange(sortName, sortOrder) {
@@ -165,7 +171,7 @@ class InstitutionsReferenceTable extends Component {
 
   buttonFormatter(cell, row, formatExtraData, index) {
     return (
-      <Button size="sm" color="primary" onClick={this.toggle.bind(null, row)}>View</Button>)
+      <Button size="sm" color="primary" id="open-form" onClick={this.toggle.bind(null, row)}>View</Button>)
   }
 
   trClassFormat(row, rowIndex) {
@@ -179,7 +185,8 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggle(row) {
-    if (_.includes(this.state.selected, row.id)) {
+    console.log(this.state.selected, row.deqar_id);
+    if (_.includes(this.state.selected, row.deqar_id)) {
       console.log('toggle', this.state.selected);
     }
     institutionRequest(row.id);
@@ -188,7 +195,6 @@ class InstitutionsReferenceTable extends Component {
 
   render() {
     const selectRow = this.getSelectRow();
-    console.log(selectRow);
     const countries = this.filterCountries();
     return (
       <div>
