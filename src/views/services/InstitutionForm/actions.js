@@ -9,7 +9,8 @@ export function institutionRequest(id) {
   store.dispatch((dispatch) => {
     axios.get(`${GET_INSTITUTION}${id}/`)
       .then((response) => {
-        response.data.names = _.find(response.data.names, (name => name.name_valid_to === null));
+        const validName = _.find(response.data.names, (name => name.name_valid_to === null));
+        _.remove(response.data.names, (name => name.name_valid_to === null));
         response.data.countries = response.data.countries.map(country => {
           if (country.lat === 0) {
             country.lat = null;
@@ -19,8 +20,26 @@ export function institutionRequest(id) {
           }
           return country;
         })
-        dispatch({ type: 'CHANGE_INSTITUTION_ALL', payload: response.data });
+        dispatch({ type: 'CHANGE_INSTITUTION_ALL', payload: response.data, validName: validName });
     })
+  });
+}
+
+export function putInstitution(institution) {
+  console.log(institution);
+  store.dispatch((dispatch) => {
+    dispatch({type: 'SPINNER_START'});
+    axios.put(`${GET_INSTITUTION}${institution.id}/`, institution)
+      .then(response => {
+        console.log(response, response.data);
+        dispatch({type: 'SPINNER_STOP'});
+        dispatch({type: 'UPLOAD_FINISH', payload: ''});
+      })
+      .catch(error => {
+        dispatch({type: 'SPINNER_STOP'});
+        dispatch({type: 'RESET_MESSAGE'});
+        console.log(error.response);
+      })
   });
 }
 

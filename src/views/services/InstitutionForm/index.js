@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName, resetFields } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName, resetFields, putInstitution } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -25,6 +25,7 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.save = this.save.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
     this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
@@ -42,6 +43,7 @@ class InstitutionModal extends Component {
     this.checkCountryFields = this.checkCountryFields.bind(this);
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.state = {
+      validNames: [],
       isEdit: false,
       removeButtonIndex: null,
       editableFields: {
@@ -67,6 +69,17 @@ class InstitutionModal extends Component {
     })
   }
 
+  save() {
+    let institution = store.getState().institutionForm.institution;
+    institution.names.push(this.props.institutionForm.validName);
+    institution.qf_ehea_levels = this.props.institutionForm.institution.qf_ehea_levels.map(level => {
+      return {
+        qf_ehea_level: level.qf_ehea_level
+      }
+    });
+    putInstitution(institution);
+  }
+
   toggle() {
     this.setState({
       isEdit: false
@@ -82,7 +95,7 @@ class InstitutionModal extends Component {
 
   edit() {
     this.setState({
-      removeButtonIndex: this.props.institutionForm.institution.names.alternative_names.length,
+      removeButtonIndex: this.props.institutionForm.validName.alternative_names.length,
       isEdit: true,
       editableFields: {
         name_official_transliterated: this.checkFields('name_official_transliterated'),
@@ -100,7 +113,7 @@ class InstitutionModal extends Component {
     if (inputId === 'qf_ehea_levels') {
       return _.isEmpty(this.props.institutionForm.institution.qf_ehea_levels);
     } else {
-      return _.isEmpty(this.props.institutionForm.institution.names[inputId])
+      return _.isEmpty(this.props.institutionForm.validName[inputId])
     }
   }
 
@@ -115,7 +128,7 @@ class InstitutionModal extends Component {
   }
 
   checkAlternativeNameFields() {
-    return this.props.institutionForm.institution.names.alternative_names.map(name => {
+    return this.props.institutionForm.validName.alternative_names.map(name => {
       return {
         name: _.isEmpty(name.name),
         transliteration: _.isEmpty(name.transliteration)
@@ -132,7 +145,7 @@ class InstitutionModal extends Component {
   }
 
   isEditableAlternativeNames(inputId, index) {
-    return this.state.isEdit && this.state.editableFields.alternative_names[index] ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.institution.names.alternative_names[index], inputId);
+    return this.state.isEdit && this.state.editableFields.alternative_names[index] ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.validName.alternative_names[index], inputId);
   }
 
   handleInput(e) {
@@ -148,19 +161,19 @@ class InstitutionModal extends Component {
   }
 
   handleAlterNamesInput(indexOfInput, e) {
-    addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.names.alternative_names);
+    addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.validName.alternative_names);
   }
 
   handleRemove(e) {
-    removeAlterName(e.target.id, this.props.institutionForm.institution.names.alternative_names);
+    removeAlterName(e.target.id, this.props.institutionForm.validName.alternative_names);
   }
 
   addEmptyAlterName() {
-    addEmptyAlternativeName(this.props.institutionForm.institution.names.alternative_names);
+    addEmptyAlternativeName(this.props.institutionForm.validName.alternative_names);
   }
 
   getAlternativeNames() {
-    const array = this.props.institutionForm.institution.names.alternative_names.map((alternativeName, i) => {
+    const array = this.props.institutionForm.validName.alternative_names.map((alternativeName, i) => {
       return [
         {
           labelText: "Alternative Institution Name",
@@ -278,7 +291,7 @@ class InstitutionModal extends Component {
     return (
       <ModalFooter>
        <Col>
-        <Button color="primary">Save Record</Button>
+        <Button color="primary" onClick={this.save}>Save Record</Button>
       </Col>
         <Button color="primary" onClick={this.cancel}>Cancel</Button>
       </ModalFooter>
@@ -302,11 +315,11 @@ class InstitutionModal extends Component {
   }
 
   render() {
-    const isOpen = !_.isEmpty(this.props.institutionForm.institution.names.alternative_names);
+    const isOpen = !_.isEmpty(this.props.institutionForm.validName.alternative_names);
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
-          View {this.props.institutionForm.institution.names.name_official} records
+          View {this.props.institutionForm.validName.name_official} records
         </ModalHeader>
         <ModalBody>
           <Row>
@@ -319,7 +332,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official"
                     name="text"
-                    value={this.props.institutionForm.institution.names.name_official}
+                    value={this.props.institutionForm.validName.name_official}
                     handleInput={this.handleInput}
                     disabled="true"
                     />
@@ -328,7 +341,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official_transliterated"
                     name="text"
-                    value={this.props.institutionForm.institution.names.name_official_transliterated}
+                    value={this.props.institutionForm.validName.name_official_transliterated}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('name_official_transliterated')}
                     />
@@ -337,7 +350,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_english"
                     name="text"
-                    value={this.props.institutionForm.institution.names.name_english}
+                    value={this.props.institutionForm.validName.name_english}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('name_english')}
                     />
@@ -346,7 +359,7 @@ class InstitutionModal extends Component {
                     type="text"
                     id="acronym"
                     name="text"
-                    value={this.props.institutionForm.institution.names.acronym}
+                    value={this.props.institutionForm.validName.acronym}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('acronym')}
                     />

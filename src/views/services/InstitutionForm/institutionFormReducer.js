@@ -11,17 +11,18 @@ const initialState = {
     founding_date: '',
     closure_date: null,
     identifiers: [],
-    names: {
-      id: null,
-      name_official: '',
-      name_official_transliterated: '',
-      name_english: '',
-      acronym: '',
-      name_valid_to: null,
-      alternative_names: []
-    },
+    names: [],
     countries: [],
     qf_ehea_levels: []
+  },
+  validName: {
+    id: null,
+    name_official: '',
+    name_official_transliterated: '',
+    name_english: '',
+    acronym: '',
+    name_valid_to: null,
+    alternative_names: []
   }
 }
 
@@ -34,53 +35,45 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
       return { ...state, formDisplay: false }
     }
     case 'CHANGE_INSTITUTION_ALL': {
-      return { ...state, institution: action.payload }
+      return {
+        ...state,
+        institution: action.payload,
+        validName: action.validName
+      }
     }
     case 'CHANGE_NAME_TRANSLITERATED': {
       return {
         ...state,
-        institution: {
-          ...state.institution,
-          names: {
-            ...state.institution.names,
-            name_official_transliterated: action.payload
-          }
+        validName: {
+          ...state.validName,
+          name_official_transliterated: action.payload
         }
       }
     }
     case 'CHANGE_NAME_ENGLISH': {
       return {
         ...state,
-        institution: {
-          ...state.institution,
-          names: {
-            ...state.institution.names,
-            name_english: action.payload
-          }
+        validName: {
+          ...state.validName,
+          name_english: action.payload
         }
       }
     }
     case 'CHANGE_ACRONYM': {
       return {
         ...state,
-        institution: {
-          ...state.institution,
-          names: {
-            ...state.institution.names,
-            acronym: action.payload
-          }
+        validName: {
+          ...state.validName,
+          acronym: action.payload
         }
       }
     }
     case 'CHANGE_INSTITUTION_ALTERNATIVE_NAME': {
       return {
         ...state,
-        institution: {
-          ...state.institution,
-          names: {
-            ...state.institution.names,
-            alternative_names: action.payload
-          }
+        validName: {
+          ...state.validName,
+          alternative_names: action.payload
         }
       }
     }
