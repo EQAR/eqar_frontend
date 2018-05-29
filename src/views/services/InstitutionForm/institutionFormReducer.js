@@ -4,6 +4,7 @@ import lodash from 'lodash';
 
 const initialState = {
   formDisplay: false,
+  isSelect: false,
   institution: {
     id: null,
     deqar_id: '',
@@ -29,7 +30,7 @@ const initialState = {
 const institutionFormReducer = composeResetReducer(function institutionFormReducer(state = lodash.cloneDeep(initialState), action) {
   switch (action.type) {
     case 'OPEN_INSTITUTION_FORM': {
-      return { ...state, formDisplay: true }
+      return { ...state, formDisplay: true, isSelect: action.payload }
     }
     case 'CLOSE_INSTITUTION_FORM': {
       return { ...state, formDisplay: false }

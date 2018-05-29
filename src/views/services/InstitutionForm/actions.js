@@ -82,6 +82,6 @@ export function closeInstitutionForm() {
   store.dispatch({ type: 'CLOSE_INSTITUTION_FORM'})
 }
 
-export function openInstitutionForm() {
-  store.dispatch({ type: 'OPEN_INSTITUTION_FORM'})
+export function openInstitutionForm(isSelect) {
+  store.dispatch({ type: 'OPEN_INSTITUTION_FORM', payload: isSelect})
 }

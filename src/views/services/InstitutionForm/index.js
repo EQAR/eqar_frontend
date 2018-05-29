@@ -42,6 +42,7 @@ class InstitutionModal extends Component {
     this.checkFields = this.checkFields.bind(this);
     this.checkCountryFields = this.checkCountryFields.bind(this);
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
+    this.selectableInstitution = this.selectableInstitution.bind(this);
     this.state = {
       validNames: [],
       isEdit: false,
@@ -298,6 +299,12 @@ class InstitutionModal extends Component {
     )
   }
 
+  selectableInstitution() {
+    if (this.props.institutionForm.isSelect) {
+      return <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
+    }
+  }
+
   viewFooter() {
     return (
       <ModalFooter>
@@ -305,7 +312,7 @@ class InstitutionModal extends Component {
         <Button color="primary" onClick={ this.toggle }>Close</Button>
       </Col>
         <Button color="primary" onClick={ this.edit }>Edit Record</Button>
-        <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
+        {this.selectableInstitution()}
       </ModalFooter>
     )
   }

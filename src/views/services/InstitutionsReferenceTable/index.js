@@ -192,7 +192,7 @@ class InstitutionsReferenceTable extends Component {
       console.log('toggle', this.state.selected);
     }
     institutionRequest(row.id);
-    openInstitutionForm();
+    openInstitutionForm(this.props.isSelect);
   }
 
   render() {
