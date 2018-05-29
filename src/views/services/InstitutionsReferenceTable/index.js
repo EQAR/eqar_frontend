@@ -25,7 +25,6 @@ class InstitutionsReferenceTable extends Component {
       insertBtn: this.createInsertButton.bind(this),
     };
     this.state = {
-      
       selected: [],
       select: {},
       unselectable: this.selectedInstitutions()
@@ -37,10 +36,14 @@ class InstitutionsReferenceTable extends Component {
     this.getSelectRow = this.getSelectRow.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('next', nextProps.reportForm.institutions, this.props.reportForm.institutions);
-    if (this.props.isSelect && nextProps.reportForm.institutions.length > this.props.institutions.length) {
-      console.log(nextProps.reportForm.institutions, this.props.institutions.length);
+  componentDidUpdate() {
+    let selectedInstitutions = this.state.selected;
+    const selectedInstitution = _.find(this.props.reportForm.institutions, institution => (!_.includes(this.state.unselectable, institution.deqar_id) && !_.includes(this.state.selected, institution.deqar_id)));
+    if (!_.isEmpty(selectedInstitution)) {
+      selectedInstitutions.push(selectedInstitution.deqar_id);
+      this.setState({
+        selected: selectedInstitutions
+      })
     }
   }
 
