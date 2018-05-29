@@ -36,6 +36,11 @@ class InstitutionsReferenceTable extends Component {
     this.getSelectRow = this.getSelectRow.bind(this);
   }
 
+  componentDidMount(){
+    InstitutionsRequest();
+    getInstituionCountries();
+  }
+
   componentDidUpdate() {
     let selectedInstitutions = this.state.selected;
     const selectedInstitution = _.find(this.props.reportForm.institutions, institution => (!_.includes(this.state.unselectable, institution.deqar_id) && !_.includes(this.state.selected, institution.deqar_id)));
@@ -60,11 +65,6 @@ class InstitutionsReferenceTable extends Component {
       {}
   }
 
-  componentDidMount(){
-    InstitutionsRequest();
-    getInstituionCountries();
-  }
-
   createInsertButton(onClick) {
     return <Button size="sm" color="primary" onClick={onClick} className="add-institution">Add New Institution</Button>
   }
@@ -75,7 +75,7 @@ class InstitutionsReferenceTable extends Component {
       this.setState(() => ({
         selected: [...this.state.selected, row.deqar_id]
       }));
-    } else {
+    } else if (!isSelected && e.target.id !== 'open-form'){
       removeInstitution(row, this.props.reportForm.institutions);
       this.setState(() => ({
         selected: this.state.selected.filter(x => x !== row.deqar_id)
@@ -188,7 +188,6 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggle(row) {
-    console.log(this.state.selected, row.deqar_id);
     if (_.includes(this.state.selected, row.deqar_id)) {
       console.log('toggle', this.state.selected);
     }
