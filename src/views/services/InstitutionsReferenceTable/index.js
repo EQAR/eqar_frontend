@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
-import { openInstitutionForm, institutionRequest } from '../InstitutionForm/actions';
+import { openInstitutionForm, institutionRequest, resetFields } from '../InstitutionForm/actions';
 import { getInstituionCountries } from '../countries/actions';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import InstitutionModal from '../InstitutionForm';
@@ -65,8 +65,13 @@ class InstitutionsReferenceTable extends Component {
       {}
   }
 
+  addNewInstitution() {
+    resetFields();
+    openInstitutionForm({isSelect: false, addNew: true});
+  }
+
   createInsertButton(onClick) {
-    return <Button size="sm" color="primary" onClick={onClick} className="add-institution">Add New Institution</Button>
+    return <Button size="sm" color="primary" onClick={this.addNewInstitution} className="add-institution">Add New Institution</Button>
   }
 
   onRowSelect(row, isSelected, e){
@@ -187,9 +192,9 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
-  toggle(row) {
+  toggle(row, options) {
     institutionRequest(row.id);
-    openInstitutionForm(this.props.isSelect);
+    openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
   }
 
   render() {

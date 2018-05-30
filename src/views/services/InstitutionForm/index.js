@@ -44,7 +44,6 @@ class InstitutionModal extends Component {
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.selectableInstitution = this.selectableInstitution.bind(this);
     this.state = {
-      validNames: [],
       isEdit: false,
       removeButtonIndex: null,
       editableFields: {
@@ -60,7 +59,7 @@ class InstitutionModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return _.isInteger(nextProps.institutionForm.institution.id);
+    return _.isInteger(nextProps.institutionForm.institution.id) || nextProps.institutionForm.addNew;
   }
 
   cancel() {
@@ -138,15 +137,16 @@ class InstitutionModal extends Component {
   }
 
   isEditableSimple(inputId) {
-    return this.state.isEdit ? !this.state.editableFields[inputId] : true;
+    console.log(this.state.isEdit || this.props.institutionForm.addNew, this.state);
+    return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields[inputId] : true;
   }
 
   isEditableCountry(inputId, index) {
-    return this.state.isEdit ? !this.state.editableFields.countries[index][inputId] : true;
+    return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields.countries[index][inputId] : true;
   }
 
   isEditableAlternativeNames(inputId, index) {
-    return this.state.isEdit && this.state.editableFields.alternative_names[index] ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.validName.alternative_names[index], inputId);
+    return (this.state.isEdit && this.state.editableFields.alternative_names[index]) || this.props.institutionForm.addNew ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.validName.alternative_names[index], inputId);
   }
 
   handleInput(e) {
@@ -222,7 +222,7 @@ class InstitutionModal extends Component {
           labelClassName: "required-input",
           type: "select",
           id: "country",
-          disabled:true,
+          disabled: !this.props.institutionForm.addNew,
           value: this.getCountry(country.country).name_english,
           options: this.getOptionsCountry(),
           handleInput: this.handleCountriesInput,
@@ -341,7 +341,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.validName.name_official}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.props.institutionForm.addNew}
                     />
                   <CustomInputField
                     labelText="Institution Name, Transliterated"
@@ -404,7 +404,7 @@ class InstitutionModal extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled={!this.state.isEdit}
+                    disabled={!this.state.isEdit || !this.props.institutionForm.addNew}
                     />
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"
@@ -422,7 +422,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.website_link}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.props.institutionForm.addNew}
                     />
                 </CardBody>
 

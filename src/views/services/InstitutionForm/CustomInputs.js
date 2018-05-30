@@ -18,6 +18,10 @@ export class CustomInputField extends Component {
     super(props);
   }
 
+  convertValue(value) {
+    return value === null ? '' : value;
+  }
+
   render() {
     return (
       <FormGroup>
@@ -27,7 +31,7 @@ export class CustomInputField extends Component {
           name={this.props.name}
           id={this.props.id}
           onChange={this.props.handleInput}
-          value={this.props.value}
+          value={this.convertValue(this.props.value)}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled} />
       </FormGroup>
@@ -125,9 +129,9 @@ export class CustomDynamicInput extends Component {
       return (
         <div key={index}>
           {e.map((elem, i) => {
-            if (elem.value === null) {
-              elem.value = '';
-            }
+            // if (elem.value === null) {
+            //   elem.value = '';
+            // }
             return elem.type === 'select' ?
               (
               <CustomSelectInput
