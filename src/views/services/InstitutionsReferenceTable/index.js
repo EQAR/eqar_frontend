@@ -188,9 +188,6 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggle(row) {
-    if (_.includes(this.state.selected, row.deqar_id)) {
-      console.log('toggle', this.state.selected);
-    }
     institutionRequest(row.id);
     openInstitutionForm(this.props.isSelect);
   }
