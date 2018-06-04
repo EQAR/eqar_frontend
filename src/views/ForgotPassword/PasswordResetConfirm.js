@@ -48,8 +48,9 @@ class PasswordResetConfirm extends Component {
       .then( response => {
         this.loadingToggle();
         formApi.resetAll();
-        toast.success("Password has been updated!");
-        Redirect('/login');
+        toast.success("Password has been updated! Redirecting to login...", {
+          onClose: () => this.props.history.push('/login')
+        });
       })
       .catch( error => {
         if("non_field_errors" in error.response.data) {
@@ -64,7 +65,6 @@ class PasswordResetConfirm extends Component {
           });
         }
         this.loadingToggle();
-        toast.error(this.state.errorMessage);
       });
   }
 
@@ -113,7 +113,7 @@ class PasswordResetConfirm extends Component {
 
     return (
       <div className="app flex-row align-items-center">
-        <ToastContainer position="top-right" autoClose={4000} style={containerStyle}/>
+        <ToastContainer position="top-right" autoClose={2000} style={containerStyle}/>
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
