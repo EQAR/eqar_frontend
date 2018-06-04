@@ -7,15 +7,9 @@ import {
   CardBody,
   CardHeader
 } from 'reactstrap';
-import store from '../../main_store';
-import setStates from '../../state';
-import InstitutionsReferenceTable from './InstitutionsReferenceTable';
+import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
 
 class Institutions extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="animated fadeIn">
@@ -29,7 +23,7 @@ class Institutions extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <InstitutionsReferenceTable />
+                    <InstitutionsReferenceTable isSelect={false}/>
                   </Col>
                 </Row>
               </CardBody>
@@ -41,4 +35,4 @@ class Institutions extends Component {
   }
 }
 
-export default connect(setStates)(Institutions);
+export default Institutions;

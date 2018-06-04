@@ -3,8 +3,8 @@ import { Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGro
 import LoginAlert from './LoginAlert';
 import { connect } from 'react-redux';
 import loginUser from './Actions/LoginAjax';
-import store from '../../main_store';
 import setStates from '../../state';
+import {Link} from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -53,8 +53,13 @@ class Login extends Component {
                       <Input type="password" placeholder="Password" onKeyUp={this.handleLogin} onChange={this.setPassword} />
                     </InputGroup>
                     <Row>
-                      <Col xs="12">
+                      <Col xs="6">
                         <Button onClick={this.handleLogin} color="primary" className="px-4">Login</Button>
+                      </Col>
+                      <Col xs="6" className="text-right">
+                        <Link to='/forgot-password'>
+                          <Button color="link" className="px-0">Forgot password?</Button>
+                        </Link>
                       </Col>
                     </Row>
                   </CardBody>

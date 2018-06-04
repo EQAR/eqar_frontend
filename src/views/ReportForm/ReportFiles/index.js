@@ -25,7 +25,7 @@ class ReportFiles extends Component {
       <div>
         <Row>
           <Col xs="6">
-            <Card>
+            <Card className="info-box">
               <CardBody>
                 <FileUrl />
                 <Upload />

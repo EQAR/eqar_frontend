@@ -14,17 +14,42 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import InstitutionsTable from '../../../components/InstitutionsTable';
+import InstitutionsReferenceTable from '../../services/InstitutionsReferenceTable';
+import { removeSelectedInstitution } from './actions';
+
 
 
 class BrowseInstitution extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.clearInstitutions = this.clearInstitutions.bind(this);
+    this.getSelectedAmount = this.getSelectedAmount.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.state = {
-      modal: false
+      modal: false,
+      selectedAmount: 0
     };
+  }
+
+  getSelectedAmount() {
+    this.setState({
+      selectedAmount: this.props.reportForm.institutions.length
+    })
+    this.toggle();
+  }
+
+  clearInstitutions() {
+    removeSelectedInstitution(this.state.selectedAmount, this.props.reportForm.institutions);
+    this.toggle();
+  }
+
+  handleKeyPress(event) {
+    if (event.key === 'Escape') {
+      this.clearInstitutions();
+    } else if (event.target.id !== 'browse' && event.key === 'Enter') {
+      this.toggle();
+    }
   }
 
   toggle() {
@@ -33,24 +58,14 @@ class BrowseInstitution extends Component {
     });
   }
 
-  handleClick(e) {
-    this.setState({
-      value: {
-        value: [],
-        label: ''
-      }
-    });
-    selectInstitution(this.state.value.value, this.props.reportForm.institutions);
-  }
-
   render() {
     return (
       <FormGroup>
-        <Button color="primary" size={'sm'} onClick={this.toggle}>Browse Institutions</Button>
-          <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="my-modal">
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+        <Button id="browse" color="primary" size={'sm'} onClick={this.getSelectedAmount} onKeyUp={this.handleKeyPress}>Browse Institutions</Button>
+          <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="table-modal" autoFocus={true} onKeyUp={this.handleKeyPress}>
+            <ModalHeader toggle={this.toggle}>Browse Institutions</ModalHeader>
             <ModalBody>
-              <InstitutionsTable tableType="allInstitutions" select="select"/>
+              <InstitutionsReferenceTable isSelect={true} />
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}

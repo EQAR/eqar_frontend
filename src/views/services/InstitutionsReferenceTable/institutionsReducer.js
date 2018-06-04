@@ -1,4 +1,4 @@
-function institutionReferencesReducer(state = {
+function institutionsReferencesReducer(state = {
   institutions: [],
   totalDataSize: 0,
   settings: {}
@@ -15,4 +15,4 @@ function institutionReferencesReducer(state = {
   }
 }
 
-export default institutionReferencesReducer;
+export default institutionsReferencesReducer;

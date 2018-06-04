@@ -1,13 +1,14 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { createBrowserHistory, routerReducer, routerMiddleware, startListener } from 'redux-first-routing';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import loginReducer from './views/Login/Reducers/login_reducer';
 import reportReducer from './views/Dashboard/Reducers/reportReducer';
 import dashboardReducer from './views/Dashboard/Reducers/dashboardReducer';
 import reportFormReducer from './views/ReportForm/Reducers/reportFormReducer';
-import institutionReferencesReducer from './views/Institutions/Reducers/institutionsReducer'
-import institutionsReducer from './components/InstitutionsTable/Reducers/institutionsReducer';
-import countriesReducer from './components/InstitutionsTable/Reducers/countriesReducer';
+import institutionsReferencesReducer from './views/services/InstitutionsReferenceTable/institutionsReducer'
+import institutionFormReducer from './views/services/InstitutionForm/institutionFormReducer'
+import countriesReducer from './views/services/countries/countriesReducer';
 import agencyReducer from './views/ReportForm/CoreData/agencyReducer';
 import agenciesReducer from './views/ReportForm/CoreData/agenciesReducer';
 import activityReducer from './views/ReportForm/CoreData/activityReducer';
@@ -31,8 +32,8 @@ const reducers = combineReducers({
   countries: countriesReducer,
   dashboard: dashboardReducer,
   decisions: decisionReducer,
-  institutions: institutionsReducer,
-  institutionsRef: institutionReferencesReducer,
+  institutionsRef: institutionsReferencesReducer,
+  institutionForm: institutionFormReducer,
   login: loginReducer,
   languages: languagesReducer,
   programme: programmeReducer,
@@ -45,7 +46,7 @@ const reducers = combineReducers({
   statuses: statusReducer
 });
 
-const middleWare = applyMiddleware(thunk, routerMiddleware(history));
+const middleWare = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
 
 const store = createStore(reducers, middleWare);
 

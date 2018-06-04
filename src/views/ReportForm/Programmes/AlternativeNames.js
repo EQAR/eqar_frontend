@@ -78,11 +78,11 @@ class AlternativeNames extends Component {
       return (
         <div key={i}>
           <FormGroup>
-            <Label for="alternativeName">Altenative programme name</Label>
+            <Label for="name_alternative">Altenative programme name</Label>
             <Input type="text" name="text" id="name_alternative" placeholder="Enter alternative programme name" onChange={this.handleInput.bind(null, i)} value={alternative.name_alternative}/>
           </FormGroup>
           <FormGroup>
-            <Label for="alternativeQualification">Alternative qualification name</Label>
+            <Label for="qualification_alternative">Alternative qualification name</Label>
             <Input type="text" name="text" id="qualification_alternative" placeholder="Enter alternative qualification name" onChange={this.handleInput.bind(null, i)} value={alternative.qualification_alternative} disabled={this.isQualification(i)}/>
           </FormGroup>
           {this.getButton(i)}

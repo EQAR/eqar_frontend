@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {Badge, Card, CardHeader, CardBody} from 'reactstrap';
+import {
+  Badge,
+  Card,
+  CardBody,
+  Button,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  ButtonGroup, Tooltip
+} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import getReports from '../Actions/getReports';
-
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -34,8 +43,26 @@ class DataTable extends Component {
         badgeColor = "danger";
     }
     return (
-        <Badge color={badgeColor} pill>{cell}</Badge>
+        <Badge color={badgeColor}>{cell}</Badge>
     );    
+  }
+
+  fileFormatter(cell, row) {
+    return (
+      <ButtonGroup>
+        {
+          cell.map(function(data, idx) {
+            if(data.file) {
+              return (
+                <a key={idx} id={'button-' + idx} href={data.file} target={'_blank'}>
+                  <Button outline color="primary" size={'sm'}><i className="fa fa-file-pdf-o"> </i></Button>
+                </a>
+              )
+            }
+          })
+        }
+      </ButtonGroup>
+    )
   }
 
   render() {
@@ -62,6 +89,7 @@ class DataTable extends Component {
               <TableHeaderColumn dataField="institutions" dataFormat={ this.multiFormatter }>Institutions</TableHeaderColumn>
               <TableHeaderColumn dataField="programmes" dataFormat={ this.multiFormatter }>Programmes</TableHeaderColumn>
               <TableHeaderColumn dataField="flag" width='10%' dataAlign="center" dataFormat={ this.flagFormatter }>Flag</TableHeaderColumn>
+              <TableHeaderColumn dataField="report_files" dataAlign="center" dataFormat={ this.fileFormatter.bind(this) }>Files</TableHeaderColumn>
             </BootstrapTable>
           </CardBody>
         </Card>

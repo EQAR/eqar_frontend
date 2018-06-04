@@ -28,13 +28,11 @@ class ValidFrom extends Component {
 
   handleBlur(e) {
     if (e.target.value < this.props.agency.valid_from && e.target.value !== '') {
-      formFill('', e.target.id);
       this.setState({
         isAlert: true,
         errorMessage: 'The given date is earlier than the agency\'s registration date!'
       });
     } else if (e.target.value > this.props.agency.valid_to && e.target.value !== '') {
-      formFill('', e.target.id);
       this.setState({
         isAlert: true,
         errorMessage: 'The given date is later than the agency\'s registration end!'

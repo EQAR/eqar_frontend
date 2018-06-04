@@ -28,15 +28,14 @@ class Full extends Component {
         <div className="app-body">
           <Sidebar {...this.props}/>
           <main className="main">
-            <Breadcrumb />
-            <Container fluid>
+            <Container fluid className={'content'}>
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/my-profile" name="My Profile" component={MyProfile}/>
                 <Route path="/my-agency" name="My Profile" component={MyAgency}/>
                 <Route path="/report-form" name="Report Form" component={ReportForm}/>
                 <Route path="/upload-csv" name="CSV Upload" component={CSVUpload}/>
-                <Route path="/reference-data/institutions" name="Institutions" component={Institutions}/>
+                <Route path="/institutions" name="Institutions" component={Institutions}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
