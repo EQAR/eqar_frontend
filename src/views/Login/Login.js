@@ -3,7 +3,6 @@ import { Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGro
 import LoginAlert from './LoginAlert';
 import { connect } from 'react-redux';
 import loginUser from './Actions/LoginAjax';
-import store from '../../main_store';
 import setStates from '../../state';
 import {Link} from "react-router-dom";
 

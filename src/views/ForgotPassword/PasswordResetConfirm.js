@@ -7,18 +7,18 @@ import {
   Card,
   CardBody,
   Button,
-  Input,
   InputGroup,
   InputGroupAddon,
-  Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Form, Text } from 'react-form';
 import setStates from '../../state';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import LaddaButton, {EXPAND_RIGHT} from "react-ladda";
-import {POST_PASSWORD_RESET, POST_PASSWORD_RESET_CONFIRM} from "../../config";
+import {POST_PASSWORD_RESET_CONFIRM} from "../../config";
 import axios from "axios/index";
+import {toast, ToastContainer} from 'react-toastify';
+
 
 class PasswordResetConfirm extends Component {
   constructor(props) {
@@ -40,30 +40,6 @@ class PasswordResetConfirm extends Component {
     });
   }
 
-  alertToggle() {
-    this.setState({
-      ...this.state,
-      alertOpen: true,
-      successOpen: false
-    })
-  }
-
-  successToggle() {
-    this.setState({
-      ...this.state,
-      successOpen: true,
-      alertOpen: false
-    })
-  }
-
-  closeAlerts() {
-    this.setState({
-      ...this.state,
-      alertOpen: false,
-      successOpen: false
-    })
-  }
-
   handleSubmit(value, e, formApi) {
     this.loadingToggle();
     value['uid'] = this.state.uid;
@@ -72,22 +48,23 @@ class PasswordResetConfirm extends Component {
       .then( response => {
         this.loadingToggle();
         formApi.resetAll();
-        this.successToggle();
+        toast.success("Password has been updated!");
+        Redirect('/login');
       })
       .catch( error => {
         if("non_field_errors" in error.response.data) {
           this.setState({
             ...this.state,
-            errorMessage: error.response.data["non_field_errors"]
+            errorMessage: "Password reset link was already used."
           });
         } else {
           this.setState({
             ...this.state,
-            errorMessage: error.response.data["new_password"]
+            errorMessage: error.response.data["new_password"][0]
           });
         }
         this.loadingToggle();
-        this.alertToggle();
+        toast.error(this.state.errorMessage);
       });
   }
 
@@ -130,8 +107,13 @@ class PasswordResetConfirm extends Component {
   }
 
   render() {
+    const containerStyle = {
+      zIndex: 1999
+    };
+
     return (
       <div className="app flex-row align-items-center">
+        <ToastContainer position="top-right" autoClose={4000} style={containerStyle}/>
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
@@ -140,17 +122,11 @@ class PasswordResetConfirm extends Component {
                   <CardBody>
                     <h1>Change Password</h1>
                     <p className="text-muted">Please enter your new password!</p>
-                    <Alert color="success" isOpen={this.state.successOpen} toggle={this.closeAlerts.bind(this)}>
-                      Password reset request was sent!
-                    </Alert>
-                    <Alert color="danger" isOpen={this.state.alertOpen} toggle={this.closeAlerts.bind(this)}>
-                      {this.state.errorMessage}
-                    </Alert>
                     <Form onSubmit={this.handleSubmit.bind(this)} validate={this.validate.bind(this)}>
                       {formApi => (
                         <form onSubmit={formApi.submitForm} id="changeEmailForm">
                           <InputGroup className="mb-3">
-                            <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
+                            <InputGroupAddon><i className="icon-lock"> </i></InputGroupAddon>
                             <Text
                               field="new_password"
                               id="new_password"
@@ -159,7 +135,7 @@ class PasswordResetConfirm extends Component {
                               placeholder="Password"/>
                           </InputGroup>
                           <InputGroup className="mb-3">
-                            <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
+                            <InputGroupAddon><i className="icon-lock"> </i></InputGroupAddon>
                             <Text
                               field="re_new_password"
                               id="re_new_password"
