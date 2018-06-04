@@ -54,7 +54,7 @@ class InstitutionsReferenceTable extends Component {
   }
 
   createInsertButton(onClick) {
-    return <Button size="sm" color="primary" onClick={onClick} className="add-institution">Add New Institution</Button>
+    return <Button size="sm" color="primary" onClick={onClick} className="add-institution" disabled={true}>Add New Institution</Button>
   }
 
   onRowSelect(row, isSelected){
