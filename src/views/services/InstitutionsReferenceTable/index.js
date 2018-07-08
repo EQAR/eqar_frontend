@@ -178,10 +178,10 @@ class InstitutionsReferenceTable extends Component {
   }
 
   trClassFormat(row, rowIndex) {
-    let className = '';
+    let className = 'institution';
     this.props.reportForm.institutions.forEach(institution => {
       if (institution.deqar_id === row.deqar_id) {
-        className = 'selected-row';
+        className += ' selected-row';
       }
     })
     return className;
@@ -204,6 +204,7 @@ class InstitutionsReferenceTable extends Component {
         <BootstrapTable data={ this.getInstitutionsRows() }
                         version="4"
                         striped
+                        hover
                         remote={ this.remote }
                         pagination={ true }
                         options={ this.options }
