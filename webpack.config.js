@@ -20,7 +20,7 @@ module.exports = (env = {}) => {
     },
     output: {
       path: BUILD_DIR,
-      filename: '[name].bundle.js'
+      filename: '[name].[hash].bundle.js'
     },
     // watch: true,
     devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
@@ -75,7 +75,6 @@ module.exports = (env = {}) => {
           test: /\.(png|jpg|jpeg|gif|ico)$/,
           use: [
             {
-              // loader: 'url-loader'
               loader: 'file-loader',
               options: {
                 name: './img/[name].[hash].[ext]'
@@ -100,7 +99,8 @@ module.exports = (env = {}) => {
       new HtmlWebpackPlugin(
         {
           inject: true,
-          template: './public/index.html'
+          template: './public/index.html',
+          title: 'Caching'
         }
       ),
       new CopyWebpackPlugin([

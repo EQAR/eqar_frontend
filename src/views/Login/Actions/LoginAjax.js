@@ -5,7 +5,6 @@ import { GET_TOKEN } from '../../../config';
 
 
 function loginUser(username, password) {
-
   store.dispatch((dispatch) => {
     axios.post(GET_TOKEN, {
       username: username,
