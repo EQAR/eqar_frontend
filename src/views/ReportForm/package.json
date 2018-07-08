@@ -2,8 +2,5 @@
   "name": "ReportForm",
   "version": "0.0.0",
   "private": true,
-  "main": "./ReportForm.js",
-  "dependencies": {
-    "spinkit": "^1.2.5"
-  }
+  "main": "./ReportForm.js"
 }
