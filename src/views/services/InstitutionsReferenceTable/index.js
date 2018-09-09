@@ -6,7 +6,7 @@ import setStates from '../../../state';
 import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
 import { openInstitutionForm, institutionRequest, resetFields } from '../InstitutionForm/actions';
 import { getInstituionCountries } from '../countries/actions';
-import { Button, Modal, ModalBody } from 'reactstrap';
+import { Button, Modal, ModalBody, Row, Col } from 'reactstrap';
 import InstitutionModal from '../InstitutionForm';
 import _ from 'lodash';
 
@@ -21,8 +21,9 @@ class InstitutionsReferenceTable extends Component {
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
-      sizePerPageList: [ 5, 10, 20 ],
-      insertBtn: this.createInsertButton.bind(this),
+      paginationPanel: this.renderPaginationPanel.bind(this),
+      paginationShowsTotal: this.renderShowsTotal.bind(this),
+      sizePerPageList: [ 5, 10, 20 ]
     };
     this.state = {
       selected: [],
@@ -34,6 +35,7 @@ class InstitutionsReferenceTable extends Component {
     this.buttonFormatter = this.buttonFormatter.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getSelectRow = this.getSelectRow.bind(this);
+    this.showsTotal = '';
   }
 
   componentDidMount(){
@@ -68,12 +70,6 @@ class InstitutionsReferenceTable extends Component {
   addNewInstitution() {
     resetFields();
     openInstitutionForm({isSelect: false, addNew: true});
-  }
-
-  createInsertButton(onClick) {
-    console.log(onClick);
-    
-    return <Button size="sm" color="primary" onClick={onClick} className="add-institution" >Add New Institution</Button>
   }
 
   onRowSelect(row, isSelected, e){
@@ -199,6 +195,24 @@ class InstitutionsReferenceTable extends Component {
     openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
   }
 
+  renderShowsTotal(start, to, total) {
+    this.showsTotal = (
+      <div>
+        From { start } to { to }, totals is { total }
+      </div>
+    );
+  }
+
+  renderPaginationPanel(props) {
+    return (
+      <Row>
+        <Col>{ props.components.sizePerPageDropdown }</Col>
+        <Col>{ this.showsTotal }</Col>
+        <Col className="float-right">{ props.components.pageList }</Col>
+      </Row>
+    )
+  }
+
   render() {
     const selectRow = this.getSelectRow();
     const countries = this.filterCountries();
@@ -218,7 +232,6 @@ class InstitutionsReferenceTable extends Component {
                         }
                         selectRow={ selectRow }
                         trClassName={ this.trClassFormat }
-                        insertRow
                         id="institution-table">
           <TableHeaderColumn dataField="deqar_id"
                              dataSort={ true }

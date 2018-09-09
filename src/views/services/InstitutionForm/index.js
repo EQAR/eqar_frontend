@@ -137,7 +137,6 @@ class InstitutionModal extends Component {
   }
 
   isEditableSimple(inputId) {
-    console.log(this.state.isEdit || this.props.institutionForm.addNew, this.state);
     return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields[inputId] : true;
   }
 

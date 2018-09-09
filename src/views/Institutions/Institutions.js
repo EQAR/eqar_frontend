@@ -10,11 +10,14 @@ import {
   Button
 } from 'reactstrap';
 import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
+import { openInstitutionForm, resetFields } from '../services/InstitutionForm/actions';
+
 
 class Institutions extends Component {
-  onClick(e) {
-    console.log(e);
-    
+
+  addNewInstitution() {
+    resetFields();
+    openInstitutionForm({isSelect: false, addNew: true});
   }
 
   render() {
@@ -36,7 +39,7 @@ class Institutions extends Component {
               </CardBody>
               <CardFooter>
                 <Col>
-                  <Button size="sm" color="primary" onClick={this.onClick} className="float-right add-institution" disabled={true}>Add New Institution</Button>
+                  <Button size="sm" color="primary" onClick={this.addNewInstitution} className="float-right add-institution">Add New Institution</Button>
                 </Col>
               </CardFooter>
             </Card>
