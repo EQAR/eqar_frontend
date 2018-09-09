@@ -5,7 +5,9 @@ import {
   Col,
   Card,
   CardBody,
-  CardHeader
+  CardHeader,
+  CardFooter,
+  Button
 } from 'reactstrap';
 import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
 
@@ -27,6 +29,11 @@ class Institutions extends Component {
                   </Col>
                 </Row>
               </CardBody>
+              <CardFooter>
+                <Col>
+                  <Button color="primary" className="float-right" onClick={this.toggle}>Add Institutions</Button>
+                </Col>
+              </CardFooter>
             </Card>
           </Col>
         </Row>
