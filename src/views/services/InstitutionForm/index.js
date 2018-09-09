@@ -7,13 +7,15 @@ import {
   Row,
   Col,
   Card,
-  CardBody} from 'reactstrap';
+  CardBody,
+  Button} from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest } from './actions';
+import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName, resetFields, putInstitution } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
+import { selectInstitution } from '../../ReportForm/Institutions/actions';
 import _ from 'lodash';
 
 
@@ -22,44 +24,157 @@ class InstitutionModal extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.save = this.save.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleCountriesInput = this.handleCountriesInput.bind(this);
+    this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.addEmptyAlterName = this.addEmptyAlterName.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
-    this.getOptions = this.getOptions.bind(this);
+    this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
     this.getCountry = this.getCountry.bind(this);
     this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
+    this.addToReport = this.addToReport.bind(this);
+    this.edit = this.edit.bind(this);
+    this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
+    this.checkFields = this.checkFields.bind(this);
+    this.checkCountryFields = this.checkCountryFields.bind(this);
+    this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
+    this.selectableInstitution = this.selectableInstitution.bind(this);
+    this.state = {
+      isEdit: false,
+      removeButtonIndex: null,
+      editableFields: {
+        name_official_transliterated: false,
+        name_english: false,
+        acronym: false,
+        national_identifier: false,
+        qf_ehea_levels: false,
+        countries: [],
+        alternative_names: []
+      }
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return _.isInteger(nextProps.institutionForm.institution.id);
+    return _.isInteger(nextProps.institutionForm.institution.id) || nextProps.institutionForm.addNew;
+  }
+
+  cancel() {
+    this.state.isEdit ? institutionRequest(this.props.institutionForm.institution.id) : resetFields();
+    this.setState({
+      isEdit: false
+    })
+  }
+
+  save() {
+    let institution = store.getState().institutionForm.institution;
+    institution.names.push(this.props.institutionForm.validName);
+    institution.qf_ehea_levels = this.props.institutionForm.institution.qf_ehea_levels.map(level => {
+      return {
+        qf_ehea_level: level.qf_ehea_level
+      }
+    });
+    putInstitution(institution);
   }
 
   toggle() {
+    this.setState({
+      isEdit: false
+    })
     closeInstitutionForm();
   }
 
-  handleInput(e) {
-    console.log(e.target.value, e.target.id);
+  addToReport() {
+    const institution = _.find(this.props.institutionReferences.institutions, {id: this.props.institutionForm.institution.id})
+    selectInstitution(institution, this.props.reportForm.institutions);
+    this.toggle();
   }
 
-  handleDynamicInput(indexOfInput, e) {
-    console.log(e.target.value, e.target.id, indexOfInput);
-    // addAlterName(e.target.value, e.target.id, indexOfInput, this.props.programme.alternative_names);
+  edit() {
+    this.setState({
+      removeButtonIndex: this.props.institutionForm.validName.alternative_names.length,
+      isEdit: true,
+      editableFields: {
+        name_official_transliterated: this.checkFields('name_official_transliterated'),
+        name_english: this.checkFields('name_english'),
+        acronym: this.checkFields('acronym'),
+        national_identifier: this.checkFields('national_identifier'),
+        qf_ehea_levels: this.checkFields('qf_ehea_levels'),
+        countries: this.checkCountryFields(),
+        alternative_names: this.checkAlternativeNameFields(),
+      }
+    })
+  }
+
+  checkFields(inputId) {
+    if (inputId === 'qf_ehea_levels') {
+      return _.isEmpty(this.props.institutionForm.institution.qf_ehea_levels);
+    } else {
+      return _.isEmpty(this.props.institutionForm.validName[inputId])
+    }
+  }
+
+  checkCountryFields() {
+    return this.props.institutionForm.institution.countries.map(country => {
+      return {
+        city: _.isEmpty(country.city),
+        lat: _.isEmpty(country.lat),
+        long: _.isEmpty(country.long)
+      }
+    })
+  }
+
+  checkAlternativeNameFields() {
+    return this.props.institutionForm.validName.alternative_names.map(name => {
+      return {
+        name: _.isEmpty(name.name),
+        transliteration: _.isEmpty(name.transliteration)
+      }
+    })
+  }
+
+  isEditableSimple(inputId) {
+    console.log(this.state.isEdit || this.props.institutionForm.addNew, this.state);
+    return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields[inputId] : true;
+  }
+
+  isEditableCountry(inputId, index) {
+    return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields.countries[index][inputId] : true;
+  }
+
+  isEditableAlternativeNames(inputId, index) {
+    return (this.state.isEdit && this.state.editableFields.alternative_names[index]) || this.props.institutionForm.addNew ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.validName.alternative_names[index], inputId);
+  }
+
+  handleInput(e) {
+    saveToForm(e.target.value, e.target.id)
+  }
+
+  handleQFEHEAInput(value) {
+    changeQFEHEALEVELS(value)
+  }
+
+  handleCountriesInput(indexOfInput, e) {
+    changeCountryData(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.countries);
+  }
+
+  handleAlterNamesInput(indexOfInput, e) {
+    addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.validName.alternative_names);
   }
 
   handleRemove(e) {
-    console.log(e.target.id);
-    // removeName(e.target.id, this.props.programme.alternative_names);
+    removeAlterName(e.target.id, this.props.institutionForm.validName.alternative_names);
   }
 
-  handleClick() {
-    console.log('add empty');
-    // addEmptyAlterName(this.props.programme.alternative_names);
+  addEmptyAlterName() {
+    addEmptyAlternativeName(this.props.institutionForm.validName.alternative_names);
   }
 
   getAlternativeNames() {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    const array = validName.alternative_names.map(alternativeName => {
+    const array = this.props.institutionForm.validName.alternative_names.map((alternativeName, i) => {
       return [
         {
           labelText: "Alternative Institution Name",
@@ -68,18 +183,18 @@ class InstitutionModal extends Component {
           name: "text",
           placeholder: "Enter alternative institution name",
           value: alternativeName.name,
-          disabled:"true",
-          handleInput: this.handleDynamicInput
+          disabled: this.isEditableAlternativeNames('name', i),
+          handleInput: this.handleAlterNamesInput
         },
         {
           labelText: "Alternative Institution Name, Transliterated",
           type: "text",
-          Id: "transliteration",
+          id: "transliteration",
           name: "text",
           placeholder: "Enter transliterated form",
-          disabled:"true",
+          disabled: this.isEditableAlternativeNames('transliteration', i),
           value: alternativeName.transliteration,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleAlterNamesInput
         }
       ]
     });
@@ -91,69 +206,127 @@ class InstitutionModal extends Component {
   }
 
   getOptionsCountry() {
-    return this.props.countries.countries.map(country => country.name_english)
+    return this.props.countries.countries.map(country => {
+      return {
+        value: country.name_english,
+        label: country.name_english
+      }
+    })
   }
 
   getCountries() {
-    return this.props.institutionForm.institution.countries.map(country => {
+    return this.props.institutionForm.institution.countries.map((country, i) => {
       return [
         {
           labelText: "Country",
           labelClassName: "required-input",
           type: "select",
           id: "country",
-          disabled:"true",
+          disabled: !this.props.institutionForm.addNew,
           value: this.getCountry(country.country).name_english,
           options: this.getOptionsCountry(),
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput,
+          multi: false
         },
         {
           labelText: "City",
           type: "text",
-          Id: "city",
+          id: "city",
           name: "text",
           placeholder: "Enter city name",
-          disabled:"true",
+          disabled: this.isEditableCountry('city', i),
           value: country.city,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         },
         {
           labelText: "Latitude",
           type: "number",
-          Id: "lat",
+          id: "lat",
           name: "number",
           placeholder: "Enter campus/city latitude",
-          disabled:"true",
+          disabled: this.isEditableCountry('lat', i),
           value: country.lat,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         },
         {
           labelText: "Longitude",
           type: "number",
-          Id: "long",
+          id: "long",
           name: "number",
           placeholder: "Enter campus/city longitude",
-          disabled:"true",
+          disabled: this.isEditableCountry('long', i),
           value: country.long,
-          handleInput: this.handleDynamicInput
+          handleInput: this.handleCountriesInput
         }
       ]
     });
   }
 
-  getOptions() {
-    return this.props.institutionForm.institution.qf_ehea_levels.map(level => {
-      return level.qf_ehea_level;
+  getQFEHEALabel(qf_ehea_level) {
+    return {
+      1: 'short cycle',
+      2: 'first cycle',
+      3: 'second cycle',
+      4: 'third cycle'
+    }[qf_ehea_level]
+  }
+
+  getQFEHEAOptions() {
+    return this.props.qfeheaLevels.levels.map(level => {
+      return {
+        value: level.id,
+        label: level.level
+      }
     })
   }
 
+  getQFEHEAValues() {
+    return this.props.institutionForm.institution.qf_ehea_levels.map(level => {
+      return {
+        value: level.qf_ehea_level,
+        label: this.getQFEHEALabel(level.qf_ehea_level)};
+    })
+  }
+
+  editFooter () {
+    return (
+      <ModalFooter>
+       <Col>
+        <Button color="primary" onClick={this.save}>Save Record</Button>
+      </Col>
+        <Button color="primary" onClick={this.cancel}>Cancel</Button>
+      </ModalFooter>
+    )
+  }
+
+  selectableInstitution() {
+    if (this.props.institutionForm.isSelect) {
+      return <Button color="primary" onClick={ this.addToReport }>Add To Report</Button>
+    }
+  }
+
+  viewFooter() {
+    return (
+      <ModalFooter>
+       <Col>
+        <Button color="primary" onClick={ this.toggle }>Close</Button>
+      </Col>
+        <Button color="primary" onClick={ this.edit }>Edit Record</Button>
+        {this.selectableInstitution()}
+      </ModalFooter>
+    )
+  }
+
+  getFooter() {
+    return this.state.isEdit ? this.editFooter() : this.viewFooter();
+  }
+
   render() {
-    const validName = _.find(this.props.institutionForm.institution.names, (name => name.name_valid_to === null))
-    const isOpen = !_.isEmpty(validName.alternative_names)
+    const isOpen = !_.isEmpty(this.props.institutionForm.validName.alternative_names);
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
-          View {validName.name_official} records
+          View {this.props.institutionForm.validName.name_official} records
         </ModalHeader>
         <ModalBody>
           <Row>
@@ -166,43 +339,46 @@ class InstitutionModal extends Component {
                     type="text"
                     id="name_official"
                     name="text"
-                    value={validName.name_official}
+                    value={this.props.institutionForm.validName.name_official}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.props.institutionForm.addNew}
                     />
                   <CustomInputField
                     labelText="Institution Name, Transliterated"
                     type="text"
                     id="name_official_transliterated"
                     name="text"
-                    value={validName.name_official_transliterated}
+                    value={this.props.institutionForm.validName.name_official_transliterated}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditableSimple('name_official_transliterated')}
                     />
                   <CustomInputField
                     labelText="Institution Name, English"
                     type="text"
                     id="name_english"
                     name="text"
-                    value={validName.name_english}
+                    value={this.props.institutionForm.validName.name_english}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditableSimple('name_english')}
                     />
                   <CustomInputField
                     labelText="Institution Acronym"
                     type="text"
                     id="acronym"
                     name="text"
-                    value={validName.acronym}
+                    value={this.props.institutionForm.validName.acronym}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditableSimple('acronym')}
                     />
                   <CustomDynamicInput
                     headerName="Alternative Names"
                     toggleButton={true}
                     addNewItemText="Add New Name"
-                    buttonDisabled={true}
-                    handleClick={this.handleClick}
+                    buttonDisabled={!this.state.isEdit}
+                    handleClick={this.addEmptyAlterName}
+                    handleRemove={this.handleRemove}
+                    removeButton={this.state.isEdit}
+                    removeButtonIndex={this.state.removeButtonIndex}
                     valueArray={this.getAlternativeNames()}
                     open={isOpen}
                     />
@@ -210,6 +386,7 @@ class InstitutionModal extends Component {
                     headerName="Geographic Locations"
                     headerClassName="required-input"
                     toggleButton={false}
+                    removeButton={false}
                     valueArray={this.getCountries()}
                     open={true}
                     />
@@ -219,7 +396,7 @@ class InstitutionModal extends Component {
                     id="national_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={this.isEditableSimple('national_identifier')}
                     />
                   <CustomInputField
                     labelText="Local Identifier"
@@ -227,14 +404,16 @@ class InstitutionModal extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.state.isEdit || !this.props.institutionForm.addNew}
                     />
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"
                     id="qf_ehea_levels"
-                    handleInput={this.handleInput}
-                    options={this.getOptions()}
-                    disabled="true"
+                    handleInput={this.handleQFEHEAInput}
+                    options={this.getQFEHEAOptions()}
+                    value={this.getQFEHEAValues()}
+                    multi={true}
+                    disabled={this.isEditableSimple('qf_ehea_levels')}
                   />
                   <CustomInputField
                     labelText="Institution Website"
@@ -243,7 +422,7 @@ class InstitutionModal extends Component {
                     name="text"
                     value={this.props.institutionForm.institution.website_link}
                     handleInput={this.handleInput}
-                    disabled="true"
+                    disabled={!this.props.institutionForm.addNew}
                     />
                 </CardBody>
 
@@ -273,8 +452,7 @@ class InstitutionModal extends Component {
             </Col>
           </Row>
         </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
+          {this.getFooter()}
       </Modal>
     )
   }
