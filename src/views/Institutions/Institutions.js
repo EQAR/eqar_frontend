@@ -12,6 +12,11 @@ import {
 import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
 
 class Institutions extends Component {
+  onClick(e) {
+    console.log(e);
+    
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -31,7 +36,7 @@ class Institutions extends Component {
               </CardBody>
               <CardFooter>
                 <Col>
-                  <Button color="primary" className="float-right" onClick={this.toggle}>Add Institutions</Button>
+                  <Button size="sm" color="primary" onClick={this.onClick} className="float-right add-institution" disabled={true}>Add New Institution</Button>
                 </Col>
               </CardFooter>
             </Card>
