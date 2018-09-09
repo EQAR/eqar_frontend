@@ -22,8 +22,7 @@ class InstitutionsReferenceTable extends Component {
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
       paginationPanel: this.renderPaginationPanel.bind(this),
-      paginationShowsTotal: this.renderShowsTotal.bind(this),
-      sizePerPageList: [ 5, 10, 20 ]
+      paginationShowsTotal: this.renderShowsTotal.bind(this)
     };
     this.state = {
       selected: [],
@@ -205,10 +204,10 @@ class InstitutionsReferenceTable extends Component {
 
   renderPaginationPanel(props) {
     return (
-      <Row>
-        <Col>{ props.components.sizePerPageDropdown }</Col>
-        <Col>{ this.showsTotal }</Col>
-        <Col className="float-right">{ props.components.pageList }</Col>
+      <Row className="institution-table-footer">
+        <div>{ props.components.sizePerPageDropdown }</div>
+        <div>{ this.showsTotal }</div>
+        <div>{ props.components.pageList }</div>
       </Row>
     )
   }
