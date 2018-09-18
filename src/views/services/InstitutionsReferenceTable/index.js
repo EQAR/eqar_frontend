@@ -203,6 +203,8 @@ class InstitutionsReferenceTable extends Component {
   }
 
   renderPaginationPanel(props) {
+    console.log(props, props.components);
+    
     return (
       <Row className="institution-table-footer">
         <div>{ props.components.sizePerPageDropdown }</div>
