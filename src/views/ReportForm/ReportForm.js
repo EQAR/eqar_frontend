@@ -19,7 +19,7 @@ import Institutions from './Institutions';
 import Programmes from './Programmes';
 import ReportFiles from './ReportFiles';
 import sendForm from './Actions/sendForm';
-import MessageModal from './MessageModal'
+import MessageModal from './MessageModal';
 import store from '../../main_store';
 import setStates from '../../state';
 import { connect } from 'react-redux';

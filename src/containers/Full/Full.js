@@ -14,6 +14,8 @@ import MyProfile from "../../views/MyProfile/MyProfile";
 import MyAgency from "../../views/MyAgency/MyAgency";
 import { ToastContainer } from 'react-toastify';
 import CSVUpload from "../../views/CSVUpload/CSVUpload";
+import MessageModal from '../../views/ReportForm/MessageModal';
+
 
 class Full extends Component {
   render() {
@@ -23,9 +25,11 @@ class Full extends Component {
 
     return (
       <div className="app">
+      Zách utca
         <ToastContainer position="top-right" autoClose={2000} style={containerStyle}/>
         <Header />
         <div className="app-body">
+          <MessageModal />
           <Sidebar {...this.props}/>
           <main className="main">
             <Container fluid className={'content'}>
