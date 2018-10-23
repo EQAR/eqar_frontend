@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import InstitutionsReferenceTable from '../../services/InstitutionsReferenceTable';
+import { openInstitutionForm, resetFields } from '../../services/InstitutionForm/actions';
 import { removeSelectedInstitution } from './actions';
 
 
@@ -58,6 +59,11 @@ class BrowseInstitution extends Component {
     });
   }
 
+  addNewInstitution() {
+    resetFields();
+    openInstitutionForm({isSelect: false, addNew: true});
+  }
+
   render() {
     return (
       <FormGroup>
@@ -65,11 +71,10 @@ class BrowseInstitution extends Component {
           <Modal size="xl" isOpen={this.state.modal} fade={false} toggle={this.toggle} className="table-modal" autoFocus={true} onKeyUp={this.handleKeyPress}>
             <ModalHeader toggle={this.toggle}>Browse Institutions</ModalHeader>
             <ModalBody>
-              <InstitutionsReferenceTable isSelect={true} />
+              <InstitutionsReferenceTable isSelect={true} toggle={this.toggle.bind(this)}/>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggle}>Add Institutions</Button>{' '}
-              <Button color="secondary" onClick={this.clearInstitutions}>Cancel</Button>
+              <Button color="primary" onClick={this.addNewInstitution}>Add New</Button>{' '}
             </ModalFooter>
           </Modal>
       </FormGroup>

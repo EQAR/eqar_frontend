@@ -18,6 +18,8 @@ class InstitutionsReferenceTable extends Component {
       hidePageListOnlyOnePage: true,
       alwaysShowAllBtns: false,
       withFirstAndLast: true,
+      defaultSortName: 'name_primary',
+      defaultSortOrder: 'asc',
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
@@ -35,6 +37,7 @@ class InstitutionsReferenceTable extends Component {
     this.toggle = this.toggle.bind(this);
     this.getSelectRow = this.getSelectRow.bind(this);
     this.showsTotal = '';
+    this.toggleModal = this.props.toggle;
   }
 
   componentDidMount(){
@@ -44,24 +47,17 @@ class InstitutionsReferenceTable extends Component {
 
   componentDidUpdate() {
     let selectedInstitutions = this.state.selected;
-    const selectedInstitution = _.find(this.props.reportForm.institutions, institution => (!_.includes(this.state.unselectable, institution.deqar_id) && !_.includes(this.state.selected, institution.deqar_id)));
-    if (!_.isEmpty(selectedInstitution)) {
-      selectedInstitutions.push(selectedInstitution.deqar_id);
-      this.setState({
-        selected: selectedInstitutions
-      })
-    }
   }
 
   getSelectRow() {
     return this.props.isSelect ?
       {
-        mode: 'checkbox',
+        mode: 'radio',
+        hideSelectColumn: true,
         clickToSelect: true,
         selected: this.state.selected,
         onSelect: this.onRowSelect.bind(this),
-        unselectable: this.state.unselectable,
-        showOnlySelected: true
+        unselectable: this.state.unselectable
       } :
       {}
   }
@@ -71,23 +67,16 @@ class InstitutionsReferenceTable extends Component {
     openInstitutionForm({isSelect: false, addNew: true});
   }
 
-  onRowSelect(row, isSelected, e){
+  onRowSelect(row, isSelected, e){    
     if (isSelected && e.target.id !== 'open-form') {
       selectInstitution(row, this.props.reportForm.institutions);
-      this.setState(() => ({
-        selected: [...this.state.selected, row.deqar_id]
-      }));
-    } else if (!isSelected && e.target.id !== 'open-form'){
-      removeInstitution(row, this.props.reportForm.institutions);
-      this.setState(() => ({
-        selected: this.state.selected.filter(x => x !== row.deqar_id)
-      }));
-    }
+      this.toggleModal();
+    } 
   }
 
   onSortChange(sortName, sortOrder) {
     const param = {};
-    if(sortOrder === 'asc') {
+    if (sortOrder === 'asc') {
       param['ordering'] = sortName;
     } else {
       param['ordering'] = '-' + sortName;
@@ -176,7 +165,8 @@ class InstitutionsReferenceTable extends Component {
 
   buttonFormatter(cell, row, formatExtraData, index) {
     return (
-      <Button size="sm" color="primary" id="open-form" onClick={this.toggle.bind(null, row)}>View</Button>)
+      <Button size="sm" color="primary" id="open-form" onClick={this.toggle.bind(null, row)}>View</Button>
+    );
   }
 
   trClassFormat(row, rowIndex) {
@@ -202,9 +192,7 @@ class InstitutionsReferenceTable extends Component {
     );
   }
 
-  renderPaginationPanel(props) {
-    console.log(props, props.components);
-    
+  renderPaginationPanel(props) {    
     return (
       <Row className="institution-table-footer">
         <div>{ props.components.sizePerPageDropdown }</div>
@@ -223,6 +211,7 @@ class InstitutionsReferenceTable extends Component {
         <BootstrapTable data={ this.getInstitutionsRows() }
                         version="4"
                         striped
+                        hover
                         remote={ this.remote }
                         pagination={ true }
                         options={ this.options }
@@ -249,7 +238,8 @@ class InstitutionsReferenceTable extends Component {
                              dataSort={ true }>Institution</TableHeaderColumn>
           <TableHeaderColumn dataField="countries"
                              width='15%'
-                             filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
+                             filter={ { type: 'SelectFilter', options: countries } }
+                             dataSort={ true }>Countries</TableHeaderColumn>
           <TableHeaderColumn dataField="id"
                              dataAlign='center'
                              width='10%'
