@@ -20,6 +20,7 @@ class InstitutionsReferenceTable extends Component {
       withFirstAndLast: true,
       defaultSortName: 'name_primary',
       defaultSortOrder: 'asc',
+      onRowClick: this.toggle.bind(this),
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
@@ -67,7 +68,7 @@ class InstitutionsReferenceTable extends Component {
     openInstitutionForm({isSelect: false, addNew: true});
   }
 
-  onRowSelect(row, isSelected, e){    
+  onRowSelect(row, isSelected, e){
     if (isSelected && e.target.id !== 'open-form') {
       selectInstitution(row, this.props.reportForm.institutions);
       this.toggleModal();
@@ -180,8 +181,10 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggle(row, options) {
-    institutionRequest(row.id);
-    openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+    if (!this.props.isSelect) {
+      institutionRequest(row.id);
+      openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+    }
   }
 
   renderShowsTotal(start, to, total) {
@@ -243,7 +246,8 @@ class InstitutionsReferenceTable extends Component {
           <TableHeaderColumn dataField="id"
                              dataAlign='center'
                              width='10%'
-                             dataFormat={this.buttonFormatter}> </TableHeaderColumn>
+                             dataFormat={this.buttonFormatter}
+                             hidden={!this.props.isSelect}> </TableHeaderColumn>
         </BootstrapTable>
       </div>
     )

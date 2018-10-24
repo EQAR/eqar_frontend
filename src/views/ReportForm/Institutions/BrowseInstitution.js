@@ -74,7 +74,7 @@ class BrowseInstitution extends Component {
               <InstitutionsReferenceTable isSelect={true} toggle={this.toggle.bind(this)}/>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.addNewInstitution}>Add New</Button>{' '}
+              <Button color="primary" onClick={this.addNewInstitution}>Add New Institution</Button>{' '}
             </ModalFooter>
           </Modal>
       </FormGroup>
