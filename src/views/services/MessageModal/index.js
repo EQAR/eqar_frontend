@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Modal } from 'reactstrap';
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
@@ -15,11 +14,11 @@ class MessageModal extends Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.message.messageDisplay} >
+      <div>
         <ErrorMessage />
         <Spinner />
         <Message />
-      </Modal>
+      </div>
     )
   }
 }

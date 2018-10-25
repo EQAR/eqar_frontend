@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -11,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { toggleAlert } from '../Actions/alertActions';
+import { toggleAlert } from './actions';
 import lodash from 'lodash';
 
 
@@ -27,7 +28,7 @@ class ErrorMessage extends Component {
     this.errors = []
   }
 
-  concatErrors(error, key) {
+  concatErrors(error) {
     lodash.last(this.errors).message = error;
     return error;
   }
@@ -44,7 +45,8 @@ class ErrorMessage extends Component {
       display_name: {inputField: 'File display name: '},
       non_field_errors: {inputField: 'Error: '},
       alternative: {inputField: 'Alternative qualification: '},
-      report_files: {inputField: 'Report file:'}
+      report_files: {inputField: 'Report file:'},
+      other: {inputField: 'Network Error: '}
     }[key]
   }
 
@@ -103,9 +105,10 @@ class ErrorMessage extends Component {
 
   render() {
     return (
-      <div>
+      <Modal isOpen={this.props.message.error}
+            toggle={this.toggle}>
         {this.renderErrors()}
-      </div>
+      </Modal>
     )
   }
 }
