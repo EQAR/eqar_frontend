@@ -29,7 +29,7 @@ class ErrorMessage extends Component {
   }
 
   concatErrors(error) {
-    lodash.last(this.errors).message = error;
+    lodash.last(this.errors).message = error;    
     return error;
   }
 
@@ -46,11 +46,14 @@ class ErrorMessage extends Component {
       non_field_errors: {inputField: 'Error: '},
       alternative: {inputField: 'Alternative qualification: '},
       report_files: {inputField: 'Report file:'},
+      get_reports: {inputField: 'Get reports: '},
       other: {inputField: 'Network Error: '}
     }[key]
   }
 
   mapErrorMessage(obj, callback, key) {
+    // console.log(obj);
+    
     const inputField = this.getKey(key);
     if (inputField) {
       this.errors.push(inputField)
@@ -64,7 +67,7 @@ class ErrorMessage extends Component {
     }
   }
 
-  getErrorMessages() {
+  getErrorMessages() {    
     this.mapErrorMessage(this.props.message.errorMessage, this.concatErrors)
     return this.errors.map((error, i) => {
       return (
@@ -86,7 +89,6 @@ class ErrorMessage extends Component {
   }
 
   renderErrors() {
-    if (this.props.message.error) {
       return (
         <div>
           <ModalHeader toggle={this.toggle}>Some error occured!</ModalHeader>
@@ -100,16 +102,16 @@ class ErrorMessage extends Component {
           </ModalFooter>
         </div>
       )
-    }
+
   }
 
   render() {
-    return (
+    return this.props.message.error ? (
       <Modal isOpen={this.props.message.error}
             toggle={this.toggle}>
         {this.renderErrors()}
       </Modal>
-    )
+    ) : null;
   }
 }
 

@@ -20,7 +20,15 @@ export default function sendForm(formDatas) {
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
-      store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: {report_files: [{error: ['There was an error posting the report files']}]} })
+      store.dispatch({type: 'CHANGE_ERROR',
+                      error: true, 
+                      errorMessage: 
+                        {
+                          report_files: [{
+                            error: ['There was an error posting the report file']
+                          }]
+                        }
+                      })
     });
   })
   .catch(error => {

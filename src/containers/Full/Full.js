@@ -22,17 +22,17 @@ class Full extends Component {
     const containerStyle = {
       zIndex: 1999
     };
-
+    console.log('render');
+    
     return (
       <div className="app">
-      Zách utca
         <ToastContainer position="top-right" autoClose={2000} style={containerStyle}/>
+        <MessageModal />
         <Header />
         <div className="app-body">
           <Sidebar {...this.props}/>
           <main className="main">
             <Container fluid className={'content'}>
-              <MessageModal />
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/my-profile" name="My Profile" component={MyProfile}/>
