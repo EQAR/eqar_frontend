@@ -18,7 +18,7 @@ import programmeReducer from './views/ReportForm/Programmes/programmeReducer';
 import qfeheaReducer from './views/ReportForm/Programmes/qfeheaReducer';
 import fileReducer from './views/ReportForm/ReportFiles/fileReducer';
 import languagesReducer from './views/ReportForm/ReportFiles/languagesReducer';
-import messageReducer from './views/ReportForm/FormAlert/messageReducer';
+import messageReducer from './views/services/MessageModal/messageReducer';
 import csvReducer from "./views/CSVUpload/Reducers/csvReducer";
 
 

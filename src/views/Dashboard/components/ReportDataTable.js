@@ -27,6 +27,7 @@ class DataTable extends Component {
   }
 
   onPageChange(page, sizePerPage) {
+    
     const currentIndex = (page - 1) * sizePerPage;
     getReports(sizePerPage, currentIndex);
   }

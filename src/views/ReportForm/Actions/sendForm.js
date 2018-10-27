@@ -20,12 +20,22 @@ export default function sendForm(formDatas) {
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
-      store.dispatch({type: 'RESET_MESSAGE'});
+      store.dispatch({type: 'CHANGE_ERROR',
+                      error: true, 
+                      errorMessage: 
+                        {
+                          report_files: [{
+                            error: ['There was an error posting the report file']
+                          }]
+                        }
+                      })
     });
   })
   .catch(error => {
     store.dispatch({type: 'SPINNER_STOP'})
-    store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: error.response.data.errors })
+    error.response.data.errors ?
+      store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: error.response.data.errors }) :
+      store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: {other: [{error: ['There was an error posting the report']}]} })
   });
 }
 

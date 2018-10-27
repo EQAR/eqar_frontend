@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Modal,
   ModalHeader,
   ModalBody,
   ModalFooter } from 'reactstrap';
@@ -45,9 +46,9 @@ class Spinner extends Component {
 
   render() {
     return (
-      <div>
+      <Modal isOpen={this.props.message.spinner}>
         {this.renderSpinner()}
-      </div>
+      </Modal>
     )
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -11,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { resetMessage, closeReportForm } from '../Actions/alertActions';
+import { resetMessage, closeReportForm } from './actions';
 import lodash from 'lodash';
 
 
@@ -65,9 +66,10 @@ class Message extends Component {
 
   render() {
     return (
-      <div>
+      <Modal isOpen={this.props.message.warning}
+             toggle={this.toggle}>
         {this.renderMessages()}
-      </div>
+      </Modal>
     )
   }
 }

@@ -14,16 +14,20 @@ import MyProfile from "../../views/MyProfile/MyProfile";
 import MyAgency from "../../views/MyAgency/MyAgency";
 import { ToastContainer } from 'react-toastify';
 import CSVUpload from "../../views/CSVUpload/CSVUpload";
+import MessageModal from '../../views/services/MessageModal';
+
 
 class Full extends Component {
   render() {
     const containerStyle = {
       zIndex: 1999
     };
-
+    console.log('render');
+    
     return (
       <div className="app">
         <ToastContainer position="top-right" autoClose={2000} style={containerStyle}/>
+        <MessageModal />
         <Header />
         <div className="app-body">
           <Sidebar {...this.props}/>
