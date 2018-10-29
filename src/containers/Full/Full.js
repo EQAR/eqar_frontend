@@ -22,8 +22,6 @@ class Full extends Component {
     const containerStyle = {
       zIndex: 1999
     };
-    console.log('render');
-    
     return (
       <div className="app">
         <ToastContainer position="top-right" autoClose={2000} style={containerStyle}/>

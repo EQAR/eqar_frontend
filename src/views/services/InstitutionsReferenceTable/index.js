@@ -20,7 +20,6 @@ class InstitutionsReferenceTable extends Component {
       withFirstAndLast: true,
       defaultSortName: 'name_primary',
       defaultSortOrder: 'asc',
-      onRowClick: this.toggle.bind(this),
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
@@ -38,16 +37,17 @@ class InstitutionsReferenceTable extends Component {
     this.toggle = this.toggle.bind(this);
     this.getSelectRow = this.getSelectRow.bind(this);
     this.showsTotal = '';
+    this.onRowSelect = this.onRowSelect.bind(this);
     this.toggleModal = this.props.toggle;
+    this.isActive = this.isActive.bind(this);
   }
 
   componentDidMount(){
     InstitutionsRequest();
     getInstituionCountries();
-  }
-
-  componentDidUpdate() {
-    let selectedInstitutions = this.state.selected;
+    if (!this.props.isSelect) {
+      this.options['onRowClick'] = this.toggle.bind(this);
+    }
   }
 
   getSelectRow() {
@@ -55,9 +55,7 @@ class InstitutionsReferenceTable extends Component {
       {
         mode: 'radio',
         hideSelectColumn: true,
-        clickToSelect: true,
         selected: this.state.selected,
-        onSelect: this.onRowSelect.bind(this),
         unselectable: this.state.unselectable
       } :
       {}
@@ -68,11 +66,9 @@ class InstitutionsReferenceTable extends Component {
     openInstitutionForm({isSelect: false, addNew: true});
   }
 
-  onRowSelect(row, isSelected, e){
-    if (isSelected && e.target.id !== 'open-form') {
-      selectInstitution(row, this.props.reportForm.institutions);
-      this.toggleModal();
-    } 
+  onRowSelect(row, e){
+    selectInstitution(row, this.props.reportForm.institutions);
+    this.toggleModal();
   }
 
   onSortChange(sortName, sortOrder) {
@@ -166,8 +162,17 @@ class InstitutionsReferenceTable extends Component {
 
   buttonFormatter(cell, row, formatExtraData, index) {
     return (
-      <Button size="sm" color="primary" id="open-form" onClick={this.toggle.bind(null, row)}>View</Button>
+      <Button 
+        size="sm" 
+        color="primary" 
+        id="open-form" 
+        onClick={this.onRowSelect.bind(null, row)}
+        disabled={this.isActive(row.deqar_id)}>Add</Button>
     );
+  }
+
+  isActive(id) {
+    return _.includes(this.state.unselectable, id);
   }
 
   trClassFormat(row, rowIndex) {
@@ -180,11 +185,9 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
-  toggle(row, options) {
-    if (!this.props.isSelect) {
-      institutionRequest(row.id);
-      openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
-    }
+  toggle(row) {
+    institutionRequest(row.id);
+    openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
   }
 
   renderShowsTotal(start, to, total) {

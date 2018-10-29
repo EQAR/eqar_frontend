@@ -17,6 +17,7 @@ export default function sendForm(formDatas) {
     .then(response => {
       store.dispatch({type: 'SPINNER_STOP'});
       store.dispatch({type: 'UPLOAD_FINISH', payload: warnings});
+      store.dispatch(push('/'));
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});

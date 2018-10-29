@@ -26,21 +26,18 @@ export function institutionRequest(id) {
 }
 
 export function putInstitution(institution) {
-  console.log(institution);
-  store.dispatch((dispatch) => {
-    dispatch({type: 'SPINNER_START'});
-    axios.put(`${GET_INSTITUTION}${institution.id}/`, institution)
-      .then(response => {
-        console.log(response, response.data);
-        dispatch({type: 'SPINNER_STOP'});
-        dispatch({type: 'UPLOAD_FINISH', payload: ''});
-      })
-      .catch(error => {
-        dispatch({type: 'SPINNER_STOP'});
-        dispatch({type: 'RESET_MESSAGE'});
-        console.log(error.response);
-      })
-  });
+  store.dispatch({type: 'SPINNER_START'});
+  return axios.put(`${GET_INSTITUTION}${institution.id}/`, institution)
+    .then(response => {
+      store.dispatch({type: 'SPINNER_STOP'});
+      store.dispatch({type: 'UPLOAD_FINISH', payload: ''});
+      return response;
+    })
+    .catch(error => {
+      store.dispatch({type: 'SPINNER_STOP'});
+      store.dispatch({type: 'RESET_MESSAGE'});
+      return error;
+    })
 }
 
 export function saveToForm(value, id) {

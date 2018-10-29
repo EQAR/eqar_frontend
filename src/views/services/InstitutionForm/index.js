@@ -12,7 +12,17 @@ import {
 import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
-import { closeInstitutionForm, institutionRequest, saveToForm, changeCountryData, changeQFEHEALEVELS, addEmptyAlternativeName, addAlternativeName, removeAlterName, resetFields, putInstitution } from './actions';
+import { 
+  closeInstitutionForm, 
+  institutionRequest, 
+  saveToForm, 
+  changeCountryData, 
+  changeQFEHEALEVELS, 
+  addEmptyAlternativeName, 
+  addAlternativeName, 
+  removeAlterName, 
+  resetFields, 
+  putInstitution } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
 import { selectInstitution } from '../../ReportForm/Institutions/actions';
@@ -25,7 +35,7 @@ class InstitutionModal extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.save = this.save.bind(this);
+    this.saveInstitution = this.saveInstitution.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
     this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
@@ -69,7 +79,7 @@ class InstitutionModal extends Component {
     })
   }
 
-  save() {
+  saveInstitution() {
     let institution = store.getState().institutionForm.institution;
     institution.names.push(this.props.institutionForm.validName);
     institution.qf_ehea_levels = this.props.institutionForm.institution.qf_ehea_levels.map(level => {
@@ -77,7 +87,11 @@ class InstitutionModal extends Component {
         qf_ehea_level: level.qf_ehea_level
       }
     });
-    putInstitution(institution);
+    putInstitution(institution)
+      .then(r => {
+        console.log(r);
+        
+      });
   }
 
   toggle() {
@@ -291,7 +305,7 @@ class InstitutionModal extends Component {
     return (
       <ModalFooter>
        <Col>
-        <Button color="primary" onClick={this.save}>Save Record</Button>
+        <Button color="primary" onClick={this.saveInstitution}>Save Record</Button>
       </Col>
         <Button color="primary" onClick={this.cancel}>Cancel</Button>
       </ModalFooter>

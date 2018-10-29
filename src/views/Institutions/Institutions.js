@@ -39,7 +39,12 @@ class Institutions extends Component {
               </CardBody>
               <CardFooter>
                 <Col>
-                  <Button size="sm" color="primary" onClick={this.addNewInstitution} className="float-right add-institution">Add New Institution</Button>
+                  <Button size="sm"
+                          color="primary"
+                          onClick={this.addNewInstitution}
+                          className="float-right add-institution">
+                          Add New Institution
+                  </Button>
                 </Col>
               </CardFooter>
             </Card>

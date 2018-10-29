@@ -44,6 +44,8 @@ class Message extends Component {
   }
 
   toggle() {
+    console.log(this.props);
+    
     resetMessage();
     closeReportForm();
   }

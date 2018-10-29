@@ -18,5 +18,4 @@ export function removeLinkErrorMessage(index, errorMessage=[]) {
 
 export function closeReportForm() {
   store.dispatch({type: 'RESET_REPORT_FORM'});
-  store.dispatch(push('/'));
 }
