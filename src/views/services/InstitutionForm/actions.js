@@ -35,7 +35,9 @@ export function putInstitution(institution) {
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
-      store.dispatch({type: 'RESET_MESSAGE'});
+      error.response.data.errors ?
+        store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: error.response.data.errors }) :
+        store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: {other: [{error: ['There was an error posting the institution']}]} })
       return error;
     })
 }

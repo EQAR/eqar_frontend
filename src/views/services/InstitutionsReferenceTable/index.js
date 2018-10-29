@@ -54,8 +54,7 @@ class InstitutionsReferenceTable extends Component {
         hideSelectColumn: true,
         clickToSelect: true,
         onSelect: this.toggleInstitutionForm,
-        selected: this.state.selected,
-        unselectable: this.state.unselectable
+        selected: this.state.selected
       } :
       {}
   }

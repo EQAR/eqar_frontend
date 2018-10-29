@@ -89,9 +89,8 @@ class InstitutionForm extends Component {
       }
     });
     putInstitution(institution)
-      .then(r => {
-        console.log(r);
-        
+      .then(res => {
+        this.setState({isEdit: false});
       });
   }
 

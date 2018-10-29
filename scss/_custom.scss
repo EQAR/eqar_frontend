@@ -154,15 +154,10 @@
           cursor: pointer;
           color: #20a8d8;
         }
-        
-        &.selected-row {
-          color: hsla(30, 30, 30, .3);
-          background-color: unset;
 
-          &:hover {
+        td {
+          .disabled {
             cursor: not-allowed;
-            font-weight: normal;
-            background-color: unset;
           }
         }
       }
