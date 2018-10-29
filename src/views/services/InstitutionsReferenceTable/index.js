@@ -27,36 +27,28 @@ class InstitutionsReferenceTable extends Component {
       paginationShowsTotal: this.renderShowsTotal.bind(this)
     };
     this.state = {
-      selected: [],
-      select: {},
       unselectable: this.selectedInstitutions()
     }
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
     this.buttonFormatter = this.buttonFormatter.bind(this);
     this.toggleInstitutionForm = this.toggleInstitutionForm.bind(this);
-    this.getSelectRow = this.getSelectRow.bind(this);
     this.showsTotal = '';
     this.onRowSelect = this.onRowSelect.bind(this);
     this.toggleTableModal = this.props.toggle;
     this.isActive = this.isActive.bind(this);
+    this.selectRow = {
+      mode: 'radio',
+      hideSelectColumn: true,
+      clickToSelect: true,
+      onSelect: this.toggleInstitutionForm,
+    } 
+
   }
 
   componentDidMount(){
     InstitutionsRequest();
     getInstituionCountries();
-  }
-
-  getSelectRow() {
-    return this.props.isSelect ?
-      {
-        mode: 'radio',
-        hideSelectColumn: true,
-        clickToSelect: true,
-        onSelect: this.toggleInstitutionForm,
-        selected: this.state.selected
-      } :
-      {}
   }
 
   addNewInstitution() {
@@ -184,7 +176,9 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggleInstitutionForm(row, isSelected, e) {
-    if (isSelected && e.target.id !== 'add-button') {
+    console.log();
+    
+    if (e.target.id !== 'add-button') {
       institutionRequest(row.id);
       openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
     }
@@ -209,7 +203,6 @@ class InstitutionsReferenceTable extends Component {
   }
 
   render() {
-    const selectRow = this.getSelectRow();
     const countries = this.filterCountries();
     return (
       <div>
@@ -226,7 +219,7 @@ class InstitutionsReferenceTable extends Component {
                             dataTotalSize: this.props.institutionReferences.totalDataSize
                           }
                         }
-                        selectRow={ selectRow }
+                        selectRow={ this.selectRow }
                         trClassName={ this.trClassFormat }
                         id="institution-table">
           <TableHeaderColumn dataField="deqar_id"
