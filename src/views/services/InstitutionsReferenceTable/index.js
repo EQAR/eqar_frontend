@@ -20,6 +20,7 @@ class InstitutionsReferenceTable extends Component {
       withFirstAndLast: true,
       defaultSortName: 'name_primary',
       defaultSortOrder: 'asc',
+      onRowClick: this.toggle.bind(this),
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
@@ -45,9 +46,6 @@ class InstitutionsReferenceTable extends Component {
   componentDidMount(){
     InstitutionsRequest();
     getInstituionCountries();
-    if (!this.props.isSelect) {
-      this.options['onRowClick'] = this.toggle.bind(this);
-    }
   }
 
   getSelectRow() {
