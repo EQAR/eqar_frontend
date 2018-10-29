@@ -30,7 +30,7 @@ import _ from 'lodash';
 
 
 
-class InstitutionModal extends Component {
+class InstitutionForm extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -53,6 +53,7 @@ class InstitutionModal extends Component {
     this.checkCountryFields = this.checkCountryFields.bind(this);
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.selectableInstitution = this.selectableInstitution.bind(this);
+    this.toggleTable = this.props.toggleTable;
     this.state = {
       isEdit: false,
       removeButtonIndex: null,
@@ -105,6 +106,7 @@ class InstitutionModal extends Component {
     const institution = _.find(this.props.institutionReferences.institutions, {id: this.props.institutionForm.institution.id})
     selectInstitution(institution, this.props.reportForm.institutions);
     this.toggle();
+    this.toggleTable();
   }
 
   edit() {
@@ -471,4 +473,4 @@ class InstitutionModal extends Component {
   }
 }
 
-export default connect(setStates)(InstitutionModal);
+export default connect(setStates)(InstitutionForm);

@@ -7,7 +7,7 @@ import { selectInstitution, removeInstitution, InstitutionsRequest } from './act
 import { openInstitutionForm, institutionRequest, resetFields } from '../InstitutionForm/actions';
 import { getInstituionCountries } from '../countries/actions';
 import { Button, Modal, ModalBody, Row, Col } from 'reactstrap';
-import InstitutionModal from '../InstitutionForm';
+import InstitutionForm from '../InstitutionForm';
 import _ from 'lodash';
 
 class InstitutionsReferenceTable extends Component {
@@ -20,7 +20,6 @@ class InstitutionsReferenceTable extends Component {
       withFirstAndLast: true,
       defaultSortName: 'name_primary',
       defaultSortOrder: 'asc',
-      onRowClick: this.toggle.bind(this),
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
@@ -35,11 +34,11 @@ class InstitutionsReferenceTable extends Component {
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
     this.buttonFormatter = this.buttonFormatter.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggleInstitutionForm = this.toggleInstitutionForm.bind(this);
     this.getSelectRow = this.getSelectRow.bind(this);
     this.showsTotal = '';
     this.onRowSelect = this.onRowSelect.bind(this);
-    this.toggleModal = this.props.toggle;
+    this.toggleTableModal = this.props.toggle;
     this.isActive = this.isActive.bind(this);
   }
 
@@ -53,6 +52,8 @@ class InstitutionsReferenceTable extends Component {
       {
         mode: 'radio',
         hideSelectColumn: true,
+        clickToSelect: true,
+        onSelect: this.toggleInstitutionForm,
         selected: this.state.selected,
         unselectable: this.state.unselectable
       } :
@@ -64,9 +65,9 @@ class InstitutionsReferenceTable extends Component {
     openInstitutionForm({isSelect: false, addNew: true});
   }
 
-  onRowSelect(row, e){
+  onRowSelect(row){
     selectInstitution(row, this.props.reportForm.institutions);
-    this.toggleModal();
+    this.toggleTableModal();
   }
 
   onSortChange(sortName, sortOrder) {
@@ -163,7 +164,7 @@ class InstitutionsReferenceTable extends Component {
       <Button 
         size="sm" 
         color="primary" 
-        id="open-form" 
+        id="add-button" 
         onClick={this.onRowSelect.bind(null, row)}
         disabled={this.isActive(row.deqar_id)}>Add</Button>
     );
@@ -173,7 +174,7 @@ class InstitutionsReferenceTable extends Component {
     return _.includes(this.state.unselectable, id);
   }
 
-  trClassFormat(row, rowIndex) {
+  trClassFormat(row) {
     let className = '';
     this.props.reportForm.institutions.forEach(institution => {
       if (institution.deqar_id === row.deqar_id) {
@@ -183,9 +184,11 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
-  toggle(row) {
-    institutionRequest(row.id);
-    openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+  toggleInstitutionForm(row, isSelected, e) {
+    if (isSelected && e.target.id !== 'add-button') {
+      institutionRequest(row.id);
+      openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+    }
   }
 
   renderShowsTotal(start, to, total) {
@@ -211,7 +214,7 @@ class InstitutionsReferenceTable extends Component {
     const countries = this.filterCountries();
     return (
       <div>
-        <InstitutionModal />
+        <InstitutionForm toggleTable={this.toggleTableModal}/>
         <BootstrapTable data={ this.getInstitutionsRows() }
                         version="4"
                         striped
