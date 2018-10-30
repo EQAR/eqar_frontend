@@ -70,7 +70,13 @@ class InstitutionForm extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return _.isInteger(nextProps.institutionForm.institution.id) || nextProps.institutionForm.addNew;
+    return nextProps.institutionId || nextProps.institutionForm.addNew;
+  }
+
+  componentDidUpdate(prevProps, prevState, prevContext) {
+    if (prevProps.institutionId !== this.props.institutionId) {
+      institutionRequest(this.props.institutionId);
+    }
   }
 
   cancel() {
@@ -160,7 +166,7 @@ class InstitutionForm extends Component {
   }
 
   isEditableAlternativeNames(inputId, index) {
-    return (this.state.isEdit && this.state.editableFields.alternative_names[index]) || this.props.institutionForm.addNew ? !this.state.editableFields.alternative_names[index][inputId] : !_.has(this.props.institutionForm.validName.alternative_names[index], inputId);
+    return this.state.isEdit || this.props.institutionForm.addNew ? !this.state.editableFields.alternative_names[index][inputId] : true;
   }
 
   handleInput(e) {
@@ -185,6 +191,7 @@ class InstitutionForm extends Component {
 
   addEmptyAlterName() {
     addEmptyAlternativeName(this.props.institutionForm.validName.alternative_names);
+    this.edit();
   }
 
   getAlternativeNames() {
@@ -418,7 +425,7 @@ class InstitutionForm extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleInput}
-                    disabled={!this.state.isEdit || !this.props.institutionForm.addNew}
+                    disabled={!this.state.isEdit}
                     />
                   <CustomSelectInput
                     labelText="QF-EHEA Levels"

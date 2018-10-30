@@ -27,7 +27,8 @@ class InstitutionsReferenceTable extends Component {
       paginationShowsTotal: this.renderShowsTotal.bind(this)
     };
     this.state = {
-      unselectable: this.selectedInstitutions()
+      unselectable: this.selectedInstitutions(),
+      institutionId: null
     }
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
@@ -176,11 +177,9 @@ class InstitutionsReferenceTable extends Component {
   }
 
   toggleInstitutionForm(row, isSelected, e) {
-    console.log();
-    
     if (e.target.id !== 'add-button') {
-      institutionRequest(row.id);
       openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+      this.setState({...this.state, institutionId: row.id})
     }
   }
 
@@ -206,7 +205,7 @@ class InstitutionsReferenceTable extends Component {
     const countries = this.filterCountries();
     return (
       <div>
-        <InstitutionForm toggleTable={this.toggleTableModal}/>
+        <InstitutionForm toggleTable={this.toggleTableModal} institutionId={this.state.institutionId}/>
         <BootstrapTable data={ this.getInstitutionsRows() }
                         version="4"
                         striped

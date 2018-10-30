@@ -90,8 +90,8 @@ export class CustomDynamicInput extends Component {
   }
 
   getButton(index) {
-    return this.props.removeButton && index >= this.props.removeButtonIndex ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
-    : null;
+    return this.props.removeButton && index <= this.props.removeButtonIndex ?
+      <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button> : null;
   }
 
   getHR() {
@@ -112,7 +112,10 @@ export class CustomDynamicInput extends Component {
 
   getAddButton() {
     if (this.props.addNewItemText) {
-      return <Button color="primary" size={'sm'} onClick={ this.props.handleClick } disabled={this.props.buttonDisabled}>{ this.props.addNewItemText }</Button>
+      return <Button color="primary"
+                     size={'sm'}
+                     onClick={ this.props.handleClick }
+                     disabled={this.props.buttonDisabled}>{ this.props.addNewItemText }</Button>
     }
   }
 
@@ -129,9 +132,6 @@ export class CustomDynamicInput extends Component {
       return (
         <div key={index}>
           {e.map((elem, i) => {
-            // if (elem.value === null) {
-            //   elem.value = '';
-            // }
             return elem.type === 'select' ?
               (
               <CustomSelectInput
