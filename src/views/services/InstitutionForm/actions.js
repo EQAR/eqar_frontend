@@ -54,6 +54,17 @@ export function changeCountryData(value, id, index, countries) {
   store.dispatch({ type: 'CHANGE_INSTITUITON_COUNTRY', payload: countries });
 }
 
+export function changeIdentifier(value, id, identifiers) {
+  if (_.filter(identifiers, item => item.resource === id.replace('_', ' ')).length === 0) {
+    identifiers.push({identifier: value, resource: id.replace('_', ' ')});
+  } else if (id === 'national_identifier') {
+    _.find(identifiers, i => i.resource === 'national identifier').identifier = value
+  } else {
+    _.find(identifiers, i => i.resource === 'local identifier').identifier = value
+  }
+  store.dispatch({ type: 'CHANGE_IDENTIFIER', payload: identifiers });
+}
+
 export function changeQFEHEALEVELS(values) {
   values = values.map(value => {
     return { qf_ehea_level: value.value};

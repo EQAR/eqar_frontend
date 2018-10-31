@@ -84,27 +84,12 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         }
       }
     }
-    case 'CHANGE_NATIONAL_IDENTIFIER': {
+    case 'CHANGE_IDENTIFIER': {
       return {
         ...state,
         institution: {
           ...state.institution,
-          identifiers: {
-            ...state.institution.identifiers,
-            national_identifier: action.payload
-          }
-        }
-      }
-    }
-    case 'CHANGE_LOCAL_IDENTIFIER': {
-      return {
-        ...state,
-        institution: {
-          ...state.institution,
-          identifiers: {
-            ...state.institution.identifiers,
-            local_identifier: action.payload
-          }
+          identifiers: action.payload
         }
       }
     }

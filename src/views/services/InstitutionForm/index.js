@@ -13,15 +13,16 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { 
-  closeInstitutionForm, 
-  institutionRequest, 
-  saveToForm, 
-  changeCountryData, 
-  changeQFEHEALEVELS, 
-  addEmptyAlternativeName, 
-  addAlternativeName, 
-  removeAlterName, 
-  resetFields, 
+  closeInstitutionForm,
+  institutionRequest,
+  saveToForm,
+  changeCountryData,
+  changeQFEHEALEVELS,
+  changeIdentifier,
+  addEmptyAlternativeName,
+  addAlternativeName,
+  removeAlterName,
+  resetFields,
   putInstitution } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
@@ -43,6 +44,7 @@ class InstitutionForm extends Component {
     this.addEmptyAlterName = this.addEmptyAlterName.bind(this);
     this.getAlternativeNames = this.getAlternativeNames.bind(this);
     this.getQFEHEAOptions = this.getQFEHEAOptions.bind(this);
+    this.handleIdentifiersInput = this.handleIdentifiersInput.bind(this);
     this.getCountry = this.getCountry.bind(this);
     this.getOptionsCountry = this.getOptionsCountry.bind(this);
     this.getCountries = this.getCountries.bind(this);
@@ -170,11 +172,15 @@ class InstitutionForm extends Component {
   }
 
   handleInput(e) {
-    saveToForm(e.target.value, e.target.id)
+    saveToForm(e.target.value, e.target.id);
   }
 
   handleQFEHEAInput(value) {
-    changeQFEHEALEVELS(value)
+    changeQFEHEALEVELS(value);
+  }
+
+  handleIdentifiersInput(e) {
+    changeIdentifier(e.target.value, e.target.id, this.props.institutionForm.institution.identifiers);
   }
 
   handleCountriesInput(indexOfInput, e) {
@@ -191,7 +197,13 @@ class InstitutionForm extends Component {
 
   addEmptyAlterName() {
     addEmptyAlternativeName(this.props.institutionForm.validName.alternative_names);
-    this.edit();
+    this.setState({
+      ...this.state,
+      editableFields: {
+        ...this.state.editableFields,
+        alternative_names: this.checkAlternativeNameFields(),
+      }
+    },() => console.log(this.state));
   }
 
   getAlternativeNames() {
@@ -416,7 +428,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="national_identifier"
                     name="text"
-                    handleInput={this.handleInput}
+                    handleInput={this.handleIdentifiersInput}
                     disabled={this.isEditableSimple('national_identifier')}
                     />
                   <CustomInputField
@@ -424,7 +436,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="local_identifier"
                     name="text"
-                    handleInput={this.handleInput}
+                    handleInput={this.handleIdentifiersInput}
                     disabled={!this.state.isEdit}
                     />
                   <CustomSelectInput
