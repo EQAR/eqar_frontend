@@ -58,6 +58,7 @@ class InstitutionForm extends Component {
     this.toggleTable = this.props.toggleTable;
     this.state = {
       isEdit: false,
+      isEdited: false,
       removeButtonIndex: null,
       editableFields: {
         name_official_transliterated: false,
@@ -72,6 +73,7 @@ class InstitutionForm extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    
     return nextProps.institutionId || nextProps.institutionForm.addNew;
   }
 
@@ -84,13 +86,13 @@ class InstitutionForm extends Component {
   cancel() {
     this.state.isEdit ? institutionRequest(this.props.institutionForm.institution.id) : resetFields();
     this.setState({
-      isEdit: false
+      isEdit: false,
+      isEdited: false
     })
   }
 
   saveInstitution() {
     let institution = store.getState().institutionForm.institution;
-    institution.names.push(this.props.institutionForm.validName);
     institution.qf_ehea_levels = this.props.institutionForm.institution.qf_ehea_levels.map(level => {
       return {
         qf_ehea_level: level.qf_ehea_level
@@ -98,8 +100,8 @@ class InstitutionForm extends Component {
     });
     putInstitution(institution)
       .then(res => {
-        this.setState({isEdit: false});
-      });
+        this.toggle();
+      })
   }
 
   toggle() {
@@ -118,7 +120,7 @@ class InstitutionForm extends Component {
 
   edit() {
     this.setState({
-      removeButtonIndex: this.props.institutionForm.validName.alternative_names.length,
+      removeButtonIndex: this.props.institutionForm.institution.names[0].alternative_names.length,
       isEdit: true,
       editableFields: {
         name_official_transliterated: this.checkFields('name_official_transliterated'),
@@ -136,7 +138,7 @@ class InstitutionForm extends Component {
     if (inputId === 'qf_ehea_levels') {
       return _.isEmpty(this.props.institutionForm.institution.qf_ehea_levels);
     } else {
-      return _.isEmpty(this.props.institutionForm.validName[inputId])
+      return _.isEmpty(this.props.institutionForm.institution.names[0][inputId])
     }
   }
 
@@ -151,7 +153,7 @@ class InstitutionForm extends Component {
   }
 
   checkAlternativeNameFields() {
-    return this.props.institutionForm.validName.alternative_names.map(name => {
+    return this.props.institutionForm.institution.names[0].alternative_names.map(name => {
       return {
         name: _.isEmpty(name.name),
         transliteration: _.isEmpty(name.transliteration)
@@ -172,42 +174,55 @@ class InstitutionForm extends Component {
   }
 
   handleInput(e) {
+    this.setIsEdited();
     saveToForm(e.target.value, e.target.id);
   }
 
   handleQFEHEAInput(value) {
+    this.setIsEdited();
     changeQFEHEALEVELS(value);
   }
 
   handleIdentifiersInput(e) {
+    this.setIsEdited();
     changeIdentifier(e.target.value, e.target.id, this.props.institutionForm.institution.identifiers);
   }
 
   handleCountriesInput(indexOfInput, e) {
+    this.setIsEdited();
     changeCountryData(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.countries);
   }
 
   handleAlterNamesInput(indexOfInput, e) {
-    addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.validName.alternative_names);
+    this.setIsEdited();
+    addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.names);
   }
 
   handleRemove(e) {
-    removeAlterName(e.target.id, this.props.institutionForm.validName.alternative_names);
+    this.setIsEdited();
+    removeAlterName(e.target.id, this.props.institutionForm.institution.names);
+  }
+
+  setIsEdited() {
+    this.setState({
+      ...this.state,
+      isEdited: true
+    });
   }
 
   addEmptyAlterName() {
-    addEmptyAlternativeName(this.props.institutionForm.validName.alternative_names);
+    addEmptyAlternativeName(this.props.institutionForm.institution.names);
     this.setState({
       ...this.state,
       editableFields: {
         ...this.state.editableFields,
         alternative_names: this.checkAlternativeNameFields(),
       }
-    },() => console.log(this.state));
+    });
   }
 
   getAlternativeNames() {
-    const array = this.props.institutionForm.validName.alternative_names.map((alternativeName, i) => {
+    const array = this.props.institutionForm.institution.names[0].alternative_names.map((alternativeName, i) => {
       return [
         {
           labelText: "Alternative Institution Name",
@@ -325,9 +340,9 @@ class InstitutionForm extends Component {
     return (
       <ModalFooter>
        <Col>
-        <Button color="primary" onClick={this.saveInstitution}>Save Record</Button>
+        <Button color="primary" onClick={this.saveInstitution} disabled={!this.state.isEdited}>Save Record</Button>
       </Col>
-        <Button color="primary" onClick={this.cancel}>Cancel</Button>
+        <Button color="primary" color="warning" onClick={this.cancel}>Cancel</Button>
       </ModalFooter>
     )
   }
@@ -355,11 +370,11 @@ class InstitutionForm extends Component {
   }
 
   render() {
-    const isOpen = !_.isEmpty(this.props.institutionForm.validName.alternative_names);
+    const isOpen = !_.isEmpty(this.props.institutionForm.institution.names[0].alternative_names);
     return (
       <Modal size="xl" isOpen={this.props.institutionForm.formDisplay} toggle={this.toggle} className="table-modal" autoFocus={true} >
         <ModalHeader toggle={this.toggle}>
-          View {this.props.institutionForm.validName.name_official} records
+          View {this.props.institutionForm.institution.names[0].name_official} records
         </ModalHeader>
         <ModalBody>
           <Row>
@@ -372,7 +387,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="name_official"
                     name="text"
-                    value={this.props.institutionForm.validName.name_official}
+                    value={this.props.institutionForm.institution.names[0].name_official}
                     handleInput={this.handleInput}
                     disabled={!this.props.institutionForm.addNew}
                     />
@@ -381,7 +396,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="name_official_transliterated"
                     name="text"
-                    value={this.props.institutionForm.validName.name_official_transliterated}
+                    value={this.props.institutionForm.institution.names[0].name_official_transliterated}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('name_official_transliterated')}
                     />
@@ -390,7 +405,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="name_english"
                     name="text"
-                    value={this.props.institutionForm.validName.name_english}
+                    value={this.props.institutionForm.institution.names[0].name_english}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('name_english')}
                     />
@@ -399,7 +414,7 @@ class InstitutionForm extends Component {
                     type="text"
                     id="acronym"
                     name="text"
-                    value={this.props.institutionForm.validName.acronym}
+                    value={this.props.institutionForm.institution.names[0].acronym}
                     handleInput={this.handleInput}
                     disabled={this.isEditableSimple('acronym')}
                     />

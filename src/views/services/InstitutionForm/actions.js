@@ -9,8 +9,6 @@ export function institutionRequest(id) {
   store.dispatch((dispatch) => {
     axios.get(`${GET_INSTITUTION}${id}/`)
       .then((response) => {
-        const validName = _.find(response.data.names, (name => name.name_valid_to === null));
-        _.remove(response.data.names, (name => name.name_valid_to === null));
         response.data.countries = response.data.countries.map(country => {
           if (country.lat === 0) {
             country.lat = null;
@@ -20,7 +18,7 @@ export function institutionRequest(id) {
           }
           return country;
         })
-        dispatch({ type: 'CHANGE_INSTITUTION_ALL', payload: response.data, validName: validName });
+        dispatch({ type: 'CHANGE_INSTITUTION_ALL', payload: response.data });
     })
   });
 }
@@ -35,13 +33,9 @@ export function putInstitution(institution) {
     })
     .catch(error => {
       store.dispatch({type: 'SPINNER_STOP'});
-      console.log(error);
-      console.log(error.response);
-      
       error.response.data.errors ?
         store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: error.response.data.errors }) :
         store.dispatch({type: 'CHANGE_ERROR', error: true, errorMessage: {other: [{error: ['There was an error posting the institution']}]} })
-      return error;
     })
 }
 
@@ -72,19 +66,19 @@ export function changeQFEHEALEVELS(values) {
   store.dispatch({ type: 'CHANGE_QF_EHEA_LEVELS', payload: values });
 }
 
-export function addEmptyAlternativeName(alternativeNames) {
-  alternativeNames.push({name: '', transliteration: ''});
-  store.dispatch({ type: 'CHANGE_INSTITUTION_ALTERNATIVE_NAME', payload: alternativeNames });
+export function addEmptyAlternativeName(institutionNames) {
+  institutionNames[0].alternative_names.push({name: '', transliteration: ''});
+  store.dispatch({ type: 'CHANGE_NAMES', payload: institutionNames });
 }
 
-export function addAlternativeName(inputValue, inputId, indexOfAlter, alternativeNames) {
-  alternativeNames[indexOfAlter][inputId] = inputValue
-  store.dispatch({ type: 'CHANGE_INSTITUTION_ALTERNATIVE_NAME', payload: alternativeNames });
+export function addAlternativeName(inputValue, inputId, indexOfAlter, institutionNames) {
+  institutionNames[0].alternative_names[indexOfAlter][inputId] = inputValue
+  store.dispatch({ type: 'CHANGE_NAMES', payload: institutionNames });
 }
 
-export function removeAlterName(index, alternativeNames) {
-  alternativeNames.splice(index, 1);
-  store.dispatch({ type: 'CHANGE_INSTITUTION_ALTERNATIVE_NAME', payload: alternativeNames });
+export function removeAlterName(index, institutionNames) {  
+  institutionNames[0].alternative_names.splice(index, 1);
+  store.dispatch({ type: 'CHANGE_NAMES', payload: institutionNames });
 }
 
 export function resetFields() {

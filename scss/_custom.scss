@@ -146,6 +146,12 @@
   align-items: center;
 }
 
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
 .react-bs-table-container {
   .react-bs-container-body {
     .table {

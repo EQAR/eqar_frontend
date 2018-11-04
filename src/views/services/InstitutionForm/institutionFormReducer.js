@@ -13,18 +13,25 @@ const initialState = {
     founding_date: '',
     closure_date: null,
     identifiers: [],
-    names: [],
+    names: [
+      {
+        id: null,
+        name_official: '',
+        name_official_transliterated: '',
+        name_english: '',
+        acronym: '',
+        name_valid_to: '',
+        alternative_names: [
+          {
+            id: null,
+            name: '',
+            transliteration: ''
+          }
+        ]
+      }
+    ],
     countries: [],
     qf_ehea_levels: []
-  },
-  validName: {
-    id: null,
-    name_official: '',
-    name_official_transliterated: '',
-    name_english: '',
-    acronym: '',
-    name_valid_to: null,
-    alternative_names: []
   }
 }
 
@@ -44,43 +51,15 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
     case 'CHANGE_INSTITUTION_ALL': {
       return {
         ...state,
-        institution: action.payload,
-        validName: action.validName
+        institution: action.payload
       }
     }
-    case 'CHANGE_NAME_TRANSLITERATED': {
+    case 'CHANGE_NAMES': {
       return {
         ...state,
-        validName: {
-          ...state.validName,
-          name_official_transliterated: action.payload
-        }
-      }
-    }
-    case 'CHANGE_NAME_ENGLISH': {
-      return {
-        ...state,
-        validName: {
-          ...state.validName,
-          name_english: action.payload
-        }
-      }
-    }
-    case 'CHANGE_ACRONYM': {
-      return {
-        ...state,
-        validName: {
-          ...state.validName,
-          acronym: action.payload
-        }
-      }
-    }
-    case 'CHANGE_INSTITUTION_ALTERNATIVE_NAME': {
-      return {
-        ...state,
-        validName: {
-          ...state.validName,
-          alternative_names: action.payload
+        institution: {
+          ...state.institution,
+          names: action.payload
         }
       }
     }
