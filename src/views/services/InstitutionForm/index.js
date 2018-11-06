@@ -67,17 +67,25 @@ class InstitutionForm extends Component {
         national_identifier: false,
         qf_ehea_levels: false,
         countries: [],
-        alternative_names: []
+        alternative_names: [
+          {
+            id: null,
+            name: '',
+            transliteration: ''
+          }
+        ]
       }
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    
     return nextProps.institutionId || nextProps.institutionForm.addNew;
   }
 
   componentDidUpdate(prevProps, prevState, prevContext) {
+    if (!prevProps.institutionForm.addNew && this.props.institutionForm.addNew) {
+      this.edit();
+    }
     if (prevProps.institutionId !== this.props.institutionId) {
       institutionRequest(this.props.institutionId);
     }
@@ -118,9 +126,13 @@ class InstitutionForm extends Component {
     this.toggleTable();
   }
 
+  getRemoveButtonIndex() {
+    return this.props.institutionForm.addNew ? 0 : this.props.institutionForm.institution.names[0].alternative_names.length;
+  }
+
   edit() {
     this.setState({
-      removeButtonIndex: this.props.institutionForm.institution.names[0].alternative_names.length,
+      removeButtonIndex: this.getRemoveButtonIndex(),
       isEdit: true,
       editableFields: {
         name_official_transliterated: this.checkFields('name_official_transliterated'),
@@ -422,7 +434,7 @@ class InstitutionForm extends Component {
                     headerName="Alternative Names"
                     toggleButton={true}
                     addNewItemText="Add New Name"
-                    buttonDisabled={!this.state.isEdit}
+                    buttonDisabled={!this.state.isEdit || !this.props.institutionForm.addNew}
                     handleClick={this.addEmptyAlterName}
                     handleRemove={this.handleRemove}
                     removeButton={this.state.isEdit}
