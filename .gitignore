@@ -18,4 +18,5 @@ Thumbs.db
 npm-debug.log
 compilation-stats.json
 
-domainConfig.js
+/src/domainConfig.js
+/scss/local.scss
