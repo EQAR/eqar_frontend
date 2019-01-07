@@ -30,8 +30,23 @@ const initialState = {
         ]
       }
     ],
-    countries: [],
-    qf_ehea_levels: []
+    countries: [
+      {
+        id: null,
+        country: null,
+        city: '',
+        lat: null,
+        long: null,
+        country_valid_from: '',
+        country_valid_to: null
+      }
+    ],
+    qf_ehea_levels: [
+      {
+        id: null,
+        qf_ehea_level: null
+      }
+    ]
   }
 }
 
@@ -46,7 +61,10 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
        }
     }
     case 'CLOSE_INSTITUTION_FORM': {
-      return { ...state, formDisplay: false }
+      return { 
+        ...state,
+        formDisplay: false
+      }
     }
     case 'CHANGE_INSTITUTION_ALL': {
       return {
@@ -60,6 +78,42 @@ const institutionFormReducer = composeResetReducer(function institutionFormReduc
         institution: {
           ...state.institution,
           names: action.payload
+        }
+      }
+    }
+    case 'CHANGE_NAME_OFFICIAL': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            name_official: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_NAME_TRANSLITERATED': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            name_official_transliterated: action.payload
+          }
+        }
+      }
+    }
+    case 'CHANGE_NAME_ENGLISH': {
+      return {
+        ...state,
+        institution: {
+          ...state.institution,
+          names: {
+            ...state.institution.names,
+            name_english: action.payload
+          }
         }
       }
     }

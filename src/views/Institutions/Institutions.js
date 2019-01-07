@@ -42,6 +42,7 @@ class Institutions extends Component {
                   <Button size="sm"
                           color="primary"
                           onClick={this.addNewInstitution}
+                          disabled
                           className="float-right add-institution">
                           Add New Institution
                   </Button>

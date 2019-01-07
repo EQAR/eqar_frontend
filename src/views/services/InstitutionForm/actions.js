@@ -43,6 +43,11 @@ export function saveToForm(value, id) {
   store.dispatch({ type: getType(id), payload: value });
 }
 
+export function changeCountry(value, index, countries) {
+  countries[index].country = value.value;
+  store.dispatch({ type: 'CHANGE_INSTITUITON_COUNTRY', payload: countries });
+}
+
 export function changeCountryData(value, id, index, countries) {
   countries[index][id] = value;
   store.dispatch({ type: 'CHANGE_INSTITUITON_COUNTRY', payload: countries });
@@ -66,6 +71,11 @@ export function changeQFEHEALEVELS(values) {
   store.dispatch({ type: 'CHANGE_QF_EHEA_LEVELS', payload: values });
 }
 
+export function addName(inputValue, inputId, institutionNames) {
+  institutionNames[0][inputId] = inputValue;
+  store.dispatch({ type: 'CHANGE_NAMES', payload: institutionNames });
+}
+
 export function addEmptyAlternativeName(institutionNames) {
   institutionNames[0].alternative_names.push({name: '', transliteration: ''});
   store.dispatch({ type: 'CHANGE_NAMES', payload: institutionNames });
@@ -82,7 +92,7 @@ export function removeAlterName(index, institutionNames) {
 }
 
 export function resetFields() {
-  store.dispatch({ type: 'RESET_INSTITUTION_FORM',});
+  store.dispatch({ type: 'RESET_INSTITUTION_FORM'});
 }
 
 export function closeInstitutionForm() {

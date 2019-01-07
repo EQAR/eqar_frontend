@@ -16,6 +16,7 @@ import {
   closeInstitutionForm,
   institutionRequest,
   saveToForm,
+  changeCountry,
   changeCountryData,
   changeQFEHEALEVELS,
   changeIdentifier,
@@ -23,6 +24,7 @@ import {
   addAlternativeName,
   removeAlterName,
   resetFields,
+  addName,
   putInstitution } from './actions';
 import { getInstituionCountries } from '../countries/actions';
 import { CustomInputField, CustomDynamicInput, CustomSelectInput } from './CustomInputs';
@@ -38,7 +40,9 @@ class InstitutionForm extends Component {
     this.cancel = this.cancel.bind(this);
     this.saveInstitution = this.saveInstitution.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleNamesInput = this.handleNamesInput.bind(this);
     this.handleCountriesInput = this.handleCountriesInput.bind(this);
+    this.handleLocationsInput = this.handleLocationsInput.bind(this);
     this.handleAlterNamesInput = this.handleAlterNamesInput.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.addEmptyAlterName = this.addEmptyAlterName.bind(this);
@@ -55,7 +59,10 @@ class InstitutionForm extends Component {
     this.checkCountryFields = this.checkCountryFields.bind(this);
     this.checkAlternativeNameFields = this.checkAlternativeNameFields.bind(this);
     this.selectableInstitution = this.selectableInstitution.bind(this);
+    this.getNationalIdentifier = this.getNationalIdentifier.bind(this);
+    this.getLocalIdentifier = this.getLocalIdentifier.bind(this);
     this.toggleTable = this.props.toggleTable;
+    this.resetClose = this.resetClose.bind(this);
     this.state = {
       isEdit: false,
       isEdited: false,
@@ -65,8 +72,16 @@ class InstitutionForm extends Component {
         name_english: false,
         acronym: false,
         national_identifier: false,
-        qf_ehea_levels: false,
-        countries: [],
+        qf_ehea_levels: [],
+        countries: [
+          {
+            id: null,
+            country: null,
+            city: '',
+            lat: null,
+            long: null
+          }
+        ],
         alternative_names: [
           {
             id: null,
@@ -92,11 +107,16 @@ class InstitutionForm extends Component {
   }
 
   cancel() {
-    this.state.isEdit ? institutionRequest(this.props.institutionForm.institution.id) : resetFields();
+    this.props.institutionForm.addNew ? this.toggle() : institutionRequest(this.props.institutionForm.institution.id);
     this.setState({
       isEdit: false,
       isEdited: false
     })
+  }
+
+  resetClose() {
+    resetFields();
+    this.toggle();
   }
 
   saveInstitution() {
@@ -200,12 +220,23 @@ class InstitutionForm extends Component {
     changeIdentifier(e.target.value, e.target.id, this.props.institutionForm.institution.identifiers);
   }
 
-  handleCountriesInput(indexOfInput, e) {
+  handleCountriesInput(indexOfInput, value) {
+    this.setIsEdited();
+    changeCountry(value, indexOfInput, this.props.institutionForm.institution.countries);
+  }
+
+  handleLocationsInput(indexOfInput, e) {
     this.setIsEdited();
     changeCountryData(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.countries);
   }
 
+  handleNamesInput(e) {
+    this.setIsEdited();
+    addName(e.target.value, e.target.id, this.props.institutionForm.institution.names);
+  }
+
   handleAlterNamesInput(indexOfInput, e) {
+    
     this.setIsEdited();
     addAlternativeName(e.target.value, e.target.id, indexOfInput, this.props.institutionForm.institution.names);
   }
@@ -262,13 +293,14 @@ class InstitutionForm extends Component {
   }
 
   getCountry(countryId) {
-    return _.find(this.props.countries.countries, {id: countryId})
+    
+    return countryId ? _.find(this.props.countries.countries, {id: countryId}).name_english : '';
   }
 
   getOptionsCountry() {
     return this.props.countries.countries.map(country => {
       return {
-        value: country.name_english,
+        value: country.id,
         label: country.name_english
       }
     })
@@ -283,7 +315,7 @@ class InstitutionForm extends Component {
           type: "select",
           id: "country",
           disabled: !this.props.institutionForm.addNew,
-          value: this.getCountry(country.country).name_english,
+          value: country.country,
           options: this.getOptionsCountry(),
           handleInput: this.handleCountriesInput,
           multi: false
@@ -296,7 +328,7 @@ class InstitutionForm extends Component {
           placeholder: "Enter city name",
           disabled: this.isEditableCountry('city', i),
           value: country.city,
-          handleInput: this.handleCountriesInput
+          handleInput: this.handleLocationsInput
         },
         {
           labelText: "Latitude",
@@ -306,7 +338,7 @@ class InstitutionForm extends Component {
           placeholder: "Enter campus/city latitude",
           disabled: this.isEditableCountry('lat', i),
           value: country.lat,
-          handleInput: this.handleCountriesInput
+          handleInput: this.handleLocationsInput
         },
         {
           labelText: "Longitude",
@@ -320,6 +352,18 @@ class InstitutionForm extends Component {
         }
       ]
     });
+  }
+
+  getNationalIdentifier() {
+    return this.props.institutionForm.institution.identifiers.length > 0 ?
+      this.props.institutionForm.institution.identifiers.filter(identifier => identifier.resource === 'national identifier')[0].identifier :
+      null;
+  }
+  
+  getLocalIdentifier() {
+    return this.props.institutionForm.institution.identifiers.length > 0 ?
+      this.props.institutionForm.institution.identifiers.filter(identifier => identifier.resource === 'local identifier')[0].identifier :
+      null;
   }
 
   getQFEHEALabel(qf_ehea_level) {
@@ -400,7 +444,7 @@ class InstitutionForm extends Component {
                     id="name_official"
                     name="text"
                     value={this.props.institutionForm.institution.names[0].name_official}
-                    handleInput={this.handleInput}
+                    handleInput={this.handleNamesInput}
                     disabled={!this.props.institutionForm.addNew}
                     />
                   <CustomInputField
@@ -409,7 +453,7 @@ class InstitutionForm extends Component {
                     id="name_official_transliterated"
                     name="text"
                     value={this.props.institutionForm.institution.names[0].name_official_transliterated}
-                    handleInput={this.handleInput}
+                    handleInput={this.handleNamesInput}
                     disabled={this.isEditableSimple('name_official_transliterated')}
                     />
                   <CustomInputField
@@ -418,7 +462,7 @@ class InstitutionForm extends Component {
                     id="name_english"
                     name="text"
                     value={this.props.institutionForm.institution.names[0].name_english}
-                    handleInput={this.handleInput}
+                    handleInput={this.handleNamesInput}
                     disabled={this.isEditableSimple('name_english')}
                     />
                   <CustomInputField
@@ -427,7 +471,7 @@ class InstitutionForm extends Component {
                     id="acronym"
                     name="text"
                     value={this.props.institutionForm.institution.names[0].acronym}
-                    handleInput={this.handleInput}
+                    handleInput={this.handleNamesInput}
                     disabled={this.isEditableSimple('acronym')}
                     />
                   <CustomDynamicInput
@@ -456,6 +500,7 @@ class InstitutionForm extends Component {
                     id="national_identifier"
                     name="text"
                     handleInput={this.handleIdentifiersInput}
+                    value={this.getNationalIdentifier()}
                     disabled={this.isEditableSimple('national_identifier')}
                     />
                   <CustomInputField
@@ -464,6 +509,7 @@ class InstitutionForm extends Component {
                     id="local_identifier"
                     name="text"
                     handleInput={this.handleIdentifiersInput}
+                    value={this.getLocalIdentifier()}
                     disabled={!this.state.isEdit}
                     />
                   <CustomSelectInput
