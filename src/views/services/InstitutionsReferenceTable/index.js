@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { selectInstitution, removeInstitution, InstitutionsRequest } from './actions';
-import { openInstitutionForm, institutionRequest } from '../InstitutionForm/actions';
+import { openInstitutionForm, institutionRequest, resetFields } from '../InstitutionForm/actions';
 import { getInstituionCountries } from '../countries/actions';
-import { Button, Modal, ModalBody } from 'reactstrap';
-import InstitutionModal from '../InstitutionForm';
+import { Button, Modal, ModalBody, Row, Col } from 'reactstrap';
+import InstitutionForm from '../InstitutionForm';
+import _ from 'lodash';
 
 class InstitutionsReferenceTable extends Component {
   constructor(props) {
@@ -17,35 +18,33 @@ class InstitutionsReferenceTable extends Component {
       hidePageListOnlyOnePage: true,
       alwaysShowAllBtns: false,
       withFirstAndLast: true,
+      defaultSortName: 'name_primary',
+      defaultSortOrder: 'asc',
       onPageChange: this.onPageChange.bind(this),
       onFilterChange: this.onFilterChange.bind(this),
       onSortChange: this.onSortChange.bind(this),
-      sizePerPageList: [ 5, 10, 20 ],
-      insertBtn: this.createInsertButton.bind(this),
+      paginationPanel: this.renderPaginationPanel.bind(this),
+      paginationShowsTotal: this.renderShowsTotal.bind(this)
     };
     this.state = {
-      select: {}
+      unselectable: this.selectedInstitutions(),
+      institutionId: null
     }
     this.selectedInstitutions = this.selectedInstitutions.bind(this);
     this.trClassFormat = this.trClassFormat.bind(this);
     this.buttonFormatter = this.buttonFormatter.bind(this);
-    this.toggle = this.toggle.bind(this);
-  }
+    this.toggleInstitutionForm = this.toggleInstitutionForm.bind(this);
+    this.showsTotal = '';
+    this.onRowSelect = this.onRowSelect.bind(this);
+    this.toggleTableModal = this.props.toggle;
+    this.isActive = this.isActive.bind(this);
+    this.selectRow = {
+      mode: 'radio',
+      hideSelectColumn: true,
+      clickToSelect: true,
+      onSelect: this.toggleInstitutionForm,
+    } 
 
-  componentWillMount() {
-    this.props.isSelect ?
-      this.setState( {
-        select: {
-          mode: 'checkbox',
-          // clickToSelect: true,
-          onSelect: this.onRowSelect.bind(this),
-          unselectable: this.selectedInstitutions(),
-          showOnlySelected: true
-        }
-      }) :
-      this.setState( {
-        select: {}
-      })
   }
 
   componentDidMount(){
@@ -53,21 +52,19 @@ class InstitutionsReferenceTable extends Component {
     getInstituionCountries();
   }
 
-  createInsertButton(onClick) {
-    return <Button size="sm" color="primary" onClick={onClick} className="add-institution" disabled={true}>Add New Institution</Button>
+  addNewInstitution() {
+    resetFields();
+    openInstitutionForm({isSelect: false, addNew: true});
   }
 
-  onRowSelect(row, isSelected){
-    if (isSelected) {
-      selectInstitution(row, this.props.reportForm.institutions);
-    } else {
-      removeInstitution(row, this.props.reportForm.institutions);
-    }
+  onRowSelect(row){
+    selectInstitution(row, this.props.reportForm.institutions);
+    this.toggleTableModal();
   }
 
   onSortChange(sortName, sortOrder) {
     const param = {};
-    if(sortOrder === 'asc') {
+    if (sortOrder === 'asc') {
       param['ordering'] = sortName;
     } else {
       param['ordering'] = '-' + sortName;
@@ -154,12 +151,22 @@ class InstitutionsReferenceTable extends Component {
     return remoteObj;
   }
 
-  buttonFormatter(cell, row) {
+  buttonFormatter(cell, row, formatExtraData, index) {
     return (
-      <Button size="sm" color="primary" onClick={this.toggle.bind(null, row)}>View</Button>)
+      <Button 
+        size="sm" 
+        color="primary" 
+        id="add-button" 
+        onClick={this.onRowSelect.bind(null, row)}
+        disabled={this.isActive(row.deqar_id)}>Add</Button>
+    );
   }
 
-  trClassFormat(row, rowIndex) {
+  isActive(id) {
+    return _.includes(this.state.unselectable, id);
+  }
+
+  trClassFormat(row) {
     let className = '';
     this.props.reportForm.institutions.forEach(institution => {
       if (institution.deqar_id === row.deqar_id) {
@@ -169,19 +176,40 @@ class InstitutionsReferenceTable extends Component {
     return className;
   }
 
-  toggle(row) {
-    institutionRequest(row.id);
-    openInstitutionForm();
+  toggleInstitutionForm(row, isSelected, e) {
+    if (e.target.id !== 'add-button') {
+      openInstitutionForm({isSelect: this.props.isSelect, addNew: false});
+      this.setState({...this.state, institutionId: row.id})
+    }
+  }
+
+  renderShowsTotal(start, to, total) {
+    this.showsTotal = (
+      <div>
+        From { start } to { to }, totals is { total }
+      </div>
+    );
+  }
+
+  renderPaginationPanel(props) {    
+    return (
+      <Row className="institution-table-footer">
+        <div>{ props.components.sizePerPageDropdown }</div>
+        <div>{ this.showsTotal }</div>
+        <div>{ props.components.pageList }</div>
+      </Row>
+    )
   }
 
   render() {
     const countries = this.filterCountries();
     return (
       <div>
-        <InstitutionModal />
+        <InstitutionForm toggleTable={this.toggleTableModal} institutionId={this.state.institutionId}/>
         <BootstrapTable data={ this.getInstitutionsRows() }
                         version="4"
                         striped
+                        hover
                         remote={ this.remote }
                         pagination={ true }
                         options={ this.options }
@@ -190,9 +218,8 @@ class InstitutionsReferenceTable extends Component {
                             dataTotalSize: this.props.institutionReferences.totalDataSize
                           }
                         }
-                        selectRow={ this.state.select }
+                        selectRow={ this.selectRow }
                         trClassName={ this.trClassFormat }
-                        insertRow
                         id="institution-table">
           <TableHeaderColumn dataField="deqar_id"
                              dataSort={ true }
@@ -209,11 +236,13 @@ class InstitutionsReferenceTable extends Component {
                              dataSort={ true }>Institution</TableHeaderColumn>
           <TableHeaderColumn dataField="countries"
                              width='15%'
-                             filter={ { type: 'SelectFilter', options: countries } }>Countries</TableHeaderColumn>
+                             filter={ { type: 'SelectFilter', options: countries } }
+                             dataSort={ true }>Countries</TableHeaderColumn>
           <TableHeaderColumn dataField="id"
                              dataAlign='center'
                              width='10%'
-                             dataFormat={this.buttonFormatter}> </TableHeaderColumn>
+                             dataFormat={this.buttonFormatter}
+                             hidden={!this.props.isSelect}> </TableHeaderColumn>
         </BootstrapTable>
       </div>
     )

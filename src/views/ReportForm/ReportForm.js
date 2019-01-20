@@ -19,7 +19,6 @@ import Institutions from './Institutions';
 import Programmes from './Programmes';
 import ReportFiles from './ReportFiles';
 import sendForm from './Actions/sendForm';
-import MessageModal from './MessageModal'
 import store from '../../main_store';
 import setStates from '../../state';
 import { connect } from 'react-redux';
@@ -142,7 +141,6 @@ class ReportForm extends Component {
           </CardBody>
           <CardFooter>
             <Button type="submit" color="primary" disabled={this.isDisabled()} onClick={this.handleSubmit}>Save Record</Button>
-            <MessageModal />
           </CardFooter>
         </Card>
       </Form>

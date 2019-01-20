@@ -9,11 +9,17 @@ import {
   CardFooter,
   Button,
   Collapse} from 'reactstrap';
+import Select from 'react-select';
+
 
 
 export class CustomInputField extends Component {
   constructor(props) {
     super(props);
+  }
+
+  convertValue(value) {
+    return value === null ? '' : value;
   }
 
   render() {
@@ -25,7 +31,7 @@ export class CustomInputField extends Component {
           name={this.props.name}
           id={this.props.id}
           onChange={this.props.handleInput}
-          value={this.props.value}
+          value={this.convertValue(this.props.value)}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled} />
       </FormGroup>
@@ -51,16 +57,14 @@ export class CustomSelectInput extends Component {
     return (
       <FormGroup>
         <Label for={this.props.id} className={this.props.labelClassName}>{this.props.labelText}</Label>
-        <Input
-          type="select"
+        <Select
           name="select"
           id={this.props.id}
           value={this.props.value}
           disabled={this.props.disabled}
-          onChange={this.props.handleInput} >
-          <option>Please select</option>
-          {this.getOptions()}
-        </Input>
+          onChange={this.props.handleInput}
+          options={this.props.options}
+          multi={this.props.multi} />
       </FormGroup>
     )
   }
@@ -69,7 +73,7 @@ export class CustomSelectInput extends Component {
 export class CustomDynamicInput extends Component {
   constructor(props) {
     super(props);
-    this.getButton = this.getButton.bind(this);
+    this.getRemoveButton = this.getRemoveButton.bind(this);
     this.toggle = this.toggle.bind(this);
     this.setInitialState = this.setInitialState.bind(this);
     this.state = {
@@ -85,9 +89,14 @@ export class CustomDynamicInput extends Component {
     }
   }
 
-  getButton(index) {
-    return index !== 0 ? <Button color="danger" size={'sm'} id={index} onClick={this.props.handleRemove}>Remove</Button>
-    : null;
+  getRemoveButton(index) {
+    return this.props.removeButton &&
+           index >= this.props.removeButtonIndex ?
+      <Button color="danger" 
+              size={'sm'} 
+              id={index} 
+              onClick={this.props.handleRemove}>Remove</Button> : 
+      null;
   }
 
   getHR() {
@@ -108,7 +117,10 @@ export class CustomDynamicInput extends Component {
 
   getAddButton() {
     if (this.props.addNewItemText) {
-      return <Button color="primary" size={'sm'} onClick={ this.props.handleClick } disabled={this.props.buttonDisabled}>{ this.props.addNewItemText }</Button>
+      return <Button color="primary"
+                     size={'sm'}
+                     onClick={ this.props.handleClick }
+                     disabled={this.props.buttonDisabled}>{ this.props.addNewItemText }</Button>
     }
   }
 
@@ -136,6 +148,7 @@ export class CustomDynamicInput extends Component {
                 options={elem.options}
                 disabled={elem.disabled}
                 labelClassName={elem.labelClassName}
+                multi={elem.multi}
               />
               ) :
               (
@@ -153,7 +166,7 @@ export class CustomDynamicInput extends Component {
               />
             )
           })}
-          {this.getButton(index)}
+          {this.getRemoveButton(index)}
           {this.getHR()}
         </div>
       )

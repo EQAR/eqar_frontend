@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import store from '../../../main_store';
 import setStates from '../../../state';
 import { addEmptyReportLink, addReportLink, removeLink } from '../Actions/reportFormActions';
-import { removeLinkErrorMessage } from '../Actions/alertActions';
+import { removeLinkErrorMessage } from '../../services/MessageModal/actions';
 import FormAlert from '../FormAlert';
 import lodash from 'lodash';
 

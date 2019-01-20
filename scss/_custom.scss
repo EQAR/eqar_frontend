@@ -128,14 +128,45 @@
   margin: 0 0 0 5px !important;
 }
 
-.selected-row {
-  color: hsla(30, 30, 30, .3);
-}
-
 .add-institution {
   margin-right: 3px;
 }
 
 .content {
   padding-top: 30px !important;
+}
+
+.institution-table-footer {
+  width: 100%;
+  margin: {
+    left: 15px;
+    right: 15px;
+  }
+  justify-content: space-between;
+  align-items: center;
+}
+
+.disabled {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.react-bs-table-container {
+  .react-bs-container-body {
+    .table {
+      tr {
+        &:hover {
+          cursor: pointer;
+          color: #20a8d8;
+        }
+
+        td {
+          .disabled {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
 }

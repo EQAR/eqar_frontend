@@ -5,11 +5,21 @@ import {
   Col,
   Card,
   CardBody,
-  CardHeader
+  CardHeader,
+  CardFooter,
+  Button
 } from 'reactstrap';
 import InstitutionsReferenceTable from '../services/InstitutionsReferenceTable';
+import { openInstitutionForm, resetFields } from '../services/InstitutionForm/actions';
+
 
 class Institutions extends Component {
+
+  addNewInstitution() {
+    resetFields();
+    openInstitutionForm({isSelect: false, addNew: true});
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -27,6 +37,17 @@ class Institutions extends Component {
                   </Col>
                 </Row>
               </CardBody>
+              <CardFooter>
+                <Col>
+                  <Button size="sm"
+                          color="primary"
+                          onClick={this.addNewInstitution}
+                          disabled
+                          className="float-right add-institution">
+                          Add New Institution
+                  </Button>
+                </Col>
+              </CardFooter>
             </Card>
           </Col>
         </Row>
